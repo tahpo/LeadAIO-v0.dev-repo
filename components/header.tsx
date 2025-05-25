@@ -30,32 +30,32 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          <Link href="#features" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-8">
+          <Link href="#features" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap">
             Features
           </Link>
           <Link
             href="#how-it-works"
-            className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
+            className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap"
           >
             How It Works
           </Link>
-          <Link href="#pricing" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal">
+          <Link href="#pricing" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap">
             Pricing
           </Link>
           <Link
             href="#testimonials"
-            className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
+            className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap"
           >
             Testimonials
           </Link>
         </nav>
 
-        <div className="hidden md:flex items-center gap-4">
-          <a href="/login" className="index-button index-button-secondary">
+        <div className="hidden md:flex items-center gap-3 lg:gap-4">
+          <a href="/login" className="index-button index-button-secondary text-sm px-3 lg:px-4">
             Log in
           </a>
-          <a href="/signup" className="index-button index-button-primary">
+          <a href="/signup" className="index-button index-button-primary text-sm px-3 lg:px-4">
             Start for free
           </a>
         </div>

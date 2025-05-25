@@ -202,14 +202,21 @@ section {
   backdrop-filter: blur(12px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
-  margin: 8px 48px;
-  max-width: calc(100% - 96px);
+  margin: 8px 24px;
+  max-width: calc(100% - 48px);
   transform: translateY(0) scale(0.97);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* Responsive header margins for larger screens */
+@media (min-width: 768px) {
+  .header-scrolled {
+    margin: 8px 48px;
+    max-width: calc(100% - 96px);
+  }
+}
+
 @media (min-width: 1400px) {
   .header-scrolled {
     margin: 8px 120px;
