@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react"
+import anime from "animejs"
 
 export function ResultsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -37,67 +38,53 @@ export function ResultsSection() {
     if (!isVisible) return
 
     // Animate the red segments to give growing/shrinking effect
-    const updateRedSegments = () => {
-      // Random number between 0 and 4 (0-4 red segments)
-      const newCount = Math.floor(Math.random() * 5)
-      setRedSegmentCount(newCount)
+    const redSegmentAnimation = anime({
+      targets: { count: 0 },
+      count: 4,
+      easing: 'easeInOutSine',
+      duration: 2000,
+      loop: true,
+      direction: 'alternate',
+      update: (anim) => {
+        const newCount = Math.floor(anim.animations[0].currentValue)
+        setRedSegmentCount(newCount)
+      }
+    })
 
-      // Update faster (100-200ms)
-      const timeout = 100 + Math.random() * 100
-      setTimeout(updateRedSegments, timeout)
+    return () => {
+      redSegmentAnimation.pause()
     }
-
-    updateRedSegments()
   }, [isVisible])
 
   // Counter animation
   useEffect(() => {
     if (!isVisible) return
 
-    // Slower initial animation from 60 to 150 (4 seconds)
-    let startTime = Date.now()
-    let duration = 4000 // 4 seconds
-    let startValue = 60
-    let endValue = 150
-
-    const animatePhase1 = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const value = Math.floor(startValue + (endValue - startValue) * progress)
-
-      setSpeedValue(value)
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animatePhase1)
-      } else {
-        // Start phase 2 - Slower animation from 150 to 400
-        startTime = Date.now()
-        // Make it faster than before - 4 seconds per increment (1000 seconds total for 250 increments)
-        duration = 1000000 // ~16.7 minutes total
-        startValue = 150
-        endValue = 400
-        animationFrameRef.current = requestAnimationFrame(animatePhase2)
+    // First phase: Quick animation from 60 to 150
+    const phase1 = anime({
+      targets: { value: 60 },
+      value: 150,
+      duration: 4000,
+      easing: 'easeOutExpo',
+      update: (anim) => {
+        setSpeedValue(Math.floor(anim.animations[0].currentValue))
+      },
+      complete: () => {
+        // Second phase: Slower animation from 150 to 400
+        anime({
+          targets: { value: 150 },
+          value: 400,
+          duration: 20000,
+          easing: 'easeOutSine',
+          update: (anim) => {
+            setSpeedValue(Math.floor(anim.animations[0].currentValue))
+          }
+        })
       }
-    }
-
-    const animatePhase2 = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const value = Math.floor(startValue + (endValue - startValue) * progress)
-
-      setSpeedValue(value)
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animatePhase2)
-      }
-    }
-
-    animationFrameRef.current = requestAnimationFrame(animatePhase1)
+    })
 
     return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
-      }
+      phase1.pause()
     }
   }, [isVisible])
 

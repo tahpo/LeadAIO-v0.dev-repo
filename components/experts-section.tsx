@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react"
+import anime from "animejs"
 
 export function ExpertsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -12,9 +13,9 @@ export function ExpertsSection() {
   const [showFire, setShowFire] = useState(false)
   const [showChat, setShowChat] = useState(true)
   const [cursorPositions, setCursorPositions] = useState([
-    { x: 100, y: 100, color: "#A8D9FF", name: "Jessica" },
-    { x: 180, y: 150, color: "#FAC666", name: "Michael" },
-    { x: 150, y: 80, color: "#FF9EB3", name: "Sarah" }
+    { x: 152, y: 635, color: "#A8D9FF", name: "Jessica" },
+    { x: 380, y: 690, color: "#FAC666", name: "Michael" },
+    { x: 620, y: 770, color: "#FF9EB3", name: "Sarah" }
   ])
 
   // Animation message
@@ -52,6 +53,22 @@ export function ExpertsSection() {
 
     return () => observer.disconnect()
   }, [])
+
+  // Define target areas in the keyword table
+  const targetAreas = [
+    { x: 152, y: 635, area: "keyword" },    // keyword column, first row
+    { x: 380, y: 635, area: "volume" },     // volume column, first row
+    { x: 620, y: 635, area: "difficulty" }, // difficulty column, first row
+    { x: 780, y: 635, area: "potential" },  // potential column, first row
+    { x: 152, y: 690, area: "keyword" },    // keyword column, second row
+    { x: 380, y: 690, area: "volume" },     // volume column, second row
+    { x: 620, y: 690, area: "difficulty" }, // difficulty column, second row
+    { x: 780, y: 690, area: "potential" },  // potential column, second row
+    { x: 152, y: 770, area: "keyword" },    // keyword column, third row
+    { x: 380, y: 770, area: "volume" },     // volume column, third row
+    { x: 620, y: 770, area: "difficulty" }, // difficulty column, third row
+    { x: 780, y: 770, area: "potential" }   // potential column, third row
+  ]
 
   // Animation of chat
   useEffect(() => {
@@ -120,37 +137,40 @@ export function ExpertsSection() {
     }
   }, [isVisible])
   
-  // Move cursors to specific elements
+  // Move cursors around target areas with anime.js
   useEffect(() => {
     if (!isVisible) return
     
-    // Define target areas in the table
-    const targetAreas = [
-      { x: 180, y: 580, area: "keyword" }, // keyword column
-      { x: 390, y: 635, area: "volume" },  // volume column, first row
-      { x: 610, y: 690, area: "difficulty" }, // difficulty column, second row
-      { x: 800, y: 770, area: "potential" }, // potential column, third row
-      { x: 390, y: 770, area: "volume" },  // volume column, third row
-      { x: 610, y: 635, area: "difficulty" }, // difficulty column, first row
-    ];
+    const cursorAnimations = cursorPositions.map((cursor, index) => {
+      return anime({
+        targets: {},
+        duration: 2000,
+        easing: 'easeOutQuad',
+        loop: true,
+        update: function(anim) {
+          setCursorPositions(prev => {
+            const newPositions = [...prev];
+            // Every animation update, pick a random target area
+            const targetIndex = Math.floor(Math.random() * targetAreas.length);
+            const target = targetAreas[targetIndex];
+            
+            // Move cursor with some randomness
+            newPositions[index] = {
+              ...prev[index],
+              x: target.x + Math.random() * 30 - 15,
+              y: target.y + Math.random() * 20 - 10
+            };
+            
+            return newPositions;
+          });
+        }
+      });
+    });
     
-    // Move cursors around targeted areas
-    const cursorInterval = setInterval(() => {
-      setCursorPositions(prev => 
-        prev.map((cursor, index) => {
-          const target = targetAreas[Math.floor(Math.random() * targetAreas.length)];
-          // Add slight randomness to the position
-          return {
-            ...cursor,
-            x: target.x + (Math.random() * 40 - 20),
-            y: target.y + (Math.random() * 30 - 15)
-          }
-        })
-      )
-    }, 2000)
-    
-    return () => clearInterval(cursorInterval)
-  }, [isVisible])
+    return () => {
+      cursorAnimations.forEach(anim => anim.pause());
+    };
+  }, [isVisible]);
 
   return (
     <div ref={sectionRef} className="bg-[#1a1a1a] rounded-3xl p-8 shadow-xl">
