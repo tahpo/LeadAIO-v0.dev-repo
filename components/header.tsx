@@ -40,7 +40,7 @@ export function Header() {
           >
             How It Works
           </Link>
-          <Link href="#pricing" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap">
+          <Link href="/pricing" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap">
             Pricing
           </Link>
           <Link
@@ -91,7 +91,7 @@ export function Header() {
               How It Works
             </Link>
             <Link
-              href="#pricing"
+              href="/pricing"
               className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
               onClick={() => setIsMobileMenuOpen(false)}
             >
