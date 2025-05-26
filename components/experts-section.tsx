@@ -249,7 +249,7 @@ export function ExpertsSection() {
         {cursorPositions.map((cursor, index) => (
           <div
             key={index}
-            className="absolute z-20 pointer-events-none"
+            className="absolute z-20 pointer-events-none cursors-item"
             style={{
               left: `${cursor.x}px`,
               top: `${cursor.y}px`,

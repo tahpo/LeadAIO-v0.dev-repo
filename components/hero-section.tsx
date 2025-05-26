@@ -150,7 +150,7 @@ export function HeroSection() {
   const longestWord2 = words2.reduce((a, b) => (a.length > b.length ? a : b), "")
 
   return (
-    <section className="relative min-h-screen pt-32 pb-20 overflow-hidden bg-white">
+    <section className="relative min-h-screen pt-28 pb-20 overflow-hidden bg-white">
       <div className="section-container relative z-10">
         <div className="section-panel bg-cream">
           <div className="max-w-4xl mx-auto text-center">
@@ -228,22 +228,26 @@ export function HeroSection() {
               leads, and grow your business automatically.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a href="/signup" className="index-button index-button-primary flex items-center justify-center gap-2">
                 Get started <ArrowRight className="h-5 w-5" />
               </a>
             </div>
           </div>
 
-          {/* Dashboard Preview - REDUCED HEIGHT by limiting max-height */}
-          <div className="relative w-full max-w-6xl mx-auto mt-6">
+          {/* Dashboard Preview - Slightly reduced size but maintaining proportions */}
+          <div className="relative w-full max-w-5xl mx-auto mt-6">
             <motion.div
               ref={dashboardRef}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="relative rounded-xl overflow-hidden shadow-2xl mx-auto"
-              style={{ maxHeight: "450px" }} // Reduced height here
+              style={{ 
+                width: "95%", 
+                transform: "scale(0.95)",
+                transformOrigin: "center top"
+              }}
             >
               {/* Dashboard UI */}
               <div className="bg-gradient-to-br from-[#0F1724] to-[#1a202c] rounded-xl p-5 relative">
@@ -276,7 +280,7 @@ export function HeroSection() {
                       </div>
                     </div>
                     
-                    <div className="h-[140px]"> {/* Reduced height here */}
+                    <div className="h-[160px]">
                       <svg className="w-full h-full" viewBox="0 0 400 150">
                         {/* Grid Lines */}
                         <line x1="0" y1="25" x2="400" y2="25" stroke="#2D3748" strokeWidth="1" strokeDasharray="4" />
@@ -478,7 +482,7 @@ export function HeroSection() {
                     </div>
                     
                     <div className="flex justify-center my-2">
-                      <div className="relative h-20 w-20"> {/* Reduced size here */}
+                      <div className="relative h-24 w-24">
                         <svg viewBox="0 0 100 100" className="w-full h-full">
                           {/* Background circle */}
                           <circle 
@@ -521,7 +525,7 @@ export function HeroSection() {
                     </div>
                   </div>
                   
-                  {/* AI Platform Ranking Scores (replaced content optimization) - CHANGED BACKGROUND */}
+                  {/* AI Platform Ranking Scores (replaced content optimization) */}
                   <div className="col-span-12 bg-[#111827] rounded-lg p-4 shadow-lg border border-gray-800/50">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">AI Platform Ranking Scores</h3>
