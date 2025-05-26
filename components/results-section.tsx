@@ -145,11 +145,12 @@ export function ResultsSection() {
           {/* Speedometer with animation */}
           <div ref={speedometerRef} className="relative w-full flex justify-center">
             {/* Base layer (gray and red segments) */}
-            <div className="relative w-[280px] h-[140px]">
-              <svg viewBox="0 0 100 50" className="w-full h-full">
-                {/* All 12 segments */}
+            <div className="relative w-[360px] h-[140px]">
+              <svg viewBox="0 0 120 60" className="w-full h-full">
+                {/* All 12 segments with spacing */}
                 {Array.from({ length: TOTAL_SEGMENTS }, (_, i) => {
-                  const rotation = -90 + (i * 180) / 11;
+                  // Slightly adjusted rotation to create spacing
+                  const rotation = -90 + (i * 180) / (TOTAL_SEGMENTS - 1);
                   const isRed = i >= GRAY_SEGMENTS;
                   const isActive = i < totalSegments;
                   
@@ -157,14 +158,17 @@ export function ResultsSection() {
                     <rect
                       key={i}
                       className="segment"
-                      x="45"
-                      y="5"
-                      width="10"
-                      height="20"
-                      rx="1"
+                      x="54"
+                      y="4"
+                      width="12"
+                      height="24"
+                      rx="2"
                       fill={isRed ? (isActive ? "#FF3E3E" : "#8B3E3E") : "#4A4A4A"}
                       opacity={isActive ? (isRed ? 0.9 : 0.7) : 0.15}
-                      transform={`rotate(${rotation}, 50, 50)`}
+                      transform={`rotate(${rotation}, 60, 60)`}
+                      // Add spacing between segments
+                      strokeWidth="0.5"
+                      stroke="#111111"
                     />
                   );
                 })}
