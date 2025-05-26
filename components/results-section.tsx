@@ -146,7 +146,7 @@ export function ResultsSection() {
           <div ref={speedometerRef} className="relative w-full flex justify-center">
             {/* Base layer (gray and red segments) */}
             <div className="relative w-[320px] h-[160px]">
-              <svg width="320" height="160" viewBox="0 0 400 200">
+              <svg viewBox="0 0 100 100" className="w-full h-full">
                 {/* All 12 segments */}
                 {Array.from({ length: TOTAL_SEGMENTS }, (_, i) => {
                   const rotation = -90 + (i * 180) / 11;
