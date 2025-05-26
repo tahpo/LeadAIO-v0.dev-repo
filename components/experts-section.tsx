@@ -120,20 +120,34 @@ export function ExpertsSection() {
     }
   }, [isVisible])
   
-  // Move cursors around
+  // Move cursors to specific elements
   useEffect(() => {
     if (!isVisible) return
     
-    // Move cursors around randomly
+    // Define target areas in the table
+    const targetAreas = [
+      { x: 180, y: 580, area: "keyword" }, // keyword column
+      { x: 390, y: 635, area: "volume" },  // volume column, first row
+      { x: 610, y: 690, area: "difficulty" }, // difficulty column, second row
+      { x: 800, y: 770, area: "potential" }, // potential column, third row
+      { x: 390, y: 770, area: "volume" },  // volume column, third row
+      { x: 610, y: 635, area: "difficulty" }, // difficulty column, first row
+    ];
+    
+    // Move cursors around targeted areas
     const cursorInterval = setInterval(() => {
       setCursorPositions(prev => 
-        prev.map(cursor => ({
-          ...cursor,
-          x: cursor.x + (Math.random() * 20 - 10),
-          y: cursor.y + (Math.random() * 20 - 10)
-        }))
+        prev.map((cursor, index) => {
+          const target = targetAreas[Math.floor(Math.random() * targetAreas.length)];
+          // Add slight randomness to the position
+          return {
+            ...cursor,
+            x: target.x + (Math.random() * 40 - 20),
+            y: target.y + (Math.random() * 30 - 15)
+          }
+        })
       )
-    }, 1000)
+    }, 2000)
     
     return () => clearInterval(cursorInterval)
   }, [isVisible])
@@ -223,9 +237,10 @@ export function ExpertsSection() {
             ref={chatRef}
             className="absolute bottom-0 left-0 right-0 bg-[#2a2a2a] shadow-2xl rounded-t-xl transition-all duration-500 ease-in-out"
             style={{ 
-              height: "230px",
+              height: "180px",
               transform: showChat ? 'translateY(0)' : 'translateY(100%)',
-              opacity: showChat ? 1 : 0
+              opacity: showChat ? 1 : 0,
+              overflow: 'hidden'
             }}
           >
             {/* Chat Header */}
@@ -237,61 +252,63 @@ export function ExpertsSection() {
               <div className="text-xs text-gray-400">Active now</div>
             </div>
 
-            {/* Chat Messages */}
-            <div className="p-4 overflow-y-auto" style={{ height: "calc(100% - 50px)" }}>
-              {/* First message */}
-              <div className="flex gap-3 mb-4">
-                <img 
-                  src="/professional-woman-headshot.png" 
-                  alt="Sarah" 
-                  className="w-8 h-8 rounded-full border border-gray-700"
-                />
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-medium text-white text-sm">Sarah</span>
-                    <span className="text-gray-500 text-xs">3h ago</span>
-                  </div>
-                  <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
-                    I found a new keyword opportunity that could increase our client's traffic by 32%. Competitors aren't targeting it yet.
-                  </div>
-                </div>
-              </div>
-
-              {/* Second message with typing animation */}
-              <div className="flex gap-3 mb-1">
-                <img 
-                  src="/professional-man-headshot.png" 
-                  alt="Michael" 
-                  className="w-8 h-8 rounded-full border border-gray-700"
-                />
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-medium text-white text-sm">Michael</span>
-                    <span className="text-gray-500 text-xs">Just now</span>
-                  </div>
-                  <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
-                    {messageToType.substring(0, typingIndex)}
-                    {typingIndex < messageToType.length && (
-                      <span className="inline-block w-[2px] h-4 bg-blue-400 ml-[1px] animate-pulse"></span>
-                    )}
+            {/* Chat Messages - No scrollbar, fixed height, auto-pushing content */}
+            <div className="p-4 overflow-hidden" style={{ height: "calc(100% - 50px)" }}>
+              <div className="flex flex-col space-y-4">
+                {/* First message */}
+                <div className="flex gap-3">
+                  <img 
+                    src="/professional-woman-headshot.png" 
+                    alt="Sarah" 
+                    className="w-8 h-8 rounded-full border border-gray-700"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-medium text-white text-sm">Sarah</span>
+                      <span className="text-gray-500 text-xs">3h ago</span>
+                    </div>
+                    <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
+                      I found a new keyword opportunity that could increase our client's traffic by 32%. Competitors aren't targeting it yet.
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Reactions */}
-              <div className="ml-11 mt-2 flex gap-2">
-                {showThumbsUp && (
-                  <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
-                    <span className="text-sm">👍</span>
-                    <span className="text-gray-300 text-xs">1</span>
+                {/* Second message with typing animation */}
+                <div className="flex gap-3">
+                  <img 
+                    src="/professional-man-headshot.png" 
+                    alt="Michael" 
+                    className="w-8 h-8 rounded-full border border-gray-700"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-medium text-white text-sm">Michael</span>
+                      <span className="text-gray-500 text-xs">Just now</span>
+                    </div>
+                    <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
+                      {messageToType.substring(0, typingIndex)}
+                      {typingIndex < messageToType.length && (
+                        <span className="inline-block w-[2px] h-4 bg-blue-400 ml-[1px] animate-pulse"></span>
+                      )}
+                    </div>
                   </div>
-                )}
-                {showFire && (
-                  <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
-                    <span className="text-sm">🔥</span>
-                    <span className="text-gray-300 text-xs">1</span>
-                  </div>
-                )}
+                </div>
+
+                {/* Reactions */}
+                <div className="ml-11 mt-1 flex gap-2">
+                  {showThumbsUp && (
+                    <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
+                      <span className="text-sm">👍</span>
+                      <span className="text-gray-300 text-xs">1</span>
+                    </div>
+                  )}
+                  {showFire && (
+                    <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
+                      <span className="text-sm">🔥</span>
+                      <span className="text-gray-300 text-xs">1</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
