@@ -9,6 +9,7 @@ export function HeroSection() {
   const [currentWord2, setCurrentWord2] = useState(0)
   const words1 = ["business", "startup", "agency", "brand", "expert"]
   const words2 = ["rankings", "results", "traffic", "dominance", "growth"]
+  const [mounted, setMounted] = useState(false)
   const [cursors, setCursors] = useState([
     { 
       id: 1, 
@@ -16,10 +17,11 @@ export function HeroSection() {
       color: "#A8D9FF",
       x: 180, 
       y: 150,
-      targetX: 320,
-      targetY: 170,
+      targetX: 180,
+      targetY: 150,
       width: 62,
-      shape: "keyword-rankings"
+      shape: "keyword-rankings",
+      transitionMs: 0
     },
     { 
       id: 2, 
@@ -27,10 +29,11 @@ export function HeroSection() {
       color: "#EC4B4B",
       x: 420, 
       y: 220,
-      targetX: 600,
-      targetY: 190,
+      targetX: 420,
+      targetY: 220,
       width: 69,
-      shape: "traffic-analysis"
+      shape: "traffic-analysis",
+      transitionMs: 0
     },
     { 
       id: 3, 
@@ -38,10 +41,11 @@ export function HeroSection() {
       color: "#FAC666",
       x: 320, 
       y: 280,
-      targetX: 150,
-      targetY: 340,
+      targetX: 320,
+      targetY: 280,
       width: 56,
-      shape: "backlinks"
+      shape: "backlinks",
+      transitionMs: 0
     },
     { 
       id: 4, 
@@ -49,15 +53,21 @@ export function HeroSection() {
       color: "#B5B5FF",
       x: 520, 
       y: 340,
-      targetX: 480,
-      targetY: 400,
+      targetX: 520,
+      targetY: 340,
       width: 82,
-      shape: "page-optimization"
+      shape: "page-optimization",
+      transitionMs: 0
     }
   ])
   
   const dashboardRef = useRef<HTMLDivElement>(null)
   
+  // Set mounted state to true after hydration
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   // Word carousel effect
   useEffect(() => {
     const interval1 = setInterval(() => {
@@ -74,9 +84,17 @@ export function HeroSection() {
     }
   }, [])
 
-  // Cursor animation effect
+  // Cursor animation effect - only runs client-side after component is mounted
   useEffect(() => {
-    if (!dashboardRef.current) return
+    if (!dashboardRef.current || !mounted) return
+    
+    // Initialize transition durations
+    setCursors(prevCursors => 
+      prevCursors.map(cursor => ({
+        ...cursor,
+        transitionMs: Math.floor(Math.random() * 1000 + 1500)
+      }))
+    )
     
     // Function to generate random position within dashboard bounds
     const getRandomPosition = () => {
@@ -104,7 +122,9 @@ export function HeroSection() {
           return {
             ...cursor,
             targetX: x,
-            targetY: y
+            targetY: y,
+            // Update transition duration each time for variety
+            transitionMs: Math.floor(Math.random() * 1000 + 1500)
           }
         })
       )
@@ -144,7 +164,7 @@ export function HeroSection() {
       clearInterval(interval)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [])
+  }, [mounted])
 
   // Find the longest word in each array to set fixed widths - increased multiplier for better spacing
   const longestWord1 = words1.reduce((a, b) => (a.length > b.length ? a : b), "")
@@ -435,14 +455,14 @@ export function HeroSection() {
                   </div>
                 </div>
                 
-                {/* Moving Cursors */}
-                {cursors.map((cursor) => (
+                {/* Moving Cursors - Only rendered client-side to avoid hydration mismatch */}
+                {mounted && cursors.map((cursor) => (
                   <div 
                     key={cursor.id}
                     className="cursors-item absolute z-20 pointer-events-none"
                     style={{
                       transform: `translate3d(${cursor.x}px, ${cursor.y}px, 0px)`,
-                      transition: `transform ${Math.random() * 1000 + 1500}ms`
+                      transition: cursor.transitionMs > 0 ? `transform ${cursor.transitionMs}ms` : undefined
                     }}
                   >
                     {/* Custom cursor shapes based on SEO context */}
