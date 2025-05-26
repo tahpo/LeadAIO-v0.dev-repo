@@ -208,12 +208,12 @@ export function ExpertsSection() {
         <span className="text-gray-300 text-base">24/7 SEO Monitoring</span>
       </div>
       <h3 className="text-3xl font-bold text-white mb-3">Our experts never sleep</h3>
-      <p className="text-gray-400 leading-relaxed mb-8">
+      <p className="text-gray-400 leading-relaxed mb-6">
         Our team constantly analyzes, monitors, and optimizes your rankings to keep you ahead of competitors and future-proof your SEO strategy.
       </p>
 
-      {/* Dashboard Container */}
-      <div className="relative bg-[#222] rounded-2xl p-6 overflow-hidden h-[400px]">
+      {/* Dashboard Container - Reduced height */}
+      <div className="relative bg-[#222] rounded-2xl p-5 overflow-hidden h-[370px]">
         {/* Table Area */}
         <div ref={tableRef} className="h-full w-full">
           <div className="flex items-center justify-between mb-4">
@@ -221,8 +221,8 @@ export function ExpertsSection() {
             <div className="text-sm text-gray-400">Last updated: just now</div>
           </div>
 
-          {/* Keywords table - expanded to fill height */}
-          <div className="w-full overflow-hidden border border-gray-700 rounded-lg" style={{ height: "calc(100% - 60px)" }}>
+          {/* Keywords table - adjusted to fill height */}
+          <div className="w-full overflow-hidden border border-gray-700 rounded-lg" style={{ height: "calc(100% - 50px)" }}>
             <div className="grid grid-cols-4 gap-1 px-4 py-2 bg-[#333] text-gray-300 text-sm">
               <div>Keyword</div>
               <div className="text-center">Volume</div>
@@ -232,7 +232,7 @@ export function ExpertsSection() {
 
             <div style={{ height: "calc(100% - 34px)", overflow: "hidden" }}>
               {keywords.map((kw, idx) => (
-                <div key={idx} className="grid grid-cols-4 gap-1 px-4 py-3 border-t border-gray-700 text-sm">
+                <div key={idx} className="grid grid-cols-4 gap-1 px-4 py-2 border-t border-gray-700 text-sm">
                   <div className="text-white font-medium">{kw.keyword}</div>
                   <div className="text-gray-300 text-center">{kw.volume}</div>
                   <div className="text-gray-300 text-center">{kw.difficulty}</div>
@@ -270,19 +270,19 @@ export function ExpertsSection() {
           </div>
         ))}
 
-        {/* Chat Overlay */}
+        {/* Chat Overlay - Reduced height */}
         {showChat && (
           <div 
             ref={chatRef}
             className="absolute bottom-0 left-0 right-0 bg-[#2a2a2a] shadow-2xl rounded-t-xl transition-all duration-500 ease-in-out"
             style={{ 
-              height: "180px",
+              height: "160px",
               transform: showChat ? 'translateY(0)' : 'translateY(100%)',
               opacity: showChat ? 1 : 0
             }}
           >
             {/* Chat Header */}
-            <div className="p-3 border-b border-gray-700 flex items-center justify-between">
+            <div className="p-2 border-b border-gray-700 flex items-center justify-between">
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
                 <span className="text-white text-sm">SEO Team Chat</span>
@@ -290,13 +290,13 @@ export function ExpertsSection() {
               <div className="text-xs text-gray-400">Active now</div>
             </div>
 
-            {/* Chat Messages Container */}
-            <div className="p-4 h-[calc(100%-50px)] overflow-hidden relative">
+            {/* Chat Messages Container - Reduced padding */}
+            <div className="p-3 h-[calc(100%-40px)] overflow-hidden relative">
               {/* Messages Stack */}
               <div className="h-full flex flex-col justify-end">
                 {showFirstMessage && (
                   <div 
-                    className="flex gap-3 animate-fade-in mb-4"
+                    className="flex gap-3 animate-fade-in mb-3"
                     style={{
                       transition: "transform 0.5s ease-out",
                       transform: showSecondMessage ? 'translateY(-20px)' : 'translateY(0)'
@@ -305,14 +305,14 @@ export function ExpertsSection() {
                     <img 
                       src="/professional-woman-headshot.png" 
                       alt="Sarah" 
-                      className="w-8 h-8 rounded-full border border-gray-700 flex-shrink-0"
+                      className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
                     />
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium text-white text-sm">Sarah</span>
-                        <span className="text-gray-500 text-xs">Just now</span>
+                        <span className="font-medium text-white text-xs">Sarah</span>
+                        <span className="text-gray-500 text-[10px]">Just now</span>
                       </div>
-                      <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
+                      <div className="bg-[#333] text-gray-200 p-1.5 rounded-lg text-xs max-w-[280px]">
                         I can start working on content optimization for these keywords right away!
                       </div>
                     </div>
@@ -325,32 +325,32 @@ export function ExpertsSection() {
                     <img 
                       src="/professional-man-headshot.png" 
                       alt="Michael" 
-                      className="w-8 h-8 rounded-full border border-gray-700 flex-shrink-0"
+                      className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
                     />
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium text-white text-sm">Michael</span>
-                        <span className="text-gray-500 text-xs">Just now</span>
+                        <span className="font-medium text-white text-xs">Michael</span>
+                        <span className="text-gray-500 text-[10px]">Just now</span>
                       </div>
-                      <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
+                      <div className="bg-[#333] text-gray-200 p-1.5 rounded-lg text-xs max-w-[280px]">
                         {messageToType.substring(0, typingIndex)}
                         {typingIndex < messageToType.length && (
-                          <span className="inline-block w-[2px] h-4 bg-blue-400 ml-[1px] animate-pulse"></span>
+                          <span className="inline-block w-[2px] h-3.5 bg-blue-400 ml-[1px] animate-pulse"></span>
                         )}
                       </div>
                       
                       {/* Reactions directly under this message */}
-                      <div className="flex gap-2 mt-2">
+                      <div className="flex gap-2 mt-1">
                         {showThumbsUp && (
-                          <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
-                            <span className="text-sm">👍</span>
-                            <span className="text-gray-300 text-xs">1</span>
+                          <div className="bg-[#333] rounded-full px-1.5 py-0.5 flex items-center gap-1 animate-fade-in">
+                            <span className="text-xs">👍</span>
+                            <span className="text-gray-300 text-[10px]">1</span>
                           </div>
                         )}
                         {showFire && (
-                          <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
-                            <span className="text-sm">🔥</span>
-                            <span className="text-gray-300 text-xs">1</span>
+                          <div className="bg-[#333] rounded-full px-1.5 py-0.5 flex items-center gap-1 animate-fade-in">
+                            <span className="text-xs">🔥</span>
+                            <span className="text-gray-300 text-[10px]">1</span>
                           </div>
                         )}
                       </div>
