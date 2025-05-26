@@ -92,29 +92,17 @@ export function ResultsSection() {
   useEffect(() => {
     if (!isVisible) return
 
-    // Phase 1: Moderate increase to 150 in 4 seconds
+    // Set initial value to 120 and animate to 157
+    setSpeedValue(120);
+
     anime({
-      targets: {value: 60},
-      value: 150,
-      duration: 4000,
+      targets: { value: 120 },
+      value: 157,
+      duration: 2000,
       easing: 'easeInOutQuad',
       round: 1,
       update: (anim) => {
         setSpeedValue(Math.round(anim.animations[0].currentValue));
-      },
-      complete: () => {
-        // Phase 2: Slower increase from 150 to 400
-        // 4 seconds per unit × 250 units = 1,000,000 milliseconds
-        anime({
-          targets: {value: 150},
-          value: 400,
-          duration: 1000000, // ~16.7 minutes (4 seconds per unit)
-          easing: 'linear', // Linear to make it consistently slow
-          round: 1,
-          update: (anim) => {
-            setSpeedValue(Math.round(anim.animations[0].currentValue));
-          }
-        });
       }
     });
     
@@ -147,13 +135,12 @@ export function ResultsSection() {
             {/* Base layer (gray and red segments) */}
             <div className="relative w-[280px] h-[140px]">
               <svg viewBox="0 0 100 50" className="w-full h-full">
-                {/* All 12 segments */}
+                {/* All 12 segments with spacing between them */}
                 {Array.from({ length: TOTAL_SEGMENTS }, (_, i) => {
-                  const rotation = -90 + (i * 180) / 11;
+                  const rotation = -90 + (i * 180) / (TOTAL_SEGMENTS - 1);
                   const isRed = i >= GRAY_SEGMENTS;
                   const isActive = i < totalSegments;
                   
-                  // Add some margin between segments
                   return (
                     <rect
                       key={i}
@@ -192,7 +179,7 @@ export function ResultsSection() {
           </div>
         </div>
 
-        {/* SEO Performance Metrics - moved up */}
+        {/* SEO Performance Metrics */}
         <div className="w-full mb-4 mt-6">
           <div className="flex items-center justify-between mb-2">
             <div className="text-gray-400 font-mono">CONVERSION METRICS</div>
@@ -222,19 +209,19 @@ export function ResultsSection() {
           </div>
         </div>
 
-        {/* Monthly Growth Stats - kept close to conversion metrics */}
+        {/* Monthly Growth Stats */}
         <div className="w-full mt-4">
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center">
-              <div className="text-green-400 font-mono text-xl font-bold">+{Math.floor(speedValue * 1.5)}%</div>
+              <div className="text-green-400 font-mono text-xl font-bold">+235%</div>
               <div className="text-gray-500 text-xs font-mono text-center mt-1">ORGANIC TRAFFIC</div>
             </div>
             <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center">
-              <div className="text-green-400 font-mono text-xl font-bold">+{Math.floor(speedValue * 0.8)}%</div>
+              <div className="text-green-400 font-mono text-xl font-bold">+125%</div>
               <div className="text-gray-500 text-xs font-mono text-center mt-1">KEYWORD RANKINGS</div>
             </div>
             <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center">
-              <div className="text-green-400 font-mono text-xl font-bold">+{Math.floor(speedValue * 0.5)}%</div>
+              <div className="text-green-400 font-mono text-xl font-bold">+78%</div>
               <div className="text-gray-500 text-xs font-mono text-center mt-1">CONVERSION RATE</div>
             </div>
           </div>
