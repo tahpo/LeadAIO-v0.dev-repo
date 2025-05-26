@@ -88,11 +88,11 @@ export function SpeedPerformanceSection() {
     };
   }, [isVisible]);
 
-  // Counter animation
+  // Counter animation with EXTREMELY slow second phase
   useEffect(() => {
     if (!isVisible) return
 
-    // Anime.js for smooth counter animation
+    // Phase 1: Moderate increase to 150 in 4 seconds
     anime({
       targets: {value: 60},
       value: 150,
@@ -103,12 +103,12 @@ export function SpeedPerformanceSection() {
         setSpeedValue(Math.round(anim.animations[0].currentValue));
       },
       complete: () => {
-        // Start phase 2 - slower animation from 150 to 400
+        // Phase 2: EXTREMELY slow increase from 150 to 400
         anime({
           targets: {value: 150},
           value: 400,
-          duration: 50000, // Much slower increase
-          easing: 'easeOutSine',
+          duration: 1500000, // 25 minutes (1.5 million ms)
+          easing: 'linear', // Linear to make it consistently slow
           round: 1,
           update: (anim) => {
             setSpeedValue(Math.round(anim.animations[0].currentValue));
