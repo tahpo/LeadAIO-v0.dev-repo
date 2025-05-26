@@ -1,14 +1,20 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react"
+import anime from 'animejs'
 
 export function SpeedPerformanceSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const speedometerRef = useRef<HTMLDivElement>(null)
   const [speedValue, setSpeedValue] = useState(60)
   const [isVisible, setIsVisible] = useState(false)
-  const [redSegments, setRedSegments] = useState([false, false, false, false])
-  const [graySegmentOpacities, setGraySegmentOpacities] = useState(Array(8).fill(0.5))
+  const [totalSegments, setTotalSegments] = useState(8)
   const animationFrameRef = useRef<number | null>(null)
+  
+  // Total number of segments in the speedometer
+  const TOTAL_SEGMENTS = 12;
+  // Number of gray segments (rest are red)
+  const GRAY_SEGMENTS = 8;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,126 +38,89 @@ export function SpeedPerformanceSection() {
       }
     }
   }, [])
-
-  // Advanced flickering for gray segments
+  
+  // Redline flickering animation using Anime.js
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible || !speedometerRef.current) return
     
-    // Function to update gray segment opacities for subtle flickering
-    const updateGraySegments = () => {
-      setGraySegmentOpacities(prev => 
-        prev.map(() => 0.3 + Math.random() * 0.4) // Values between 0.3 and 0.7
-      )
-      setTimeout(updateGraySegments, 200) // Update every 200ms
-    }
-    
-    updateGraySegments()
-  }, [isVisible])
-
-  // Red segment animation - more erratic
-  useEffect(() => {
-    if (!isVisible) return
-    
-    // Function to randomly show/hide red segments to simulate redlining
-    const updateRedSegments = () => {
-      // Calculate how many red segments should be active based on speed
-      // As speed increases, more red segments become active, but flicker more erratically
-      const normalizedSpeed = Math.min(400, Math.max(60, speedValue))
-      const redlineThreshold = 250 // When speed starts to enter red zone
+    // Function to update the speedometer display
+    const updateSpeedometer = () => {
+      // Randomly determine how many segments should be lit (8-12)
+      const segmentCount = Math.floor(Math.random() * 5) + 8; // 8-12 range
+      setTotalSegments(segmentCount);
       
-      if (normalizedSpeed < redlineThreshold) {
-        // Below redline - no red segments
-        setRedSegments([false, false, false, false])
-      } else {
-        // Above redline - calculate active segments with randomness
-        const segmentPercentage = (normalizedSpeed - redlineThreshold) / (400 - redlineThreshold)
-        const baseActiveCount = Math.floor(segmentPercentage * 4)
-        
-        // Add randomness for the redlining effect
-        let newRedSegments = [false, false, false, false]
-        
-        // Always activate the segments up to baseActiveCount
-        for (let i = 0; i < baseActiveCount; i++) {
-          newRedSegments[i] = true
-        }
-        
-        // Add random flickering for higher segments
-        if (baseActiveCount < 4) {
-          for (let i = baseActiveCount; i < 4; i++) {
-            // Higher chance of flickering as speed increases
-            const flickerChance = segmentPercentage * 0.8
-            newRedSegments[i] = Math.random() < flickerChance
-          }
-        }
-        
-        // Shuffle the array to make flickering more erratic
-        if (baseActiveCount > 0 && baseActiveCount < 4) {
-          for (let i = 0; i < 3; i++) {
-            const idx1 = Math.floor(Math.random() * 4)
-            const idx2 = Math.floor(Math.random() * 4)
-            if (idx1 !== idx2) {
-              const temp = newRedSegments[idx1]
-              newRedSegments[idx1] = newRedSegments[idx2]
-              newRedSegments[idx2] = temp
+      // Get all segment elements
+      const segments = speedometerRef.current?.querySelectorAll('.segment');
+      
+      if (segments) {
+        // Reset all segments
+        segments.forEach((segment, i) => {
+          // Gray segments
+          if (i < GRAY_SEGMENTS) {
+            (segment as HTMLElement).style.opacity = '0.7';
+            (segment as HTMLElement).style.fill = '#4A4A4A';
+          } 
+          // Red segments
+          else {
+            // If this segment should be lit based on the random count
+            if (i < segmentCount) {
+              (segment as HTMLElement).style.opacity = '0.9';
+              (segment as HTMLElement).style.fill = '#FF3E3E';
+            } else {
+              (segment as HTMLElement).style.opacity = '0.15';
+              (segment as HTMLElement).style.fill = '#8B3E3E';
             }
           }
-        }
-        
-        setRedSegments(newRedSegments)
+        });
       }
       
-      // Update faster as speed increases
-      const updateRate = Math.max(50, 200 - (normalizedSpeed / 400) * 150)
-      setTimeout(updateRedSegments, updateRate)
-    }
+      // Flicker rapidly - between 70-120ms
+      const flickerRate = 70 + Math.random() * 50;
+      setTimeout(updateSpeedometer, flickerRate);
+    };
     
-    updateRedSegments()
-  }, [isVisible, speedValue])
+    // Start the speedometer animation
+    updateSpeedometer();
+    
+    return () => {
+      // Cleanup any remaining timers
+      clearTimeout(updateSpeedometer as unknown as number);
+    };
+  }, [isVisible]);
 
   // Counter animation
   useEffect(() => {
     if (!isVisible) return
 
-    // Slower initial animation from 60 to 150 (4 seconds)
-    let startTime = Date.now()
-    let duration = 4000 // 4 seconds
-    let startValue = 60
-    let endValue = 150
-
-    const animatePhase1 = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const value = Math.floor(startValue + (endValue - startValue) * progress)
-
-      setSpeedValue(value)
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animatePhase1)
-      } else {
-        // Start phase 2 - Slower animation from 150 to 400
-        // 5 seconds per increment = 1250 seconds total for 250 increments
-        startTime = Date.now()
-        duration = 1250000 // 1250 seconds = ~21 minutes (5 seconds per increment)
-        startValue = 150
-        endValue = 400
-        animationFrameRef.current = requestAnimationFrame(animatePhase2)
+    // Anime.js for smooth counter animation
+    anime({
+      targets: {value: 60},
+      value: 150,
+      duration: 4000,
+      easing: 'easeInOutQuad',
+      round: 1,
+      update: (anim) => {
+        setSpeedValue(Math.round(anim.animations[0].currentValue));
+      },
+      complete: () => {
+        // Start phase 2 - slower animation from 150 to 400
+        anime({
+          targets: {value: 150},
+          value: 400,
+          duration: 50000, // Much slower increase
+          easing: 'easeOutSine',
+          round: 1,
+          update: (anim) => {
+            setSpeedValue(Math.round(anim.animations[0].currentValue));
+          }
+        });
       }
-    }
-
-    const animatePhase2 = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const value = Math.floor(startValue + (endValue - startValue) * progress)
-
-      setSpeedValue(value)
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animatePhase2)
-      }
-    }
-
-    animationFrameRef.current = requestAnimationFrame(animatePhase1)
-  }, [isVisible])
+    });
+    
+    return () => {
+      anime.remove('[data-speed-counter]');
+    };
+  }, [isVisible]);
 
   return (
     <section ref={sectionRef} className="py-16 bg-white">
@@ -177,54 +146,40 @@ export function SpeedPerformanceSection() {
               {/* Digital Speedometer */}
               <div className="relative w-full mb-8">
                 {/* Speedometer with animation */}
-                <div className="relative w-full flex justify-center">
+                <div ref={speedometerRef} className="relative w-full flex justify-center">
                   {/* Base layer (gray and red segments) */}
                   <div className="relative w-[320px] h-[160px]">
                     <svg width="320" height="160" viewBox="0 0 400 200">
-                      {/* Gray segments */}
-                      {Array.from({ length: 8 }, (_, i) => {
-                        const rotation = -90 + (i * 180) / 11
+                      {/* All 12 segments */}
+                      {Array.from({ length: TOTAL_SEGMENTS }, (_, i) => {
+                        const rotation = -90 + (i * 180) / 11;
+                        const isRed = i >= GRAY_SEGMENTS;
+                        const isActive = i < totalSegments;
                         
                         return (
                           <rect
-                            key={`gray-${i}`}
-                            className="gray-segment"
+                            key={i}
+                            className="segment"
                             x="185"
                             y="10"
                             width="30"
                             height="60"
                             rx="2"
-                            fill="#4A4A4A"
-                            opacity={graySegmentOpacities[i]}
+                            fill={isRed ? (isActive ? "#FF3E3E" : "#8B3E3E") : "#4A4A4A"}
+                            opacity={isActive ? (isRed ? 0.9 : 0.7) : 0.15}
                             transform={`rotate(${rotation}, 200, 200)`}
                           />
-                        )
-                      })}
-                      
-                      {/* Red segments */}
-                      {Array.from({ length: 4 }, (_, i) => {
-                        const rotation = -90 + ((i + 8) * 180) / 11
-                        
-                        return (
-                          <rect
-                            key={`red-${i}`}
-                            className="red-segment"
-                            x="185"
-                            y="10"
-                            width="30"
-                            height="60"
-                            rx="2"
-                            fill={redSegments[i] ? "#FF3E3E" : "#8B3E3E"}
-                            opacity={redSegments[i] ? 0.9 : 0.15}
-                            transform={`rotate(${rotation}, 200, 200)`}
-                          />
-                        )
+                        );
                       })}
                     </svg>
 
                     {/* Digital display - moved to center of the speedometer */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-[10%] text-center">
-                      <div className="text-6xl font-mono text-white tracking-wider" style={{ fontFamily: "monospace" }}>
+                      <div 
+                        data-speed-counter 
+                        className="text-6xl font-mono text-white tracking-wider" 
+                        style={{ fontFamily: "monospace" }}
+                      >
                         {speedValue}
                       </div>
                       <div className="text-orange-400 text-lg font-mono mt-1">LEADS/DAY</div>
