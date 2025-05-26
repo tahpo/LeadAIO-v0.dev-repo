@@ -124,7 +124,7 @@ export function ResultsSection() {
   }, [isVisible]);
 
   return (
-    <div ref={sectionRef} className="bg-[#1a1a1a] rounded-2xl p-8 shadow-xl">
+    <div ref={sectionRef} className="bg-[#1a1a1a] rounded-2xl p-8 shadow-xl h-[520px]">
       {/* Header */}
       <div className="mb-6">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2a2a2a] mb-6">
@@ -141,11 +141,11 @@ export function ResultsSection() {
       {/* Speedometer Container */}
       <div className="flex flex-col items-center justify-center">
         {/* Digital Speedometer */}
-        <div className="relative w-full mb-8">
+        <div className="relative w-full mb-4">
           {/* Speedometer with animation */}
           <div ref={speedometerRef} className="relative w-full flex justify-center">
             {/* Base layer (gray and red segments) */}
-            <div className="relative w-[320px] h-[160px]">
+            <div className="relative w-[280px] h-[140px]">
               <svg viewBox="0 0 100 50" className="w-full h-full">
                 {/* All 12 segments */}
                 {Array.from({ length: TOTAL_SEGMENTS }, (_, i) => {
@@ -153,13 +153,14 @@ export function ResultsSection() {
                   const isRed = i >= GRAY_SEGMENTS;
                   const isActive = i < totalSegments;
                   
+                  // Add some margin between segments
                   return (
                     <rect
                       key={i}
                       className="segment"
-                      x="45"
+                      x="46"
                       y="5"
-                      width="10"
+                      width="8"
                       height="20"
                       rx="1"
                       fill={isRed ? (isActive ? "#FF3E3E" : "#8B3E3E") : "#4A4A4A"}
@@ -185,14 +186,14 @@ export function ResultsSection() {
           </div>
 
           {/* Labels */}
-          <div className="flex justify-between text-gray-500 text-sm font-mono mt-4">
+          <div className="flex justify-between text-gray-500 text-sm font-mono mt-2">
             <div className="whitespace-nowrap">LEAD POTENTIAL</div>
             <div className="text-right">LEAD GENERATION RATE</div>
           </div>
         </div>
 
-        {/* SEO Performance Metrics - moved down with increased margin-top */}
-        <div className="w-full mb-4 mt-12">
+        {/* SEO Performance Metrics - moved up */}
+        <div className="w-full mb-4 mt-6">
           <div className="flex items-center justify-between mb-2">
             <div className="text-gray-400 font-mono">CONVERSION METRICS</div>
             <div className="text-orange-400 font-mono">HIGH-INTENT</div>
@@ -222,7 +223,7 @@ export function ResultsSection() {
         </div>
 
         {/* Monthly Growth Stats - kept close to conversion metrics */}
-        <div className="w-full mt-6">
+        <div className="w-full mt-4">
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center">
               <div className="text-green-400 font-mono text-xl font-bold">+{Math.floor(speedValue * 1.5)}%</div>
