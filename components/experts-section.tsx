@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react"
+import anime from 'animejs'
 
 export function ExpertsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -290,19 +291,16 @@ export function ExpertsSection() {
               <div className="text-xs text-gray-400">Active now</div>
             </div>
 
-            {/* Chat Messages */}
+            {/* Chat Messages Container */}
             <div className="p-4 h-[calc(100%-50px)] overflow-hidden relative">
-              {/* Message container with relative positioning */}
-              <div className="relative h-full w-full">
-                {/* Sarah's message - positioned at the top initially */}
+              {/* Messages Stack */}
+              <div className="h-full flex flex-col justify-end">
                 {showFirstMessage && (
                   <div 
-                    className="absolute top-0 left-0 right-0 flex gap-3 animate-fade-in"
-                    style={{ 
-                      transform: showSecondMessage ? 'translateY(-100%)' : 'translateY(0)',
-                      opacity: showSecondMessage ? 0 : 1,
-                      transition: "transform 0.5s ease-out, opacity 0.5s ease-out",
-                      zIndex: 1
+                    className="flex gap-3 animate-fade-in mb-4"
+                    style={{
+                      transition: "transform 0.5s ease-out",
+                      transform: showSecondMessage ? 'translateY(-20px)' : 'translateY(0)'
                     }}
                   >
                     <img 
@@ -322,12 +320,9 @@ export function ExpertsSection() {
                   </div>
                 )}
 
-                {/* Michael's message (with typing animation) - always at the bottom */}
+                {/* Michael's message (with typing animation) */}
                 {showSecondMessage && (
-                  <div 
-                    className="absolute bottom-0 left-0 right-0 flex gap-3 animate-fade-in"
-                    style={{ zIndex: 2 }}
-                  >
+                  <div className="flex gap-3 animate-fade-in mt-auto">
                     <img 
                       src="/professional-man-headshot.png" 
                       alt="Michael" 
