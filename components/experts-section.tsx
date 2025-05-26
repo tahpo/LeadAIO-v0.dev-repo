@@ -12,10 +12,12 @@ export function ExpertsSection() {
   const [showThumbsUp, setShowThumbsUp] = useState(false)
   const [showFire, setShowFire] = useState(false)
   const [showChat, setShowChat] = useState(true)
+  const [showFirstMessage, setShowFirstMessage] = useState(false)
+  const [showSecondMessage, setShowSecondMessage] = useState(false)
   const [cursorPositions, setCursorPositions] = useState([
-    { x: 100, y: 100, color: "#A8D9FF", name: "Jessica" },
-    { x: 180, y: 150, color: "#FAC666", name: "Michael" },
-    { x: 150, y: 80, color: "#FF9EB3", name: "Sarah" }
+    { x: 100, y: 100, color: "#A8D9FF", name: "Jessica", targetX: 150, targetY: 150, speed: 1.5 },
+    { x: 180, y: 150, color: "#FAC666", name: "Michael", targetX: 220, targetY: 100, speed: 2 },
+    { x: 150, y: 80, color: "#FF9EB3", name: "Sarah", targetX: 120, targetY: 120, speed: 1.8 }
   ])
 
   // Animation message
@@ -68,50 +70,62 @@ export function ExpertsSection() {
     setShowThumbsUp(false)
     setShowFire(false)
     setShowChat(true)
+    setShowFirstMessage(false)
+    setShowSecondMessage(false)
     
     // Start chat animation loop
     const runChatAnimation = () => {
-      // Step 1: Start typing with a short delay
+      // Show Sarah's message first
+      setShowFirstMessage(true)
+      
+      // After 1 second, show Michael's message and start typing
       setTimeout(() => {
-        // Typing animation
-        const typingInterval = setInterval(() => {
-          setTypingIndex(prev => {
-            if (prev < messageToType.length) {
-              return prev + 1
-            } else {
-              clearInterval(typingInterval)
-              return prev
-            }
-          })
-        }, 30) // Speed of typing
+        setShowSecondMessage(true)
         
-        // Step 2: After typing, show reactions one by one
+        // Start typing animation with a short delay
         setTimeout(() => {
-          // Show first reaction
-          setShowThumbsUp(true)
+          // Typing animation
+          const typingInterval = setInterval(() => {
+            setTypingIndex(prev => {
+              if (prev < messageToType.length) {
+                return prev + 1
+              } else {
+                clearInterval(typingInterval)
+                return prev
+              }
+            })
+          }, 30) // Speed of typing
           
-          // Show second reaction after delay
+          // After typing, show reactions one by one
           setTimeout(() => {
-            setShowFire(true)
+            // Show first reaction
+            setShowThumbsUp(true)
             
-            // Step 3: Hide chat after showing reactions
+            // Show second reaction after delay
             setTimeout(() => {
-              setShowChat(false)
+              setShowFire(true)
               
-              // Step 4: Reset and restart after showing dashboard
+              // Hide chat after showing reactions
               setTimeout(() => {
-                setTypingIndex(0)
-                setShowThumbsUp(false)
-                setShowFire(false)
-                setShowChat(true)
+                setShowChat(false)
                 
-                // Step 5: Restart the animation after delay
-                setTimeout(runChatAnimation, 1000)
-              }, 3000) // Time showing dashboard (increased to 3 seconds)
-            }, 2000) // Time showing chat with reactions
-          }, 600) // Delay between reactions
-        }, messageToType.length * 30 + 500) // Wait for typing to complete
-      }, 500) // Initial delay
+                // Reset and restart after showing dashboard
+                setTimeout(() => {
+                  setTypingIndex(0)
+                  setShowThumbsUp(false)
+                  setShowFire(false)
+                  setShowChat(true)
+                  setShowFirstMessage(false)
+                  setShowSecondMessage(false)
+                  
+                  // Restart the animation after delay
+                  setTimeout(runChatAnimation, 1000)
+                }, 3000) // Time showing dashboard (increased to 3 seconds)
+              }, 2000) // Time showing chat with reactions
+            }, 600) // Delay between reactions
+          }, messageToType.length * 30 + 500) // Wait for typing to complete
+        }, 200)
+      }, 1000) // Delay before showing second message
     }
     
     // Start the animation
@@ -126,23 +140,67 @@ export function ExpertsSection() {
     }
   }, [isVisible])
   
-  // Move cursors around
+  // Move cursors around more randomly
   useEffect(() => {
     if (!isVisible) return
     
-    // Move cursors around randomly
+    // Function to generate a new random target position
+    const getNewTarget = (currentX, currentY) => {
+      // More dramatic movements - larger range (20-100 pixels)
+      const rangeX = 20 + Math.random() * 80;
+      const rangeY = 20 + Math.random() * 80;
+      
+      // Random direction
+      const directionX = Math.random() > 0.5 ? 1 : -1;
+      const directionY = Math.random() > 0.5 ? 1 : -1;
+      
+      // New target coordinates
+      const newX = currentX + (directionX * rangeX);
+      const newY = currentY + (directionY * rangeY);
+      
+      // Ensure targets stay within bounds (50-300 for X, 50-250 for Y)
+      return {
+        x: Math.min(Math.max(newX, 50), 300),
+        y: Math.min(Math.max(newY, 50), 250)
+      };
+    };
+    
+    // Move cursors toward random targets
     const cursorInterval = setInterval(() => {
       setCursorPositions(prev => 
-        prev.map(cursor => ({
-          ...cursor,
-          x: cursor.x + (Math.random() * 20 - 10),
-          y: cursor.y + (Math.random() * 20 - 10)
-        }))
-      )
-    }, 1000)
+        prev.map(cursor => {
+          // If cursor is close to target, generate a new target
+          const distToTarget = Math.sqrt(
+            Math.pow(cursor.targetX - cursor.x, 2) + 
+            Math.pow(cursor.targetY - cursor.y, 2)
+          );
+          
+          if (distToTarget < 5) {
+            const newTarget = getNewTarget(cursor.x, cursor.y);
+            return {
+              ...cursor,
+              targetX: newTarget.x,
+              targetY: newTarget.y,
+              // Randomize speed slightly each time
+              speed: 0.8 + Math.random() * 2
+            };
+          }
+          
+          // Move toward current target
+          const dx = (cursor.targetX - cursor.x) / 20 * cursor.speed;
+          const dy = (cursor.targetY - cursor.y) / 20 * cursor.speed;
+          
+          return {
+            ...cursor,
+            x: cursor.x + dx,
+            y: cursor.y + dy
+          };
+        })
+      );
+    }, 50); // Update much more frequently for smoother motion
     
-    return () => clearInterval(cursorInterval)
-  }, [isVisible])
+    return () => clearInterval(cursorInterval);
+  }, [isVisible]);
 
   return (
     <div ref={sectionRef} className="bg-[#1a1a1a] rounded-3xl p-8 shadow-xl">
@@ -186,18 +244,6 @@ export function ExpertsSection() {
               ))}
             </div>
           </div>
-          
-          {/* Activity indicators */}
-          <div className="flex flex-wrap gap-2 absolute bottom-6 left-6">
-            <div className="px-3 py-1 bg-[#2a2a2a] rounded-full text-sm text-gray-300 flex items-center">
-              <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-              <span>5 team members active</span>
-            </div>
-            <div className="px-3 py-1 bg-[#2a2a2a] rounded-full text-sm text-gray-300 flex items-center">
-              <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
-              <span>18 new keywords found today</span>
-            </div>
-          </div>
         </div>
 
         {/* Moving cursors */}
@@ -208,7 +254,7 @@ export function ExpertsSection() {
             style={{
               left: `${cursor.x}px`,
               top: `${cursor.y}px`,
-              transition: 'all 0.5s ease-out'
+              transition: 'all 0.1s linear'
             }}
           >
             <div className="flex items-center">
@@ -252,43 +298,47 @@ export function ExpertsSection() {
               style={{ height: "calc(100% - 50px)", position: "relative" }}
             >
               {/* First message */}
-              <div className="flex gap-3 mb-4">
-                <img 
-                  src="/professional-woman-headshot.png" 
-                  alt="Sarah" 
-                  className="w-8 h-8 rounded-full border border-gray-700"
-                />
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-medium text-white text-sm">Sarah</span>
-                    <span className="text-gray-500 text-xs">3h ago</span>
-                  </div>
-                  <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
-                    I found a new keyword opportunity that could increase our client's traffic by 32%. Competitors aren't targeting it yet.
+              {showFirstMessage && (
+                <div className="flex gap-3 mb-4 animate-fade-in">
+                  <img 
+                    src="/professional-woman-headshot.png" 
+                    alt="Sarah" 
+                    className="w-8 h-8 rounded-full border border-gray-700"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-medium text-white text-sm">Sarah</span>
+                      <span className="text-gray-500 text-xs">Just now</span>
+                    </div>
+                    <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
+                      I can start working on content optimization for these keywords right away!
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Second message with typing animation */}
-              <div className="flex gap-3 mb-1">
-                <img 
-                  src="/professional-man-headshot.png" 
-                  alt="Michael" 
-                  className="w-8 h-8 rounded-full border border-gray-700"
-                />
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-medium text-white text-sm">Michael</span>
-                    <span className="text-gray-500 text-xs">Just now</span>
-                  </div>
-                  <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
-                    {messageToType.substring(0, typingIndex)}
-                    {typingIndex < messageToType.length && (
-                      <span className="inline-block w-[2px] h-4 bg-blue-400 ml-[1px] animate-pulse"></span>
-                    )}
+              {showSecondMessage && (
+                <div className="flex gap-3 mb-1 animate-fade-in">
+                  <img 
+                    src="/professional-man-headshot.png" 
+                    alt="Michael" 
+                    className="w-8 h-8 rounded-full border border-gray-700"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-medium text-white text-sm">Michael</span>
+                      <span className="text-gray-500 text-xs">Just now</span>
+                    </div>
+                    <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
+                      {messageToType.substring(0, typingIndex)}
+                      {typingIndex < messageToType.length && (
+                        <span className="inline-block w-[2px] h-4 bg-blue-400 ml-[1px] animate-pulse"></span>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Reactions - separated to show one after another */}
               <div className="ml-11 mt-2 flex gap-2">
