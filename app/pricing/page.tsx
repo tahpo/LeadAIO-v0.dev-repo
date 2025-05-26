@@ -2,7 +2,7 @@
 
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Check, HelpCircle, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -31,6 +31,7 @@ export default function PricingPage() {
     <main className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
       <Header />
       <PricingSection billingPeriod={billingPeriod} setBillingPeriod={setBillingPeriod} />
+      <ParallaxCompareSection billingPeriod={billingPeriod} />
       <FaqSection />
       <FooterSection />
     </main>
@@ -248,118 +249,205 @@ function PricingSection({
             </div>
           </div>
         </div>
-
-        {/* Feature Comparison Table */}
-        <div className="mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-garnett text-center mb-12">Compare features</h2>
-          
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead className="bg-gray-50 text-left">
-                <tr>
-                  <th className="py-4 px-6 font-universal font-medium text-gray-500 text-sm">Features</th>
-                  <th className="py-4 px-6 font-universal font-medium text-gray-900 text-sm">Starter</th>
-                  <th className="py-4 px-6 font-universal font-medium text-orange-600 text-sm">Pro</th>
-                  <th className="py-4 px-6 font-universal font-medium text-gray-900 text-sm">Enterprise</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                <tr>
-                  <td className="py-4 px-6 font-universal text-sm text-gray-800">Keywords tracked</td>
-                  <td className="py-4 px-6 font-universal text-sm">50</td>
-                  <td className="py-4 px-6 font-universal text-sm">200</td>
-                  <td className="py-4 px-6 font-universal text-sm">Unlimited</td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-universal text-sm text-gray-800 bg-gray-50">
-                    <div className="flex items-center">
-                      AI keyword research
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <HelpCircle className="ml-1.5 h-4 w-4 text-gray-400" />
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p className="text-sm font-universal max-w-xs">
-                              Our AI analyzes millions of keywords to find the most valuable opportunities for your business
-                            </p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">Basic</td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">Advanced</td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">Custom</td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-universal text-sm text-gray-800">Site audits</td>
-                  <td className="py-4 px-6 font-universal text-sm">Monthly</td>
-                  <td className="py-4 px-6 font-universal text-sm">Weekly</td>
-                  <td className="py-4 px-6 font-universal text-sm">Daily</td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-universal text-sm text-gray-800 bg-gray-50">Content optimization</td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">
-                    <X className="h-5 w-5 text-gray-400" />
-                  </td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">
-                    <Check className="h-5 w-5 text-green-500" />
-                  </td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">
-                    <Check className="h-5 w-5 text-green-500" />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-universal text-sm text-gray-800">Competitor analysis</td>
-                  <td className="py-4 px-6 font-universal text-sm">
-                    <X className="h-5 w-5 text-gray-400" />
-                  </td>
-                  <td className="py-4 px-6 font-universal text-sm">
-                    <Check className="h-5 w-5 text-green-500" />
-                  </td>
-                  <td className="py-4 px-6 font-universal text-sm">
-                    <Check className="h-5 w-5 text-green-500" />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-universal text-sm text-gray-800 bg-gray-50">Users</td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">1</td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">5</td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">Unlimited</td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-universal text-sm text-gray-800">API access</td>
-                  <td className="py-4 px-6 font-universal text-sm">
-                    <X className="h-5 w-5 text-gray-400" />
-                  </td>
-                  <td className="py-4 px-6 font-universal text-sm">
-                    <X className="h-5 w-5 text-gray-400" />
-                  </td>
-                  <td className="py-4 px-6 font-universal text-sm">
-                    <Check className="h-5 w-5 text-green-500" />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-universal text-sm text-gray-800 bg-gray-50">Support</td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">Email</td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">Email & chat</td>
-                  <td className="py-4 px-6 font-universal text-sm bg-gray-50">24/7 dedicated</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </section>
   )
+}
+
+function ParallaxCompareSection({ billingPeriod }: { billingPeriod: "monthly" | "yearly" }) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [isSticky, setIsSticky] = useState(false);
+  const [endSticky, setEndSticky] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (header) {
+      setHeaderHeight(header.offsetHeight);
+    }
+
+    const handleScroll = () => {
+      const section = sectionRef.current;
+      const header = headerRef.current;
+      
+      if (section && header) {
+        const sectionRect = section.getBoundingClientRect();
+        const headerRect = header.getBoundingClientRect();
+        const sectionBottom = sectionRect.bottom;
+        const headerBottom = headerRect.height;
+        
+        // Set sticky when section top reaches top of viewport
+        setIsSticky(sectionRect.top <= 80); // 80px for the site header
+        
+        // End sticky when bottom of section is about to meet bottom of sticky header
+        setEndSticky(sectionBottom <= headerBottom + 80 + 100); // Added some buffer
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Feature comparison data
+  const features = [
+    {
+      category: "Keywords",
+      items: [
+        { name: "Keywords tracked", starter: "50", pro: "200", enterprise: "Unlimited" },
+        { name: "AI keyword research", starter: "Basic", pro: "Advanced", enterprise: "Custom" },
+        { name: "Keyword difficulty analysis", starter: <Check className="h-5 w-5 text-green-500 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+        { name: "Keyword grouping", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      ]
+    },
+    {
+      category: "Ranking",
+      items: [
+        { name: "Position tracking frequency", starter: "Weekly", pro: "Daily", enterprise: "Real-time" },
+        { name: "Search engines monitored", starter: "2", pro: "5", enterprise: "All major" },
+        { name: "Location-based tracking", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+        { name: "Competitor rank tracking", starter: "Up to 2", pro: "Up to 5", enterprise: "Unlimited" },
+      ]
+    },
+    {
+      category: "Site Audit",
+      items: [
+        { name: "Audit frequency", starter: "Monthly", pro: "Weekly", enterprise: "Daily" },
+        { name: "Pages crawled", starter: "500", pro: "5,000", enterprise: "Unlimited" },
+        { name: "Technical issue detection", starter: "Basic", pro: "Advanced", enterprise: "Comprehensive" },
+        { name: "JavaScript rendering", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+        { name: "Custom issue prioritization", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <X className="h-5 w-5 text-gray-400 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      ]
+    },
+    {
+      category: "Content",
+      items: [
+        { name: "Content optimization", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+        { name: "AI writing suggestions", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: "Basic", enterprise: "Advanced" },
+        { name: "Content performance tracking", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+        { name: "Custom content templates", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <X className="h-5 w-5 text-gray-400 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      ]
+    },
+    {
+      category: "Backlinks",
+      items: [
+        { name: "Backlink monitoring", starter: "Limited", pro: "Full", enterprise: "Full" },
+        { name: "Link building opportunities", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+        { name: "Toxic link detection", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+        { name: "Competitor backlink analysis", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: "Basic", enterprise: "Advanced" },
+      ]
+    },
+    {
+      category: "Reporting",
+      items: [
+        { name: "Custom dashboards", starter: "1", pro: "5", enterprise: "Unlimited" },
+        { name: "White-label reports", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+        { name: "Report scheduling", starter: "Weekly", pro: "Daily", enterprise: "Custom" },
+        { name: "Data export formats", starter: "CSV", pro: "CSV, PDF", enterprise: "CSV, PDF, API" },
+      ]
+    },
+    {
+      category: "Support & Training",
+      items: [
+        { name: "Customer support", starter: "Email", pro: "Email & chat", enterprise: "24/7 dedicated" },
+        { name: "Response time", starter: "48 hours", pro: "24 hours", enterprise: "4 hours" },
+        { name: "Onboarding calls", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: "1 hour", enterprise: "Customized" },
+        { name: "Training sessions", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: "Monthly", enterprise: "Weekly" },
+        { name: "Dedicated account manager", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <X className="h-5 w-5 text-gray-400 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      ]
+    },
+  ];
+
+  return (
+    <section ref={sectionRef} className="py-20 bg-white relative" style={{ paddingTop: 0 }}>
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl md:text-4xl font-garnett text-center mb-12">Compare all features</h2>
+        
+        <div style={{ paddingTop: isSticky && !endSticky ? headerHeight : 0 }}>
+          {/* Sticky header */}
+          <div 
+            ref={headerRef}
+            className={`w-full bg-white transition-shadow duration-300 z-10 ${
+              isSticky && !endSticky 
+                ? 'fixed top-[80px] left-0 right-0 shadow-md' 
+                : ''
+            } ${endSticky ? 'absolute bottom-0' : ''}`}
+          >
+            <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-4 gap-4 py-6 border-b">
+                <div className="text-left">
+                  <span className="font-universal text-gray-500 text-sm">Features</span>
+                </div>
+                <div className="text-center">
+                  <h3 className="font-garnett text-lg font-medium">Starter</h3>
+                  <p className="text-sm text-gray-600 font-universal mt-1">
+                    ${billingPeriod === "monthly" ? "49" : "39"}/mo
+                  </p>
+                </div>
+                <div className="text-center">
+                  <h3 className="font-garnett text-lg font-medium text-orange-500">Pro</h3>
+                  <p className="text-sm text-gray-600 font-universal mt-1">
+                    ${billingPeriod === "monthly" ? "99" : "79"}/mo
+                  </p>
+                </div>
+                <div className="text-center">
+                  <h3 className="font-garnett text-lg font-medium">Enterprise</h3>
+                  <p className="text-sm text-gray-600 font-universal mt-1">Custom</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Feature comparison content */}
+          <div className="mt-0">
+            {features.map((category, categoryIndex) => (
+              <div key={categoryIndex} className="mb-16">
+                <h3 className="text-xl font-garnett font-medium mb-6 pt-6 border-t">{category.category}</h3>
+                
+                {category.items.map((feature, featureIndex) => (
+                  <div 
+                    key={featureIndex} 
+                    className={`grid grid-cols-4 gap-4 py-4 ${
+                      featureIndex !== category.items.length - 1 ? 'border-b border-gray-200' : ''
+                    }`}
+                  >
+                    <div className="flex items-center">
+                      <div className="text-sm font-universal font-medium">{feature.name}</div>
+                    </div>
+                    <div className="text-center text-sm font-universal">
+                      {feature.starter}
+                    </div>
+                    <div className="text-center text-sm font-universal">
+                      {feature.pro}
+                    </div>
+                    <div className="text-center text-sm font-universal">
+                      {feature.enterprise}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="text-center mt-12">
+          <p className="text-gray-600 mb-6 font-universal">
+            Need a custom solution for your business?
+          </p>
+          <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white">
+            <Link href="/contact">Contact our sales team</Link>
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function FaqSection() {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-garnett text-center mb-12">Frequently asked questions</h2>
+        <h2 className="text-3xl md:text-4xl font-garnett text-center mb-12">Frequently asked questions</h2>
         
         <div className="space-y-6">
           <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
