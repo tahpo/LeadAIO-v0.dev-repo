@@ -6,8 +6,7 @@ export function SpeedPerformanceSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [speedValue, setSpeedValue] = useState(60)
   const [isVisible, setIsVisible] = useState(false)
-  const [redSegmentCount, setRedSegmentCount] = useState(0)
-  const [segmentLengths, setSegmentLengths] = useState<number[]>([])
+  const [activeSegments, setActiveSegments] = useState<number[]>([])
   const animationFrameRef = useRef<number | null>(null)
 
   useEffect(() => {
@@ -33,43 +32,47 @@ export function SpeedPerformanceSection() {
     }
   }, [])
 
-  // Initialize segment lengths
-  useEffect(() => {
-    // Initialize with random lengths for all 12 segments
-    setSegmentLengths(Array(12).fill(0).map(() => Math.random() * 0.5 + 0.5)) // Between 0.5 and 1
-  }, [])
-
-  // Red segment length animation
+  // Segment filling animation - redlining effect
   useEffect(() => {
     if (!isVisible) return
 
-    // Animate the red segments to give growing/shrinking effect
-    const updateRedSegments = () => {
-      // Random number between 0 and 4 (0-4 red segments)
-      const newCount = Math.floor(Math.random() * 5)
-      setRedSegmentCount(newCount)
+    // Total number of segments (8 gray + 4 red)
+    const totalSegments = 12
+    const graySegments = 8 // first 8 segments are gray
+    
+    const updateSegments = () => {
+      // Determine how many segments to show based on current speed
+      // At lower speeds, show mostly gray segments
+      // At higher speeds, start showing red segments
+      const normalizedSpeed = Math.min(400, Math.max(60, speedValue))
       
-      // Update segment lengths with more dynamic values
-      setSegmentLengths(prev => {
-        return prev.map((length, i) => {
-          // Make red segments (last 4) more volatile
-          if (i >= 8) {
-            // More dramatic fluctuations for red segments
-            return Math.random() * 0.7 + 0.3; // Between 0.3 and 1
-          } else {
-            // More subtle fluctuations for gray segments
-            return Math.max(0.3, Math.min(1, length + (Math.random() - 0.5) * 0.2));
-          }
-        });
-      });
-
-      // Update faster (100-200ms) for more dynamic effect
-      const timeout = 80 + Math.random() * 120
-      setTimeout(updateRedSegments, timeout)
+      // Calculate base number of segments to show (0-12)
+      let segmentsToShow = Math.floor((normalizedSpeed - 60) / (400 - 60) * totalSegments)
+      
+      // When in "redline" territory (showing at least some red segments)
+      if (segmentsToShow > graySegments) {
+        // Create redlining effect - sometimes drop 1-2 red segments randomly
+        // This creates the "jumpy" redlining effect
+        const redSegmentsToShow = segmentsToShow - graySegments
+        
+        // 40% chance to drop 1-2 red segments randomly to create erratic behavior at high speeds
+        if (normalizedSpeed > 200 && Math.random() < 0.4) {
+          const drop = Math.floor(Math.random() * Math.min(2, redSegmentsToShow)) + 1
+          segmentsToShow -= drop
+        }
+      }
+      
+      // Generate array of active segment indices
+      const segments = Array.from({ length: segmentsToShow }, (_, i) => i)
+      setActiveSegments(segments)
+      
+      // Update faster at higher speeds (50-150ms)
+      const updateSpeed = Math.max(50, 150 - (normalizedSpeed / 400) * 100)
+      setTimeout(updateSegments, updateSpeed)
     }
 
-    updateRedSegments()
-  }, [isVisible])
+    updateSegments()
+  }, [isVisible, speedValue])
 
   // Counter animation
   useEffect(() => {
@@ -77,7 +80,7 @@ export function SpeedPerformanceSection() {
 
     // Slower initial animation from 60 to 150 (4 seconds)
     let startTime = Date.now()
-    let duration = 4000 // Changed from 2000 to 4000 (4 seconds)
+    let duration = 4000 // 4 seconds
     let startValue = 60
     let endValue = 150
 
@@ -148,26 +151,19 @@ export function SpeedPerformanceSection() {
                       {Array.from({ length: 12 }, (_, i) => {
                         const rotation = -90 + (i * 180) / 11
                         const isRed = i >= 8
-                        const segmentLength = segmentLengths[i] || 0.75 // Fallback value
-
-                        // Calculate different heights for segments
-                        const baseHeight = isRed ? 70 : 60
-                        const height = baseHeight * segmentLength
-
-                        // Always show gray segments, conditionally show red ones
-                        const isVisible = !isRed || i < 8 + redSegmentCount
-
+                        const isActive = activeSegments.includes(i)
+                        
                         return (
                           <rect
                             key={i}
-                            className={isRed ? "animate-flicker-red" : "animate-flicker-gray"}
+                            className={isActive ? (isRed ? "animate-flicker-red" : "animate-flicker-gray") : ""}
                             x="185"
-                            y={10 + (60 - height)}
+                            y="10"
                             width="30"
-                            height={height}
+                            height="60"
                             rx="2"
                             fill={isRed ? "#8B3E3E" : "#4A4A4A"}
-                            opacity={isVisible ? (isRed ? "0.8" : "0.6") : "0"}
+                            opacity={isActive ? (isRed ? "0.9" : "0.6") : "0.15"}
                             transform={`rotate(${rotation}, 200, 200)`}
                           />
                         )
@@ -263,26 +259,27 @@ export function SpeedPerformanceSection() {
       {/* CSS Animations */}
       <style jsx global>{`
         @keyframes flicker-gray {
-          0%, 100% { opacity: 0.3; }
-          25% { opacity: 0.5; }
-          50% { opacity: 0.25; }
-          75% { opacity: 0.45; }
+          0% { opacity: 0.4; }
+          25% { opacity: 0.7; }
+          50% { opacity: 0.5; }
+          75% { opacity: 0.6; }
+          100% { opacity: 0.45; }
         }
         
         @keyframes flicker-red {
-          0% { opacity: 0.5; }
-          25% { opacity: 0.9; }
-          50% { opacity: 0.4; }
-          75% { opacity: 0.8; }
-          100% { opacity: 0.6; }
+          0% { opacity: 0.7; }
+          25% { opacity: 1; }
+          50% { opacity: 0.6; }
+          75% { opacity: 0.9; }
+          100% { opacity: 0.8; }
         }
         
         .animate-flicker-gray {
-          animation: flicker-gray 0.4s infinite;
+          animation: flicker-gray 0.3s infinite;
         }
         
         .animate-flicker-red {
-          animation: flicker-red 0.25s infinite;
+          animation: flicker-red 0.2s infinite;
         }
       `}</style>
     </section>
