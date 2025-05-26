@@ -228,26 +228,27 @@ export function HeroSection() {
               leads, and grow your business automatically.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <a href="/signup" className="index-button index-button-primary flex items-center justify-center gap-2">
                 Get started <ArrowRight className="h-5 w-5" />
               </a>
             </div>
           </div>
 
-          {/* Dashboard Preview */}
-          <div className="relative w-full max-w-6xl mx-auto mt-12">
+          {/* Dashboard Preview - REDUCED HEIGHT by limiting max-height */}
+          <div className="relative w-full max-w-6xl mx-auto mt-6">
             <motion.div
               ref={dashboardRef}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="relative rounded-xl overflow-hidden shadow-2xl mx-auto"
+              style={{ maxHeight: "450px" }} // Reduced height here
             >
               {/* Dashboard UI */}
               <div className="bg-gradient-to-br from-[#0F1724] to-[#1a202c] rounded-xl p-5 relative">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">
                     <div className="h-8 w-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center text-white shadow-md">
                       <span className="font-bold">L</span>
@@ -275,7 +276,7 @@ export function HeroSection() {
                       </div>
                     </div>
                     
-                    <div className="h-[180px]">
+                    <div className="h-[140px]"> {/* Reduced height here */}
                       <svg className="w-full h-full" viewBox="0 0 400 150">
                         {/* Grid Lines */}
                         <line x1="0" y1="25" x2="400" y2="25" stroke="#2D3748" strokeWidth="1" strokeDasharray="4" />
@@ -344,7 +345,7 @@ export function HeroSection() {
                   
                   {/* Keyword Rankings */}
                   <div className="col-span-4 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
-                    <div className="flex justify-between items-center mb-4">
+                    <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">Keyword Rankings</h3>
                       <div className="text-emerald-400 text-xs font-medium">
                         +12 ↑
@@ -384,7 +385,7 @@ export function HeroSection() {
                     </div>
                     
                     {/* AI Insight */}
-                    <div className="mt-4 bg-[#4361EE]/10 border border-[#4361EE]/20 rounded p-2 text-xs text-blue-300">
+                    <div className="mt-3 bg-[#4361EE]/10 border border-[#4361EE]/20 rounded p-2 text-xs text-blue-300">
                       <div className="flex items-start">
                         <div className="h-4 w-4 rounded-full bg-[#4361EE]/20 flex items-center justify-center mt-0.5 mr-2">
                           <span className="text-blue-400 text-[10px]">AI</span>
@@ -477,7 +478,7 @@ export function HeroSection() {
                     </div>
                     
                     <div className="flex justify-center my-2">
-                      <div className="relative h-24 w-24">
+                      <div className="relative h-20 w-20"> {/* Reduced size here */}
                         <svg viewBox="0 0 100 100" className="w-full h-full">
                           {/* Background circle */}
                           <circle 
@@ -498,7 +499,7 @@ export function HeroSection() {
                           />
                         </svg>
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <span className="text-3xl font-bold text-white">80</span>
+                          <span className="text-2xl font-bold text-white">80</span>
                           <span className="text-gray-400 text-xs">/ 100</span>
                         </div>
                       </div>
@@ -520,15 +521,15 @@ export function HeroSection() {
                     </div>
                   </div>
                   
-                  {/* AI Platform Ranking Scores (replaced content optimization) */}
-                  <div className="col-span-12 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
+                  {/* AI Platform Ranking Scores (replaced content optimization) - CHANGED BACKGROUND */}
+                  <div className="col-span-12 bg-[#111827] rounded-lg p-4 shadow-lg border border-gray-800/50">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">AI Platform Ranking Scores</h3>
                       <div className="text-gray-400 text-xs">Last updated: 3 hours ago</div>
                     </div>
                     
                     <div className="grid grid-cols-5 gap-3">
-                      <div className="bg-gradient-to-br from-[#4361EE]/20 to-[#4361EE]/5 border border-[#4361EE]/30 rounded p-3 hover:border-[#4361EE]/40 transition-colors">
+                      <div className="bg-[#131b2c] border border-[#4361EE]/30 rounded p-3 hover:border-[#4361EE]/40 transition-colors">
                         <div className="flex items-center mb-2">
                           <div className="h-6 w-6 bg-[#4361EE]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#4361EE]" fill="none" stroke="currentColor">
@@ -546,7 +547,7 @@ export function HeroSection() {
                         </div>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-[#7209B7]/20 to-[#7209B7]/5 border border-[#7209B7]/30 rounded p-3 hover:border-[#7209B7]/40 transition-colors">
+                      <div className="bg-[#131b2c] border border-[#7209B7]/30 rounded p-3 hover:border-[#7209B7]/40 transition-colors">
                         <div className="flex items-center mb-2">
                           <div className="h-6 w-6 bg-[#7209B7]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#7209B7]" fill="none" stroke="currentColor">
@@ -564,7 +565,7 @@ export function HeroSection() {
                         </div>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-[#F72585]/20 to-[#F72585]/5 border border-[#F72585]/30 rounded p-3 hover:border-[#F72585]/40 transition-colors">
+                      <div className="bg-[#131b2c] border border-[#F72585]/30 rounded p-3 hover:border-[#F72585]/40 transition-colors">
                         <div className="flex items-center mb-2">
                           <div className="h-6 w-6 bg-[#F72585]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#F72585]" fill="none" stroke="currentColor">
@@ -582,7 +583,7 @@ export function HeroSection() {
                         </div>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-[#4CC9F0]/20 to-[#4CC9F0]/5 border border-[#4CC9F0]/30 rounded p-3 hover:border-[#4CC9F0]/40 transition-colors">
+                      <div className="bg-[#131b2c] border border-[#4CC9F0]/30 rounded p-3 hover:border-[#4CC9F0]/40 transition-colors">
                         <div className="flex items-center mb-2">
                           <div className="h-6 w-6 bg-[#4CC9F0]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#4CC9F0]" fill="none" stroke="currentColor">
@@ -600,7 +601,7 @@ export function HeroSection() {
                         </div>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-[#FB8B24]/20 to-[#FB8B24]/5 border border-[#FB8B24]/30 rounded p-3 hover:border-[#FB8B24]/40 transition-colors">
+                      <div className="bg-[#131b2c] border border-[#FB8B24]/30 rounded p-3 hover:border-[#FB8B24]/40 transition-colors">
                         <div className="flex items-center mb-2">
                           <div className="h-6 w-6 bg-[#FB8B24]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#FB8B24]" fill="none" stroke="currentColor">
