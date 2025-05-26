@@ -245,20 +245,20 @@ export function HeroSection() {
               className="relative rounded-xl overflow-hidden shadow-2xl mx-auto"
             >
               {/* Dashboard UI */}
-              <div className="bg-gradient-to-br from-[#111927] to-[#1E293B] rounded-xl p-5 relative">
+              <div className="bg-gradient-to-br from-[#0F1724] to-[#1a202c] rounded-xl p-5 relative">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center">
-                    <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white shadow-md">
+                    <div className="h-8 w-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center text-white shadow-md">
                       <span className="font-bold">L</span>
                     </div>
                     <div className="text-white text-lg font-garnett ml-3">LeadAIO</div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-full text-xs font-semibold">
+                    <div className="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-xs font-semibold">
                       Live Data
                     </div>
-                    <div className="h-8 w-8 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-600">
+                    <div className="h-8 w-8 bg-gray-800 rounded-full flex items-center justify-center border-2 border-gray-700">
                       <span className="text-gray-300 text-xs font-medium">JS</span>
                     </div>
                   </div>
@@ -267,7 +267,7 @@ export function HeroSection() {
                 {/* Main Grid */}
                 <div className="grid grid-cols-12 gap-4">
                   {/* Traffic Chart */}
-                  <div className="col-span-8 bg-gradient-to-br from-gray-800/90 to-gray-900/90 rounded-lg p-4 shadow-lg border border-gray-700/50">
+                  <div className="col-span-8 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">Organic Traffic Growth</h3>
                       <div className="bg-emerald-500/20 px-2 py-1 rounded text-emerald-300 text-xs">
@@ -278,21 +278,21 @@ export function HeroSection() {
                     <div className="h-[180px]">
                       <svg className="w-full h-full" viewBox="0 0 400 150">
                         {/* Grid Lines */}
-                        <line x1="0" y1="25" x2="400" y2="25" stroke="#374151" strokeWidth="1" strokeDasharray="4" />
-                        <line x1="0" y1="50" x2="400" y2="50" stroke="#374151" strokeWidth="1" strokeDasharray="4" />
-                        <line x1="0" y1="75" x2="400" y2="75" stroke="#374151" strokeWidth="1" strokeDasharray="4" />
-                        <line x1="0" y1="100" x2="400" y2="100" stroke="#374151" strokeWidth="1" strokeDasharray="4" />
-                        <line x1="0" y1="125" x2="400" y2="125" stroke="#374151" strokeWidth="1" strokeDasharray="4" />
+                        <line x1="0" y1="25" x2="400" y2="25" stroke="#2D3748" strokeWidth="1" strokeDasharray="4" />
+                        <line x1="0" y1="50" x2="400" y2="50" stroke="#2D3748" strokeWidth="1" strokeDasharray="4" />
+                        <line x1="0" y1="75" x2="400" y2="75" stroke="#2D3748" strokeWidth="1" strokeDasharray="4" />
+                        <line x1="0" y1="100" x2="400" y2="100" stroke="#2D3748" strokeWidth="1" strokeDasharray="4" />
+                        <line x1="0" y1="125" x2="400" y2="125" stroke="#2D3748" strokeWidth="1" strokeDasharray="4" />
                         
                         {/* Area Chart Gradients */}
                         <defs>
                           <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.6"/>
-                            <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.1"/>
+                            <stop offset="0%" stopColor="#4361EE" stopOpacity="0.6"/>
+                            <stop offset="100%" stopColor="#4361EE" stopOpacity="0.1"/>
                           </linearGradient>
                           <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.4"/>
-                            <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.02"/>
+                            <stop offset="0%" stopColor="#7209B7" stopOpacity="0.4"/>
+                            <stop offset="100%" stopColor="#7209B7" stopOpacity="0.02"/>
                           </linearGradient>
                         </defs>
                         
@@ -304,7 +304,7 @@ export function HeroSection() {
                         <path 
                           d="M0,140 C30,135 70,130 120,125 S200,120 240,115 S350,110 400,105" 
                           fill="none" 
-                          stroke="#8B5CF6" 
+                          stroke="#7209B7" 
                           strokeWidth="2"
                         />
                         
@@ -316,25 +316,25 @@ export function HeroSection() {
                         <path 
                           d="M0,110 C40,100 80,80 120,60 S180,30 240,25 S320,20 400,30" 
                           fill="none" 
-                          stroke="#3B82F6" 
+                          stroke="#4361EE" 
                           strokeWidth="2.5"
                         />
                         
                         {/* Data Points */}
-                        <circle cx="120" cy="60" r="4" fill="#3B82F6" stroke="#0F172A" strokeWidth="1.5" />
-                        <circle cx="240" cy="25" r="4" fill="#3B82F6" stroke="#0F172A" strokeWidth="1.5" />
-                        <circle cx="340" cy="27" r="4" fill="#3B82F6" stroke="#0F172A" strokeWidth="1.5" />
+                        <circle cx="120" cy="60" r="4" fill="#4361EE" stroke="#0F172A" strokeWidth="1.5" />
+                        <circle cx="240" cy="25" r="4" fill="#4361EE" stroke="#0F172A" strokeWidth="1.5" />
+                        <circle cx="340" cy="27" r="4" fill="#4361EE" stroke="#0F172A" strokeWidth="1.5" />
                       </svg>
                     </div>
                     
                     <div className="flex justify-between items-center text-xs mt-2">
                       <div className="flex space-x-4">
                         <div className="flex items-center">
-                          <div className="h-2.5 w-2.5 bg-blue-500 rounded-sm mr-1.5"></div>
+                          <div className="h-2.5 w-2.5 bg-[#4361EE] rounded-sm mr-1.5"></div>
                           <span className="text-blue-300">Organic Search</span>
                         </div>
                         <div className="flex items-center">
-                          <div className="h-2.5 w-2.5 bg-purple-500 rounded-sm mr-1.5"></div>
+                          <div className="h-2.5 w-2.5 bg-[#7209B7] rounded-sm mr-1.5"></div>
                           <span className="text-purple-300">Direct Traffic</span>
                         </div>
                       </div>
@@ -343,7 +343,7 @@ export function HeroSection() {
                   </div>
                   
                   {/* Keyword Rankings */}
-                  <div className="col-span-4 bg-gradient-to-br from-gray-800/90 to-gray-900/90 rounded-lg p-4 shadow-lg border border-gray-700/50">
+                  <div className="col-span-4 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
                     <div className="flex justify-between items-center mb-4">
                       <h3 className="text-white text-sm font-garnett">Keyword Rankings</h3>
                       <div className="text-emerald-400 text-xs font-medium">
@@ -357,7 +357,7 @@ export function HeroSection() {
                           <span className="text-gray-400">Top 3 positions</span>
                           <span className="text-white font-medium">18</span>
                         </div>
-                        <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                        <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
                           <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" style={{width: "65%"}}></div>
                         </div>
                       </div>
@@ -367,8 +367,8 @@ export function HeroSection() {
                           <span className="text-gray-400">Top 10 positions</span>
                           <span className="text-white font-medium">42</span>
                         </div>
-                        <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-400 rounded-full" style={{width: "78%"}}></div>
+                        <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
+                          <div className="h-full bg-gradient-to-r from-[#4361EE] to-[#4CC9F0] rounded-full" style={{width: "78%"}}></div>
                         </div>
                       </div>
                       
@@ -377,16 +377,16 @@ export function HeroSection() {
                           <span className="text-gray-400">Position improvements</span>
                           <span className="text-white font-medium">+21</span>
                         </div>
-                        <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full" style={{width: "45%"}}></div>
+                        <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
+                          <div className="h-full bg-gradient-to-r from-[#F72585] to-[#FF9E00] rounded-full" style={{width: "45%"}}></div>
                         </div>
                       </div>
                     </div>
                     
                     {/* AI Insight */}
-                    <div className="mt-4 bg-blue-500/10 border border-blue-500/20 rounded p-2 text-xs text-blue-300">
+                    <div className="mt-4 bg-[#4361EE]/10 border border-[#4361EE]/20 rounded p-2 text-xs text-blue-300">
                       <div className="flex items-start">
-                        <div className="h-4 w-4 rounded-full bg-blue-500/20 flex items-center justify-center mt-0.5 mr-2">
+                        <div className="h-4 w-4 rounded-full bg-[#4361EE]/20 flex items-center justify-center mt-0.5 mr-2">
                           <span className="text-blue-400 text-[10px]">AI</span>
                         </div>
                         <span>8 new high-value keyword opportunities identified</span>
@@ -395,34 +395,34 @@ export function HeroSection() {
                   </div>
                   
                   {/* Backlink Profile - Compact with no wasted space */}
-                  <div className="col-span-7 bg-gradient-to-br from-gray-800/90 to-gray-900/90 rounded-lg p-4 shadow-lg border border-gray-700/50">
+                  <div className="col-span-7 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">Backlink Profile</h3>
-                      <div className="text-xs text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded-full">
+                      <div className="text-xs text-blue-300 bg-[#4361EE]/20 px-2 py-0.5 rounded-full">
                         372 total links
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-4 gap-3">
-                      <div className="bg-gray-800/60 p-2 rounded border border-gray-700/50">
+                      <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50">
                         <div className="text-xs text-gray-400 mb-1">High Authority</div>
                         <div className="text-white font-medium">204</div>
                         <div className="text-emerald-400 text-xs mt-1">+9.2% ↑</div>
                       </div>
                       
-                      <div className="bg-gray-800/60 p-2 rounded border border-gray-700/50">
+                      <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50">
                         <div className="text-xs text-gray-400 mb-1">Medium</div>
                         <div className="text-white font-medium">108</div>
                         <div className="text-emerald-400 text-xs mt-1">+4.5% ↑</div>
                       </div>
                       
-                      <div className="bg-gray-800/60 p-2 rounded border border-gray-700/50">
+                      <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50">
                         <div className="text-xs text-gray-400 mb-1">Low Quality</div>
                         <div className="text-white font-medium">38</div>
                         <div className="text-red-400 text-xs mt-1">-2.3% ↓</div>
                       </div>
                       
-                      <div className="bg-gray-800/60 p-2 rounded border border-gray-700/50">
+                      <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50">
                         <div className="text-xs text-gray-400 mb-1">New (7d)</div>
                         <div className="text-white font-medium">22</div>
                         <div className="text-emerald-400 text-xs mt-1">+24% ↑</div>
@@ -431,9 +431,9 @@ export function HeroSection() {
                     
                     {/* Domain stats - Fills the empty space */}
                     <div className="mt-3 grid grid-cols-3 gap-3">
-                      <div className="flex items-center bg-gray-800/40 rounded p-2">
-                        <div className="h-8 w-8 rounded-full bg-indigo-500/20 flex items-center justify-center mr-2">
-                          <svg viewBox="0 0 24 24" className="h-4 w-4 text-indigo-400" fill="none" stroke="currentColor">
+                      <div className="flex items-center bg-[#1a2234]/40 rounded p-2">
+                        <div className="h-8 w-8 rounded-full bg-[#4361EE]/20 flex items-center justify-center mr-2">
+                          <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#4361EE]" fill="none" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                           </svg>
                         </div>
@@ -443,7 +443,7 @@ export function HeroSection() {
                         </div>
                       </div>
                       
-                      <div className="flex items-center bg-gray-800/40 rounded p-2">
+                      <div className="flex items-center bg-[#1a2234]/40 rounded p-2">
                         <div className="h-8 w-8 rounded-full bg-emerald-500/20 flex items-center justify-center mr-2">
                           <svg viewBox="0 0 24 24" className="h-4 w-4 text-emerald-400" fill="none" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -455,9 +455,9 @@ export function HeroSection() {
                         </div>
                       </div>
                       
-                      <div className="flex items-center bg-gray-800/40 rounded p-2">
-                        <div className="h-8 w-8 rounded-full bg-amber-500/20 flex items-center justify-center mr-2">
-                          <svg viewBox="0 0 24 24" className="h-4 w-4 text-amber-400" fill="none" stroke="currentColor">
+                      <div className="flex items-center bg-[#1a2234]/40 rounded p-2">
+                        <div className="h-8 w-8 rounded-full bg-[#F72585]/20 flex items-center justify-center mr-2">
+                          <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#F72585]" fill="none" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                         </div>
@@ -470,7 +470,7 @@ export function HeroSection() {
                   </div>
                   
                   {/* Site Health */}
-                  <div className="col-span-5 bg-gradient-to-br from-gray-800/90 to-gray-900/90 rounded-lg p-4 shadow-lg border border-gray-700/50">
+                  <div className="col-span-5 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
                     <div className="flex justify-between items-center mb-2">
                       <h3 className="text-white text-sm font-garnett">Site Health</h3>
                       <div className="text-gray-400 text-xs">Updated today</div>
@@ -483,7 +483,7 @@ export function HeroSection() {
                           <circle 
                             cx="50" cy="50" r="40" 
                             fill="none" 
-                            stroke="#374151" 
+                            stroke="#2D3748" 
                             strokeWidth="8"
                           />
                           {/* Progress circle */}
@@ -505,63 +505,117 @@ export function HeroSection() {
                     </div>
                     
                     <div className="grid grid-cols-3 gap-2 mt-2">
-                      <div className="bg-gray-800/40 rounded p-2 text-center">
+                      <div className="bg-[#1a2234]/40 rounded p-2 text-center">
                         <div className="text-emerald-400 text-sm font-medium">24</div>
                         <div className="text-gray-400 text-xs">Fixed</div>
                       </div>
-                      <div className="bg-gray-800/40 rounded p-2 text-center">
+                      <div className="bg-[#1a2234]/40 rounded p-2 text-center">
                         <div className="text-amber-400 text-sm font-medium">8</div>
                         <div className="text-gray-400 text-xs">Warnings</div>
                       </div>
-                      <div className="bg-gray-800/40 rounded p-2 text-center">
+                      <div className="bg-[#1a2234]/40 rounded p-2 text-center">
                         <div className="text-red-400 text-sm font-medium">3</div>
                         <div className="text-gray-400 text-xs">Errors</div>
                       </div>
                     </div>
                   </div>
                   
-                  {/* Content Optimization Opportunities */}
-                  <div className="col-span-12 bg-gradient-to-br from-gray-800/90 to-gray-900/90 rounded-lg p-4 shadow-lg border border-gray-700/50">
+                  {/* AI Platform Ranking Scores (replaced content optimization) */}
+                  <div className="col-span-12 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
                     <div className="flex justify-between items-center mb-3">
-                      <h3 className="text-white text-sm font-garnett">Content Optimization</h3>
-                      <div className="text-gray-400 text-xs">10 suggestions available</div>
+                      <h3 className="text-white text-sm font-garnett">AI Platform Ranking Scores</h3>
+                      <div className="text-gray-400 text-xs">Last updated: 3 hours ago</div>
                     </div>
                     
-                    <div className="grid grid-cols-3 gap-3">
-                      <div className="bg-gradient-to-br from-blue-600/20 to-blue-900/20 border border-blue-600/30 rounded p-2.5 hover:border-blue-500/40 transition-colors">
+                    <div className="grid grid-cols-5 gap-3">
+                      <div className="bg-gradient-to-br from-[#4361EE]/20 to-[#4361EE]/5 border border-[#4361EE]/30 rounded p-3 hover:border-[#4361EE]/40 transition-colors">
                         <div className="flex items-center mb-2">
-                          <div className="h-6 w-6 bg-blue-500/30 rounded-full flex items-center justify-center mr-2">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-blue-400" fill="none" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                          <div className="h-6 w-6 bg-[#4361EE]/30 rounded-full flex items-center justify-center mr-2">
+                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#4361EE]" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                             </svg>
                           </div>
-                          <span className="text-xs text-blue-300 font-medium">Content Length</span>
+                          <span className="text-xs text-[#4361EE] font-medium">Google</span>
                         </div>
-                        <p className="text-xs text-gray-400 leading-tight">Add 300+ words to your homepage to improve ranking potential.</p>
+                        <div className="flex items-end justify-between">
+                          <div className="text-lg font-bold text-white">92</div>
+                          <div className="text-xs text-emerald-400">+4 ↑</div>
+                        </div>
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#4361EE] rounded-full" style={{width: "92%"}}></div>
+                        </div>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-purple-600/20 to-purple-900/20 border border-purple-600/30 rounded p-2.5 hover:border-purple-500/40 transition-colors">
+                      <div className="bg-gradient-to-br from-[#7209B7]/20 to-[#7209B7]/5 border border-[#7209B7]/30 rounded p-3 hover:border-[#7209B7]/40 transition-colors">
                         <div className="flex items-center mb-2">
-                          <div className="h-6 w-6 bg-purple-500/30 rounded-full flex items-center justify-center mr-2">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-purple-400" fill="none" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                            </svg>
-                          </div>
-                          <span className="text-xs text-purple-300 font-medium">Meta Tags</span>
-                        </div>
-                        <p className="text-xs text-gray-400 leading-tight">6 pages missing optimized meta descriptions for search.</p>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-emerald-600/20 to-emerald-900/20 border border-emerald-600/30 rounded p-2.5 hover:border-emerald-500/40 transition-colors">
-                        <div className="flex items-center mb-2">
-                          <div className="h-6 w-6 bg-emerald-500/30 rounded-full flex items-center justify-center mr-2">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-emerald-400" fill="none" stroke="currentColor">
+                          <div className="h-6 w-6 bg-[#7209B7]/30 rounded-full flex items-center justify-center mr-2">
+                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#7209B7]" fill="none" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                           </div>
-                          <span className="text-xs text-emerald-300 font-medium">Page Speed</span>
+                          <span className="text-xs text-[#7209B7] font-medium">ChatGPT</span>
                         </div>
-                        <p className="text-xs text-gray-400 leading-tight">Optimize product images to improve load time by 38%.</p>
+                        <div className="flex items-end justify-between">
+                          <div className="text-lg font-bold text-white">85</div>
+                          <div className="text-xs text-emerald-400">+7 ↑</div>
+                        </div>
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#7209B7] rounded-full" style={{width: "85%"}}></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gradient-to-br from-[#F72585]/20 to-[#F72585]/5 border border-[#F72585]/30 rounded p-3 hover:border-[#F72585]/40 transition-colors">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 bg-[#F72585]/30 rounded-full flex items-center justify-center mr-2">
+                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#F72585]" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                            </svg>
+                          </div>
+                          <span className="text-xs text-[#F72585] font-medium">Gemini</span>
+                        </div>
+                        <div className="flex items-end justify-between">
+                          <div className="text-lg font-bold text-white">78</div>
+                          <div className="text-xs text-emerald-400">+3 ↑</div>
+                        </div>
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#F72585] rounded-full" style={{width: "78%"}}></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gradient-to-br from-[#4CC9F0]/20 to-[#4CC9F0]/5 border border-[#4CC9F0]/30 rounded p-3 hover:border-[#4CC9F0]/40 transition-colors">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 bg-[#4CC9F0]/30 rounded-full flex items-center justify-center mr-2">
+                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#4CC9F0]" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </div>
+                          <span className="text-xs text-[#4CC9F0] font-medium">Anthropic</span>
+                        </div>
+                        <div className="flex items-end justify-between">
+                          <div className="text-lg font-bold text-white">81</div>
+                          <div className="text-xs text-emerald-400">+5 ↑</div>
+                        </div>
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#4CC9F0] rounded-full" style={{width: "81%"}}></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gradient-to-br from-[#FB8B24]/20 to-[#FB8B24]/5 border border-[#FB8B24]/30 rounded p-3 hover:border-[#FB8B24]/40 transition-colors">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 bg-[#FB8B24]/30 rounded-full flex items-center justify-center mr-2">
+                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#FB8B24]" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                          </div>
+                          <span className="text-xs text-[#FB8B24] font-medium">DeepSeek</span>
+                        </div>
+                        <div className="flex items-end justify-between">
+                          <div className="text-lg font-bold text-white">73</div>
+                          <div className="text-xs text-emerald-400">+9 ↑</div>
+                        </div>
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#FB8B24] rounded-full" style={{width: "73%"}}></div>
+                        </div>
                       </div>
                     </div>
                   </div>

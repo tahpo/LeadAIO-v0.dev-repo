@@ -124,14 +124,14 @@ export function ResultsSection() {
   }, [isVisible]);
 
   return (
-    <div ref={sectionRef} className="bg-[#1a1a1a] rounded-3xl p-8 shadow-xl">
+    <div ref={sectionRef} className="bg-[#1a1a1a] rounded-2xl p-8 shadow-xl">
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-6">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2a2a2a] mb-6">
           <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
           <span className="text-gray-300 text-base">Results focus</span>
         </div>
-        <h3 className="text-4xl font-bold text-white mb-2">Built for results</h3>
+        <h3 className="text-3xl font-bold text-white mb-2">Built for results</h3>
         <p className="text-gray-400 leading-relaxed">
           Transform your SEO performance into a lead generation machine. Our optimized platform delivers qualified
           prospects directly to your business.
@@ -157,14 +157,14 @@ export function ResultsSection() {
                     <rect
                       key={i}
                       className="segment"
-                      x="185"
-                      y="10"
-                      width="30"
-                      height="60"
-                      rx="2"
+                      x="45"
+                      y="5"
+                      width="10"
+                      height="20"
+                      rx="1"
                       fill={isRed ? (isActive ? "#FF3E3E" : "#8B3E3E") : "#4A4A4A"}
                       opacity={isActive ? (isRed ? 0.9 : 0.7) : 0.15}
-                      transform={`rotate(${rotation}, 200, 200)`}
+                      transform={`rotate(${rotation}, 50, 50)`}
                     />
                   );
                 })}
@@ -174,7 +174,7 @@ export function ResultsSection() {
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-[10%] text-center">
                 <div 
                   data-speed-counter 
-                  className="text-6xl font-mono text-white tracking-wider" 
+                  className="text-5xl font-mono text-white tracking-wider" 
                   style={{ fontFamily: "monospace" }}
                 >
                   {speedValue}
