@@ -141,7 +141,7 @@ export function ResultsSection() {
       {/* Speedometer Container */}
       <div className="flex flex-col items-center justify-center">
         {/* Digital Speedometer */}
-        <div className="relative w-full mb-4">
+        <div className="relative w-full mb-8">
           {/* Speedometer with animation */}
           <div ref={speedometerRef} className="relative w-full flex justify-center">
             {/* Base layer (gray and red segments) */}
@@ -191,8 +191,8 @@ export function ResultsSection() {
           </div>
         </div>
 
-        {/* SEO Performance Metrics - added margin-top for better spacing */}
-        <div className="w-full mb-3 mt-6">
+        {/* SEO Performance Metrics - moved down with increased margin-top */}
+        <div className="w-full mb-4 mt-12">
           <div className="flex items-center justify-between mb-2">
             <div className="text-gray-400 font-mono">CONVERSION METRICS</div>
             <div className="text-orange-400 font-mono">HIGH-INTENT</div>
@@ -221,8 +221,8 @@ export function ResultsSection() {
           </div>
         </div>
 
-        {/* Monthly Growth Stats - reduced margin-top */}
-        <div className="w-full mt-3">
+        {/* Monthly Growth Stats - kept close to conversion metrics */}
+        <div className="w-full mt-6">
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center">
               <div className="text-green-400 font-mono text-xl font-bold">+{Math.floor(speedValue * 1.5)}%</div>
