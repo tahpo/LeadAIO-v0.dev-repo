@@ -7,6 +7,7 @@ export function SpeedPerformanceSection() {
   const [speedValue, setSpeedValue] = useState(60)
   const [isVisible, setIsVisible] = useState(false)
   const [redSegmentCount, setRedSegmentCount] = useState(0)
+  const [segmentLengths, setSegmentLengths] = useState<number[]>([])
   const animationFrameRef = useRef<number | null>(null)
 
   useEffect(() => {
@@ -32,6 +33,12 @@ export function SpeedPerformanceSection() {
     }
   }, [])
 
+  // Initialize segment lengths
+  useEffect(() => {
+    // Initialize with random lengths for all 12 segments
+    setSegmentLengths(Array(12).fill(0).map(() => Math.random() * 0.5 + 0.5)) // Between 0.5 and 1
+  }, [])
+
   // Red segment length animation
   useEffect(() => {
     if (!isVisible) return
@@ -41,9 +48,23 @@ export function SpeedPerformanceSection() {
       // Random number between 0 and 4 (0-4 red segments)
       const newCount = Math.floor(Math.random() * 5)
       setRedSegmentCount(newCount)
+      
+      // Update segment lengths with more dynamic values
+      setSegmentLengths(prev => {
+        return prev.map((length, i) => {
+          // Make red segments (last 4) more volatile
+          if (i >= 8) {
+            // More dramatic fluctuations for red segments
+            return Math.random() * 0.7 + 0.3; // Between 0.3 and 1
+          } else {
+            // More subtle fluctuations for gray segments
+            return Math.max(0.3, Math.min(1, length + (Math.random() - 0.5) * 0.2));
+          }
+        });
+      });
 
-      // Update faster (100-200ms)
-      const timeout = 100 + Math.random() * 100
+      // Update faster (100-200ms) for more dynamic effect
+      const timeout = 80 + Math.random() * 120
       setTimeout(updateRedSegments, timeout)
     }
 
@@ -127,6 +148,11 @@ export function SpeedPerformanceSection() {
                       {Array.from({ length: 12 }, (_, i) => {
                         const rotation = -90 + (i * 180) / 11
                         const isRed = i >= 8
+                        const segmentLength = segmentLengths[i] || 0.75 // Fallback value
+
+                        // Calculate different heights for segments
+                        const baseHeight = isRed ? 70 : 60
+                        const height = baseHeight * segmentLength
 
                         // Always show gray segments, conditionally show red ones
                         const isVisible = !isRed || i < 8 + redSegmentCount
@@ -136,12 +162,12 @@ export function SpeedPerformanceSection() {
                             key={i}
                             className={isRed ? "animate-flicker-red" : "animate-flicker-gray"}
                             x="185"
-                            y="10"
+                            y={10 + (60 - height)}
                             width="30"
-                            height="60"
+                            height={height}
                             rx="2"
                             fill={isRed ? "#8B3E3E" : "#4A4A4A"}
-                            opacity={isVisible ? "1" : "0"}
+                            opacity={isVisible ? (isRed ? "0.8" : "0.6") : "0"}
                             transform={`rotate(${rotation}, 200, 200)`}
                           />
                         )
@@ -237,25 +263,26 @@ export function SpeedPerformanceSection() {
       {/* CSS Animations */}
       <style jsx global>{`
         @keyframes flicker-gray {
-          0%, 100% { opacity: 0.4; }
-          25% { opacity: 0.6; }
-          50% { opacity: 0.3; }
-          75% { opacity: 0.5; }
+          0%, 100% { opacity: 0.3; }
+          25% { opacity: 0.5; }
+          50% { opacity: 0.25; }
+          75% { opacity: 0.45; }
         }
         
         @keyframes flicker-red {
-          0%, 100% { opacity: 0.6; }
+          0% { opacity: 0.5; }
           25% { opacity: 0.9; }
-          50% { opacity: 0.5; }
+          50% { opacity: 0.4; }
           75% { opacity: 0.8; }
+          100% { opacity: 0.6; }
         }
         
         .animate-flicker-gray {
-          animation: flicker-gray 0.2s infinite;
+          animation: flicker-gray 0.4s infinite;
         }
         
         .animate-flicker-red {
-          animation: flicker-red 0.15s infinite;
+          animation: flicker-red 0.25s infinite;
         }
       `}</style>
     </section>
