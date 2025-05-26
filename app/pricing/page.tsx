@@ -277,11 +277,11 @@ function ParallaxCompareSection({ billingPeriod }: { billingPeriod: "monthly" | 
         const sectionBottom = sectionRect.bottom;
         const headerBottom = headerRect.height;
         
-        // Set sticky when section top reaches top of viewport
-        setIsSticky(sectionRect.top <= 80); // 80px for the site header
+        // Set sticky when section top reaches top of viewport with a 70px offset for the site header
+        setIsSticky(sectionRect.top <= 70);
         
         // End sticky when bottom of section is about to meet bottom of sticky header
-        setEndSticky(sectionBottom <= headerBottom + 80 + 100); // Added some buffer
+        setEndSticky(sectionBottom <= headerBottom + 70 + 100);
       }
     };
 
@@ -359,9 +359,9 @@ function ParallaxCompareSection({ billingPeriod }: { billingPeriod: "monthly" | 
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 bg-white relative" style={{ paddingTop: 0 }}>
+    <section ref={sectionRef} className="py-6 bg-white relative">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-garnett text-center mb-12">Compare all features</h2>
+        <h2 className="text-3xl md:text-4xl font-garnett text-center mb-8">Compare all features</h2>
         
         <div style={{ paddingTop: isSticky && !endSticky ? headerHeight : 0 }}>
           {/* Sticky header */}
@@ -369,7 +369,7 @@ function ParallaxCompareSection({ billingPeriod }: { billingPeriod: "monthly" | 
             ref={headerRef}
             className={`w-full bg-white transition-shadow duration-300 z-10 ${
               isSticky && !endSticky 
-                ? 'fixed top-[80px] left-0 right-0 shadow-md' 
+                ? 'fixed top-[70px] left-0 right-0 shadow-md' 
                 : ''
             } ${endSticky ? 'absolute bottom-0' : ''}`}
           >
@@ -411,9 +411,9 @@ function ParallaxCompareSection({ billingPeriod }: { billingPeriod: "monthly" | 
                       featureIndex !== category.items.length - 1 ? 'border-b border-gray-200' : ''
                     }`}
                   >
-                    <div className="flex items-center">
+                     <div className="flex items-center">
                       <div className="text-sm font-universal font-medium">{feature.name}</div>
-                    </div>
+                     </div>
                     <div className="text-center text-sm font-universal">
                       {feature.starter}
                     </div>
