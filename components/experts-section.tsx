@@ -5,6 +5,7 @@ import { useRef, useEffect, useState } from "react"
 export function ExpertsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const chatRef = useRef<HTMLDivElement>(null)
+  const messagesRef = useRef<HTMLDivElement>(null)
   const tableRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [typingIndex, setTypingIndex] = useState(0)
@@ -163,8 +164,8 @@ export function ExpertsSection() {
             <div className="text-sm text-gray-400">Last updated: just now</div>
           </div>
 
-          {/* Keywords table */}
-          <div className="w-full mb-6 overflow-hidden border border-gray-700 rounded-lg">
+          {/* Keywords table - expanded to fill height */}
+          <div className="w-full overflow-hidden border border-gray-700 rounded-lg" style={{ height: "calc(100% - 60px)" }}>
             <div className="grid grid-cols-4 gap-1 px-4 py-2 bg-[#333] text-gray-300 text-sm">
               <div>Keyword</div>
               <div className="text-center">Volume</div>
@@ -172,20 +173,22 @@ export function ExpertsSection() {
               <div className="text-center">Potential</div>
             </div>
 
-            {keywords.map((kw, idx) => (
-              <div key={idx} className="grid grid-cols-4 gap-1 px-4 py-3 border-t border-gray-700 text-sm">
-                <div className="text-white font-medium">{kw.keyword}</div>
-                <div className="text-gray-300 text-center">{kw.volume}</div>
-                <div className="text-gray-300 text-center">{kw.difficulty}</div>
-                <div className={`text-center ${kw.potential === "High" ? "text-green-400" : "text-yellow-400"}`}>
-                  {kw.potential}
+            <div style={{ height: "calc(100% - 34px)", overflow: "hidden" }}>
+              {keywords.map((kw, idx) => (
+                <div key={idx} className="grid grid-cols-4 gap-1 px-4 py-3 border-t border-gray-700 text-sm">
+                  <div className="text-white font-medium">{kw.keyword}</div>
+                  <div className="text-gray-300 text-center">{kw.volume}</div>
+                  <div className="text-gray-300 text-center">{kw.difficulty}</div>
+                  <div className={`text-center ${kw.potential === "High" ? "text-green-400" : "text-yellow-400"}`}>
+                    {kw.potential}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           
           {/* Activity indicators */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 absolute bottom-6 left-6">
             <div className="px-3 py-1 bg-[#2a2a2a] rounded-full text-sm text-gray-300 flex items-center">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
               <span>5 team members active</span>
@@ -242,8 +245,12 @@ export function ExpertsSection() {
               <div className="text-xs text-gray-400">Active now</div>
             </div>
 
-            {/* Chat Messages */}
-            <div className="p-4 overflow-y-auto" style={{ height: "calc(100% - 50px)" }}>
+            {/* Chat Messages - no scrollbar, auto-scrolls to show latest content */}
+            <div 
+              ref={messagesRef} 
+              className="p-4 overflow-hidden" 
+              style={{ height: "calc(100% - 50px)", position: "relative" }}
+            >
               {/* First message */}
               <div className="flex gap-3 mb-4">
                 <img 
