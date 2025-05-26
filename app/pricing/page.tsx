@@ -2,7 +2,7 @@
 
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Check, HelpCircle, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -15,6 +15,17 @@ import {
 
 export default function PricingPage() {
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("yearly")
+  const [mounted, setMounted] = useState(false)
+  
+  // Prevent hydration mismatch by only rendering after component is mounted
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Don't render anything until client-side
+  if (!mounted) {
+    return null
+  }
 
   return (
     <main className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
