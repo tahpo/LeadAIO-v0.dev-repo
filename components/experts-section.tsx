@@ -292,15 +292,17 @@ export function ExpertsSection() {
 
             {/* Chat Messages */}
             <div className="p-4 h-[calc(100%-50px)] overflow-hidden relative">
+              {/* Message container with relative positioning */}
               <div className="relative h-full w-full">
-                {/* Sarah's message - positioned absolutely */}
+                {/* Sarah's message - positioned at the top initially */}
                 {showFirstMessage && (
                   <div 
-                    className="absolute left-0 top-0 right-0 flex gap-3 animate-fade-in transition-all duration-500 ease-in-out"
+                    className="absolute top-0 left-0 right-0 flex gap-3 animate-fade-in"
                     style={{ 
-                      transform: showSecondMessage ? 'translateY(-120%)' : 'translateY(0)',
+                      transform: showSecondMessage ? 'translateY(-100%)' : 'translateY(0)',
                       opacity: showSecondMessage ? 0 : 1,
-                      zIndex: showSecondMessage ? 1 : 2
+                      transition: "transform 0.5s ease-out, opacity 0.5s ease-out",
+                      zIndex: 1
                     }}
                   >
                     <img 
@@ -320,11 +322,11 @@ export function ExpertsSection() {
                   </div>
                 )}
 
-                {/* Michael's message - positioned absolutely */}
+                {/* Michael's message (with typing animation) - always at the bottom */}
                 {showSecondMessage && (
                   <div 
-                    className="absolute left-0 bottom-0 right-0 flex gap-3 animate-fade-in transition-all duration-500 ease-in-out"
-                    style={{ zIndex: 3 }}
+                    className="absolute bottom-0 left-0 right-0 flex gap-3 animate-fade-in"
+                    style={{ zIndex: 2 }}
                   >
                     <img 
                       src="/professional-man-headshot.png" 
