@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from "react"
 import anime from 'animejs'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { motion } from "framer-motion"
 
 export function SpeedPerformanceSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -17,6 +16,7 @@ export function SpeedPerformanceSection() {
   const [showReactions, setShowReactions] = useState(false)
   const animationFrameRef = useRef<number | null>(null)
   const chatTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const cursorRefs = useRef<HTMLDivElement[]>([])
   
   // Total number of segments in the speedometer
   const TOTAL_SEGMENTS = 12;
@@ -137,24 +137,39 @@ export function SpeedPerformanceSection() {
   useEffect(() => {
     if (!isVisible) return;
 
+    const chatMessages = [
+      {
+        avatar: "/professional-woman-headshot.png",
+        name: "Sarah",
+        time: "3h ago",
+        text: "I found a new keyword opportunity that could increase our client's traffic by 32%. Competitors aren't targeting it yet."
+      },
+      {
+        avatar: "/professional-man-headshot.png",
+        name: "Michael",
+        time: "Just now",
+        text: "We've found a high-value keyword cluster that competitors are missing. Search volume is 8.2K/month with low competition."
+      }
+    ];
+
     const chatLoop = () => {
-      // First message appears instantly
+      // Reset chat state
       if (chatStep === 0) {
         setTypingText("");
         setShowReactions(false);
         setChatStep(1);
-        chatTimeoutRef.current = setTimeout(chatLoop, 1000);
+        chatTimeoutRef.current = setTimeout(chatLoop, 1500);
       } 
       // Start typing second message
       else if (chatStep === 1) {
-        const message = "We've found a high-value keyword cluster that competitors are missing. Search volume is 8.2K/month with low competition.";
+        const message = chatMessages[1].text;
         let currentIndex = 0;
         
         const typeNextChar = () => {
           if (currentIndex < message.length) {
             setTypingText(message.substring(0, currentIndex + 1));
             currentIndex++;
-            chatTimeoutRef.current = setTimeout(typeNextChar, 30); // Speed of typing
+            chatTimeoutRef.current = setTimeout(typeNextChar, 25); // Speed of typing
           } else {
             // Finished typing, wait a moment then show reactions
             chatTimeoutRef.current = setTimeout(() => {
@@ -163,7 +178,6 @@ export function SpeedPerformanceSection() {
               // Wait with reactions, then reset
               chatTimeoutRef.current = setTimeout(() => {
                 setChatStep(0); // Reset to beginning
-                chatLoop();
               }, 3000);
             }, 1000);
           }
@@ -183,58 +197,76 @@ export function SpeedPerformanceSection() {
     };
   }, [isVisible, chatStep]);
 
-  // Simulate cursor movements
+  // Create and animate cursors
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || !chatContainerRef.current) return;
     
-    let cursorPositions: {x: number, y: number}[] = [
-      {x: 180, y: 70}, 
-      {x: 80, y: 100}, 
-      {x: 230, y: 140}
-    ];
-    let cursors: HTMLDivElement[] = [];
+    const cursorNames = ["Sarah", "Michael", "Jessica"];
+    const cursorColors = ["#A8D9FF", "#FAC666", "#FF9EB3"];
+    const cursors: HTMLDivElement[] = [];
     
-    // Create cursors
+    // Remove any existing cursors first
+    cursorRefs.current.forEach(cursor => {
+      if (cursor && cursor.parentNode) {
+        cursor.parentNode.removeChild(cursor);
+      }
+    });
+    
+    cursorRefs.current = [];
+    
+    // Create new cursors
     for (let i = 0; i < 3; i++) {
       const cursor = document.createElement('div');
       cursor.className = 'absolute pointer-events-none z-20';
       cursor.innerHTML = `
         <div class="flex items-center">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M2 2l8 8M2 10L10 2" stroke="${i === 0 ? '#A8D9FF' : i === 1 ? '#FAC666' : '#FF9EB3'}" stroke-width="2" stroke-linecap="round"/>
+            <path d="M2 2l8 8M2 10L10 2" stroke="${cursorColors[i]}" stroke-width="2" stroke-linecap="round"/>
           </svg>
           <div class="ml-1 px-2 py-0.5 text-[10px] text-white rounded-md" 
-               style="background-color: ${i === 0 ? '#A8D9FF' : i === 1 ? '#FAC666' : '#FF9EB3'}; opacity: 0.9">
-            ${i === 0 ? 'Sarah' : i === 1 ? 'Michael' : 'Jessica'}
+               style="background-color: ${cursorColors[i]}; opacity: 0.9">
+            ${cursorNames[i]}
           </div>
         </div>
       `;
-      cursor.style.left = `${cursorPositions[i].x}px`;
-      cursor.style.top = `${cursorPositions[i].y}px`;
       
-      if (chatContainerRef.current) {
-        chatContainerRef.current.appendChild(cursor);
-        cursors.push(cursor);
-      }
+      // Initial random position within the dashboard area
+      const posX = 40 + Math.random() * 180;
+      const posY = 40 + Math.random() * 120; // Keep within the visible dashboard area
+      
+      cursor.style.left = `${posX}px`;
+      cursor.style.top = `${posY}px`;
+      cursor.style.position = 'absolute';
+      cursor.style.zIndex = '40';
+      
+      chatContainerRef.current.appendChild(cursor);
+      cursors.push(cursor);
+      cursorRefs.current.push(cursor);
     }
     
-    // Animate cursors
+    // Animation function for moving cursors
+    let targetPositions = cursors.map(() => ({
+      x: 40 + Math.random() * 180,
+      y: 40 + Math.random() * 120
+    }));
+    
     const animateCursors = () => {
+      // Occasionally generate new target positions
+      if (Math.random() < 0.01) {
+        targetPositions = cursors.map(() => ({
+          x: 40 + Math.random() * 180,
+          y: 40 + Math.random() * 120
+        }));
+      }
+      
+      // Move each cursor towards its target
       cursors.forEach((cursor, i) => {
-        // Random new target every 3-5 seconds
-        if (Math.random() < 0.01) {
-          cursorPositions[i] = {
-            x: 20 + Math.random() * 230,
-            y: 20 + Math.random() * 170
-          };
-        }
-        
-        // Move cursor toward its target
         const currentX = parseFloat(cursor.style.left);
         const currentY = parseFloat(cursor.style.top);
-        const targetX = cursorPositions[i].x;
-        const targetY = cursorPositions[i].y;
+        const targetX = targetPositions[i].x;
+        const targetY = targetPositions[i].y;
         
+        // Move gradually toward target
         cursor.style.left = `${currentX + (targetX - currentX) * 0.05}px`;
         cursor.style.top = `${currentY + (targetY - currentY) * 0.05}px`;
       });
@@ -242,6 +274,7 @@ export function SpeedPerformanceSection() {
       animationFrameRef.current = requestAnimationFrame(animateCursors);
     };
     
+    // Start animation
     animationFrameRef.current = requestAnimationFrame(animateCursors);
     
     return () => {
@@ -255,6 +288,8 @@ export function SpeedPerformanceSection() {
           cursor.parentNode.removeChild(cursor);
         }
       });
+      
+      cursorRefs.current = [];
     };
   }, [isVisible]);
 
@@ -391,10 +426,15 @@ export function SpeedPerformanceSection() {
               Our team constantly analyzes, monitors, and optimizes your rankings to keep you ahead of competitors and future-proof your SEO strategy.
             </p>
 
-            <div ref={chatContainerRef} className="bg-[#222] rounded-2xl p-6 h-[340px] relative overflow-hidden">
-              {/* Keyword Analysis Dashboard */}
-              <div className="bg-[#2a2a2a] rounded-xl p-3 mb-6 border border-gray-700">
-                <div className="flex items-center justify-between mb-2">
+            {/* Dashboard and Chat Container - increased height and used flex for better layout */}
+            <div 
+              ref={chatContainerRef} 
+              className="bg-[#222] rounded-2xl overflow-hidden flex flex-col h-96"
+              style={{ position: 'relative' }}
+            >
+              {/* Keyword Analysis Dashboard - fixed height */}
+              <div className="bg-[#2a2a2a] p-4 border-b border-gray-700">
+                <div className="flex items-center justify-between mb-3">
                   <div className="text-white text-sm font-medium">Keyword Opportunity Analysis</div>
                   <div className="text-xs text-gray-400">Last updated: just now</div>
                 </div>
@@ -402,41 +442,35 @@ export function SpeedPerformanceSection() {
                 {/* Simple keyword table */}
                 <div className="w-full rounded overflow-hidden border border-gray-700 text-xs">
                   <div className="grid grid-cols-4 bg-[#333] text-gray-400">
-                    <div className="p-2">Keyword</div>
-                    <div className="p-2 text-center">Volume</div>
-                    <div className="p-2 text-center">Difficulty</div>
-                    <div className="p-2 text-center">Potential</div>
+                    <div className="p-1.5">Keyword</div>
+                    <div className="p-1.5 text-center">Volume</div>
+                    <div className="p-1.5 text-center">Difficulty</div>
+                    <div className="p-1.5 text-center">Potential</div>
                   </div>
                   <div className="grid grid-cols-4 bg-[#2d2d2d] text-white">
-                    <div className="p-2 font-medium">ai seo tools</div>
-                    <div className="p-2 text-center">5,200</div>
-                    <div className="p-2 text-center">32/100</div>
-                    <div className="p-2 text-center text-green-400">High</div>
+                    <div className="p-1.5 font-medium">ai seo tools</div>
+                    <div className="p-1.5 text-center">5,200</div>
+                    <div className="p-1.5 text-center">32/100</div>
+                    <div className="p-1.5 text-center text-green-400">High</div>
                   </div>
                   <div className="grid grid-cols-4 bg-[#2d2d2d] border-t border-gray-700 text-white">
-                    <div className="p-2 font-medium">ai keyword research</div>
-                    <div className="p-2 text-center">3,800</div>
-                    <div className="p-2 text-center">41/100</div>
-                    <div className="p-2 text-center text-green-400">High</div>
-                  </div>
-                  <div className="grid grid-cols-4 bg-[#2d2d2d] border-t border-gray-700 text-white">
-                    <div className="p-2 font-medium">best ai for seo</div>
-                    <div className="p-2 text-center">2,100</div>
-                    <div className="p-2 text-center">28/100</div>
-                    <div className="p-2 text-center text-green-400">High</div>
+                    <div className="p-1.5 font-medium">ai keyword research</div>
+                    <div className="p-1.5 text-center">3,800</div>
+                    <div className="p-1.5 text-center">41/100</div>
+                    <div className="p-1.5 text-center text-green-400">High</div>
                   </div>
                 </div>
               </div>
               
-              {/* Chat Conversation */}
-              <div className="bg-[#292929] rounded-xl p-4">
-                {/* First message from Sarah */}
-                <div className="flex items-start gap-2 mb-3">
-                  <Avatar className="h-8 w-8 rounded-full border border-gray-700">
+              {/* Chat area - flexible height, scrollable */}
+              <div className="flex-grow p-4 overflow-y-auto flex flex-col justify-end" style={{ minHeight: "160px" }}>
+                {/* First message */}
+                <div className="flex items-start gap-2 mb-4">
+                  <Avatar className="h-8 w-8 rounded-full border border-gray-700 shrink-0">
                     <AvatarImage src="/professional-woman-headshot.png" alt="Sarah" />
-                    <AvatarFallback style={{backgroundColor: "#A8D9FF"}}>S</AvatarFallback>
+                    <AvatarFallback className="bg-[#A8D9FF]">S</AvatarFallback>
                   </Avatar>
-                  <div className="flex-1">
+                  <div>
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-medium text-white text-sm">Sarah</span>
                       <span className="text-gray-500 text-xs">3h ago</span>
@@ -449,18 +483,21 @@ export function SpeedPerformanceSection() {
                 
                 {/* Second message - typing animation */}
                 {chatStep >= 1 && (
-                  <div className="flex items-start gap-2 mb-3">
-                    <Avatar className="h-8 w-8 rounded-full border border-gray-700">
+                  <div className="flex items-start gap-2 mb-2">
+                    <Avatar className="h-8 w-8 rounded-full border border-gray-700 shrink-0">
                       <AvatarImage src="/professional-man-headshot.png" alt="Michael" />
-                      <AvatarFallback style={{backgroundColor: "#FAC666"}}>M</AvatarFallback>
+                      <AvatarFallback className="bg-[#FAC666]">M</AvatarFallback>
                     </Avatar>
-                    <div className="flex-1">
+                    <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium text-white text-sm">Michael</span>
                         <span className="text-gray-500 text-xs">Just now</span>
                       </div>
                       <p className="text-gray-300 text-sm">
                         {typingText}
+                        {typingText.length > 0 && typingText.length < 83 && (
+                          <span className="inline-block h-4 w-[2px] bg-blue-400 ml-[1px] animate-pulse"></span>
+                        )}
                       </p>
                     </div>
                   </div>
@@ -468,12 +505,12 @@ export function SpeedPerformanceSection() {
                 
                 {/* Reactions */}
                 {showReactions && (
-                  <div className="flex gap-2 ml-10 mt-2">
-                    <div className="bg-[#333] rounded-full px-2 py-1 flex items-center gap-1 text-xs">
+                  <div className="flex gap-2 ml-10 mt-1 mb-2">
+                    <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 text-xs">
                       <span>👍</span>
                       <span className="text-gray-300">1</span>
                     </div>
-                    <div className="bg-[#333] rounded-full px-2 py-1 flex items-center gap-1 text-xs">
+                    <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 text-xs animation-delay-300">
                       <span>🔥</span>
                       <span className="text-gray-300">1</span>
                     </div>
@@ -481,8 +518,8 @@ export function SpeedPerformanceSection() {
                 )}
               </div>
               
-              {/* Input area */}
-              <div className="absolute bottom-6 left-6 right-6">
+              {/* Input area - fixed at the bottom */}
+              <div className="p-4 border-t border-gray-700">
                 <div className="flex items-center bg-[#333] rounded-lg border border-gray-700 px-3 py-2">
                   <input 
                     type="text" 
@@ -525,6 +562,10 @@ export function SpeedPerformanceSection() {
         
         .animate-flicker-red {
           animation: flicker-red 0.15s infinite;
+        }
+        
+        .animation-delay-300 {
+          animation-delay: 300ms;
         }
       `}</style>
     </section>
