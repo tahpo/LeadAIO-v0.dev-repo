@@ -14,7 +14,7 @@ export function HeroSection() {
     { 
       id: 1, 
       name: "Jessica", 
-      color: "#3B82F6", 
+      color: "#A8D9FF", 
       x: 180, 
       y: 150, 
       targetX: 300, 
@@ -24,7 +24,7 @@ export function HeroSection() {
     { 
       id: 2, 
       name: "Michael", 
-      color: "#EC4899", 
+      color: "#FAC666", 
       x: 400, 
       y: 220, 
       targetX: 200, 
@@ -34,7 +34,7 @@ export function HeroSection() {
     { 
       id: 3, 
       name: "Sarah", 
-      color: "#10B981", 
+      color: "#FF9EB3", 
       x: 320, 
       y: 280, 
       targetX: 450, 
@@ -44,7 +44,7 @@ export function HeroSection() {
     { 
       id: 4, 
       name: "David", 
-      color: "#F59E0B", 
+      color: "#8DECA6", 
       x: 520, 
       y: 340, 
       targetX: 580, 
@@ -583,21 +583,12 @@ export function HeroSection() {
                       }}
                     >
                       <div className="flex items-center">
-                        {/* Custom cursor with arrow pointer */}
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <path 
-                            d="M5 3L19 12L5 21V3Z" 
-                            fill={cursor.color} 
-                            stroke={cursor.color} 
-                            strokeWidth="2" 
-                          />
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M3 3L13 13M3 13L13 3" stroke={cursor.color} strokeWidth="2" strokeLinecap="round"/>
                         </svg>
                         <div 
-                          className="ml-1 px-2 py-1 text-xs text-white rounded-md shadow-sm"
-                          style={{ 
-                            backgroundColor: cursor.color,
-                            boxShadow: `0 2px 8px ${cursor.color}50`
-                          }}
+                          className="ml-1 px-2 py-1 text-xs text-white rounded-md"
+                          style={{ backgroundColor: cursor.color }}
                         >
                           {cursor.name}
                         </div>
