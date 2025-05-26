@@ -202,18 +202,18 @@ export function ExpertsSection() {
   }, [isVisible]);
 
   return (
-    <div ref={sectionRef} className="bg-[#1a1a1a] rounded-2xl p-8 shadow-xl h-[520px]">
+    <div ref={sectionRef} className="bg-[#1a1a1a] rounded-2xl p-8 shadow-xl">
       <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2a2a2a] mb-6">
         <div className="w-2.5 h-2.5 bg-blue-500 rounded-full"></div>
         <span className="text-gray-300 text-base">24/7 SEO Monitoring</span>
       </div>
       <h3 className="text-3xl font-bold text-white mb-3">Our experts never sleep</h3>
-      <p className="text-gray-400 leading-relaxed mb-6">
+      <p className="text-gray-400 leading-relaxed mb-8">
         Our team constantly analyzes, monitors, and optimizes your rankings to keep you ahead of competitors and future-proof your SEO strategy.
       </p>
 
       {/* Dashboard Container */}
-      <div className="relative bg-[#222] rounded-2xl p-6 overflow-hidden h-[320px]">
+      <div className="relative bg-[#222] rounded-2xl p-6 overflow-hidden h-[400px]">
         {/* Table Area */}
         <div ref={tableRef} className="h-full w-full">
           <div className="flex items-center justify-between mb-4">
@@ -276,7 +276,7 @@ export function ExpertsSection() {
             ref={chatRef}
             className="absolute bottom-0 left-0 right-0 bg-[#2a2a2a] shadow-2xl rounded-t-xl transition-all duration-500 ease-in-out"
             style={{ 
-              height: "160px",
+              height: "180px",
               transform: showChat ? 'translateY(0)' : 'translateY(100%)',
               opacity: showChat ? 1 : 0
             }}
