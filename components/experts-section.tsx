@@ -5,7 +5,6 @@ import { useRef, useEffect, useState } from "react"
 export function ExpertsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const chatRef = useRef<HTMLDivElement>(null)
-  const messagesRef = useRef<HTMLDivElement>(null)
   const tableRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [typingIndex, setTypingIndex] = useState(0)
@@ -120,7 +119,7 @@ export function ExpertsSection() {
                   
                   // Restart the animation after delay
                   setTimeout(runChatAnimation, 1000)
-                }, 3000) // Time showing dashboard (increased to 3 seconds)
+                }, 3000) // Time showing dashboard (3 seconds)
               }, 2000) // Time showing chat with reactions
             }, 600) // Delay between reactions
           }, messageToType.length * 30 + 500) // Wait for typing to complete
@@ -197,7 +196,7 @@ export function ExpertsSection() {
           };
         })
       );
-    }, 50); // Update much more frequently for smoother motion
+    }, 50); // Update frequency
     
     return () => clearInterval(cursorInterval);
   }, [isVisible]);
@@ -277,7 +276,7 @@ export function ExpertsSection() {
             ref={chatRef}
             className="absolute bottom-0 left-0 right-0 bg-[#2a2a2a] shadow-2xl rounded-t-xl transition-all duration-500 ease-in-out"
             style={{ 
-              height: "230px",
+              height: "180px",
               transform: showChat ? 'translateY(0)' : 'translateY(100%)',
               opacity: showChat ? 1 : 0
             }}
@@ -291,69 +290,86 @@ export function ExpertsSection() {
               <div className="text-xs text-gray-400">Active now</div>
             </div>
 
-            {/* Chat Messages - no scrollbar, auto-scrolls to show latest content */}
+            {/* Chat Messages Container - fixed height with flex-end */}
             <div 
-              ref={messagesRef} 
               className="p-4 overflow-hidden" 
-              style={{ height: "calc(100% - 50px)", position: "relative" }}
+              style={{ 
+                height: "calc(100% - 50px)", 
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-end"
+              }}
             >
-              {/* First message */}
-              {showFirstMessage && (
-                <div className="flex gap-3 mb-4 animate-fade-in">
-                  <img 
-                    src="/professional-woman-headshot.png" 
-                    alt="Sarah" 
-                    className="w-8 h-8 rounded-full border border-gray-700"
-                  />
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-medium text-white text-sm">Sarah</span>
-                      <span className="text-gray-500 text-xs">Just now</span>
+              <div>
+                {/* Messages Container - messages stack from bottom up */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  {/* First message - only shown when second is not yet visible */}
+                  {showFirstMessage && (
+                    <div 
+                      className={`flex gap-3 animate-fade-in ${showSecondMessage ? "opacity-0" : "opacity-100"}`}
+                      style={{ 
+                        position: "absolute",
+                        top: showSecondMessage ? "-40px" : "auto",
+                        transition: "top 0.5s ease, opacity 0.5s ease",
+                        visibility: showSecondMessage ? "hidden" : "visible"
+                      }}
+                    >
+                      <img 
+                        src="/professional-woman-headshot.png" 
+                        alt="Sarah" 
+                        className="w-8 h-8 rounded-full border border-gray-700 flex-shrink-0"
+                      />
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-medium text-white text-sm">Sarah</span>
+                          <span className="text-gray-500 text-xs">Just now</span>
+                        </div>
+                        <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
+                          I can start working on content optimization for these keywords right away!
+                        </div>
+                      </div>
                     </div>
-                    <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
-                      I can start working on content optimization for these keywords right away!
-                    </div>
-                  </div>
-                </div>
-              )}
+                  )}
 
-              {/* Second message with typing animation */}
-              {showSecondMessage && (
-                <div className="flex gap-3 mb-1 animate-fade-in">
-                  <img 
-                    src="/professional-man-headshot.png" 
-                    alt="Michael" 
-                    className="w-8 h-8 rounded-full border border-gray-700"
-                  />
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-medium text-white text-sm">Michael</span>
-                      <span className="text-gray-500 text-xs">Just now</span>
+                  {/* Second message always at bottom when visible */}
+                  {showSecondMessage && (
+                    <div className="flex gap-3 animate-fade-in">
+                      <img 
+                        src="/professional-man-headshot.png" 
+                        alt="Michael" 
+                        className="w-8 h-8 rounded-full border border-gray-700 flex-shrink-0"
+                      />
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-medium text-white text-sm">Michael</span>
+                          <span className="text-gray-500 text-xs">Just now</span>
+                        </div>
+                        <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
+                          {messageToType.substring(0, typingIndex)}
+                          {typingIndex < messageToType.length && (
+                            <span className="inline-block w-[2px] h-4 bg-blue-400 ml-[1px] animate-pulse"></span>
+                          )}
+                        </div>
+                        
+                        {/* Reactions directly under this message */}
+                        <div className="flex gap-2 mt-2">
+                          {showThumbsUp && (
+                            <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
+                              <span className="text-sm">👍</span>
+                              <span className="text-gray-300 text-xs">1</span>
+                            </div>
+                          )}
+                          {showFire && (
+                            <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
+                              <span className="text-sm">🔥</span>
+                              <span className="text-gray-300 text-xs">1</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    <div className="bg-[#333] text-gray-200 p-2 rounded-lg text-sm max-w-[280px]">
-                      {messageToType.substring(0, typingIndex)}
-                      {typingIndex < messageToType.length && (
-                        <span className="inline-block w-[2px] h-4 bg-blue-400 ml-[1px] animate-pulse"></span>
-                      )}
-                    </div>
-                  </div>
+                  )}
                 </div>
-              )}
-
-              {/* Reactions - separated to show one after another */}
-              <div className="ml-11 mt-2 flex gap-2">
-                {showThumbsUp && (
-                  <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
-                    <span className="text-sm">👍</span>
-                    <span className="text-gray-300 text-xs">1</span>
-                  </div>
-                )}
-                {showFire && (
-                  <div className="bg-[#333] rounded-full px-2 py-0.5 flex items-center gap-1 animate-fade-in">
-                    <span className="text-sm">🔥</span>
-                    <span className="text-gray-300 text-xs">1</span>
-                  </div>
-                )}
               </div>
             </div>
           </div>
