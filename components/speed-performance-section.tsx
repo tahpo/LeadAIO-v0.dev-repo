@@ -1,16 +1,16 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react"
-import anime from 'animejs'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Send } from "lucide-react"
 
 export function SpeedPerformanceSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const speedometerRef = useRef<HTMLDivElement>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatInputRef = useRef<HTMLInputElement>(null)
   const sendButtonRef = useRef<HTMLButtonElement>(null)
+  
+  // Client-side only state initialization with stable initial values
   const [speedValue, setSpeedValue] = useState(60)
   const [isVisible, setIsVisible] = useState(false)
   const [redSegmentCount, setRedSegmentCount] = useState(0)
@@ -20,9 +20,13 @@ export function SpeedPerformanceSection() {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
   const [showThumbsUp, setShowThumbsUp] = useState(false)
   const [showFire, setShowFire] = useState(false)
+  
+  // Use refs for animation handles to ensure proper cleanup
   const animationFrameRef = useRef<number | null>(null)
   const chatTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const animationTimeoutsRef = useRef<NodeJS.Timeout[]>([])
   const cursorRefs = useRef<HTMLDivElement[]>([])
+  const [isMounted, setIsMounted] = useState(false)
 
   const chatMessages = [
     {
@@ -45,7 +49,14 @@ export function SpeedPerformanceSection() {
     }
   ];
 
+  // Set isMounted to true after component mounts (client-side only)
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -68,81 +79,83 @@ export function SpeedPerformanceSection() {
       if (chatTimeoutRef.current) {
         clearTimeout(chatTimeoutRef.current)
       }
+      animationTimeoutsRef.current.forEach(clearTimeout)
     }
-  }, [])
+  }, [isMounted])
 
-  // Red segment length animation
+  // Red segment length animation - client-side only
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible || !isMounted) return
 
-    // Animate the red segments to give growing/shrinking effect
     const updateRedSegments = () => {
-      // Random number between 0 and 4 (0-4 red segments)
-      const newCount = Math.floor(Math.random() * 5)
+      // Consistent value generation pattern
+      const timestamp = Date.now()
+      const newCount = Math.floor((timestamp % 5000) / 1000)
       setRedSegmentCount(newCount)
 
-      // Update faster (100-200ms)
-      const timeout = 100 + Math.random() * 100
-      setTimeout(updateRedSegments, timeout)
+      const timeoutId = setTimeout(updateRedSegments, 150)
+      animationTimeoutsRef.current.push(timeoutId)
     }
 
     updateRedSegments()
-  }, [isVisible])
+    
+    return () => {
+      animationTimeoutsRef.current.forEach(clearTimeout)
+      animationTimeoutsRef.current = []
+    }
+  }, [isVisible, isMounted])
 
-  // Counter animation
+  // Counter animation - client-side only
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible || !isMounted) return
 
-    // Slower initial animation from 60 to 150 (4 seconds)
     let startTime = Date.now()
-    let duration = 4000 // 4 seconds
-    let startValue = 60
-    let endValue = 150
+    const duration = 4000 // 4 seconds
+    const startValue = 60
+    const endValue = 150
+    const targetRate = 0.25 // 4 seconds per increment = 0.25 increments/second
 
-    const animatePhase1 = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const value = Math.floor(startValue + (endValue - startValue) * progress)
-
-      setSpeedValue(value)
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animatePhase1)
+    const animate = () => {
+      const currentTime = Date.now()
+      const elapsed = currentTime - startTime
+      
+      if (elapsed < duration) {
+        // Phase 1: Quick ramp up to 150
+        const progress = elapsed / duration
+        const value = Math.floor(startValue + (endValue - startValue) * progress)
+        setSpeedValue(value)
+        animationFrameRef.current = requestAnimationFrame(animate)
       } else {
-        // Start phase 2 - Slower animation from 150 to 400 (4 seconds per increment)
-        startTime = Date.now()
-        duration = 1000000 // 4 seconds × 250 increments = very slow increase
-        startValue = 150
-        endValue = 400
-        animationFrameRef.current = requestAnimationFrame(animatePhase2)
+        // Phase 2: Slow, steady increase
+        const timeAfterInitial = currentTime - (startTime + duration)
+        const additionalIncrements = Math.floor(timeAfterInitial / 1000 * targetRate)
+        const newValue = Math.min(endValue + additionalIncrements, 400)
+        setSpeedValue(newValue)
+        animationFrameRef.current = requestAnimationFrame(animate)
       }
     }
 
-    const animatePhase2 = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const value = Math.floor(startValue + (endValue - startValue) * progress)
-
-      setSpeedValue(value)
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animatePhase2)
+    animationFrameRef.current = requestAnimationFrame(animate)
+    
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
       }
     }
+  }, [isVisible, isMounted])
 
-    animationFrameRef.current = requestAnimationFrame(animatePhase1)
-  }, [isVisible])
-
-  // Chat animation
+  // Chat animation - client-side only
   useEffect(() => {
-    if (!isVisible || !chatInputRef.current || !sendButtonRef.current) return;
+    if (!isVisible || !isMounted || !chatInputRef.current || !sendButtonRef.current) return;
     
     const startChatSequence = () => {
-      // Wait 3 seconds before starting the chat sequence
-      setTimeout(() => {
+      // Initial delay
+      const timeoutId = setTimeout(() => {
         setChatActive(true);
         runChatAnimation();
       }, 3000);
+      
+      animationTimeoutsRef.current.push(timeoutId);
     };
     
     const runChatAnimation = () => {
@@ -152,63 +165,68 @@ export function SpeedPerformanceSection() {
       setShowFire(false);
       
       const currentMessage = chatMessages[currentMessageIndex];
+      let timeoutId: NodeJS.Timeout;
       
-      // Animation sequence:
+      // Animation sequence
       const sequence = async () => {
         // 1. Wait before typing starts
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // 2. Type message in input box
-        for (let i = 0; i <= currentMessage.text.length; i++) {
-          setTypingText(currentMessage.text.substring(0, i));
-          await new Promise(resolve => setTimeout(resolve, 25 + Math.random() * 15)); // Random typing speed
-        }
-        
-        // 3. Animate send button press
-        anime({
-          targets: sendButtonRef.current,
-          scale: [1, 0.9, 1],
-          duration: 300,
-          easing: 'easeInOutBack'
+        await new Promise(resolve => {
+          timeoutId = setTimeout(resolve, 1500);
+          animationTimeoutsRef.current.push(timeoutId);
         });
         
-        // 4. Add message to chat (immediate)
-        await new Promise(resolve => setTimeout(resolve, 300));
+        // 2. Type message
+        for (let i = 0; i <= currentMessage.text.length; i++) {
+          await new Promise<void>(resolve => {
+            timeoutId = setTimeout(() => {
+              setTypingText(currentMessage.text.substring(0, i));
+              resolve();
+            }, 30);
+            animationTimeoutsRef.current.push(timeoutId);
+          });
+        }
+        
+        // 3. Send button animation (simplified for hydration compatibility)
+        await new Promise(resolve => {
+          timeoutId = setTimeout(resolve, 300);
+          animationTimeoutsRef.current.push(timeoutId);
+        });
+        
+        // 4. Show message
         setChatPhase(1);
         setTypingText("");
         
-        // 5. Show reactions one by one with bounce
-        await new Promise(resolve => setTimeout(resolve, 800));
-        setShowThumbsUp(true);
-        anime({
-          targets: '.thumbs-up-reaction',
-          scale: [0, 1.2, 1],
-          duration: 400,
-          easing: 'spring(1, 80, 10, 0)'
+        // 5. Show reactions
+        await new Promise(resolve => {
+          timeoutId = setTimeout(() => {
+            setShowThumbsUp(true);
+            resolve();
+          }, 800);
+          animationTimeoutsRef.current.push(timeoutId);
         });
         
-        // 6. Show second reaction
-        await new Promise(resolve => setTimeout(resolve, 400));
-        setShowFire(true);
-        anime({
-          targets: '.fire-reaction',
-          scale: [0, 1.2, 1],
-          duration: 400,
-          easing: 'spring(1, 80, 10, 0)'
+        await new Promise(resolve => {
+          timeoutId = setTimeout(() => {
+            setShowFire(true);
+            resolve();
+          }, 400);
+          animationTimeoutsRef.current.push(timeoutId);
         });
         
-        // 7. Wait with message displayed
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // 6. Wait with message displayed
+        await new Promise(resolve => {
+          timeoutId = setTimeout(resolve, 2000);
+          animationTimeoutsRef.current.push(timeoutId);
+        });
         
-        // 8. Clear chat
+        // 7. Reset for next message
         setChatPhase(0);
         setChatActive(false);
-        
-        // 9. Prepare next message
         setCurrentMessageIndex((currentMessageIndex + 1) % chatMessages.length);
         
-        // 10. Start over after delay
-        setTimeout(startChatSequence, 3000);
+        // 8. Start again
+        timeoutId = setTimeout(startChatSequence, 3000);
+        animationTimeoutsRef.current.push(timeoutId);
       };
       
       sequence();
@@ -217,93 +235,92 @@ export function SpeedPerformanceSection() {
     startChatSequence();
     
     return () => {
-      if (chatTimeoutRef.current) {
-        clearTimeout(chatTimeoutRef.current);
-      }
+      animationTimeoutsRef.current.forEach(clearTimeout);
+      animationTimeoutsRef.current = [];
     };
-  }, [isVisible, currentMessageIndex, chatMessages]);
+  }, [isVisible, isMounted, currentMessageIndex, chatMessages]);
 
-  // Cursor animations
+  // Cursor animations - only initialize on client
   useEffect(() => {
-    if (!isVisible || !chatContainerRef.current) return;
+    if (!isVisible || !isMounted || !chatContainerRef.current) return;
     
-    // Create animated cursors
-    const tableArea = chatContainerRef.current.querySelector('.keyword-table');
-    if (!tableArea) return;
-    
-    const cursorData = [
-      { name: "Sarah", color: "#A8D9FF" },
-      { name: "Michael", color: "#FAC666" },
-      { name: "Jessica", color: "#FF9EB3" }
-    ];
-    
-    // Remove any existing cursors
-    cursorRefs.current.forEach(cursor => {
-      if (cursor && cursor.parentNode) {
-        cursor.parentNode.removeChild(cursor);
-      }
-    });
-    
-    cursorRefs.current = [];
-    
-    // Create cursors
-    cursorData.forEach(({ name, color }) => {
-      const cursor = document.createElement('div');
-      cursor.className = 'absolute z-50 pointer-events-none transition-all duration-300 ease-out';
-      cursor.style.transform = 'translate(-50%, -50%)';
-      cursor.innerHTML = `
-        <div class="flex flex-col items-center">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.33334 3.33334L13.3333 13.3333M3.33334 13.3333L13.3333 3.33334" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <div class="mt-1 px-2 py-0.5 text-xs font-semibold text-white rounded-full" style="background-color: ${color}">
-            ${name}
-          </div>
-        </div>
-      `;
+    const createCursors = () => {
+      // Create animated cursors
+      const tableArea = chatContainerRef.current?.querySelector('.keyword-table');
+      if (!tableArea) return;
       
-      // Random initial positions within table bounds
-      const tableRect = tableArea.getBoundingClientRect();
-      const containerRect = chatContainerRef.current.getBoundingClientRect();
+      // Define cursor data with stable positions instead of random
+      const cursorData = [
+        { name: "Sarah", color: "#A8D9FF", x: 40, y: 40 },
+        { name: "Michael", color: "#FAC666", x: 70, y: 70 },
+        { name: "Jessica", color: "#FF9EB3", x: 100, y: 100 }
+      ];
       
-      // Position relative to container
-      const x = Math.random() * tableRect.width * 0.8 + tableRect.width * 0.1;
-      const y = Math.random() * tableRect.height * 0.8 + tableRect.height * 0.1;
-      
-      cursor.style.left = `${x}px`;
-      cursor.style.top = `${y}px`;
-      
-      tableArea.appendChild(cursor);
-      cursorRefs.current.push(cursor);
-    });
-    
-    // Animate cursors
-    const animateCursors = () => {
+      // Clean up existing cursors
       cursorRefs.current.forEach(cursor => {
-        // Get table bounds
-        const tableRect = tableArea.getBoundingClientRect();
-        
-        // Random movements within table
-        const newX = Math.random() * tableRect.width * 0.8 + tableRect.width * 0.1;
-        const newY = Math.random() * tableRect.height * 0.7 + 30; // Keep away from the top header
-        
-        // Random timing for natural movement
-        const delay = Math.random() * 4000 + 2000;
-        const duration = Math.random() * 1500 + 500;
-        
-        setTimeout(() => {
-          cursor.style.transition = `all ${duration}ms cubic-bezier(0.34, 1.56, 0.64, 1)`;
-          cursor.style.left = `${newX}px`;
-          cursor.style.top = `${newY}px`;
-        }, delay);
+        if (cursor && cursor.parentNode) {
+          cursor.parentNode.removeChild(cursor);
+        }
       });
       
-      // Loop animation
-      setTimeout(animateCursors, 5000);
+      cursorRefs.current = [];
+      
+      // Create cursors
+      cursorData.forEach(({ name, color, x, y }) => {
+        const cursor = document.createElement('div');
+        cursor.className = 'absolute z-50 pointer-events-none transition-all duration-300 ease-out';
+        cursor.style.transform = 'translate(-50%, -50%)';
+        cursor.innerHTML = `
+          <div class="flex flex-col items-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.33334 3.33334L13.3333 13.3333M3.33334 13.3333L13.3333 3.33334" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div class="mt-1 px-2 py-0.5 text-xs font-semibold text-white rounded-full" style="background-color: ${color}">
+              ${name}
+            </div>
+          </div>
+        `;
+        
+        cursor.style.left = `${x}px`;
+        cursor.style.top = `${y}px`;
+        
+        tableArea.appendChild(cursor);
+        cursorRefs.current.push(cursor);
+      });
     };
     
-    // Start cursor animations
-    animateCursors();
+    const moveTimeoutId = setTimeout(createCursors, 1000);
+    animationTimeoutsRef.current.push(moveTimeoutId);
+    
+    // Move cursors periodically to predefined positions (not random)
+    const positions = [
+      [{ x: 100, y: 50 }, { x: 150, y: 100 }, { x: 200, y: 80 }],
+      [{ x: 50, y: 120 }, { x: 200, y: 50 }, { x: 100, y: 150 }],
+      [{ x: 180, y: 100 }, { x: 80, y: 80 }, { x: 140, y: 120 }],
+    ];
+    
+    let positionIndex = 0;
+    
+    const animateCursors = () => {
+      if (cursorRefs.current.length === 3) {
+        const currentPositions = positions[positionIndex];
+        
+        cursorRefs.current.forEach((cursor, i) => {
+          const { x, y } = currentPositions[i];
+          cursor.style.transition = 'all 1000ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+          cursor.style.left = `${x}px`;
+          cursor.style.top = `${y}px`;
+        });
+        
+        positionIndex = (positionIndex + 1) % positions.length;
+      }
+      
+      const timeoutId = setTimeout(animateCursors, 5000);
+      animationTimeoutsRef.current.push(timeoutId);
+    };
+    
+    const initialTimeoutId = setTimeout(animateCursors, 2000);
+    animationTimeoutsRef.current.push(initialTimeoutId);
     
     return () => {
       // Clean up
@@ -313,7 +330,7 @@ export function SpeedPerformanceSection() {
         }
       });
     };
-  }, [isVisible]);
+  }, [isVisible, isMounted]);
 
   return (
     <section ref={sectionRef} className="py-16 bg-white">
@@ -339,7 +356,7 @@ export function SpeedPerformanceSection() {
               {/* Digital Speedometer */}
               <div className="relative w-full mb-8">
                 {/* Speedometer with animation */}
-                <div ref={speedometerRef} className="relative w-full flex justify-center">
+                <div className="relative w-full flex justify-center">
                   {/* Base layer (gray and red segments) */}
                   <div className="relative w-[320px] h-[160px]">
                     <svg width="320" height="160" viewBox="0 0 400 200">
@@ -436,7 +453,7 @@ export function SpeedPerformanceSection() {
           <div className="bg-[#1a1a1a] rounded-3xl p-8 shadow-xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2a2a2a] mb-6">
               <div className="w-2.5 h-2.5 bg-blue-500 rounded-full"></div>
-              <span className="text-gray-300 text-base">Team collaboration</span>
+              <span className="text-gray-300 text-base">24/7 SEO Monitoring</span>
             </div>
             <h3 className="text-4xl font-bold text-white mb-3">Our experts never sleep</h3>
             <p className="text-gray-400 leading-relaxed mb-8">
@@ -446,101 +463,86 @@ export function SpeedPerformanceSection() {
             {/* Dashboard and Chat Interface */}
             <div 
               ref={chatContainerRef} 
-              className="relative rounded-2xl overflow-hidden h-96 shadow-inner"
+              className="relative bg-[#222] rounded-2xl overflow-hidden h-[400px] shadow-inner"
             >
               {/* Main Dashboard */}
-              <div className="h-full w-full bg-[#222] relative">
-                {/* SEO Analytics Dashboard */}
-                <div className="p-4 keyword-table">
-                  <div className="mb-3 flex justify-between items-center">
-                    <div className="text-white text-sm font-semibold">Keyword Opportunity Analysis</div>
-                    <div className="text-gray-400 text-xs">Last updated: just now</div>
+              <div className="keyword-table p-4">
+                <div className="mb-3 flex justify-between items-center">
+                  <div className="text-white text-sm font-semibold">Keyword Opportunity Analysis</div>
+                  <div className="text-gray-400 text-xs">Last updated: just now</div>
+                </div>
+                
+                <div className="bg-[#2a2a2a] rounded-lg border border-gray-700 overflow-hidden">
+                  <div className="grid grid-cols-4 bg-[#333] p-2 text-xs text-gray-400 font-medium">
+                    <div>Keyword</div>
+                    <div className="text-center">Volume</div>
+                    <div className="text-center">Difficulty</div>
+                    <div className="text-center">Potential</div>
                   </div>
                   
-                  <div className="bg-[#2a2a2a] rounded-lg border border-gray-700 overflow-hidden">
-                    <div className="grid grid-cols-4 bg-[#333] p-2 text-xs text-gray-400 font-medium">
-                      <div>Keyword</div>
-                      <div className="text-center">Volume</div>
-                      <div className="text-center">Difficulty</div>
-                      <div className="text-center">Potential</div>
-                    </div>
-                    
-                    <div className="grid grid-cols-4 p-2 text-xs text-white border-b border-gray-700 relative">
-                      <div className="font-medium">ai seo tools</div>
-                      <div className="text-center">5,200</div>
-                      <div className="text-center">32/100</div>
-                      <div className="text-center text-green-400">High</div>
-                      {/* Position indicator for Jessica */}
-                      <div className="absolute -right-4 -top-4 bg-pink-400 px-2 py-0.5 rounded-md text-white text-[10px] opacity-70 transform scale-75">
-                        Jessica
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-4 p-2 text-xs text-white border-b border-gray-700 relative">
-                      <div className="font-medium">ai keyword research</div>
-                      <div className="text-center">3,800</div>
-                      <div className="text-center">41/100</div>
-                      <div className="text-center text-green-400">High</div>
-                      {/* Position indicators for Michael and Sarah */}
-                      <div className="absolute -right-4 top-2 bg-yellow-400 px-2 py-0.5 rounded-md text-white text-[10px] opacity-70 transform scale-75">
-                        Michael
-                      </div>
-                      <div className="absolute left-12 top-2 bg-blue-400 px-2 py-0.5 rounded-md text-white text-[10px] opacity-70 transform scale-75">
-                        Sarah
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-4 p-2 text-xs text-white">
-                      <div className="font-medium">best ai for seo</div>
-                      <div className="text-center">2,100</div>
-                      <div className="text-center">28/100</div>
-                      <div className="text-center text-green-400">High</div>
-                    </div>
+                  <div className="grid grid-cols-4 p-2 text-xs text-white border-b border-gray-700 relative">
+                    <div className="font-medium">ai seo tools</div>
+                    <div className="text-center">5,200</div>
+                    <div className="text-center">32/100</div>
+                    <div className="text-center text-green-400">High</div>
                   </div>
                   
-                  {/* Additional analytics element */}
-                  <div className="grid grid-cols-2 gap-4 mt-4">
-                    <div className="bg-[#2a2a2a] p-3 rounded-lg border border-gray-700">
-                      <div className="text-xs text-gray-400 mb-2">Keyword difficulty trend</div>
-                      <div className="h-12 flex items-end space-x-1">
-                        {Array.from({ length: 12 }).map((_, i) => (
-                          <div 
-                            key={i} 
-                            className="bg-blue-500 w-full" 
-                            style={{ 
-                              height: `${20 + Math.sin(i / 2) * 10 + Math.random() * 5}px`,
-                              opacity: 0.5 + Math.random() * 0.5
-                            }}
-                          />
-                        ))}
-                      </div>
+                  <div className="grid grid-cols-4 p-2 text-xs text-white border-b border-gray-700">
+                    <div className="font-medium">ai keyword research</div>
+                    <div className="text-center">3,800</div>
+                    <div className="text-center">41/100</div>
+                    <div className="text-center text-green-400">High</div>
+                  </div>
+                  
+                  <div className="grid grid-cols-4 p-2 text-xs text-white">
+                    <div className="font-medium">best ai for seo</div>
+                    <div className="text-center">2,100</div>
+                    <div className="text-center">28/100</div>
+                    <div className="text-center text-green-400">High</div>
+                  </div>
+                </div>
+                
+                {/* Additional analytics element */}
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  <div className="bg-[#2a2a2a] p-3 rounded-lg border border-gray-700">
+                    <div className="text-xs text-gray-400 mb-2">Keyword difficulty trend</div>
+                    <div className="h-12 flex items-end space-x-1">
+                      {Array.from({ length: 12 }).map((_, i) => (
+                        <div 
+                          key={i} 
+                          className="bg-blue-500 w-full" 
+                          style={{ 
+                            height: `${20 + Math.sin(i / 2) * 10}px`,
+                            opacity: 0.5 + (i % 10) / 10
+                          }}
+                        />
+                      ))}
                     </div>
-                    <div className="bg-[#2a2a2a] p-3 rounded-lg border border-gray-700">
-                      <div className="text-xs text-gray-400 mb-2">Competitor ranking</div>
-                      <div className="h-12 flex items-center justify-between">
-                        <div className="h-8 w-8 rounded-full bg-blue-500 opacity-80"></div>
-                        <div className="h-6 w-6 rounded-full bg-green-500 opacity-60"></div>
-                        <div className="h-10 w-10 rounded-full bg-purple-500 opacity-70"></div>
-                        <div className="h-4 w-4 rounded-full bg-yellow-500 opacity-50"></div>
-                        <div className="h-5 w-5 rounded-full bg-pink-500 opacity-60"></div>
-                      </div>
+                  </div>
+                  <div className="bg-[#2a2a2a] p-3 rounded-lg border border-gray-700">
+                    <div className="text-xs text-gray-400 mb-2">Competitor ranking</div>
+                    <div className="h-12 flex items-center justify-between">
+                      <div className="h-8 w-8 rounded-full bg-blue-500 opacity-80"></div>
+                      <div className="h-6 w-6 rounded-full bg-green-500 opacity-60"></div>
+                      <div className="h-10 w-10 rounded-full bg-purple-500 opacity-70"></div>
+                      <div className="h-4 w-4 rounded-full bg-yellow-500 opacity-50"></div>
+                      <div className="h-5 w-5 rounded-full bg-pink-500 opacity-60"></div>
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* Chat Overlay */}
-              <div className="absolute bottom-0 right-0 w-full max-w-md">
-                {/* Message container */}
-                <div className="bg-[#333] shadow-xl rounded-t-lg overflow-hidden">
-                  {chatPhase >= 1 && (
-                    <div className="p-3 max-h-60 overflow-y-auto">
-                      {currentMessageIndex === 0 ? (
-                        /* First message */
+              {/* Chat Overlay - Only show after client-side mounted */}
+              {isMounted && (
+                <div className="absolute bottom-0 left-0 right-0">
+                  {/* Message container */}
+                  <div className="bg-[#333] shadow-xl rounded-t-lg overflow-hidden">
+                    {chatPhase >= 1 && (
+                      <div className="p-3 max-h-60 overflow-y-auto">
                         <div className="flex items-start gap-2 mb-3">
                           <Avatar className="h-8 w-8 rounded-full border border-gray-700 shrink-0">
                             <AvatarImage src={chatMessages[currentMessageIndex].avatar} alt={chatMessages[currentMessageIndex].name} />
-                            <AvatarFallback className="bg-[#A8D9FF]">{chatMessages[currentMessageIndex].name[0]}</AvatarFallback>
+                            <AvatarFallback className="bg-blue-400">{chatMessages[currentMessageIndex].name[0]}</AvatarFallback>
                           </Avatar>
                           <div>
                             <div className="flex items-center gap-2 mb-1">
@@ -570,72 +572,40 @@ export function SpeedPerformanceSection() {
                             )}
                           </div>
                         </div>
-                      ) : (
-                        <div className="flex items-start gap-2 mb-3">
-                          <Avatar className="h-8 w-8 rounded-full border border-gray-700 shrink-0">
-                            <AvatarImage src={chatMessages[currentMessageIndex].avatar} alt={chatMessages[currentMessageIndex].name} />
-                            <AvatarFallback className="bg-[#FAC666]">{chatMessages[currentMessageIndex].name[0]}</AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="font-medium text-white text-sm">{chatMessages[currentMessageIndex].name}</span>
-                              <span className="text-gray-500 text-xs">{chatMessages[currentMessageIndex].time}</span>
-                            </div>
-                            <p className="text-gray-300 text-sm">
-                              {chatMessages[currentMessageIndex].text}
-                            </p>
-                            
-                            {/* Reactions */}
-                            {(showThumbsUp || showFire) && (
-                              <div className="flex gap-2 mt-1 mb-0">
-                                {showThumbsUp && (
-                                  <div className="thumbs-up-reaction bg-[#444] rounded-full px-2 py-0.5 flex items-center gap-1 text-xs">
-                                    <span>👍</span>
-                                    <span className="text-gray-300">1</span>
-                                  </div>
-                                )}
-                                {showFire && (
-                                  <div className="fire-reaction bg-[#444] rounded-full px-2 py-0.5 flex items-center gap-1 text-xs">
-                                    <span>🔥</span>
-                                    <span className="text-gray-300">1</span>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      )}
+                      </div>
+                    )}
+                    
+                    {/* Input area */}
+                    <div className="border-t border-gray-600 p-3 bg-[#2a2a2a] flex items-center gap-2">
+                      <input 
+                        ref={chatInputRef}
+                        type="text" 
+                        placeholder="Type your message..."
+                        className="bg-[#333] text-gray-300 text-sm flex-1 px-3 py-2 rounded-md border border-gray-600 focus:outline-none focus:border-blue-500"
+                        value={typingText}
+                        readOnly
+                      />
+                      <button 
+                        ref={sendButtonRef}
+                        className="bg-blue-500 text-white rounded-md p-2 flex items-center justify-center transform transition-transform"
+                        disabled
+                      >
+                        <Send size={16} />
+                      </button>
                     </div>
-                  )}
-                  
-                  {/* Input area */}
-                  <div className="border-t border-gray-600 p-3 bg-[#2a2a2a] flex items-center gap-2">
-                    <input 
-                      ref={chatInputRef}
-                      type="text" 
-                      placeholder="Type your message..."
-                      className="bg-[#333] text-gray-300 text-sm flex-1 px-3 py-2 rounded-md border border-gray-600 focus:outline-none focus:border-blue-500"
-                      value={typingText}
-                      readOnly
-                    />
-                    <button 
-                      ref={sendButtonRef}
-                      className="bg-blue-500 text-white rounded-md p-2 flex items-center justify-center"
-                      disabled
-                    >
-                      <Send size={16} />
-                    </button>
                   </div>
                 </div>
-              </div>
+              )}
               
-              {/* Notification bubble */}
-              <div className={`absolute top-4 right-4 bg-[#333] p-2 rounded-full transition-all duration-300 ${chatActive ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.5 6.33325C17.5 4.6764 16.1569 3.33325 14.5 3.33325H5.5C3.84315 3.33325 2.5 4.6764 2.5 6.33325V16.6666L4.98875 15.4222C5.54417 15.1445 6.15662 14.9999 6.77761 14.9999H14.5C16.1569 14.9999 17.5 13.6568 17.5 11.9999V6.33325Z" 
-                        fill="#37322F" stroke="#D6CFC2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
+              {/* Notification bubble - Only show after client-side mounted */}
+              {isMounted && (
+                <div className={`absolute top-4 right-4 bg-[#333] p-2 rounded-full transition-all duration-300 ${chatActive ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.5 6.33325C17.5 4.6764 16.1569 3.33325 14.5 3.33325H5.5C3.84315 3.33325 2.5 4.6764 2.5 6.33325V16.6666L4.98875 15.4222C5.54417 15.1445 6.15662 14.9999 6.77761 14.9999H14.5C16.1569 14.9999 17.5 13.6568 17.5 11.9999V6.33325Z" 
+                          fill="#37322F" stroke="#D6CFC2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -657,21 +627,12 @@ export function SpeedPerformanceSection() {
           75% { opacity: 0.8; }
         }
         
-        @keyframes cursor-blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        
         .animate-flicker-gray {
           animation: flicker-gray 0.2s infinite;
         }
         
         .animate-flicker-red {
           animation: flicker-red 0.15s infinite;
-        }
-        
-        .cursor-blink {
-          animation: cursor-blink 0.8s infinite;
         }
       `}</style>
     </section>
