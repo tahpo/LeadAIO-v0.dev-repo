@@ -272,7 +272,7 @@ section {
 
 .index-button-secondary:hover {
   background-color: #ffffff;
-  color: #ffffff;
+  color: #000000;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
@@ -528,7 +528,7 @@ body {
 /* CTA button hover states */
 .index-button-secondary:hover {
   background-color: #ffffff;
-  color: #ffffff;
+  color: #000000;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
