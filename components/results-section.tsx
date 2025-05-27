@@ -124,31 +124,32 @@ export function ResultsSection() {
   }, [isVisible]);
 
   return (
-    <div ref={sectionRef} className="bg-[#1a1a1a] rounded-3xl p-8 shadow-xl">
+    <div ref={sectionRef} className="bg-[#1a1a1a] rounded-2xl p-8 shadow-xl">
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-5">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2a2a2a] mb-6">
           <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
           <span className="text-gray-300 text-base">Results focus</span>
         </div>
-        <h3 className="text-4xl font-bold text-white mb-2">Built for results</h3>
+        <h3 className="text-3xl font-bold text-white mb-2">Built for results</h3>
         <p className="text-gray-400 leading-relaxed">
           Transform your SEO performance into a lead generation machine. Our optimized platform delivers qualified
           prospects directly to your business.
         </p>
       </div>
 
-      {/* Speedometer Container - Made wider with spacing between segments */}
+      {/* Speedometer Container */}
       <div className="flex flex-col items-center justify-center">
         {/* Digital Speedometer */}
         <div className="relative w-full mb-6">
-          {/* Speedometer with animation - increased width */}
+          {/* Speedometer with animation */}
           <div ref={speedometerRef} className="relative w-full flex justify-center">
             {/* Base layer (gray and red segments) */}
-            <div className="relative w-[360px] h-[160px]">
-              <svg width="400" height="200" viewBox="0 0 120 60">
-                {/* All segments with spacing between them */}
+            <div className="relative w-[360px] h-[140px]">
+              <svg viewBox="0 0 120 60" className="w-full h-full">
+                {/* All 12 segments with spacing */}
                 {Array.from({ length: TOTAL_SEGMENTS }, (_, i) => {
+                  // Slightly adjusted rotation to create spacing
                   const rotation = -90 + (i * 180) / (TOTAL_SEGMENTS - 1);
                   const isRed = i >= GRAY_SEGMENTS;
                   const isActive = i < totalSegments;
@@ -165,7 +166,8 @@ export function ResultsSection() {
                       fill={isRed ? (isActive ? "#FF3E3E" : "#8B3E3E") : "#4A4A4A"}
                       opacity={isActive ? (isRed ? 0.9 : 0.7) : 0.15}
                       transform={`rotate(${rotation}, 60, 60)`}
-                      strokeWidth="1"
+                      // Add spacing between segments
+                      strokeWidth="0.5"
                       stroke="#111111"
                     />
                   );
@@ -176,7 +178,7 @@ export function ResultsSection() {
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-[10%] text-center">
                 <div 
                   data-speed-counter 
-                  className="text-6xl font-mono text-white tracking-wider" 
+                  className="text-5xl font-mono text-white tracking-wider" 
                   style={{ fontFamily: "monospace" }}
                 >
                   {speedValue}
@@ -187,14 +189,14 @@ export function ResultsSection() {
           </div>
 
           {/* Labels */}
-          <div className="flex justify-between text-gray-500 text-sm font-mono mt-4">
+          <div className="flex justify-between text-gray-500 text-sm font-mono mt-2">
             <div className="whitespace-nowrap">LEAD POTENTIAL</div>
             <div className="text-right">LEAD GENERATION RATE</div>
           </div>
         </div>
 
-        {/* SEO Performance Metrics */}
-        <div className="w-full mb-4">
+        {/* SEO Performance Metrics - moved up with reduced margin */}
+        <div className="w-full mb-4 mt-6">
           <div className="flex items-center justify-between mb-2">
             <div className="text-gray-400 font-mono">CONVERSION METRICS</div>
             <div className="text-orange-400 font-mono">HIGH-INTENT</div>
@@ -223,7 +225,7 @@ export function ResultsSection() {
           </div>
         </div>
 
-        {/* Monthly Growth Stats */}
+        {/* Monthly Growth Stats - kept close to conversion metrics */}
         <div className="w-full mt-4">
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center">

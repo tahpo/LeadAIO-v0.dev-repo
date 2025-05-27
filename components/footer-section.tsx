@@ -32,7 +32,7 @@ export function FooterSection() {
               href="/signup"
               className="index-button index-button-primary bg-white text-black hover:bg-gray-100 flex items-center justify-center gap-2 mx-auto inline-flex"
             >
-              Get started <span className="ml-2">→</span>
+              Get started - for free <span className="ml-2">→</span>
             </a>
           </div>
 
@@ -113,7 +113,7 @@ export function FooterSection() {
             </div>
           </div>
 
-          <div className="border-t border-gray-800 mt-8 pt-6 pb-8 flex flex-col md:flex-row justify-between items-center">
+          <div className="border-t border-gray-800 mt-8 pt-6 pb-0 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm font-universal">© 2024 LeadAIO. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0 font-universal">
               <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
