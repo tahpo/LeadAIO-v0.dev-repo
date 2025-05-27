@@ -51,7 +51,7 @@ function PricingSection({
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-garnett font-medium mb-6">Simple, transparent pricing</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto font-universal">
-            Choose the plan that works best for your business needs. All plans include a 14-day free trial.
+            Choose the plan that works best for your business needs.
           </p>
 
           {/* Billing toggle */}
@@ -104,13 +104,12 @@ function PricingSection({
                   <div className="text-sm text-gray-600 mt-1 font-universal">billed annually</div>
                 )}
               </div>
-              <p className="text-gray-600 mb-6 font-universal">Perfect for small businesses just getting started with SEO.</p>
-              <Button
-                className="w-full bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-lg text-sm transition-colors font-universal"
-                asChild
-              >
-                <Link href="/signup">Start free trial</Link>
-              </Button>
+              <p className="text-gray-600 mb-6 font-universal">Perfect for small businesses looking to improve their SEO.</p>
+              <Link href="/signup" className="w-full">
+                <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-lg text-sm transition-colors font-universal">
+                  Get Started
+                </Button>
+              </Link>
             </div>
             <div className="bg-gray-50 px-8 py-6">
               <p className="font-medium mb-4 font-universal text-sm">Includes:</p>
@@ -156,12 +155,11 @@ function PricingSection({
                 )}
               </div>
               <p className="text-gray-600 mb-6 font-universal">Comprehensive solution for growing businesses.</p>
-              <Button
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm transition-colors font-universal"
-                asChild
-              >
-                <Link href="/signup">Start free trial</Link>
-              </Button>
+              <Link href="/signup" className="w-full">
+                <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm transition-colors font-universal">
+                  Get Started
+                </Button>
+              </Link>
             </div>
             <div className="bg-gray-50 px-8 py-6">
               <p className="font-medium mb-4 font-universal text-sm">Everything in Starter, plus:</p>

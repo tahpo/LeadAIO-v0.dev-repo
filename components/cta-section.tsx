@@ -31,11 +31,10 @@ export function CTASection() {
               <Button
                 size="lg"
                 variant="secondary"
-                asChild
-                className="text-lg px-8 py-6 bg-white text-blue-600 hover:bg-gray-100 rounded-full hover-lift"
+                className="text-lg px-8 py-6 bg-white text-blue-600 hover:bg-white hover:text-black rounded-full hover-lift"
               >
                 <Link href="/signup">
-                  Start free trial <ArrowRight className="ml-2 h-5 w-5" />
+                  Start free trial <ArrowRight className="ml-2 h-5 w-4" />
                 </Link>
               </Button>
               <Button
