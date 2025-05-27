@@ -27,9 +27,9 @@ export function SpeedPerformanceSection() {
   }, [])
 
   return (
-    <section ref={containerRef} className="relative bg-[#2d2d2d] py-14">
+    <section ref={containerRef} className="relative bg-[#2d2d2d] py-24">
       {/* Top wave */}
-      <div className="absolute top-0 left-0 right-0 h-24 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-32 overflow-hidden">
         <svg
           className="absolute bottom-0 w-full h-24 rotate-180"
           xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ export function SpeedPerformanceSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
+      <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
         <svg
           className="absolute bottom-0 w-full h-24"
           xmlns="http://www.w3.org/2000/svg"

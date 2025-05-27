@@ -8,7 +8,7 @@ const features = [
   {
     id: "ai-optimization",
     icon: Search,
-    title: "AI/SEO Optimization",
+    title: "Artificial Intelligence Optimization (AIO)",
     description: "Comprehensive AI-powered SEO optimization including keyword research, content optimization, and AI search engine optimization.",
     image: "/ai-seo-dashboard.png",
     color: "from-blue-500 to-cyan-500",
