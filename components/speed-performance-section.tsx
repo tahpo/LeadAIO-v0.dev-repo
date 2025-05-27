@@ -7,12 +7,6 @@ import { ExpertsSection } from "./experts-section"
 export function SpeedPerformanceSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const waveStyle = {
-    height: '120px',
-    backgroundColor: '#2d2d2d',
-    position: 'relative' as const
-  }
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -33,9 +27,9 @@ export function SpeedPerformanceSection() {
   }, [])
 
   return (
-    <section ref={containerRef} className="relative">
+    <section ref={containerRef} className="relative bg-[#2d2d2d] py-14">
       {/* Top wave */}
-      <div style={waveStyle}>
+      <div className="absolute top-0 left-0 right-0 h-24 overflow-hidden">
         <svg
           className="absolute bottom-0 w-full h-24 rotate-180"
           xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +40,7 @@ export function SpeedPerformanceSection() {
         </svg>
       </div>
 
-      <div className="relative z-10 bg-[#2d2d2d] py-14">
+      <div className="relative z-10">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Box - Speedometer */}
@@ -58,7 +52,7 @@ export function SpeedPerformanceSection() {
         </div>
       </div>
 
-      <div style={waveStyle}>
+      <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
         <svg
           className="absolute bottom-0 w-full h-24"
           xmlns="http://www.w3.org/2000/svg"
