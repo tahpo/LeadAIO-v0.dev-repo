@@ -15,8 +15,8 @@ export default function Home() {
       <FeaturesSection />
       <HowItWorks />
       <SpeedPerformanceSection />
-      <WorkflowSection />
       <TestimonialsSection />
+      <WorkflowSection />
       <FooterSection />
     </main>
   )

@@ -81,9 +81,9 @@ export function HeroSection() {
   const longestWord2 = words2.reduce((a, b) => (a.length > b.length ? a : b), "")
 
   return (
-    <section className="relative min-h-screen pt-28 pb-20 overflow-hidden bg-white">
+    <section className="relative min-h-screen pt-28 pb-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="section-container relative z-10">
-        <div className="section-panel bg-cream">
+        <div className="section-panel bg-[#fdfcfa]">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl mb-6 leading-tight text-gray-900 font-garnett">
               The SEO that every{" "}
