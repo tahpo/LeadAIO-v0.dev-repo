@@ -186,8 +186,8 @@ button,
 
 /* Reduce section padding globally */
 section {
-  padding-top: 60px !important; /* Reduced from 96px (py-24) */
-  padding-bottom: 60px !important;
+  padding-top: 50px !important; /* Reduced from 60px for more even spacing */
+  padding-bottom: 50px !important;
 }
 
 /* Header styling - Enhanced like index.app with responsive margins */
@@ -260,6 +260,7 @@ section {
   background-color: #333333;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #ffffff; /* Fix for white text on white background */
 }
 
 .index-button-secondary {
@@ -417,6 +418,26 @@ section {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Number counter animation */
+@keyframes number-count {
+  0% {
+    content: attr(data-from);
+  }
+  100% {
+    content: attr(data-to);
+  }
+}
+
+.animate-count {
+  animation: number-count 2s ease-out forwards;
+}
+
+/* Cursor animations */
+.cursors-item {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  will-change: transform;
+}
+
 /* Speedometer styles */
 .speedometer {
   position: relative;
@@ -506,8 +527,39 @@ body {
   padding-bottom: 0 !important;
 }
 
-/* Cursor animations */
-.cursors-item {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-  will-change: transform;
+/* Dashboard animation utilities */
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes count-up {
+  from {
+    content: attr(data-from);
+  }
+  to {
+    content: attr(data-to);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s infinite;
+}
+
+.animate-count {
+  counter-reset: count attr(data-from);
+  animation: count-up 2s forwards;
+}
+
+.dashboard-animate {
+  transition: all 0.6s ease-in-out;
+}
+
+.dashboard-animate:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
 }

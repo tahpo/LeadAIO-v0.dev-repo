@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import anime from 'animejs'
 
 export function HeroSection() {
   const [currentWord1, setCurrentWord1] = useState(0)
@@ -10,61 +11,12 @@ export function HeroSection() {
   const words1 = ["business", "startup", "agency", "brand", "expert"]
   const words2 = ["rankings", "results", "traffic", "dominance", "growth"]
   const [mounted, setMounted] = useState(false)
-  const [cursorPositions, setCursorPositions] = useState([
-    { 
-      id: 1, 
-      name: "Jessica", 
-      color: "#A8D9FF", 
-      x: 180, 
-      y: 150, 
-      targetX: 300, 
-      targetY: 180,
-      speed: 2.5
-    },
-    { 
-      id: 2, 
-      name: "Michael", 
-      color: "#FAC666", 
-      x: 400, 
-      y: 220, 
-      targetX: 200, 
-      targetY: 300,
-      speed: 2.0
-    },
-    { 
-      id: 3, 
-      name: "Sarah", 
-      color: "#FF9EB3", 
-      x: 320, 
-      y: 280, 
-      targetX: 450, 
-      targetY: 200,
-      speed: 1.8
-    },
-    { 
-      id: 4, 
-      name: "David", 
-      color: "#8DECA6", 
-      x: 520, 
-      y: 340, 
-      targetX: 580, 
-      targetY: 260,
-      speed: 2.2
-    }
-  ])
-  
   const dashboardRef = useRef<HTMLDivElement>(null)
-  const animationFrameId = useRef<number | null>(null)
   
   // Set mounted state to true after hydration
   useEffect(() => {
     setMounted(true)
-    
-    return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current)
-      }
-    }
+    return () => {}
   }, [])
 
   // Word carousel effect
@@ -83,67 +35,77 @@ export function HeroSection() {
     }
   }, [])
 
-  // Cursor animation effect - client-side only
+  // Animated dashboard elements
   useEffect(() => {
     if (!mounted || !dashboardRef.current) return
     
-    const getRandomPosition = () => {
-      const rect = dashboardRef.current?.getBoundingClientRect()
-      if (!rect) return { x: 0, y: 0 }
-      
-      // Keep cursors within dashboard bounds with padding
-      const padding = 60
-      const minX = padding
-      const maxX = rect.width - padding
-      const minY = padding
-      const maxY = rect.height - padding
-      
-      return {
-        x: Math.floor(minX + Math.random() * (maxX - minX)),
-        y: Math.floor(minY + Math.random() * (maxY - minY))
+    // Animate progress bars
+    anime({
+      targets: '.progress-bar',
+      width: (el) => el.getAttribute('data-width'),
+      opacity: [0.6, 1],
+      easing: 'easeInOutQuad',
+      duration: 1500,
+      delay: anime.stagger(200),
+      loop: true,
+      direction: 'alternate',
+      loopComplete: (anim) => {
+        const newWidths = [
+          `${65 + Math.floor(Math.random() * 15)}%`, 
+          `${75 + Math.floor(Math.random() * 10)}%`,
+          `${40 + Math.floor(Math.random() * 15)}%`
+        ];
+        
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars.forEach((bar, i) => {
+          bar.setAttribute('data-width', newWidths[i]);
+        });
       }
-    }
+    });
     
-    // Function to smoothly animate cursors
-    const moveCursors = () => {
-      setCursorPositions(prevPositions => {
-        return prevPositions.map(cursor => {
-          // Calculate distance to target
-          const dx = cursor.targetX - cursor.x
-          const dy = cursor.targetY - cursor.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-          
-          // If close to target, set new target
-          if (distance < 5) {
-            const newTarget = getRandomPosition()
-            return {
-              ...cursor,
-              targetX: newTarget.x,
-              targetY: newTarget.y
-            }
-          }
-          
-          // Otherwise, move toward target
-          return {
-            ...cursor,
-            x: cursor.x + (dx / distance) * cursor.speed,
-            y: cursor.y + (dy / distance) * cursor.speed
-          }
-        })
-      })
-      
-      animationFrameId.current = requestAnimationFrame(moveCursors)
-    }
+    // Animate stats counters
+    anime({
+      targets: '.stat-value',
+      innerHTML: (el) => [0, el.getAttribute('data-value')],
+      easing: 'easeInOutExpo',
+      round: true,
+      duration: 2000,
+      delay: anime.stagger(300)
+    });
     
-    // Start animation
-    animationFrameId.current = requestAnimationFrame(moveCursors)
+    // Animate insight badges
+    anime({
+      targets: '.insight-badge',
+      translateY: [-10, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(400),
+      duration: 800
+    });
     
-    return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current)
-      }
-    }
-  }, [mounted])
+    // Set up pulsing animation
+    anime({
+      targets: '.pulse-element',
+      scale: [1, 1.05],
+      opacity: [0.8, 1],
+      easing: 'easeInOutSine',
+      duration: 1500,
+      loop: true,
+      direction: 'alternate'
+    });
+    
+    // Update traffic numbers periodically
+    const updateVisitorNumbers = () => {
+      const visitorCounters = document.querySelectorAll('.visitor-counter');
+      visitorCounters.forEach(counter => {
+        const currentNum = parseInt((counter as HTMLElement).innerText.replace(/,/g, ''), 10);
+        const increase = Math.floor(Math.random() * 10) + 1;
+        (counter as HTMLElement).innerText = (currentNum + increase).toLocaleString();
+      });
+    };
+    
+    const counterInterval = setInterval(updateVisitorNumbers, 3000);
+    return () => clearInterval(counterInterval);
+  }, [mounted]);
 
   // Find the longest word in each array to set fixed widths
   const longestWord1 = words1.reduce((a, b) => (a.length > b.length ? a : b), "")
@@ -235,7 +197,7 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Dashboard Preview - Slightly reduced size but maintaining proportions */}
+          {/* Dashboard Preview with dynamic animations */}
           <div className="relative w-full max-w-5xl mx-auto mt-6">
             <motion.div
               ref={dashboardRef}
@@ -260,7 +222,7 @@ export function HeroSection() {
                     <div className="text-white text-lg font-garnett ml-3">LeadAIO</div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-xs font-semibold">
+                    <div className="px-3 py-1 bg-orange-500/20 text-orange-300 rounded-full text-xs font-semibold pulse-element">
                       Live Data
                     </div>
                     <div className="h-8 w-8 bg-gray-800 rounded-full flex items-center justify-center border-2 border-gray-700">
@@ -272,11 +234,11 @@ export function HeroSection() {
                 {/* Main Grid */}
                 <div className="grid grid-cols-12 gap-4">
                   {/* Traffic Chart */}
-                  <div className="col-span-8 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
+                  <div className="col-span-8 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50 pulse-element">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">Organic Traffic Growth</h3>
                       <div className="bg-emerald-500/20 px-2 py-1 rounded text-emerald-300 text-xs">
-                        +58% ↑
+                        +<span className="visitor-counter">58</span>% ↑
                       </div>
                     </div>
                     
@@ -305,6 +267,7 @@ export function HeroSection() {
                         <path 
                           d="M0,140 C30,135 70,130 120,125 S200,120 240,115 S350,110 400,105 V150 H0 Z" 
                           fill="url(#purpleGradient)" 
+                          className="animate-pulse-soft"
                         />
                         <path 
                           d="M0,140 C30,135 70,130 120,125 S200,120 240,115 S350,110 400,105" 
@@ -317,6 +280,7 @@ export function HeroSection() {
                         <path 
                           d="M0,110 C40,100 80,80 120,60 S180,30 240,25 S320,20 400,30 V150 H0 Z" 
                           fill="url(#blueGradient)" 
+                          className="animate-pulse-soft"
                         />
                         <path 
                           d="M0,110 C40,100 80,80 120,60 S180,30 240,25 S320,20 400,30" 
@@ -325,10 +289,10 @@ export function HeroSection() {
                           strokeWidth="2.5"
                         />
                         
-                        {/* Data Points */}
-                        <circle cx="120" cy="60" r="4" fill="#4361EE" stroke="#0F172A" strokeWidth="1.5" />
-                        <circle cx="240" cy="25" r="4" fill="#4361EE" stroke="#0F172A" strokeWidth="1.5" />
-                        <circle cx="340" cy="27" r="4" fill="#4361EE" stroke="#0F172A" strokeWidth="1.5" />
+                        {/* Animated Data Points */}
+                        <circle cx="120" cy="60" r="4" fill="#4361EE" stroke="#0F172A" strokeWidth="1.5" className="pulse-element" />
+                        <circle cx="240" cy="25" r="4" fill="#4361EE" stroke="#0F172A" strokeWidth="1.5" className="pulse-element" />
+                        <circle cx="340" cy="27" r="4" fill="#4361EE" stroke="#0F172A" strokeWidth="1.5" className="pulse-element" />
                       </svg>
                     </div>
                     
@@ -348,11 +312,11 @@ export function HeroSection() {
                   </div>
                   
                   {/* Keyword Rankings */}
-                  <div className="col-span-4 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
+                  <div className="col-span-4 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50 dashboard-animate">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">Keyword Rankings</h3>
                       <div className="text-emerald-400 text-xs font-medium">
-                        +12 ↑
+                        +<span className="visitor-counter">12</span> ↑
                       </div>
                     </div>
                     
@@ -360,36 +324,36 @@ export function HeroSection() {
                       <div>
                         <div className="flex justify-between text-xs mb-1">
                           <span className="text-gray-400">Top 3 positions</span>
-                          <span className="text-white font-medium">18</span>
+                          <span className="text-white font-medium stat-value" data-value="18">18</span>
                         </div>
                         <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" style={{width: "65%"}}></div>
+                          <div className="progress-bar h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" data-width="65%"></div>
                         </div>
                       </div>
                       
                       <div>
                         <div className="flex justify-between text-xs mb-1">
                           <span className="text-gray-400">Top 10 positions</span>
-                          <span className="text-white font-medium">42</span>
+                          <span className="text-white font-medium stat-value" data-value="42">42</span>
                         </div>
                         <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-[#4361EE] to-[#4CC9F0] rounded-full" style={{width: "78%"}}></div>
+                          <div className="progress-bar h-full bg-gradient-to-r from-[#4361EE] to-[#4CC9F0] rounded-full" data-width="78%"></div>
                         </div>
                       </div>
                       
                       <div>
                         <div className="flex justify-between text-xs mb-1">
                           <span className="text-gray-400">Position improvements</span>
-                          <span className="text-white font-medium">+21</span>
+                          <span className="text-white font-medium stat-value" data-value="21">21</span>
                         </div>
                         <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-[#F72585] to-[#FF9E00] rounded-full" style={{width: "45%"}}></div>
+                          <div className="progress-bar h-full bg-gradient-to-r from-[#F72585] to-[#FF9E00] rounded-full" data-width="45%"></div>
                         </div>
                       </div>
                     </div>
                     
                     {/* AI Insight */}
-                    <div className="mt-3 bg-[#4361EE]/10 border border-[#4361EE]/20 rounded p-2 text-xs text-blue-300">
+                    <div className="mt-3 bg-[#4361EE]/10 border border-[#4361EE]/20 rounded p-2 text-xs text-blue-300 insight-badge pulse-element">
                       <div className="flex items-start">
                         <div className="h-4 w-4 rounded-full bg-[#4361EE]/20 flex items-center justify-center mt-0.5 mr-2">
                           <span className="text-blue-400 text-[10px]">AI</span>
@@ -399,44 +363,44 @@ export function HeroSection() {
                     </div>
                   </div>
                   
-                  {/* Backlink Profile - Compact with no wasted space */}
-                  <div className="col-span-7 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
+                  {/* Backlink Profile */}
+                  <div className="col-span-7 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50 dashboard-animate">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">Backlink Profile</h3>
                       <div className="text-xs text-blue-300 bg-[#4361EE]/20 px-2 py-0.5 rounded-full">
-                        372 total links
+                        <span className="visitor-counter">372</span> total links
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-4 gap-3">
-                      <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50">
+                      <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50 pulse-element">
                         <div className="text-xs text-gray-400 mb-1">High Authority</div>
-                        <div className="text-white font-medium">204</div>
+                        <div className="text-white font-medium stat-value" data-value="204">204</div>
                         <div className="text-emerald-400 text-xs mt-1">+9.2% ↑</div>
                       </div>
                       
                       <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50">
                         <div className="text-xs text-gray-400 mb-1">Medium</div>
-                        <div className="text-white font-medium">108</div>
+                        <div className="text-white font-medium stat-value" data-value="108">108</div>
                         <div className="text-emerald-400 text-xs mt-1">+4.5% ↑</div>
                       </div>
                       
-                      <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50">
+                      <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50 pulse-element">
                         <div className="text-xs text-gray-400 mb-1">Low Quality</div>
-                        <div className="text-white font-medium">38</div>
+                        <div className="text-white font-medium stat-value" data-value="38">38</div>
                         <div className="text-red-400 text-xs mt-1">-2.3% ↓</div>
                       </div>
                       
                       <div className="bg-[#1a2234]/60 p-2 rounded border border-gray-800/50">
                         <div className="text-xs text-gray-400 mb-1">New (7d)</div>
-                        <div className="text-white font-medium">22</div>
+                        <div className="text-white font-medium stat-value" data-value="22">22</div>
                         <div className="text-emerald-400 text-xs mt-1">+24% ↑</div>
                       </div>
                     </div>
                     
-                    {/* Domain stats - Fills the empty space */}
+                    {/* Domain stats */}
                     <div className="mt-3 grid grid-cols-3 gap-3">
-                      <div className="flex items-center bg-[#1a2234]/40 rounded p-2">
+                      <div className="flex items-center bg-[#1a2234]/40 rounded p-2 pulse-element">
                         <div className="h-8 w-8 rounded-full bg-[#4361EE]/20 flex items-center justify-center mr-2">
                           <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#4361EE]" fill="none" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -444,7 +408,7 @@ export function HeroSection() {
                         </div>
                         <div>
                           <div className="text-xs text-gray-400">Domain Authority</div>
-                          <div className="text-white font-medium text-sm">62 / 100</div>
+                          <div className="text-white font-medium text-sm stat-value" data-value="62">62</div>
                         </div>
                       </div>
                       
@@ -456,11 +420,11 @@ export function HeroSection() {
                         </div>
                         <div>
                           <div className="text-xs text-gray-400">Trust Score</div>
-                          <div className="text-white font-medium text-sm">78 / 100</div>
+                          <div className="text-white font-medium text-sm stat-value" data-value="78">78</div>
                         </div>
                       </div>
                       
-                      <div className="flex items-center bg-[#1a2234]/40 rounded p-2">
+                      <div className="flex items-center bg-[#1a2234]/40 rounded p-2 pulse-element">
                         <div className="h-8 w-8 rounded-full bg-[#F72585]/20 flex items-center justify-center mr-2">
                           <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#F72585]" fill="none" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -468,21 +432,21 @@ export function HeroSection() {
                         </div>
                         <div>
                           <div className="text-xs text-gray-400">Avg. Link Age</div>
-                          <div className="text-white font-medium text-sm">9.2 months</div>
+                          <div className="text-white font-medium text-sm stat-value" data-value="9">9.2</div>
                         </div>
                       </div>
                     </div>
                   </div>
                   
                   {/* Site Health */}
-                  <div className="col-span-5 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
+                  <div className="col-span-5 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50 dashboard-animate">
                     <div className="flex justify-between items-center mb-2">
                       <h3 className="text-white text-sm font-garnett">Site Health</h3>
                       <div className="text-gray-400 text-xs">Updated today</div>
                     </div>
                     
                     <div className="flex justify-center my-2">
-                      <div className="relative h-24 w-24">
+                      <div className="relative h-24 w-24 pulse-element">
                         <svg viewBox="0 0 100 100" className="w-full h-full">
                           {/* Background circle */}
                           <circle 
@@ -491,7 +455,7 @@ export function HeroSection() {
                             stroke="#2D3748" 
                             strokeWidth="8"
                           />
-                          {/* Progress circle */}
+                          {/* Progress circle with animation */}
                           <circle 
                             cx="50" cy="50" r="40" 
                             fill="none" 
@@ -500,10 +464,11 @@ export function HeroSection() {
                             strokeDasharray="251.2"
                             strokeDashoffset="50.24"
                             transform="rotate(-90 50 50)"
+                            className="animate-pulse-soft"
                           />
                         </svg>
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <span className="text-2xl font-bold text-white">80</span>
+                          <span className="text-2xl font-bold text-white stat-value" data-value="80">80</span>
                           <span className="text-gray-400 text-xs">/ 100</span>
                         </div>
                       </div>
@@ -511,29 +476,29 @@ export function HeroSection() {
                     
                     <div className="grid grid-cols-3 gap-2 mt-2">
                       <div className="bg-[#1a2234]/40 rounded p-2 text-center">
-                        <div className="text-emerald-400 text-sm font-medium">24</div>
+                        <div className="text-emerald-400 text-sm font-medium stat-value" data-value="24">24</div>
                         <div className="text-gray-400 text-xs">Fixed</div>
                       </div>
-                      <div className="bg-[#1a2234]/40 rounded p-2 text-center">
-                        <div className="text-amber-400 text-sm font-medium">8</div>
+                      <div className="bg-[#1a2234]/40 rounded p-2 text-center pulse-element">
+                        <div className="text-amber-400 text-sm font-medium stat-value" data-value="8">8</div>
                         <div className="text-gray-400 text-xs">Warnings</div>
                       </div>
                       <div className="bg-[#1a2234]/40 rounded p-2 text-center">
-                        <div className="text-red-400 text-sm font-medium">3</div>
+                        <div className="text-red-400 text-sm font-medium stat-value" data-value="3">3</div>
                         <div className="text-gray-400 text-xs">Errors</div>
                       </div>
                     </div>
                   </div>
                   
                   {/* AI Platform Ranking Scores (replaced content optimization) */}
-                  <div className="col-span-12 bg-[#111827] rounded-lg p-4 shadow-lg border border-gray-800/50">
+                  <div className="col-span-12 bg-gradient-to-br from-[#131820] to-[#1E293B] rounded-lg p-4 shadow-lg border border-gray-800/50 dashboard-animate">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">AI Platform Ranking Scores</h3>
-                      <div className="text-gray-400 text-xs">Last updated: 3 hours ago</div>
+                      <div className="text-gray-400 text-xs">Last updated: <span className="text-blue-300">3 hours ago</span></div>
                     </div>
                     
                     <div className="grid grid-cols-5 gap-3">
-                      <div className="bg-[#131b2c] border border-[#4361EE]/30 rounded p-3 hover:border-[#4361EE]/40 transition-colors">
+                      <div className="bg-[#131b2c] border border-[#4361EE]/30 rounded p-3 hover:border-[#4361EE]/40 transition-colors pulse-element">
                         <div className="flex items-center mb-2">
                           <div className="h-6 w-6 bg-[#4361EE]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#4361EE]" fill="none" stroke="currentColor">
@@ -543,11 +508,11 @@ export function HeroSection() {
                           <span className="text-xs text-[#4361EE] font-medium">Google</span>
                         </div>
                         <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">92</div>
+                          <div className="text-lg font-bold text-white stat-value" data-value="92">92</div>
                           <div className="text-xs text-emerald-400">+4 ↑</div>
                         </div>
                         <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#4361EE] rounded-full" style={{width: "92%"}}></div>
+                          <div className="h-full bg-[#4361EE] rounded-full animate-pulse-soft" style={{width: "92%"}}></div>
                         </div>
                       </div>
                       
@@ -561,15 +526,15 @@ export function HeroSection() {
                           <span className="text-xs text-[#7209B7] font-medium">ChatGPT</span>
                         </div>
                         <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">85</div>
+                          <div className="text-lg font-bold text-white stat-value" data-value="85">85</div>
                           <div className="text-xs text-emerald-400">+7 ↑</div>
                         </div>
                         <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#7209B7] rounded-full" style={{width: "85%"}}></div>
+                          <div className="h-full bg-[#7209B7] rounded-full animate-pulse-soft" style={{width: "85%"}}></div>
                         </div>
                       </div>
                       
-                      <div className="bg-[#131b2c] border border-[#F72585]/30 rounded p-3 hover:border-[#F72585]/40 transition-colors">
+                      <div className="bg-[#131b2c] border border-[#F72585]/30 rounded p-3 hover:border-[#F72585]/40 transition-colors pulse-element">
                         <div className="flex items-center mb-2">
                           <div className="h-6 w-6 bg-[#F72585]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#F72585]" fill="none" stroke="currentColor">
@@ -579,11 +544,11 @@ export function HeroSection() {
                           <span className="text-xs text-[#F72585] font-medium">Gemini</span>
                         </div>
                         <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">78</div>
+                          <div className="text-lg font-bold text-white stat-value" data-value="78">78</div>
                           <div className="text-xs text-emerald-400">+3 ↑</div>
                         </div>
                         <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#F72585] rounded-full" style={{width: "78%"}}></div>
+                          <div className="h-full bg-[#F72585] rounded-full animate-pulse-soft" style={{width: "78%"}}></div>
                         </div>
                       </div>
                       
@@ -597,15 +562,15 @@ export function HeroSection() {
                           <span className="text-xs text-[#4CC9F0] font-medium">Anthropic</span>
                         </div>
                         <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">81</div>
+                          <div className="text-lg font-bold text-white stat-value" data-value="81">81</div>
                           <div className="text-xs text-emerald-400">+5 ↑</div>
                         </div>
                         <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#4CC9F0] rounded-full" style={{width: "81%"}}></div>
+                          <div className="h-full bg-[#4CC9F0] rounded-full animate-pulse-soft" style={{width: "81%"}}></div>
                         </div>
                       </div>
                       
-                      <div className="bg-[#131b2c] border border-[#FB8B24]/30 rounded p-3 hover:border-[#FB8B24]/40 transition-colors">
+                      <div className="bg-[#131b2c] border border-[#FB8B24]/30 rounded p-3 hover:border-[#FB8B24]/40 transition-colors pulse-element">
                         <div className="flex items-center mb-2">
                           <div className="h-6 w-6 bg-[#FB8B24]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#FB8B24]" fill="none" stroke="currentColor">
@@ -615,47 +580,17 @@ export function HeroSection() {
                           <span className="text-xs text-[#FB8B24] font-medium">DeepSeek</span>
                         </div>
                         <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">73</div>
+                          <div className="text-lg font-bold text-white stat-value" data-value="73">73</div>
                           <div className="text-xs text-emerald-400">+9 ↑</div>
                         </div>
                         <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#FB8B24] rounded-full" style={{width: "73%"}}></div>
+                          <div className="h-full bg-[#FB8B24] rounded-full animate-pulse-soft" style={{width: "73%"}}></div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              
-              {/* Cursor overlay - Client-side only */}
-              {mounted && (
-                <div className="absolute inset-0 pointer-events-none">
-                  {cursorPositions.map((cursor) => (
-                    <div 
-                      key={cursor.id}
-                      className="cursors-item absolute z-20 pointer-events-none"
-                      style={{
-                        left: 0,
-                        top: 0,
-                        transform: `translate3d(${cursor.x}px, ${cursor.y}px, 0px)`,
-                        transition: 'all 0.1s linear'
-                      }}
-                    >
-                      <div className="flex items-center">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                          <path d="M3 3L13 13M3 13L13 3" stroke={cursor.color} strokeWidth="2" strokeLinecap="round"/>
-                        </svg>
-                        <div 
-                          className="ml-1 px-2 py-1 text-xs text-white rounded-md"
-                          style={{ backgroundColor: cursor.color }}
-                        >
-                          {cursor.name}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
             </motion.div>
           </div>
         </div>

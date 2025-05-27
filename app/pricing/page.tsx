@@ -51,7 +51,7 @@ function PricingSection({
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-garnett font-medium mb-6">Simple, transparent pricing</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto font-universal">
-            Choose the plan that works best for your business needs. All plans include a 14-day free trial.
+            Choose the plan that works best for your business needs.
           </p>
 
           {/* Billing toggle */}
@@ -109,7 +109,7 @@ function PricingSection({
                 className="w-full bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-lg text-sm transition-colors font-universal"
                 asChild
               >
-                <Link href="/signup">Start free trial</Link>
+                <Link href="/signup">Get started</Link>
               </Button>
             </div>
             <div className="bg-gray-50 px-8 py-6">
@@ -160,7 +160,7 @@ function PricingSection({
                 className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm transition-colors font-universal"
                 asChild
               >
-                <Link href="/signup">Start free trial</Link>
+                <Link href="/signup">Get started</Link>
               </Button>
             </div>
             <div className="bg-gray-50 px-8 py-6">
@@ -454,13 +454,6 @@ function FaqSection() {
             <h3 className="text-lg font-garnett mb-3">Can I change my plan later?</h3>
             <p className="text-gray-600 font-universal">
               Yes, you can upgrade, downgrade or cancel your plan at any time. If you upgrade, you'll be prorated for the remainder of your billing cycle. If you downgrade or cancel, changes will take effect at the end of your current billing cycle.
-            </p>
-          </div>
-          
-          <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
-            <h3 className="text-lg font-garnett mb-3">Is there a free trial?</h3>
-            <p className="text-gray-600 font-universal">
-              Yes, all plans come with a 14-day free trial, no credit card required. You can try out all the features before committing to a paid plan.
             </p>
           </div>
           

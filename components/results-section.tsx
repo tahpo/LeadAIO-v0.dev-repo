@@ -88,7 +88,7 @@ export function ResultsSection() {
     };
   }, [isVisible]);
 
-  // Counter animation with faster second phase (4 seconds per unit)
+  // Counter animation with faster second phase
   useEffect(() => {
     if (!isVisible) return
 
@@ -103,18 +103,21 @@ export function ResultsSection() {
         setSpeedValue(Math.round(anim.animations[0].currentValue));
       },
       complete: () => {
-        // Phase 2: Slower increase from 150 to 400
-        // 4 seconds per unit × 250 units = 1,000,000 milliseconds
-        anime({
-          targets: {value: 150},
-          value: 400,
-          duration: 1000000, // ~16.7 minutes (4 seconds per unit)
-          easing: 'linear', // Linear to make it consistently slow
-          round: 1,
-          update: (anim) => {
-            setSpeedValue(Math.round(anim.animations[0].currentValue));
-          }
-        });
+        // Phase 2: Cycle between 150 and 200 for dynamic effect
+        const cycleValues = () => {
+          anime({
+            targets: {value: speedValue},
+            value: speedValue < 175 ? 200 : 150,
+            duration: 8000,
+            easing: 'easeInOutSine',
+            round: 1,
+            update: (anim) => {
+              setSpeedValue(Math.round(anim.animations[0].currentValue));
+            },
+            complete: cycleValues
+          });
+        };
+        cycleValues();
       }
     });
     
@@ -207,19 +210,19 @@ export function ResultsSection() {
             <div className="space-y-1">
               <div className="text-gray-500 text-xs font-mono">Traffic Quality</div>
               <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                <div className="h-full bg-orange-500 rounded-full" style={{ width: "90%" }}></div>
+                <div className="h-full bg-orange-500 rounded-full animate-pulse-soft" style={{ width: "90%" }}></div>
               </div>
             </div>
             <div className="space-y-1">
               <div className="text-gray-500 text-xs font-mono">Conversion Rate</div>
               <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                <div className="h-full bg-orange-500 rounded-full" style={{ width: "95%" }}></div>
+                <div className="h-full bg-orange-500 rounded-full animate-pulse-soft" style={{ width: "95%" }}></div>
               </div>
             </div>
             <div className="space-y-1">
               <div className="text-gray-500 text-xs font-mono">Lead Quality</div>
               <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                <div className="h-full bg-orange-500 rounded-full" style={{ width: "85%" }}></div>
+                <div className="h-full bg-orange-500 rounded-full animate-pulse-soft" style={{ width: "85%" }}></div>
               </div>
             </div>
           </div>
@@ -228,46 +231,21 @@ export function ResultsSection() {
         {/* Monthly Growth Stats - kept close to conversion metrics */}
         <div className="w-full mt-4">
           <div className="grid grid-cols-3 gap-3">
-            <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center">
-              <div className="text-green-400 font-mono text-xl font-bold">+{Math.floor(speedValue * 1.5)}%</div>
+            <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center dashboard-animate">
+              <div className="text-green-400 font-mono text-xl font-bold">+<span className="counter-value" data-from="0" data-to={Math.floor(speedValue * 1.5)}>{Math.floor(speedValue * 1.5)}</span>%</div>
               <div className="text-gray-500 text-xs font-mono text-center mt-1">ORGANIC TRAFFIC</div>
             </div>
-            <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center">
-              <div className="text-green-400 font-mono text-xl font-bold">+{Math.floor(speedValue * 0.8)}%</div>
+            <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center dashboard-animate">
+              <div className="text-green-400 font-mono text-xl font-bold">+<span className="counter-value" data-from="0" data-to={Math.floor(speedValue * 0.8)}>{Math.floor(speedValue * 0.8)}</span>%</div>
               <div className="text-gray-500 text-xs font-mono text-center mt-1">KEYWORD RANKINGS</div>
             </div>
-            <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center">
-              <div className="text-green-400 font-mono text-xl font-bold">+{Math.floor(speedValue * 0.5)}%</div>
+            <div className="bg-[#222] rounded-lg p-3 border border-gray-800 flex flex-col items-center justify-center dashboard-animate">
+              <div className="text-green-400 font-mono text-xl font-bold">+<span className="counter-value" data-from="0" data-to={Math.floor(speedValue * 0.5)}>{Math.floor(speedValue * 0.5)}</span>%</div>
               <div className="text-gray-500 text-xs font-mono text-center mt-1">CONVERSION RATE</div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* CSS Animations */}
-      <style jsx>{`
-        @keyframes flicker-gray {
-          0%, 100% { opacity: 0.4; }
-          25% { opacity: 0.6; }
-          50% { opacity: 0.3; }
-          75% { opacity: 0.5; }
-        }
-        
-        @keyframes flicker-red {
-          0%, 100% { opacity: 0.6; }
-          25% { opacity: 0.9; }
-          50% { opacity: 0.5; }
-          75% { opacity: 0.8; }
-        }
-        
-        .animate-flicker-gray {
-          animation: flicker-gray 0.2s infinite;
-        }
-        
-        .animate-flicker-red {
-          animation: flicker-red 0.15s infinite;
-        }
-      `}</style>
     </div>
   )
 }

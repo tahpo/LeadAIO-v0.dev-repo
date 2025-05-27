@@ -59,6 +59,50 @@ export function ExpertsSection() {
 
     return () => observer.disconnect()
   }, [])
+  
+  // Animate table rows when visible
+  useEffect(() => {
+    if (!isVisible || !tableRef.current) return;
+    
+    // Animate table rows with stagger
+    const tableRows = tableRef.current.querySelectorAll('.keyword-row');
+    anime({
+      targets: tableRows,
+      opacity: [0, 1],
+      translateY: [20, 0],
+      delay: anime.stagger(50),
+      easing: 'easeOutQuad',
+      duration: 500
+    });
+    
+    // Animate volume numbers to count up
+    const volumeElements = tableRef.current.querySelectorAll('.volume-value');
+    volumeElements.forEach((el) => {
+      const finalValue = el.textContent || '';
+      const numValue = parseInt(finalValue.replace(/,/g, ''), 10);
+      
+      if (!isNaN(numValue)) {
+        anime({
+          targets: el,
+          innerHTML: [0, numValue],
+          easing: 'easeInOutExpo',
+          round: true,
+          duration: 2000,
+          delay: Math.random() * 500
+        });
+      }
+    });
+    
+    // Pulse animation for potential indicators
+    anime({
+      targets: '.potential-indicator',
+      opacity: [0.7, 1],
+      duration: 800,
+      easing: 'easeInOutSine',
+      loop: true,
+      direction: 'alternate'
+    });
+  }, [isVisible]);
 
   // Animation of chat
   useEffect(() => {
@@ -139,66 +183,28 @@ export function ExpertsSection() {
     }
   }, [isVisible])
   
-  // Move cursors around more randomly
+  // Animate keyword rows
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible || !tableRef.current) return;
     
-    // Function to generate a new random target position
-    const getNewTarget = (currentX, currentY) => {
-      // More dramatic movements - larger range (20-100 pixels)
-      const rangeX = 20 + Math.random() * 80;
-      const rangeY = 20 + Math.random() * 80;
-      
-      // Random direction
-      const directionX = Math.random() > 0.5 ? 1 : -1;
-      const directionY = Math.random() > 0.5 ? 1 : -1;
-      
-      // New target coordinates
-      const newX = currentX + (directionX * rangeX);
-      const newY = currentY + (directionY * rangeY);
-      
-      // Ensure targets stay within bounds (50-300 for X, 50-250 for Y)
-      return {
-        x: Math.min(Math.max(newX, 50), 300),
-        y: Math.min(Math.max(newY, 50), 250)
-      };
-    };
+    const keywordRows = tableRef.current.querySelectorAll('.keyword-row');
     
-    // Move cursors toward random targets
-    const cursorInterval = setInterval(() => {
-      setCursorPositions(prev => 
-        prev.map(cursor => {
-          // If cursor is close to target, generate a new target
-          const distToTarget = Math.sqrt(
-            Math.pow(cursor.targetX - cursor.x, 2) + 
-            Math.pow(cursor.targetY - cursor.y, 2)
-          );
-          
-          if (distToTarget < 5) {
-            const newTarget = getNewTarget(cursor.x, cursor.y);
-            return {
-              ...cursor,
-              targetX: newTarget.x,
-              targetY: newTarget.y,
-              // Randomize speed slightly each time
-              speed: 0.8 + Math.random() * 2
-            };
-          }
-          
-          // Move toward current target
-          const dx = (cursor.targetX - cursor.x) / 20 * cursor.speed;
-          const dy = (cursor.targetY - cursor.y) / 20 * cursor.speed;
-          
-          return {
-            ...cursor,
-            x: cursor.x + dx,
-            y: cursor.y + dy
-          };
-        })
-      );
-    }, 50); // Update frequency
+    // Set up an interval to highlight random rows
+    const highlightInterval = setInterval(() => {
+      // Get a random row
+      const randomIndex = Math.floor(Math.random() * keywordRows.length);
+      const randomRow = keywordRows[randomIndex];
+      
+      // Add highlight class
+      randomRow.classList.add('bg-[#2a2a2a]');
+      
+      // Remove it after a short delay
+      setTimeout(() => {
+        randomRow.classList.remove('bg-[#2a2a2a]');
+      }, 800);
+    }, 3000);
     
-    return () => clearInterval(cursorInterval);
+    return () => clearInterval(highlightInterval);
   }, [isVisible]);
 
   return (
@@ -232,11 +238,13 @@ export function ExpertsSection() {
 
             <div style={{ height: "calc(100% - 34px)", overflow: "hidden" }}>
               {keywords.map((kw, idx) => (
-                <div key={idx} className="grid grid-cols-4 gap-1 px-4 py-2 border-t border-gray-700 text-sm">
+                <div key={idx} className="grid grid-cols-4 gap-1 px-4 py-2 border-t border-gray-700 text-sm transition-all duration-300 keyword-row">
                   <div className="text-white font-medium">{kw.keyword}</div>
-                  <div className="text-gray-300 text-center">{kw.volume}</div>
+                  <div className="text-gray-300 text-center">
+                    <span className="volume-value">{kw.volume}</span>
+                  </div>
                   <div className="text-gray-300 text-center">{kw.difficulty}</div>
-                  <div className={`text-center ${kw.potential === "High" ? "text-green-400" : "text-yellow-400"}`}>
+                  <div className={`text-center ${kw.potential === "High" ? "text-green-400" : "text-yellow-400"} potential-indicator`}>
                     {kw.potential}
                   </div>
                 </div>
@@ -245,7 +253,7 @@ export function ExpertsSection() {
           </div>
         </div>
 
-        {/* Moving cursors */}
+        {/* Moving avatars/people icons instead of cursors */}
         {cursorPositions.map((cursor, index) => (
           <div
             key={index}
@@ -257,9 +265,15 @@ export function ExpertsSection() {
             }}
           >
             <div className="flex items-center">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 3L13 13M3 13L13 3" stroke={cursor.color} strokeWidth="2" strokeLinecap="round"/>
-              </svg>
+              <div 
+                className="w-6 h-6 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: cursor.color }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
               <div 
                 className="ml-1 px-2 py-1 text-xs text-white rounded-md"
                 style={{ backgroundColor: cursor.color }}
@@ -302,11 +316,12 @@ export function ExpertsSection() {
                       transform: showSecondMessage ? 'translateY(-20px)' : 'translateY(0)'
                     }}
                   >
-                    <img 
-                      src="/professional-woman-headshot.png" 
-                      alt="Sarah" 
-                      className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
-                    />
+                    <div className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0 bg-[#FF9EB3] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                      </svg>
+                    </div>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium text-white text-xs">Sarah</span>
@@ -322,11 +337,12 @@ export function ExpertsSection() {
                 {/* Michael's message (with typing animation) */}
                 {showSecondMessage && (
                   <div className="flex gap-3 animate-fade-in mt-auto">
-                    <img 
-                      src="/professional-man-headshot.png" 
-                      alt="Michael" 
-                      className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
-                    />
+                    <div className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0 bg-[#FAC666] flex items-center justify-center">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                      </svg>
+                    </div>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium text-white text-xs">Michael</span>
