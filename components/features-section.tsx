@@ -51,12 +51,17 @@ export function FeaturesSection() {
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
+    smooth: 0.1
   })
 
   // Parallax effects for different elements
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -100])
   const cardsY = useTransform(scrollYProgress, [0, 1], [0, 50])
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -50])
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, -50], {
+    stiffness: 400,
+    damping: 90,
+    mass: 0.5
+  })
 
   useEffect(() => {
     const handleScroll = (e: WheelEvent | TouchEvent) => {

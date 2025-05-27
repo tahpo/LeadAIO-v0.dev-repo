@@ -49,7 +49,7 @@ export function WorkflowSection() {
   const row2 = workflowItems.slice(5);
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-16 bg-white relative overflow-hidden">
       <div className="section-container relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gray-100 rounded-full text-sm font-universal text-gray-800 mb-4">
@@ -69,13 +69,13 @@ export function WorkflowSection() {
                 {[...row1, ...row1, ...row1].map((item, index) => (
                   <div
                     key={index}
-                    className="flex-none w-36 h-24 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
+                    className="flex-none w-36 h-20 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xl">{item.icon}</span>
                       <h3 className="font-garnett text-sm">{item.label}</h3>
                     </div>
-                    <p className="text-gray-600 text-xs font-universal">{item.description}</p>
+                    <p className="text-gray-600 text-[11px] font-universal truncate">{item.description}</p>
                   </div>
                 ))}
               </div>
@@ -88,13 +88,13 @@ export function WorkflowSection() {
                 {[...row2, ...row2, ...row2].map((item, index) => (
                   <div
                     key={index}
-                    className="flex-none w-36 h-24 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
+                    className="flex-none w-36 h-20 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xl">{item.icon}</span>
                       <h3 className="font-garnett text-sm">{item.label}</h3>
                     </div>
-                    <p className="text-gray-600 text-xs font-universal">{item.description}</p>
+                    <p className="text-gray-600 text-[11px] font-universal truncate">{item.description}</p>
                   </div>
                 ))}
               </div>
