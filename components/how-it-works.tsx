@@ -70,7 +70,7 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" ref={containerRef} className="py-24 bg-white relative overflow-hidden">
       <div className="section-container relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <span className="inline-block px-3 py-1 bg-gray-100 rounded-full text-sm font-universal text-gray-800 mb-4">
             Real-time insights
           </span>
@@ -83,8 +83,8 @@ export function HowItWorks() {
         <div className="section-panel bg-cream">
           {/* Rankings Overview */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div className="h-[400px]">
-              <div ref={rankingRef} className="h-full bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+            <div className="h-[320px]">
+              <div ref={rankingRef} className="h-full bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 group">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-100 rounded-lg">
@@ -105,13 +105,13 @@ export function HowItWorks() {
                     { label: "Keyword Growth", value: "45", color: "bg-purple-500" }
                   ].map((item, i) => (
                     <div key={i} className="space-y-2">
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-sm group-hover:transform group-hover:translate-x-2 transition-transform">
                         <span className="text-gray-600">{item.label}</span>
                         <span className="font-medium">{item.value}%</span>
                       </div>
                       <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                         <div 
-                          className={`progress-bar h-full ${item.color} transform origin-left`}
+                          className={`progress-bar h-full ${item.color} transform origin-left group-hover:animate-pulse`}
                           data-progress={item.value}
                           style={{width: '0%'}}
                         />
@@ -157,13 +157,13 @@ export function HowItWorks() {
           {/* Traffic Analysis */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-24">
             <div className="order-2 lg:order-1">
-              <h3 className="text-2xl font-garnett mb-4">Analyze your traffic sources</h3>
+              <h3 className="text-2xl font-garnett mb-4 lg:text-right">Analyze your traffic sources</h3>
               <p className="text-gray-600 mb-6 font-universal">
                 See exactly where your visitors are coming from and which keywords are driving the most valuable traffic
                 to your site.
               </p>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 lg:text-right">
                 <div className="stat-card">
                   <div className="stat-value font-garnett"><span data-counter="traffic">0</span>%</div>
                   <div className="stat-label font-universal">Organic traffic growth</div>
@@ -180,8 +180,8 @@ export function HowItWorks() {
                 </div>
               </div>
             </div>
-            <div className="order-1 lg:order-2 h-[400px]">
-              <div ref={trafficRef} className="h-full bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+            <div className="order-1 lg:order-2 h-[320px]">
+              <div ref={trafficRef} className="h-full bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 group">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-purple-100 rounded-lg">
@@ -191,12 +191,12 @@ export function HowItWorks() {
                   </div>
                 </div>
 
-                <div className="relative flex justify-center items-center h-[calc(100%-100px)]">
+                <div className="relative flex justify-center items-center h-[calc(100%-80px)]">
                   <svg className="transform -rotate-90 w-48 h-48">
                     <circle
                       cx="96"
                       cy="96"
-                      r="60"
+                      r="80"
                       stroke="#eee"
                       strokeWidth="24"
                       fill="none"
@@ -205,27 +205,29 @@ export function HowItWorks() {
                       className="traffic-segment"
                       cx="96"
                       cy="96"
-                      r="60"
+                      r="80"
                       stroke="#4F46E5"
                       strokeWidth="24"
                       fill="none"
                       strokeDasharray="377"
                       strokeDashoffset="94"
+                      className="group-hover:animate-pulse"
                     />
                     <circle
                       className="traffic-segment"
                       cx="96"
                       cy="96"
-                      r="60"
+                      r="80"
                       stroke="#7C3AED"
                       strokeWidth="24"
                       fill="none"
                       strokeDasharray="377"
                       strokeDashoffset="188"
+                      className="group-hover:animate-pulse"
                     />
                   </svg>
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                    <div className="text-3xl font-bold">35</div>
+                    <div className="text-4xl font-bold group-hover:scale-110 transition-transform">35</div>
                     <div className="text-sm text-gray-500">Unique Visitors</div>
                   </div>
                 </div>
@@ -235,8 +237,8 @@ export function HowItWorks() {
 
           {/* Backlink Profile */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-24">
-            <div className="h-[400px]">
-              <div ref={backlinkRef} className="h-full bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+            <div className="h-[320px]">
+              <div ref={backlinkRef} className="h-full bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 group">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-orange-100 rounded-lg">
@@ -253,13 +255,13 @@ export function HowItWorks() {
                     { domain: "github.com", da: 90, growth: "68" }
                   ].map((link, i) => (
                     <div key={i} className="space-y-2">
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-sm group-hover:transform group-hover:translate-x-2 transition-transform">
                         <span className="text-gray-900 font-medium">{link.domain}</span>
                         <span className="text-gray-600">DA: {link.da}</span>
                       </div>
                       <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                         <div 
-                          className="progress-bar h-full bg-orange-500"
+                          className="progress-bar h-full bg-orange-500 group-hover:animate-pulse"
                           data-progress={link.growth}
                           style={{width: '0%'}}
                         />
