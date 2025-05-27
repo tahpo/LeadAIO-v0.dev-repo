@@ -2,7 +2,6 @@ import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { FeaturesSection } from "@/components/features-section"
 import { HowItWorks } from "@/components/how-it-works"
-import { SEODashboardSection } from "@/components/seo-dashboard-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { SpeedPerformanceSection } from "@/components/speed-performance-section"
 import { WorkflowSection } from "@/components/workflow-section"
@@ -14,7 +13,6 @@ export default function Home() {
       <Header />
       <HeroSection />
       <HowItWorks />
-      <SEODashboardSection />
       <FeaturesSection />
       <TestimonialsSection />
       <SpeedPerformanceSection />
