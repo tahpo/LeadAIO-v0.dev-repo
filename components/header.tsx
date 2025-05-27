@@ -2,15 +2,42 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+
+interface DropdownProps {
+  label: string;
+  items: {
+    href: string;
+    label: string;
+  }[];
+}
+
+function NavDropdown({ label, items }: DropdownProps) {
+  return (
+    <div className="relative group">
+      <button className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap flex items-center gap-1">
+        {label}
+        <svg className="h-4 w-4 opacity-50 group-hover:opacity-70 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div className="absolute top-full left-0 pt-2 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200">
+        <div className="bg-white rounded-lg shadow-lg border border-gray-100 py-2 min-w-[200px]">
+          {items.map((item, index) => (
+            <Link
+              key={index}
+              href={item.href}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors font-universal"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -38,60 +65,28 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap flex items-center gap-1">
-                Services <ChevronDown className="h-4 w-4" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>
-                <Link href="/services/aio" className="w-full">
-                  Artificial Intelligence Optimization (AIO)
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/services/reputation-management" className="w-full">
-                  Reputation Management
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/services/paid-advertising" className="w-full">
-                  Paid Advertising
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <NavDropdown 
+            label="Services"
+            items={[
+              { href: "/services/aio", label: "Artificial Intelligence Optimization (AIO)" },
+              { href: "/services/reputation-management", label: "Reputation Management" },
+              { href: "/services/paid-advertising", label: "Paid Advertising" },
+            ]}
+          />
           <Link
             href="#how-it-works"
             className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap"
           >
             How It Works
           </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap flex items-center gap-1">
-                Pricing <ChevronDown className="h-4 w-4" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>
-                <Link href="/pricing/aio" className="w-full">
-                  AIO Pricing
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/pricing/reputation-management" className="w-full">
-                  Reputation Management Pricing
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/pricing/paid-advertising" className="w-full">
-                  Paid Advertising Pricing
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <NavDropdown
+            label="Pricing"
+            items={[
+              { href: "/pricing/aio", label: "AIO Pricing" },
+              { href: "/pricing/reputation-management", label: "Reputation Management Pricing" },
+              { href: "/pricing/paid-advertising", label: "Paid Advertising Pricing" },
+            ]}
+          />
           <Link href="/contact" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap">
             Contact
           </Link>
