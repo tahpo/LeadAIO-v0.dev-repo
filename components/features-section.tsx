@@ -6,36 +6,28 @@ import { Search, BarChart3, Zap, FileText } from "lucide-react"
 
 const features = [
   {
-    id: "keyword-research",
+    id: "ai-optimization",
     icon: Search,
-    title: "Smart Keyword Research",
-    description: "AI-powered keyword discovery that finds opportunities your competitors miss.",
-    image: "/keyword-research-dashboard.png",
+    title: "AI/SEO Optimization",
+    description: "Comprehensive AI-powered SEO optimization including keyword research, content optimization, and AI search engine optimization.",
+    image: "/ai-seo-dashboard.png",
     color: "from-blue-500 to-cyan-500",
   },
   {
-    id: "rank-tracking",
+    id: "reputation-management",
     icon: BarChart3,
-    title: "Real-time Rank Tracking",
-    description: "Monitor your search positions across all major search engines with precision.",
-    image: "/rank-tracking-dashboard.png",
+    title: "Reputation Management",
+    description: "Build and maintain your online reputation with real reviews, negative review management, and strategic content publishing.",
+    image: "/backlink-analysis-dashboard.png",
     color: "from-purple-500 to-pink-500",
   },
   {
-    id: "content-optimization",
+    id: "paid-advertising",
     icon: FileText,
-    title: "Content Optimization",
-    description: "Create SEO-optimized content that ranks higher and converts better.",
-    image: "/content-optimization-dashboard.png",
+    title: "Paid Advertising",
+    description: "Strategic PPC and AdWords campaigns that maximize ROI and drive qualified traffic to your business.",
+    image: "/traffic-analysis-dashboard.png",
     color: "from-green-500 to-emerald-500",
-  },
-  {
-    id: "technical-seo",
-    icon: Zap,
-    title: "Technical SEO Audits",
-    description: "Identify and fix technical issues that are holding back your rankings.",
-    image: "/technical-seo-dashboard.png",
-    color: "from-yellow-500 to-orange-500",
   },
 ]
 
