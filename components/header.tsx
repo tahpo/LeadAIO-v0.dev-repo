@@ -12,7 +12,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import { cn } from "@/lib/utils"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
