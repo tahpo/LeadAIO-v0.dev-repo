@@ -5,6 +5,10 @@ import { ArrowRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import anime from 'animejs'
 
+// Define the words arrays that were missing
+const words1 = ["business", "startup", "brand", "company"]
+const words2 = ["growth", "success", "results", "leads"]
+
 export function HeroSection() {
   const [currentWord1, setCurrentWord1] = useState(0)
   const [currentWord2, setCurrentWord2] = useState(0)
@@ -15,6 +19,7 @@ export function HeroSection() {
     revenue: 0
   })
   const animationFrameId = useRef<number | null>(null)
+  const dashboardRef = useRef(null)
 
   useEffect(() => {
     const updateMetrics = () => {
@@ -325,7 +330,7 @@ export function HeroSection() {
                     </div>
                   </div>
                   
-                  {/* Backlink Profile - Compact with no wasted space */}
+                  {/* Backlink Profile */}
                   <div className="col-span-7 bg-gradient-to-br from-[#151c28] to-[#1c2330] rounded-lg p-4 shadow-lg border border-gray-800/50">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">Backlink Profile</h3>
@@ -360,7 +365,7 @@ export function HeroSection() {
                       </div>
                     </div>
                     
-                    {/* Domain stats - Fills the empty space */}
+                    {/* Domain stats */}
                     <div className="mt-3 grid grid-cols-3 gap-3">
                       <div className="flex items-center bg-[#1a2234]/40 rounded p-2">
                         <div className="h-8 w-8 rounded-full bg-[#4361EE]/20 flex items-center justify-center mr-2">
@@ -451,7 +456,7 @@ export function HeroSection() {
                     </div>
                   </div>
                   
-                  {/* AI Platform Ranking Scores (replaced content optimization) */}
+                  {/* AI Platform Ranking Scores */}
                   <div className="col-span-12 bg-[#111827] rounded-lg p-4 shadow-lg border border-gray-800/50">
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="text-white text-sm font-garnett">AI Platform Ranking Scores</h3>
@@ -494,10 +499,14 @@ export function HeroSection() {
                           <div className="h-full bg-[#7209B7] rounded-full" style={{width: "85%"}}></div>
                         </div>
                       </div>
-                      
-                      <div className="bg-[#131b2c] border border-[#F72585]/30 rounded p-3 hover:border-[#F72585]/40 transition-colors">
-                        <div className="flex items-center mb-2">
-                          <div className="h-6 w-6 bg-[#F72585]/30 rounded-full flex items-center justify-center mr-2">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#F72585]" fill="none
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
