@@ -257,8 +257,7 @@ section {
 }
 
 .index-button-primary:hover {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #333333;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

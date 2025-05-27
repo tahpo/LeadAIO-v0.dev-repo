@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import anime from 'animejs'
 
 export function HeroSection() {
   const [currentWord1, setCurrentWord1] = useState(0)
@@ -11,42 +10,11 @@ export function HeroSection() {
   const words1 = ["business", "startup", "agency", "brand", "expert"]
   const words2 = ["rankings", "results", "traffic", "dominance", "growth"]
   const [mounted, setMounted] = useState(false)
-  const [animationProgress, setAnimationProgress] = useState(0)
   const [dashboardMetrics, setDashboardMetrics] = useState({
     visitors: 0,
     conversions: 0,
     revenue: 0
   });
-
-  // Animation configuration
-  useEffect(() => {
-    if (!mounted) return;
-    
-    const animation = anime({
-      targets: '.dashboard-component',
-      translateY: [-10, 0],
-      opacity: [0, 1],
-      delay: anime.stagger(100),
-      duration: 1200,
-      easing: 'spring(1, 80, 10, 0)',
-      loop: true,
-      direction: 'alternate'
-    });
-
-    const fluctuation = anime({
-      targets: '.dashboard-metric',
-      scale: [1, 1.02],
-      duration: 2000,
-      easing: 'easeInOutSine',
-      loop: true,
-      direction: 'alternate'
-    });
-
-    return () => {
-      animation.pause();
-      fluctuation.pause();
-    };
-  }, [mounted]);
   
   const dashboardRef = useRef<HTMLDivElement>(null)
   const animationFrameId = useRef<number | null>(null)

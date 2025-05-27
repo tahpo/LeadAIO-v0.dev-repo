@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState } from "react"
 import anime from 'animejs'
-import { User } from '@phosphor-icons/react'
 
 export function ExpertsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -258,14 +257,19 @@ export function ExpertsSection() {
             }}
           >
             <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: cursor.color }}>
-                <User weight="duotone" className="w-5 h-5 text-white" />
-              </div>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 3L13 13M3 13L13 3" stroke={cursor.color} strokeWidth="2" strokeLinecap="round"/>
+              </svg>
               <div 
                 className="ml-1 px-2 py-1 text-xs text-white rounded-md"
                 style={{ backgroundColor: cursor.color }}
               >
                 {cursor.name}
+              </div>
+            </div>
+            <div className="w-8 h-8 rounded-full bg-opacity-20" style={{ backgroundColor: cursor.color }}>
+              <div className="w-full h-full flex items-center justify-center text-white">
+                👤
               </div>
             </div>
           </div>
