@@ -10,48 +10,11 @@ export function HeroSection() {
   const words1 = ["business", "startup", "agency", "brand", "expert"]
   const words2 = ["rankings", "results", "traffic", "dominance", "growth"]
   const [mounted, setMounted] = useState(false)
-  const [cursorPositions, setCursorPositions] = useState([
-    { 
-      id: 1, 
-      name: "Jessica", 
-      color: "#A8D9FF", 
-      x: 180, 
-      y: 150, 
-      targetX: 300, 
-      targetY: 180,
-      speed: 2.5
-    },
-    { 
-      id: 2, 
-      name: "Michael", 
-      color: "#FAC666", 
-      x: 400, 
-      y: 220, 
-      targetX: 200, 
-      targetY: 300,
-      speed: 2.0
-    },
-    { 
-      id: 3, 
-      name: "Sarah", 
-      color: "#FF9EB3", 
-      x: 320, 
-      y: 280, 
-      targetX: 450, 
-      targetY: 200,
-      speed: 1.8
-    },
-    { 
-      id: 4, 
-      name: "David", 
-      color: "#8DECA6", 
-      x: 520, 
-      y: 340, 
-      targetX: 580, 
-      targetY: 260,
-      speed: 2.2
-    }
-  ])
+  const [dashboardMetrics, setDashboardMetrics] = useState({
+    visitors: 0,
+    conversions: 0,
+    revenue: 0
+  });
   
   const dashboardRef = useRef<HTMLDivElement>(null)
   const animationFrameId = useRef<number | null>(null)
@@ -83,67 +46,16 @@ export function HeroSection() {
     }
   }, [])
 
-  // Cursor animation effect - client-side only
   useEffect(() => {
-    if (!mounted || !dashboardRef.current) return
-    
-    const getRandomPosition = () => {
-      const rect = dashboardRef.current?.getBoundingClientRect()
-      if (!rect) return { x: 0, y: 0 }
-      
-      // Keep cursors within dashboard bounds with padding
-      const padding = 60
-      const minX = padding
-      const maxX = rect.width - padding
-      const minY = padding
-      const maxY = rect.height - padding
-      
-      return {
-        x: Math.floor(minX + Math.random() * (maxX - minX)),
-        y: Math.floor(minY + Math.random() * (maxY - minY))
-      }
-    }
-    
-    // Function to smoothly animate cursors
-    const moveCursors = () => {
-      setCursorPositions(prevPositions => {
-        return prevPositions.map(cursor => {
-          // Calculate distance to target
-          const dx = cursor.targetX - cursor.x
-          const dy = cursor.targetY - cursor.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-          
-          // If close to target, set new target
-          if (distance < 5) {
-            const newTarget = getRandomPosition()
-            return {
-              ...cursor,
-              targetX: newTarget.x,
-              targetY: newTarget.y
-            }
-          }
-          
-          // Otherwise, move toward target
-          return {
-            ...cursor,
-            x: cursor.x + (dx / distance) * cursor.speed,
-            y: cursor.y + (dy / distance) * cursor.speed
-          }
-        })
-      })
-      
-      animationFrameId.current = requestAnimationFrame(moveCursors)
-    }
-    
-    // Start animation
-    animationFrameId.current = requestAnimationFrame(moveCursors)
-    
-    return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current)
-      }
-    }
-  }, [mounted])
+    const interval = setInterval(() => {
+      setDashboardMetrics(prev => ({
+        visitors: Math.min(prev.visitors + Math.floor(Math.random() * 50), 10000),
+        conversions: Math.min(prev.conversions + Math.floor(Math.random() * 5), 1000),
+        revenue: Math.min(prev.revenue + Math.floor(Math.random() * 1000), 50000)
+      }));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Find the longest word in each array to set fixed widths
   const longestWord1 = words1.reduce((a, b) => (a.length > b.length ? a : b), "")
@@ -574,92 +486,3 @@ export function HeroSection() {
                           <div className="h-6 w-6 bg-[#F72585]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#F72585]" fill="none" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                            </svg>
-                          </div>
-                          <span className="text-xs text-[#F72585] font-medium">Gemini</span>
-                        </div>
-                        <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">78</div>
-                          <div className="text-xs text-emerald-400">+3 ↑</div>
-                        </div>
-                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#F72585] rounded-full" style={{width: "78%"}}></div>
-                        </div>
-                      </div>
-                      
-                      <div className="bg-[#131b2c] border border-[#4CC9F0]/30 rounded p-3 hover:border-[#4CC9F0]/40 transition-colors">
-                        <div className="flex items-center mb-2">
-                          <div className="h-6 w-6 bg-[#4CC9F0]/30 rounded-full flex items-center justify-center mr-2">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#4CC9F0]" fill="none" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                          </div>
-                          <span className="text-xs text-[#4CC9F0] font-medium">Anthropic</span>
-                        </div>
-                        <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">81</div>
-                          <div className="text-xs text-emerald-400">+5 ↑</div>
-                        </div>
-                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#4CC9F0] rounded-full" style={{width: "81%"}}></div>
-                        </div>
-                      </div>
-                      
-                      <div className="bg-[#131b2c] border border-[#FB8B24]/30 rounded p-3 hover:border-[#FB8B24]/40 transition-colors">
-                        <div className="flex items-center mb-2">
-                          <div className="h-6 w-6 bg-[#FB8B24]/30 rounded-full flex items-center justify-center mr-2">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#FB8B24]" fill="none" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                            </svg>
-                          </div>
-                          <span className="text-xs text-[#FB8B24] font-medium">DeepSeek</span>
-                        </div>
-                        <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">73</div>
-                          <div className="text-xs text-emerald-400">+9 ↑</div>
-                        </div>
-                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#FB8B24] rounded-full" style={{width: "73%"}}></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Cursor overlay - Client-side only */}
-              {mounted && (
-                <div className="absolute inset-0 pointer-events-none">
-                  {cursorPositions.map((cursor) => (
-                    <div 
-                      key={cursor.id}
-                      className="cursors-item absolute z-20 pointer-events-none"
-                      style={{
-                        left: 0,
-                        top: 0,
-                        transform: `translate3d(${cursor.x}px, ${cursor.y}px, 0px)`,
-                        transition: 'all 0.1s linear'
-                      }}
-                    >
-                      <div className="flex items-center">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                          <path d="M3 3L13 13M3 13L13 3" stroke={cursor.color} strokeWidth="2" strokeLinecap="round"/>
-                        </svg>
-                        <div 
-                          className="ml-1 px-2 py-1 text-xs text-white rounded-md"
-                          style={{ backgroundColor: cursor.color }}
-                        >
-                          {cursor.name}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}

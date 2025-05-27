@@ -269,9 +269,11 @@ export function ExpertsSection() {
             </div>
           </div>
         ))}
-
-        {/* Chat Overlay - Reduced height */}
-        {showChat && (
+          <div className="w-8 h-8 rounded-full bg-opacity-20" style={{ backgroundColor: cursor.color }}>
+            <div className="w-full h-full flex items-center justify-center text-white">
+              👤
+            </div>
+          </div>
           <div 
             ref={chatRef}
             className="absolute bottom-0 left-0 right-0 bg-[#2a2a2a] shadow-2xl rounded-t-xl transition-all duration-500 ease-in-out"
