@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState } from "react"
 import anime from 'animejs'
-import { User } from '@phosphor-icons/react'
 
 export function ExpertsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -257,8 +256,10 @@ export function ExpertsSection() {
               transition: 'all 0.1s linear'
             }}
           >
-            <div className="flex items-center gap-1">
-              <User size={20} weight="duotone" color={cursor.color} />
+            <div className="flex items-center">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 3L13 13M3 13L13 3" stroke={cursor.color} strokeWidth="2" strokeLinecap="round"/>
+              </svg>
               <div 
                 className="ml-1 px-2 py-1 text-xs text-white rounded-md"
                 style={{ backgroundColor: cursor.color }}
@@ -304,9 +305,11 @@ export function ExpertsSection() {
                     transform: showSecondMessage ? 'translateY(-20px)' : 'translateY(0)'
                   }}
                 >
-                  <div className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0 flex items-center justify-center bg-gray-800">
-                    <User size={20} weight="duotone" className="text-gray-300" />
-                  </div>
+                  <img 
+                    src="/professional-woman-headshot.png" 
+                    alt="Sarah" 
+                    className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
+                  />
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-medium text-white text-xs">Sarah</span>
@@ -322,9 +325,11 @@ export function ExpertsSection() {
               {/* Michael's message (with typing animation) */}
               {showSecondMessage && (
                 <div className="flex gap-3 animate-fade-in mt-auto">
-                  <div className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0 flex items-center justify-center bg-gray-800">
-                    <User size={20} weight="duotone" className="text-gray-300" />
-                  </div>
+                  <img 
+                    src="/professional-man-headshot.png" 
+                    alt="Michael" 
+                    className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
+                  />
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-medium text-white text-xs">Michael</span>
