@@ -177,8 +177,8 @@ export function HowItWorks() {
                       />
                     </svg>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                      <div className="text-3xl font-bold">35%</div>
-                      <div className="text-sm text-gray-500">Organic Traffic</div>
+                      <div className="text-3xl font-bold metric-value" data-value="35">0</div>
+                      <div className="text-sm text-gray-500">Unique Visitors</div>
                     </div>
                   </div>
                 </div>
