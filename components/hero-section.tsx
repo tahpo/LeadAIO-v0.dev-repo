@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import anime from 'animejs'
 
 export function HeroSection() {
   const [currentWord1, setCurrentWord1] = useState(0)
