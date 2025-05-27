@@ -266,11 +266,6 @@ export function ExpertsSection() {
                 {cursor.name}
               </div>
             </div>
-            <div className="w-8 h-8 rounded-full bg-opacity-20" style={{ backgroundColor: cursor.color }}>
-              <div className="w-full h-full flex items-center justify-center text-white">
-                👤
-              </div>
-            </div>
           </div>
         ))}
 

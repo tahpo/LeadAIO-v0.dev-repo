@@ -499,3 +499,5 @@ export function HeroSection() {
                         <div className="flex items-center mb-2">
                           <div className="h-6 w-6 bg-[#F72585]/30 rounded-full flex items-center justify-center mr-2">
                             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#F72585]" fill="none
+  )
+}
