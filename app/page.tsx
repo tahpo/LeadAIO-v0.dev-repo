@@ -12,11 +12,11 @@ export default function Home() {
     <main className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
       <Header />
       <HeroSection />
-      <HowItWorks />
       <FeaturesSection />
-      <TestimonialsSection />
+      <HowItWorks />
       <SpeedPerformanceSection />
       <WorkflowSection />
+      <TestimonialsSection />
       <FooterSection />
     </main>
   )

@@ -157,24 +157,24 @@ export function HowItWorks() {
           {/* Traffic Analysis */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-24">
             <div className="order-2 lg:order-1">
-              <h3 className="text-2xl font-garnett mb-4 lg:text-right">Analyze your traffic sources</h3>
-              <p className="text-gray-600 mb-6 font-universal">
+              <h3 className="text-2xl font-garnett mb-4 text-right">Analyze your traffic sources</h3>
+              <p className="text-gray-600 mb-6 font-universal text-right">
                 See exactly where your visitors are coming from and which keywords are driving the most valuable traffic
                 to your site.
               </p>
 
-              <div className="grid grid-cols-2 gap-4 lg:text-right">
+              <div className="grid grid-cols-2 gap-4">
                 <div className="stat-card">
-                  <div className="stat-value font-garnett"><span data-counter="traffic">0</span>%</div>
-                  <div className="stat-label font-universal">Organic traffic growth</div>
-                  <div className="stat-trend stat-trend-up font-universal">
+                  <div className="stat-value font-garnett text-right"><span data-counter="traffic">0</span>%</div>
+                  <div className="stat-label font-universal text-right">Organic traffic growth</div>
+                  <div className="stat-trend stat-trend-up font-universal text-right">
                     Year over year
                   </div>
                 </div>
                 <div className="stat-card">
-                  <div className="stat-value font-garnett"><span data-counter="conversion">0</span></div>
-                  <div className="stat-label font-universal">Conversion rate</div>
-                  <div className="stat-trend stat-trend-up font-universal">
+                  <div className="stat-value font-garnett text-right"><span data-counter="conversion">0</span></div>
+                  <div className="stat-label font-universal text-right">Conversion rate</div>
+                  <div className="stat-trend stat-trend-up font-universal text-right">
                     +1.3% increase
                   </div>
                 </div>
