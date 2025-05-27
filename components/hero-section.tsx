@@ -9,37 +9,29 @@ export function HeroSection() {
   const [currentWord1, setCurrentWord1] = useState(0)
   const [currentWord2, setCurrentWord2] = useState(0)
   const [mounted, setMounted] = useState(false)
-  const dashboardRef = useRef<HTMLDivElement>(null)
-  const chartRef = useRef<HTMLDivElement>(null)
+  const [dashboardMetrics, setDashboardMetrics] = useState({
+    visitors: 0,
+    conversions: 0,
+    revenue: 0
+  })
+  const animationFrameId = useRef<number | null>(null)
 
   useEffect(() => {
-    if (!mounted) return
-    
-    // Dashboard components animation
-    const timeline = anime.timeline({
-      easing: 'easeInOutQuad',
-      loop: true
-    })
-    
-    timeline
-      .add({
-        targets: '.dashboard-stat',
-        translateY: [-5, 5],
-        duration: 2000,
-        delay: anime.stagger(200),
-        direction: 'alternate',
-        loop: true
-      })
-      .add({
-        targets: '.chart-line',
-        strokeDashoffset: [anime.setDashoffset, 0],
-        duration: 1500,
-        delay: function(el, i) { return i * 250 },
-        easing: 'easeInOutSine'
-      }, '-=1000')
-
-    return () => timeline.pause()
-  }, [mounted])
+    const updateMetrics = () => {
+      setDashboardMetrics(prev => ({
+        visitors: Math.min(prev.visitors + Math.floor(Math.random() * 50), 10000),
+        conversions: Math.min(prev.conversions + Math.floor(Math.random() * 5), 1000),
+        revenue: Math.min(prev.revenue + Math.floor(Math.random() * 1000), 50000)
+      }))
+      animationFrameId.current = requestAnimationFrame(updateMetrics)
+    }
+    animationFrameId.current = requestAnimationFrame(updateMetrics)
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current)
+      }
+    }
+  }, [])
 
   // Set mounted state to true after hydration
   useEffect(() => {
