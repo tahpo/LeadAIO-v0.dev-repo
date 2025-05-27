@@ -69,7 +69,7 @@ export function WorkflowSection() {
                 {[...row1, ...row1, ...row1].map((item, index) => (
                   <div
                     key={index}
-                    className="flex-none w-40 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
+                    className="flex-none w-36 h-24 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xl">{item.icon}</span>
@@ -88,7 +88,7 @@ export function WorkflowSection() {
                 {[...row2, ...row2, ...row2].map((item, index) => (
                   <div
                     key={index}
-                    className="flex-none w-40 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
+                    className="flex-none w-36 h-24 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xl">{item.icon}</span>
