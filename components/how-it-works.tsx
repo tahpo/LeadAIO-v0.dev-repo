@@ -74,7 +74,7 @@ export function HowItWorks() {
           <span className="inline-block px-3 py-1 bg-gray-100 rounded-full text-sm font-universal text-gray-800 mb-4">
             Real-time insights
           </span>
-          <h2 className="text-3xl md:text-4xl font-garnett mb-4 text-gray-900">Your SEO dashboard</h2>
+          <h2 className="text-3xl md:text-4xl font-garnett mb-4 text-gray-900">Your Dashboard</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto font-universal">
             Monitor all your SEO metrics in one place with our proprietary AI-powered dashboard
           </p>
@@ -157,7 +157,7 @@ export function HowItWorks() {
           {/* Traffic Analysis */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-24">
             <div className="order-2 lg:order-1">
-              <h3 className="text-2xl font-garnett mb-4 text-right">Analyze your traffic sources</h3>
+              <h3 className="text-2xl font-garnett mb-4">Analyze your traffic sources</h3>
               <p className="text-gray-600 mb-6 font-universal text-right">
                 See exactly where your visitors are coming from and which keywords are driving the most valuable traffic
                 to your site.
