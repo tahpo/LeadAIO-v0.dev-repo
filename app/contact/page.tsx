@@ -27,56 +27,18 @@ export default function ContactPage() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-b from-[#fdfcfa] to-white">
+      <section className="pt-32 pb-16">
         <div className="container max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-garnett mb-6">Let's talk about your project</h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-universal">
-              Ready to take your search rankings to the next level? We're here to help you achieve your SEO goals.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
-            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
-                <Mail className="h-6 w-6 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-garnett mb-2">Email Us</h3>
-              <p className="text-gray-600 text-sm mb-4 font-universal">Drop us a line anytime</p>
-              <a href="mailto:hello@leadaio.com" className="text-blue-600 hover:text-blue-700 font-universal">
-                hello@leadaio.com
-              </a>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-24">
+            {/* Left Column - Title */}
+            <div>
+              <h1 className="text-4xl md:text-5xl font-garnett mb-6">Let's talk about your project</h1>
+              <p className="text-lg text-gray-600 max-w-xl font-universal">
+                Ready to take your search rankings to the next level? We're here to help you achieve your SEO goals.
+              </p>
             </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mb-4">
-                <MessageSquare className="h-6 w-6 text-green-600" />
-              </div>
-              <h3 className="text-lg font-garnett mb-2">Live Chat</h3>
-              <p className="text-gray-600 text-sm mb-4 font-universal">Chat with our team</p>
-              <button className="text-green-600 hover:text-green-700 font-universal">
-                Start a conversation
-              </button>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mb-4">
-                <Phone className="h-6 w-6 text-purple-600" />
-              </div>
-              <h3 className="text-lg font-garnett mb-2">Phone</h3>
-              <p className="text-gray-600 text-sm mb-4 font-universal">Mon-Fri from 8am to 5pm</p>
-              <a href="tel:+1234567890" className="text-purple-600 hover:text-purple-700 font-universal">
-                +1 (234) 567-890
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form Section */}
-      <section className="py-16 bg-white">
-        <div className="container max-w-6xl mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
+            {/* Right Column - Contact Form */}
             <div className="bg-[#fdfcfa] rounded-2xl p-8 md:p-12 shadow-sm">
               <h2 className="text-2xl md:text-3xl font-garnett mb-2">Send us a message</h2>
               <p className="text-gray-600 mb-8 font-universal">
@@ -144,8 +106,47 @@ export default function ContactPage() {
               </form>
             </div>
           </div>
+
+          {/* Contact Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+              <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+                <Mail className="h-6 w-6 text-blue-600" />
+              </div>
+              <h3 className="text-lg font-garnett mb-2">Email Us</h3>
+              <p className="text-gray-600 text-sm mb-4 font-universal">Drop us a line anytime</p>
+              <a href="mailto:hello@leadaio.com" className="text-blue-600 hover:text-blue-700 font-universal">
+                hello@leadaio.com
+              </a>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+              <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mb-4">
+                <MessageSquare className="h-6 w-6 text-green-600" />
+              </div>
+              <h3 className="text-lg font-garnett mb-2">Live Chat</h3>
+              <p className="text-gray-600 text-sm mb-4 font-universal">Chat with our team</p>
+              <button className="text-green-600 hover:text-green-700 font-universal">
+                Start a conversation
+              </button>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+              <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mb-4">
+                <Phone className="h-6 w-6 text-purple-600" />
+              </div>
+              <h3 className="text-lg font-garnett mb-2">Phone</h3>
+              <p className="text-gray-600 text-sm mb-4 font-universal">Mon-Fri from 8am to 5pm</p>
+              <a href="tel:+1234567890" className="text-purple-600 hover:text-purple-700 font-universal">
+                +1 (234) 567-890
+              </a>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Spacer for header */}
+      <div className="h-24"></div>
 
       <FooterSection />
     </main>
