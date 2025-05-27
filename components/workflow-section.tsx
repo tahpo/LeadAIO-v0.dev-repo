@@ -2,6 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
+import { ArrowRight } from "lucide-react"
 
 export function WorkflowSection() {
   const containerRef = useRef<HTMLDivElement>(null)

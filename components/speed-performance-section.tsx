@@ -5,7 +5,7 @@ import { ResultsSection } from "./results-section"
 import { ExpertsSection } from "./experts-section"
 
 export function SpeedPerformanceSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -17,8 +17,8 @@ export function SpeedPerformanceSection() {
       { threshold: 0.25 }
     )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
     }
 
     return () => {
