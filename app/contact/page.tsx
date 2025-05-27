@@ -23,11 +23,11 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col">
       <Header />
       
-      {/* Hero Section */}
-      <section className="pt-32 pb-16">
+      {/* Main content */}
+      <main className="flex-grow pt-28">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-24">
             {/* Left Column - Title */}
@@ -108,7 +108,7 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
             <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
               <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
                 <Mail className="h-6 w-6 text-blue-600" />
@@ -143,12 +143,9 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Spacer for header */}
-      <div className="h-24"></div>
+      </main>
 
       <FooterSection />
-    </main>
+    </div>
   )
 }
