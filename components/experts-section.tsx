@@ -267,102 +267,102 @@ export function ExpertsSection() {
                 {cursor.name}
               </div>
             </div>
+            <div className="w-8 h-8 rounded-full bg-opacity-20" style={{ backgroundColor: cursor.color }}>
+              <div className="w-full h-full flex items-center justify-center text-white">
+                👤
+              </div>
+            </div>
           </div>
         ))}
-          <div className="w-8 h-8 rounded-full bg-opacity-20" style={{ backgroundColor: cursor.color }}>
-            <div className="w-full h-full flex items-center justify-center text-white">
-              👤
-            </div>
-          </div>
-          <div 
-            ref={chatRef}
-            className="absolute bottom-0 left-0 right-0 bg-[#2a2a2a] shadow-2xl rounded-t-xl transition-all duration-500 ease-in-out"
-            style={{ 
-              height: "160px",
-              transform: showChat ? 'translateY(0)' : 'translateY(100%)',
-              opacity: showChat ? 1 : 0
-            }}
-          >
-            {/* Chat Header */}
-            <div className="p-2 border-b border-gray-700 flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-                <span className="text-white text-sm">SEO Team Chat</span>
-              </div>
-              <div className="text-xs text-gray-400">Active now</div>
-            </div>
 
-            {/* Chat Messages Container - Reduced padding */}
-            <div className="p-3 h-[calc(100%-40px)] overflow-hidden relative">
-              {/* Messages Stack */}
-              <div className="h-full flex flex-col justify-end">
-                {showFirstMessage && (
-                  <div 
-                    className="flex gap-3 animate-fade-in mb-3"
-                    style={{
-                      transition: "transform 0.5s ease-out",
-                      transform: showSecondMessage ? 'translateY(-20px)' : 'translateY(0)'
-                    }}
-                  >
-                    <img 
-                      src="/professional-woman-headshot.png" 
-                      alt="Sarah" 
-                      className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
-                    />
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium text-white text-xs">Sarah</span>
-                        <span className="text-gray-500 text-[10px]">Just now</span>
-                      </div>
-                      <div className="bg-[#333] text-gray-200 p-1.5 rounded-lg text-xs max-w-[280px]">
-                        I can start working on content optimization for these keywords right away!
-                      </div>
+        <div 
+          ref={chatRef}
+          className="absolute bottom-0 left-0 right-0 bg-[#2a2a2a] shadow-2xl rounded-t-xl transition-all duration-500 ease-in-out"
+          style={{ 
+            height: "160px",
+            transform: showChat ? 'translateY(0)' : 'translateY(100%)',
+            opacity: showChat ? 1 : 0
+          }}
+        >
+          {/* Chat Header */}
+          <div className="p-2 border-b border-gray-700 flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+              <span className="text-white text-sm">SEO Team Chat</span>
+            </div>
+            <div className="text-xs text-gray-400">Active now</div>
+          </div>
+
+          {/* Chat Messages Container - Reduced padding */}
+          <div className="p-3 h-[calc(100%-40px)] overflow-hidden relative">
+            {/* Messages Stack */}
+            <div className="h-full flex flex-col justify-end">
+              {showFirstMessage && (
+                <div 
+                  className="flex gap-3 animate-fade-in mb-3"
+                  style={{
+                    transition: "transform 0.5s ease-out",
+                    transform: showSecondMessage ? 'translateY(-20px)' : 'translateY(0)'
+                  }}
+                >
+                  <img 
+                    src="/professional-woman-headshot.png" 
+                    alt="Sarah" 
+                    className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-medium text-white text-xs">Sarah</span>
+                      <span className="text-gray-500 text-[10px]">Just now</span>
+                    </div>
+                    <div className="bg-[#333] text-gray-200 p-1.5 rounded-lg text-xs max-w-[280px]">
+                      I can start working on content optimization for these keywords right away!
                     </div>
                   </div>
-                )}
+                </div>
+              )}
 
-                {/* Michael's message (with typing animation) */}
-                {showSecondMessage && (
-                  <div className="flex gap-3 animate-fade-in mt-auto">
-                    <img 
-                      src="/professional-man-headshot.png" 
-                      alt="Michael" 
-                      className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
-                    />
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium text-white text-xs">Michael</span>
-                        <span className="text-gray-500 text-[10px]">Just now</span>
-                      </div>
-                      <div className="bg-[#333] text-gray-200 p-1.5 rounded-lg text-xs max-w-[280px]">
-                        {messageToType.substring(0, typingIndex)}
-                        {typingIndex < messageToType.length && (
-                          <span className="inline-block w-[2px] h-3.5 bg-blue-400 ml-[1px] animate-pulse"></span>
-                        )}
-                      </div>
-                      
-                      {/* Reactions directly under this message */}
-                      <div className="flex gap-2 mt-1">
-                        {showThumbsUp && (
-                          <div className="bg-[#333] rounded-full px-1.5 py-0.5 flex items-center gap-1 animate-fade-in">
-                            <span className="text-xs">👍</span>
-                            <span className="text-gray-300 text-[10px]">1</span>
-                          </div>
-                        )}
-                        {showFire && (
-                          <div className="bg-[#333] rounded-full px-1.5 py-0.5 flex items-center gap-1 animate-fade-in">
-                            <span className="text-xs">🔥</span>
-                            <span className="text-gray-300 text-[10px]">1</span>
-                          </div>
-                        )}
-                      </div>
+              {/* Michael's message (with typing animation) */}
+              {showSecondMessage && (
+                <div className="flex gap-3 animate-fade-in mt-auto">
+                  <img 
+                    src="/professional-man-headshot.png" 
+                    alt="Michael" 
+                    className="w-7 h-7 rounded-full border border-gray-700 flex-shrink-0"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-medium text-white text-xs">Michael</span>
+                      <span className="text-gray-500 text-[10px]">Just now</span>
+                    </div>
+                    <div className="bg-[#333] text-gray-200 p-1.5 rounded-lg text-xs max-w-[280px]">
+                      {messageToType.substring(0, typingIndex)}
+                      {typingIndex < messageToType.length && (
+                        <span className="inline-block w-[2px] h-3.5 bg-blue-400 ml-[1px] animate-pulse"></span>
+                      )}
+                    </div>
+                    
+                    {/* Reactions directly under this message */}
+                    <div className="flex gap-2 mt-1">
+                      {showThumbsUp && (
+                        <div className="bg-[#333] rounded-full px-1.5 py-0.5 flex items-center gap-1 animate-fade-in">
+                          <span className="text-xs">👍</span>
+                          <span className="text-gray-300 text-[10px]">1</span>
+                        </div>
+                      )}
+                      {showFire && (
+                        <div className="bg-[#333] rounded-full px-1.5 py-0.5 flex items-center gap-1 animate-fade-in">
+                          <span className="text-xs">🔥</span>
+                          <span className="text-gray-300 text-[10px]">1</span>
+                        </div>
+                      )}
                     </div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
-        )}
+        </div>
       </div>
 
       {/* Animation styles */}
