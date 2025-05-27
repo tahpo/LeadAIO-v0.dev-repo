@@ -18,17 +18,17 @@ function NavDropdown({ label, items }: DropdownProps) {
     <div className="relative group">
       <button className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap flex items-center gap-1">
         {label}
-        <svg className="h-4 w-4 opacity-50 group-hover:opacity-70 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <svg className="h-3 w-3 opacity-50 group-hover:opacity-70 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      <div className="absolute top-full left-0 pt-2 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200">
-        <div className="bg-white rounded-lg shadow-lg border border-gray-100 py-2 min-w-[200px]">
+      <div className="absolute top-full left-0 pt-1 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-150">
+        <div className="bg-white rounded-lg shadow-xl border border-gray-100/50 py-1.5 min-w-[220px] backdrop-blur-sm">
           {items.map((item, index) => (
             <Link
               key={index}
               href={item.href}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors font-universal"
+              className="block px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50/80 hover:text-gray-900 transition-colors font-universal mx-1 rounded-md"
             >
               {item.label}
             </Link>
