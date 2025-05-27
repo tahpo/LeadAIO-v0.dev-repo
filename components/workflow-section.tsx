@@ -9,24 +9,26 @@ export function WorkflowSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Animate items in opposite directions
-    const timeline = anime.timeline({
-      easing: 'easeInOutQuad',
+    const duration = 30000; // 30 seconds for one complete cycle
+    const distance = document.querySelector('.workflow-row')?.scrollWidth || 0;
+
+    // Animate first row (right to left)
+    anime({
+      targets: '.workflow-row-1 .workflow-inner',
+      translateX: [-distance, 0],
+      duration: duration,
       loop: true,
-      duration: 20000
-    });
+      easing: 'linear'
+    })
 
-    // First row moves right to left
-    timeline.add({
-      targets: '.workflow-row-1',
-      translateX: ['-100%', '0%'],
-    });
-
-    // Second row moves left to right
-    timeline.add({
-      targets: '.workflow-row-2',
-      translateX: ['0%', '-100%'],
-    }, '-=20000'); // Start at the same time as first animation
+    // Animate second row (left to right)
+    anime({
+      targets: '.workflow-row-2 .workflow-inner',
+      translateX: [0, -distance],
+      duration: duration,
+      loop: true,
+      easing: 'linear'
+    })
   }, []);
 
   const workflowItems = [
@@ -61,75 +63,77 @@ export function WorkflowSection() {
         </div>
 
         <div className="section-panel overflow-hidden">
-          {/* First Row - Right to Left */}
+          <div className="relative">
           <div className="workflow-row-1 flex gap-4 mb-8">
             {row1.map((item, index) => (
               <motion.div
                 key={index}
-                className="flex-none w-64 bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-300"
+                className="flex-none w-48 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-2 mb-1">
                   <span className="text-2xl">{item.icon}</span>
-                  <h3 className="font-garnett text-lg">{item.label}</h3>
+                  <h3 className="font-garnett text-base">{item.label}</h3>
                 </div>
-                <p className="text-gray-600 text-sm font-universal">{item.description}</p>
+                <p className="text-gray-600 text-xs font-universal">{item.description}</p>
               </motion.div>
             ))}
             {/* Duplicate for seamless loop */}
             {row1.map((item, index) => (
               <motion.div
                 key={`dup-${index}`}
-                className="flex-none w-64 bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-300"
+                className="flex-none w-48 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
               >
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-2 mb-1">
                   <span className="text-2xl">{item.icon}</span>
-                  <h3 className="font-garnett text-lg">{item.label}</h3>
+                  <h3 className="font-garnett text-base">{item.label}</h3>
                 </div>
-                <p className="text-gray-600 text-sm font-universal">{item.description}</p>
+                <p className="text-gray-600 text-xs font-universal">{item.description}</p>
               </motion.div>
             ))}
           </div>
+          {/* Add fade effect */}
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#faf9f6] to-transparent"></div>
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#faf9f6] to-transparent"></div>
+          </div>
 
           {/* Second Row - Left to Right */}
+          <div className="relative">
           <div className="workflow-row-2 flex gap-4">
             {row2.map((item, index) => (
               <motion.div
                 key={index}
-                className="flex-none w-64 bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-300"
+                className="flex-none w-48 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: (index + 5) * 0.1 }}
               >
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-2 mb-1">
                   <span className="text-2xl">{item.icon}</span>
-                  <h3 className="font-garnett text-lg">{item.label}</h3>
+                  <h3 className="font-garnett text-base">{item.label}</h3>
                 </div>
-                <p className="text-gray-600 text-sm font-universal">{item.description}</p>
+                <p className="text-gray-600 text-xs font-universal">{item.description}</p>
               </motion.div>
             ))}
             {/* Duplicate for seamless loop */}
             {row2.map((item, index) => (
               <motion.div
                 key={`dup-${index}`}
-                className="flex-none w-64 bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-lg transition-all duration-300"
+                className="flex-none w-48 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
               >
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-2 mb-1">
                   <span className="text-2xl">{item.icon}</span>
-                  <h3 className="font-garnett text-lg">{item.label}</h3>
+                  <h3 className="font-garnett text-base">{item.label}</h3>
                 </div>
-                <p className="text-gray-600 text-sm font-universal">{item.description}</p>
+                <p className="text-gray-600 text-xs font-universal">{item.description}</p>
               </motion.div>
             ))}
           </div>
-
-          <div className="mt-12 text-center">
-            <a href="/signup" className="index-button index-button-primary inline-flex items-center gap-2">
-              Get started with LeadAIO
-              <ArrowRight className="h-5 w-5" />
-            </a>
+          {/* Add fade effect */}
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#faf9f6] to-transparent"></div>
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#faf9f6] to-transparent"></div>
           </div>
         </div>
       </div>
