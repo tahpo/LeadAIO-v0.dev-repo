@@ -2,7 +2,14 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
 
 export function Header() {
@@ -31,23 +38,62 @@ export function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">
-          <Link href="#features" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap">
-            Features
-          </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap flex items-center gap-1">
+                Services <ChevronDown className="h-4 w-4" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <Link href="/services/aio" className="w-full">
+                  Artificial Intelligence Optimization (AIO)
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/services/reputation-management" className="w-full">
+                  Reputation Management
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/services/paid-advertising" className="w-full">
+                  Paid Advertising
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Link
             href="#how-it-works"
             className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap"
           >
             How It Works
           </Link>
-          <Link href="/pricing" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap">
-            Pricing
-          </Link>
-          <Link
-            href="#testimonials"
-            className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap"
-          >
-            Testimonials
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap flex items-center gap-1">
+                Pricing <ChevronDown className="h-4 w-4" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <Link href="/pricing/aio" className="w-full">
+                  AIO Pricing
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/pricing/reputation-management" className="w-full">
+                  Reputation Management Pricing
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/pricing/paid-advertising" className="w-full">
+                  Paid Advertising Pricing
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Link href="/contact" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap">
+            Contact
           </Link>
         </nav>
 
@@ -76,13 +122,32 @@ export function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white py-4 px-6 shadow-lg animate-fade-in mt-2 rounded-xl mx-4">
           <nav className="flex flex-col gap-4">
-            <Link
-              href="#features"
-              className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Features
-            </Link>
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-gray-500">Services</p>
+              <div className="pl-4 space-y-2">
+                <Link
+                  href="/services/aio"
+                  className="block text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Artificial Intelligence Optimization (AIO)
+                </Link>
+                <Link
+                  href="/services/reputation-management"
+                  className="block text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Reputation Management
+                </Link>
+                <Link
+                  href="/services/paid-advertising"
+                  className="block text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Paid Advertising
+                </Link>
+              </div>
+            </div>
             <Link
               href="#how-it-works"
               className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
@@ -90,19 +155,38 @@ export function Header() {
             >
               How It Works
             </Link>
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-gray-500">Pricing</p>
+              <div className="pl-4 space-y-2">
+                <Link
+                  href="/pricing/aio"
+                  className="block text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  AIO Pricing
+                </Link>
+                <Link
+                  href="/pricing/reputation-management"
+                  className="block text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Reputation Management Pricing
+                </Link>
+                <Link
+                  href="/pricing/paid-advertising"
+                  className="block text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Paid Advertising Pricing
+                </Link>
+              </div>
+            </div>
             <Link
-              href="/pricing"
+              href="/contact"
               className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Pricing
-            </Link>
-            <Link
-              href="#testimonials"
-              className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Testimonials
+              Contact
             </Link>
             <div className="flex flex-col gap-2 mt-4">
               <a href="/login" className="index-button index-button-secondary w-full text-center">
