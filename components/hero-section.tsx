@@ -81,7 +81,7 @@ export function HeroSection() {
   const longestWord2 = words2.reduce((a, b) => (a.length > b.length ? a : b), "")
 
   return (
-    <section className="relative min-h-screen pt-28 pb-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50">
+    <section className="relative min-h-screen pt-28 pb-20 overflow-hidden bg-white">
       <div className="section-container relative z-10">
         <div className="section-panel bg-[#fdfcfa]">
           <div className="max-w-4xl mx-auto text-center">
@@ -160,7 +160,7 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <a href="/signup" className="index-button index-button-primary flex items-center justify-center gap-2">
+              <a href="/signup" className="index-button cta-button flex items-center justify-center gap-2">
                 Get started <ArrowRight className="h-5 w-5" />
               </a>
             </div>
