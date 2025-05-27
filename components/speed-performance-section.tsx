@@ -27,8 +27,18 @@ export function SpeedPerformanceSection() {
   }, [])
 
   return (
-    <section ref={containerRef} className="relative py-14 bg-[#2d2d2d]">
-      <div className="absolute inset-0 w-full h-full bg-[#2d2d2d]"></div>
+    <section ref={containerRef} className="relative bg-[#2d2d2d]">
+      {/* Top wave */}
+      <div className="absolute top-0 left-0 right-0 h-24 overflow-hidden">
+        <svg
+          className="absolute top-0 w-full h-24"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path fill="#ffffff" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+        </svg>
+      </div>
 
       <div className="relative py-20 z-10">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">

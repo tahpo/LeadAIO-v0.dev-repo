@@ -9,13 +9,13 @@ export function WorkflowSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const duration = 30000; // 30 seconds for one complete cycle
-    const distance = document.querySelector('.workflow-row')?.scrollWidth || 0;
+    const duration = 20000; // 20 seconds for one complete cycle
+    const distance = 1000; // Fixed distance for consistent animation
 
     // Animate first row (right to left)
     anime({
       targets: '.workflow-row-1 .workflow-inner',
-      translateX: [-distance, 0],
+      translateX: [0, -distance],
       duration: duration,
       loop: true,
       easing: 'linear'
@@ -24,7 +24,7 @@ export function WorkflowSection() {
     // Animate second row (left to right)
     anime({
       targets: '.workflow-row-2 .workflow-inner',
-      translateX: [0, -distance],
+      translateX: [-distance, 0],
       duration: duration,
       loop: true,
       easing: 'linear'
@@ -64,76 +64,43 @@ export function WorkflowSection() {
 
         <div className="section-panel overflow-hidden">
           <div className="relative">
-          <div className="workflow-row-1 flex gap-4 mb-8">
-            {row1.map((item, index) => (
-              <motion.div
-                key={index}
-                className="flex-none w-48 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-2xl">{item.icon}</span>
-                  <h3 className="font-garnett text-base">{item.label}</h3>
-                </div>
-                <p className="text-gray-600 text-xs font-universal">{item.description}</p>
-              </motion.div>
-            ))}
-            {/* Duplicate for seamless loop */}
-            {row1.map((item, index) => (
-              <motion.div
-                key={`dup-${index}`}
-                className="flex-none w-48 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-2xl">{item.icon}</span>
-                  <h3 className="font-garnett text-base">{item.label}</h3>
-                </div>
-                <p className="text-gray-600 text-xs font-universal">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-          {/* Add fade effect */}
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#faf9f6] to-transparent"></div>
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#faf9f6] to-transparent"></div>
-          </div>
+            <div className="workflow-row-1 relative mb-8 overflow-hidden">
+              <div className="workflow-inner flex gap-4">
+                {[...row1, ...row1, ...row1].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex-none w-40 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xl">{item.icon}</span>
+                      <h3 className="font-garnett text-sm">{item.label}</h3>
+                    </div>
+                    <p className="text-gray-600 text-xs font-universal">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#faf9f6] via-[#faf9f6] to-transparent z-10"></div>
+              <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#faf9f6] via-[#faf9f6] to-transparent z-10"></div>
+            </div>
 
-          {/* Second Row - Left to Right */}
-          <div className="relative">
-          <div className="workflow-row-2 flex gap-4">
-            {row2.map((item, index) => (
-              <motion.div
-                key={index}
-                className="flex-none w-48 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: (index + 5) * 0.1 }}
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-2xl">{item.icon}</span>
-                  <h3 className="font-garnett text-base">{item.label}</h3>
-                </div>
-                <p className="text-gray-600 text-xs font-universal">{item.description}</p>
-              </motion.div>
-            ))}
-            {/* Duplicate for seamless loop */}
-            {row2.map((item, index) => (
-              <motion.div
-                key={`dup-${index}`}
-                className="flex-none w-48 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-2xl">{item.icon}</span>
-                  <h3 className="font-garnett text-base">{item.label}</h3>
-                </div>
-                <p className="text-gray-600 text-xs font-universal">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-          {/* Add fade effect */}
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#faf9f6] to-transparent"></div>
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#faf9f6] to-transparent"></div>
+            <div className="workflow-row-2 relative overflow-hidden">
+              <div className="workflow-inner flex gap-4">
+                {[...row2, ...row2, ...row2].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex-none w-40 bg-white rounded-lg shadow-sm border border-gray-100 p-3 hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xl">{item.icon}</span>
+                      <h3 className="font-garnett text-sm">{item.label}</h3>
+                    </div>
+                    <p className="text-gray-600 text-xs font-universal">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#faf9f6] via-[#faf9f6] to-transparent z-10"></div>
+              <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#faf9f6] via-[#faf9f6] to-transparent z-10"></div>
+            </div>
           </div>
         </div>
       </div>
