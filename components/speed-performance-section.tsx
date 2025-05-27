@@ -31,7 +31,7 @@ export function SpeedPerformanceSection() {
       {/* Top wave */}
       <div className="absolute top-0 left-0 right-0 h-24 overflow-hidden">
         <svg
-          className="absolute top-0 w-full h-24"
+          className="absolute bottom-0 w-full h-24 rotate-180"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
           preserveAspectRatio="none"
@@ -40,7 +40,7 @@ export function SpeedPerformanceSection() {
         </svg>
       </div>
 
-      <div className="relative py-20 z-10">
+      <div className="relative py-12 z-10">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Box - Speedometer */}

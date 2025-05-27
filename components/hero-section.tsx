@@ -160,7 +160,7 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <a href="/signup" className="index-button cta-button flex items-center justify-center gap-2">
+              <a href="/signup" className="index-button index-button-primary flex items-center justify-center gap-2">
                 Get started <ArrowRight className="h-5 w-5" />
               </a>
             </div>
