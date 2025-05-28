@@ -12,19 +12,27 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardRef, { margin: "-100px" })
 
+  // Track animation state
+  const animationRef = useRef<anime.AnimeInstance | null>(null)
+
   useEffect(() => {
     if (!cardRef.current) return
 
     if (type === "aio") {
-      // Animate search box and results
-      const timeline = anime.timeline({
+      // Clear any existing animation
+      if (animationRef.current) {
+        animationRef.current.pause()
+      }
+
+      // Create new timeline
+      animationRef.current = anime.timeline({
         loop: true,
-        direction: 'normal',
+        direction: 'alternate',
         easing: 'easeInOutQuad',
         autoplay: true
       })
 
-      timeline
+      animationRef.current
         .add({
           targets: cardRef.current.querySelectorAll(".search-element"),
           delay: anime.stagger(600),
@@ -34,16 +42,9 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           easing: "easeOutElastic(1, .5)"
         })
         .add({
-          targets: cardRef.current.querySelector(".cursor"),
-          opacity: [0, 1],
-          duration: 400,
-          direction: "alternate",
-          easing: "linear"
-        })
-        .add({
           targets: cardRef.current.querySelector(".search-text"),
-          width: ["0%", "100%"],
-          duration: 1200,
+          width: [0, function(el) { return el.scrollWidth; }],
+          duration: 800,
           delay: 200,
           easing: "linear"
         })
@@ -58,7 +59,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           targets: cardRef.current.querySelectorAll("*"),
           opacity: [1, 0],
           duration: 800,
-          delay: 1500,
+          delay: 2000,
           complete: () => {
             // Reset elements for next loop
             anime.set([
@@ -68,41 +69,40 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
             ], {
               translateY: 0,
               opacity: 0,
-              width: "0%"
+              width: 0
             });
           }
         })
     }
 
     if (type === "reputation") {
-      // Animate review stars and ratings
-      anime({
+      const starsAnimation = anime({
         targets: cardRef.current.querySelectorAll(".review-star"),
         scale: [0.5, 1],
         rotate: [0, 360],
         delay: anime.stagger(100),
         duration: 1200,
         loop: true,
-        direction: 'normal',
+        direction: 'alternate',
         easing: "easeOutElastic(1, .5)"
       })
 
-      // Animate review cards
-      anime({
+      const cardsAnimation = anime({
         targets: cardRef.current.querySelectorAll(".review-card"),
         translateY: [-20, 0],
         opacity: [0, 1],
         delay: anime.stagger(200),
         duration: 1200,
         loop: true,
-        direction: 'normal',
+        direction: 'alternate',
         easing: "easeOutElastic(1, .5)"
       })
+
+      animationRef.current = starsAnimation
     }
 
     if (type === "advertising") {
-      // Animate PPC elements
-      anime({
+      animationRef.current = anime({
         targets: cardRef.current.querySelectorAll(".ppc-element"),
         translateY: [-20, 0],
         scale: [0.9, 1],
@@ -110,7 +110,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         delay: anime.stagger(200),
         duration: 1200,
         loop: true,
-        direction: 'normal',
+        direction: 'alternate',
         easing: "easeOutElastic(1, .5)",
         complete: (anim) => {
           // Reset for smooth loop
@@ -121,6 +121,13 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           });
         }
       })
+    }
+
+    // Cleanup function
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.pause()
+      }
     }
   }, [isInView, type])
 
@@ -138,10 +145,10 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
             <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
               <div className="relative flex items-center w-full">
-                <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden" style={{ width: 0, maxWidth: "100%" }}>
-                Find the best SEO company
+                <span className="search-text text-sm text-gray-600 whitespace-nowrap\" style={{ width: 0 }}>
+                  find the best seo company
                 </span>
-                <span className="cursor absolute text-gray-600 animate-blink" style={{ left: "calc(var(--text-width, 0%))" }}>|</span>
+                <span className="cursor absolute text-gray-600 animate-blink" style={{ left: 'calc(var(--text-width, 0) * 1px)' }}>|</span>
               </div>
             </div>
           </div>
@@ -216,14 +223,24 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
 
 // Add cursor blink animation
 const styles = `
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.animate-blink {
-  animation: blink 0.8s infinite;
-}
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .animate-blink {
+    animation: blink 0.7s infinite;
+  }
+  
+  .search-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .cursor {
+    transition: left 0.8s linear;
+  }
 `
 
 // Add styles to head
