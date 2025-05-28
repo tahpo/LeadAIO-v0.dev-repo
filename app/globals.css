@@ -542,3 +542,8 @@ body {
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
+
+/* Override button hover color */
+.contact-submit:hover {
+  color: #ffffff !important;
+}

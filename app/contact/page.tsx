@@ -38,18 +38,18 @@ export default function ContactPage() {
       <Header />
       
       {/* Main content */}
-      <main className="flex-grow pt-32">
+      <main className="flex-grow pt-28">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
             {/* Left Column - Title */}
-            <div>
+            <div className="lg:pt-12">
               <h1 className="text-4xl md:text-5xl font-garnett mb-6">Let's talk about your project</h1>
               <p className="text-lg text-gray-600 max-w-xl font-universal">
                 Ready to take your search rankings to the next level? We're here to help you achieve your SEO goals.
               </p>
               
               {/* Contact Cards - Moved and resized */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-auto pt-[180px]">
                 <div className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
                   <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
                     <Mail className="h-4 w-4 text-blue-600" />
@@ -147,7 +147,7 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-black hover:bg-gray-800 text-white py-6 rounded-xl flex items-center justify-center gap-2 font-universal">
+                <Button type="submit" className="w-full bg-black hover:bg-gray-800 hover:text-white text-white h-[60px] rounded-xl flex items-center justify-center gap-2 font-universal">
                   Send Message <ArrowRight className="h-5 w-5" />
                 </Button>
               </form>
@@ -155,7 +155,7 @@ export default function ContactPage() {
           </div>
 
           {/* Brands Section */}
-          <div className="py-20 bg-white overflow-hidden">
+          <div className="py-12 bg-white overflow-hidden">
             <div className="flex space-x-12 animate-scroll">
               {[...brands, ...brands].map((brand, i) => (
                 <div key={i} className="flex-none grayscale opacity-50 hover:opacity-75 transition-opacity">
