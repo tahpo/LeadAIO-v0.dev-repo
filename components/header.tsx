@@ -87,7 +87,11 @@ export function Header() {
               { href: "/pricing/paid-advertising", label: "Paid Advertising Pricing" },
             ]}
           />
-          <Link href="/contact" className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap">
+          <Link
+            href="/contact"
+            className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Contact
           </Link>
         </nav>
