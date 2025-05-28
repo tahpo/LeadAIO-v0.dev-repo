@@ -8,6 +8,7 @@ import { WorkflowSection } from "@/components/workflow-section"
 import { FooterSection } from "@/components/footer-section"
 
 const FeaturesSection = dynamic(() => import('@/components/features-section'), {
+  loading: () => <div>Loading...</div>,
   ssr: false
 })
 
