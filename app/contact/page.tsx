@@ -7,10 +7,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { ArrowRight, Mail, MessageSquare, Phone } from "lucide-react"
-import { 
-  AmazonLogo, AppleLogo, GoogleLogo, MicrosoftLogo, 
-  NetflixLogo, SpotifyLogo, TwitterLogo, MetaLogo 
-} from "@logotypes/react"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -21,14 +17,14 @@ export default function ContactPage() {
   })
 
   const brands = [
-    { Logo: GoogleLogo, alt: "Google" },
-    { Logo: AppleLogo, alt: "Apple" },
-    { Logo: AmazonLogo, alt: "Amazon" },
-    { Logo: MicrosoftLogo, alt: "Microsoft" },
-    { Logo: NetflixLogo, alt: "Netflix" },
-    { Logo: SpotifyLogo, alt: "Spotify" },
-    { Logo: TwitterLogo, alt: "Twitter" },
-    { Logo: MetaLogo, alt: "Meta" }
+    { name: "Google" },
+    { name: "Apple" },
+    { name: "Amazon" },
+    { name: "Microsoft" },
+    { name: "Netflix" },
+    { name: "Spotify" },
+    { name: "Twitter" },
+    { name: "Meta" }
   ]
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -163,7 +159,7 @@ export default function ContactPage() {
             <div className="flex space-x-12 animate-scroll">
               {[...brands, ...brands].map((brand, i) => (
                 <div key={i} className="flex-none grayscale opacity-50 hover:opacity-75 transition-opacity">
-                  <brand.Logo className="h-8 w-auto" />
+                  <span className="text-gray-400 text-lg font-universal">{brand.name}</span>
                 </div>
               ))}
             </div>
