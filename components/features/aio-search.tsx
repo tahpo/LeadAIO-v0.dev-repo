@@ -101,13 +101,13 @@ export function AIOSearch() {
         {results.map((result, index) => (
           <div
             key={index}
-            className={`search-result opacity-0 p-4 rounded-lg transition-all ${
+            className={\`search-result opacity-0 p-4 rounded-lg transition-all ${
               result.highlight
                 ? "bg-blue-50 border-2 border-blue-200"
                 : "hover:bg-gray-50 border border-gray-100"
             }`}
           >
-            <h3 className={`text-lg mb-1 ${result.highlight ? "text-blue-600" : "text-gray-700"}`}>
+            <h3 className={\`text-lg mb-1 ${result.highlight ? "text-blue-600" : "text-gray-700"}`}>
               {result.title}
             </h3>
             <p className="text-sm text-gray-600">{result.description}</p>
