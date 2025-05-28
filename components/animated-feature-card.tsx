@@ -10,7 +10,7 @@ interface AnimatedFeatureCardProps {
 
 export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(cardRef, { margin: "-100px" })
+  const isInView = useInView(cardRef, { margin: "-100px", once: false })
 
   useEffect(() => {
     if (!cardRef.current) return
@@ -20,7 +20,8 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       const timeline = anime.timeline({
         loop: true,
         direction: 'normal',
-        easing: 'easeInOutQuad'
+        easing: 'easeInOutQuad',
+        autoplay: true
       })
 
       timeline
@@ -43,7 +44,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           targets: cardRef.current.querySelector(".search-text"),
           width: ["0%", "100%"],
           duration: 1200,
-          delay: 400,
+          delay: 200,
           easing: "linear"
         })
         .add({
@@ -57,7 +58,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           targets: cardRef.current.querySelectorAll("*"),
           opacity: [1, 0],
           duration: 800,
-          delay: 2000,
+          delay: 1500,
           complete: () => {
             // Reset elements for next loop
             anime.set([
@@ -80,7 +81,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         scale: [0.5, 1],
         rotate: [0, 360],
         delay: anime.stagger(100),
-        duration: 800,
+        duration: 1200,
         loop: true,
         direction: 'normal',
         easing: "easeOutElastic(1, .5)"
@@ -92,7 +93,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         translateY: [-20, 0],
         opacity: [0, 1],
         delay: anime.stagger(200),
-        duration: 1000,
+        duration: 1200,
         loop: true,
         direction: 'normal',
         easing: "easeOutElastic(1, .5)"
@@ -107,7 +108,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         scale: [0.9, 1],
         opacity: [0.5, 1],
         delay: anime.stagger(200),
-        duration: 1000,
+        duration: 1200,
         loop: true,
         direction: 'normal',
         easing: "easeOutElastic(1, .5)",
@@ -136,11 +137,11 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           <div className="search-element bg-gray-100 rounded-full p-3 flex items-center">
             <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
-              <div className="relative flex items-center">
-                <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden\" style={{ width: 0 }}>
+              <div className="relative flex items-center w-full">
+                <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden" style={{ width: 0 }}>
                 find the best seo company
                 </span>
-                <span className="cursor absolute" style={{ left: "100%" }}>|</span>
+                <span className="cursor absolute text-gray-600" style={{ left: "100%" }}>|</span>
               </div>
             </div>
           </div>
