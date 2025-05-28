@@ -10,13 +10,13 @@ interface AnimatedFeatureCardProps {
 
 export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(cardRef, { margin: "-100px" })
+  const isInView = useInView(cardRef, { margin: "-100px", once: false })
 
   // Track animation state
   const animationRef = useRef<anime.AnimeInstance | null>(null)
 
   useEffect(() => {
-    if (!cardRef.current) return
+    if (!cardRef.current || !isInView) return
 
     if (type === "aio") {
       // Clear any existing animation
@@ -28,32 +28,21 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       animationRef.current = anime.timeline({
         loop: true,
         direction: 'normal',
-        easing: 'easeInOutQuad',
-        autoplay: true
+        easing: 'easeInOutQuad'
       })
 
       animationRef.current
         .add({
           targets: cardRef.current.querySelectorAll(".search-element"),
-          delay: anime.stagger(300),
+          delay: anime.stagger(200),
           translateY: [-20, 0],
           opacity: [0, 1],
           duration: 800,
           easing: "easeOutElastic(1, .5)"
         })
         .add({
-          targets: cardRef.current.querySelector(".search-text"),
-          width: [0, function(el) { return el.scrollWidth; }],
-          duration: 800,
-          delay: 200,
-          easing: "linear"
-        })
-        .add({
-          targets: cardRef.current.querySelector(".cursor"),
-          translateX: [0, function(el) {
-            const textEl = el.previousElementSibling;
-            return textEl ? textEl.scrollWidth : 0;
-          }],
+          targets: cardRef.current.querySelector(".search-input"),
+          width: ['0%', '100%'],
           duration: 800,
           easing: "linear"
         })
@@ -68,22 +57,23 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           targets: cardRef.current.querySelectorAll("*"),
           opacity: [1, 0],
           duration: 800,
-          delay: 2000,
+          delay: 1500,
           complete: () => {
             // Reset elements for next loop
             anime.set([
               cardRef.current.querySelectorAll(".search-element"),
-              cardRef.current.querySelector(".search-text"),
-              cardRef.current.querySelector(".cursor"),
+              cardRef.current.querySelector(".search-input"),
               cardRef.current.querySelectorAll(".result")
             ], {
               translateY: 0,
               opacity: 0,
-              width: 0,
-              translateX: 0
+              width: '0%'
             });
           }
         })
+        
+      // Start the animation
+      animationRef.current.play()
     }
 
     if (type === "reputation") {
@@ -155,11 +145,11 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           <div className="search-element bg-gray-100 rounded-full p-3 flex items-center">
             <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
-              <div className="relative flex items-center">
-                <span className="search-text text-sm text-gray-600 whitespace-nowrap\" style={{ width: 0 }}>
+              <div className="search-input relative flex items-center w-0">
+                <span className="text-sm text-gray-600 whitespace-nowrap">
                   find the best seo company
                 </span>
-                <span className="cursor absolute text-gray-600 animate-blink" style={{ transform: 'translateX(0)' }}>|</span>
+                <span className="absolute right-0 text-gray-600 animate-blink">|</span>
               </div>
             </div>
           </div>
@@ -251,8 +241,7 @@ const styles = `
   }
   
   .cursor {
-    left: 100%;
-    transform: translateX(-100%);
+    right: 0;
   }
 `
 
