@@ -10,10 +10,10 @@ interface AnimatedFeatureCardProps {
 
 export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(cardRef, { once: true, margin: "-100px" })
+  const isInView = useInView(cardRef, { margin: "-100px" })
 
   useEffect(() => {
-    if (!isInView || !cardRef.current) return
+    if (!cardRef.current) return
 
     if (type === "aio") {
       // Animate search box and results
@@ -42,8 +42,9 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         .add({
           targets: cardRef.current.querySelector(".search-text"),
           width: ["0%", "100%"],
-          duration: 1500,
-          delay: 400
+          duration: 1200,
+          delay: 400,
+          easing: "linear"
         })
         .add({
           targets: cardRef.current.querySelectorAll(".result"),
@@ -135,9 +136,12 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           <div className="search-element bg-gray-100 rounded-full p-3 flex items-center">
             <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
-              <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden\" style={{ width: 0 }}>
+              <div className="relative flex items-center">
+                <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden" style={{ width: 0 }}>
                 find the best seo company
-              </span><span className="cursor">|</span>
+                </span>
+                <span className="cursor absolute" style={{ left: "100%" }}>|</span>
+              </div>
             </div>
           </div>
           
