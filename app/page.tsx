@@ -1,27 +1,23 @@
-import dynamic from 'next/dynamic'
 import { Header } from "@/components/header"
-import { Hero } from "@/components/hero"
-import { Features } from "@/components/features"
-import { Testimonials } from "@/components/testimonials"
-import { PerformanceSection } from "@/components/performance-section"
+import { HeroSection } from "@/components/hero-section"
+import { FeaturesSection } from "@/components/features-section"
+import { HowItWorks } from "@/components/how-it-works"
+import { TestimonialsSection } from "@/components/testimonials-section"
+import { SpeedPerformanceSection } from "@/components/speed-performance-section"
 import { WorkflowSection } from "@/components/workflow-section"
-import { Footer } from "@/components/footer"
-
-const FeaturesSection = dynamic(() => import('@/components/features-section'), {
-  ssr: true
-})
+import { FooterSection } from "@/components/footer-section"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
       <Header />
-      <Hero />
+      <HeroSection />
       <FeaturesSection />
-      <Features />
-      <PerformanceSection />
-      <Testimonials />
+      <HowItWorks />
+      <SpeedPerformanceSection />
+      <TestimonialsSection />
       <WorkflowSection />
-      <Footer />
+      <FooterSection />
     </main>
   )
 }
