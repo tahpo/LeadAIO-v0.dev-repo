@@ -3,6 +3,9 @@
 import { useState, useRef, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Search, BarChart3, Zap, FileText } from "lucide-react"
+import { AIOSearch } from "./features/aio-search"
+import { ReputationReviews } from "./features/reputation-reviews"
+import { PaidAds } from "./features/paid-ads"
 
 const features = [
   {
@@ -10,7 +13,7 @@ const features = [
     icon: Search,
     title: "Artificial Intelligence Optimization (AIO)",
     description: "Comprehensive AI-powered SEO optimization including keyword research, content optimization, and AI search engine optimization.",
-    image: "/ai-seo-dashboard.png",
+    component: AIOSearch,
     color: "from-blue-500 to-cyan-500",
   },
   {
@@ -18,7 +21,7 @@ const features = [
     icon: BarChart3,
     title: "Reputation Management",
     description: "Build and maintain your online reputation with real reviews, negative review management, and strategic content publishing.",
-    image: "/backlink-analysis-dashboard.png",
+    component: ReputationReviews,
     color: "from-purple-500 to-pink-500",
   },
   {
@@ -26,7 +29,7 @@ const features = [
     icon: FileText,
     title: "Paid Advertising",
     description: "Strategic PPC and AdWords campaigns that maximize ROI and drive qualified traffic to your business.",
-    image: "/traffic-analysis-dashboard.png",
+    component: PaidAds,
     color: "from-green-500 to-emerald-500",
   },
 ]
@@ -247,73 +250,30 @@ export function FeaturesSection() {
               {/* Feature Image */}
               <motion.div style={{ y: imageY }} className="relative mt-12">
                 <div className="feature-image-container bg-[#404040]">
-                  {features.map((feature, index) => (
-                    <motion.div
-                      key={feature.id}
-                      className="absolute inset-0"
-                      initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-                      animate={{
-                        opacity: activeFeature === index ? 1 : 0,
-                        scale: activeFeature === index ? 1 : 0.8,
-                        rotateY: activeFeature === index ? 0 : 90,
-                      }}
-                      transition={{
-                        duration: 0.6,
-                        ease: "easeInOut",
-                        opacity: { duration: 0.3 },
-                      }}
-                      style={{
-                        zIndex: activeFeature === index ? 10 : 0,
-                        transformStyle: "preserve-3d",
-                      }}
-                    >
-                      {/* Gradient background that matches the feature */}
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-10 rounded-lg`}
-                      ></div>
-
-                      {/* Image with proper sizing */}
-                      <img
-                        src={feature.image || "/placeholder.svg"}
-                        alt={feature.title}
-                        className="w-full h-full object-contain p-4 relative z-10"
-                        style={{
-                          filter: activeFeature === index ? "none" : "blur(2px)",
-                          transition: "filter 0.3s ease",
+                  {features.map((feature, index) => {
+                    const FeatureComponent = feature.component;
+                    return (
+                      <motion.div
+                        key={feature.id}
+                        className="absolute inset-0 p-8"
+                        initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                        animate={{
+                          opacity: activeFeature === index ? 1 : 0,
+                          scale: activeFeature === index ? 1 : 0.8,
+                          rotateY: activeFeature === index ? 0 : 90,
                         }}
-                      />
-
-                      {/* Floating elements for active feature */}
-                      {activeFeature === index && (
-                        <>
-                          <motion.div
-                            className="absolute top-4 right-4 w-3 h-3 bg-white rounded-full shadow-lg"
-                            animate={{
-                              y: [0, -10, 0],
-                              opacity: [0.7, 1, 0.7],
-                            }}
-                            transition={{
-                              duration: 2,
-                              repeat: Number.POSITIVE_INFINITY,
-                              ease: "easeInOut",
-                            }}
-                          />
-                          <motion.div
-                            className="absolute bottom-6 left-6 w-2 h-2 bg-orange-400 rounded-full shadow-lg"
-                            animate={{
-                              y: [0, -8, 0],
-                              opacity: [0.5, 1, 0.5],
-                            }}
-                            transition={{
-                              duration: 2.5,
-                              repeat: Number.POSITIVE_INFINITY,
-                              ease: "easeInOut",
-                              delay: 0.5,
-                            }}
-                          />
-                        </>
-                      )}
-                    </motion.div>
+                        transition={{
+                          duration: 0.6,
+                          ease: "easeInOut",
+                          opacity: { duration: 0.3 },
+                        }}
+                        style={{
+                          zIndex: activeFeature === index ? 10 : 0,
+                          transformStyle: "preserve-3d",
+                        }}
+                      >
+                        <FeatureComponent />
+                      </motion.div>
                   ))}
                 </div>
 
