@@ -27,7 +27,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       // Create new timeline
       animationRef.current = anime.timeline({
         loop: true,
-        direction: 'alternate',
+        direction: 'normal',
         easing: 'easeInOutQuad',
         autoplay: true
       })
@@ -43,7 +43,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         })
         .add({
           targets: cardRef.current.querySelector(".search-text"),
-          width: [0, function(el) { return el.scrollWidth; }],
+          width: ['0%', '100%'],
           duration: 800,
           delay: 200,
           easing: "linear"
@@ -59,7 +59,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           targets: cardRef.current.querySelectorAll("*"),
           opacity: [1, 0],
           duration: 800,
-          delay: 2000,
+          delay: 1500,
           complete: () => {
             // Reset elements for next loop
             anime.set([
@@ -69,7 +69,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
             ], {
               translateY: 0,
               opacity: 0,
-              width: 0
+              width: '0%'
             });
           }
         })
@@ -81,9 +81,9 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         scale: [0.5, 1],
         rotate: [0, 360],
         delay: anime.stagger(100),
-        duration: 1200,
+        duration: 800,
         loop: true,
-        direction: 'alternate',
+        direction: 'normal',
         easing: "easeOutElastic(1, .5)"
       })
 
@@ -92,9 +92,9 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         translateY: [-20, 0],
         opacity: [0, 1],
         delay: anime.stagger(200),
-        duration: 1200,
+        duration: 800,
         loop: true,
-        direction: 'alternate',
+        direction: 'normal',
         easing: "easeOutElastic(1, .5)"
       })
 
@@ -108,9 +108,9 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         scale: [0.9, 1],
         opacity: [0.5, 1],
         delay: anime.stagger(200),
-        duration: 1200,
+        duration: 800,
         loop: true,
-        direction: 'alternate',
+        direction: 'normal',
         easing: "easeOutElastic(1, .5)",
         complete: (anim) => {
           // Reset for smooth loop
@@ -145,10 +145,10 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
             <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
               <div className="relative flex items-center w-full">
-                <span className="search-text text-sm text-gray-600 whitespace-nowrap\" style={{ width: 0 }}>
+                <span className="search-text text-sm text-gray-600 whitespace-nowrap" style={{ width: '0%' }}>
                   find the best seo company
                 </span>
-                <span className="cursor absolute text-gray-600 animate-blink" style={{ left: 'calc(var(--text-width, 0) * 1px)' }}>|</span>
+                <span className="cursor absolute text-gray-600 animate-blink">|</span>
               </div>
             </div>
           </div>
@@ -235,11 +235,13 @@ const styles = `
   .search-text {
     display: inline-block;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: hidden; 
+    position: relative;
   }
   
   .cursor {
-    transition: left 0.8s linear;
+    left: 100%;
+    transform: translateX(-100%);
   }
 `
 
