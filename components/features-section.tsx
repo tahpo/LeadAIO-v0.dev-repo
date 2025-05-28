@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Search, BarChart3, Zap, FileText } from "lucide-react"
+import { AnimatedFeatureCard } from "@/components/animated-feature-card"
 
 const features = [
   {
@@ -205,6 +206,12 @@ export function FeaturesSection() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pl-16">
               {/* Feature List */}
               <motion.div style={{ y: cardsY }} className="space-y-3">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+                  <AnimatedFeatureCard type="aio" />
+                  <AnimatedFeatureCard type="reputation" />
+                  <AnimatedFeatureCard type="advertising" />
+                </div>
+
                 {features.map((feature, index) => {
                   const Icon = feature.icon
                   return (
