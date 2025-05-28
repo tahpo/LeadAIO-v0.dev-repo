@@ -18,13 +18,15 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
     if (type === "aio") {
       // Animate search box and results
       const timeline = anime.timeline({
-        targets: cardRef.current.querySelectorAll(".search-element"),
-        delay: anime.stagger(600),
-        loop: true
+        loop: true,
+        direction: 'normal',
+        easing: 'easeInOutQuad'
       })
 
       timeline
         .add({
+          targets: cardRef.current.querySelectorAll(".search-element"),
+          delay: anime.stagger(600),
           translateY: [-20, 0],
           opacity: [0, 1],
           duration: 1200,
@@ -34,7 +36,6 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           targets: cardRef.current.querySelector(".cursor"),
           opacity: [0, 1],
           duration: 400,
-          loop: true,
           direction: "alternate",
           easing: "linear"
         })
@@ -51,18 +52,48 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           duration: 800,
           delay: anime.stagger(200)
         })
+        .add({ 
+          targets: cardRef.current.querySelectorAll("*"),
+          opacity: [1, 0],
+          duration: 800,
+          delay: 2000,
+          complete: () => {
+            // Reset elements for next loop
+            anime.set([
+              cardRef.current.querySelectorAll(".search-element"),
+              cardRef.current.querySelector(".search-text"),
+              cardRef.current.querySelectorAll(".result")
+            ], {
+              translateY: 0,
+              opacity: 0,
+              width: "0%"
+            });
+          }
+        })
     }
 
     if (type === "reputation") {
       // Animate review stars and ratings
       anime({
         targets: cardRef.current.querySelectorAll(".review-star"),
-        scale: [0, 1],
-        rotateY: [90, 0],
+        scale: [0.5, 1],
+        rotate: [0, 360],
         delay: anime.stagger(100),
         duration: 800,
         loop: true,
-        direction: "alternate",
+        direction: 'normal',
+        easing: "easeOutElastic(1, .5)"
+      })
+
+      // Animate review cards
+      anime({
+        targets: cardRef.current.querySelectorAll(".review-card"),
+        translateY: [-20, 0],
+        opacity: [0, 1],
+        delay: anime.stagger(200),
+        duration: 1000,
+        loop: true,
+        direction: 'normal',
         easing: "easeOutElastic(1, .5)"
       })
     }
@@ -77,7 +108,16 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         delay: anime.stagger(200),
         duration: 1000,
         loop: true,
-        easing: "easeOutElastic(1, .5)"
+        direction: 'normal',
+        easing: "easeOutElastic(1, .5)",
+        complete: (anim) => {
+          // Reset for smooth loop
+          anime.set(anim.animatables.map(a => a.target), {
+            translateY: -20,
+            scale: 0.9,
+            opacity: 0.5
+          });
+        }
       })
     }
   }, [isInView, type])
@@ -97,8 +137,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
               <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden\" style={{ width: 0 }}>
                 find the best seo company
-              </span>
-              <span className="cursor">|</span>
+              </span><span className="cursor">|</span>
             </div>
           </div>
           
@@ -136,7 +175,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           
           <div className="space-y-3">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="bg-gray-50 rounded-lg p-3">
+              <div key={i} className="review-card bg-gray-50 rounded-lg p-3 opacity-0">
                 <div className="flex items-center space-x-2">
                   <div className="w-8 h-8 bg-gray-200 rounded-full" />
                   <div className="flex-1">
