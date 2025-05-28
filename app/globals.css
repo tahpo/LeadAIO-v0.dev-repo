@@ -427,7 +427,7 @@ section {
 }
 
 .cursor {
-  animation: cursor-blink 1s step-end infinite;
+  animation: cursor-blink 0.8s step-end infinite;
 }
 
 /* Search text typing animation */
@@ -437,7 +437,11 @@ section {
 }
 
 .search-text {
-  animation: typing 2s steps(40, end);
+  animation: typing 1.5s steps(30, end);
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 /* Speedometer styles */
