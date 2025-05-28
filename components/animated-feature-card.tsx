@@ -10,7 +10,7 @@ interface AnimatedFeatureCardProps {
 
 export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(cardRef, { margin: "-100px", once: false })
+  const isInView = useInView(cardRef, { margin: "-100px" })
 
   useEffect(() => {
     if (!cardRef.current) return
@@ -138,10 +138,10 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
             <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
               <div className="relative flex items-center w-full">
-                <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden\" style={{ width: 0 }}>
-                find the best seo company
+                <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden" style={{ width: 0, maxWidth: "100%" }}>
+                Find the best SEO company
                 </span>
-                <span className="cursor absolute text-gray-600" style={{ left: "100%" }}>|</span>
+                <span className="cursor absolute text-gray-600 animate-blink" style={{ left: "calc(var(--text-width, 0%))" }}>|</span>
               </div>
             </div>
           </div>
@@ -212,4 +212,23 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       )}
     </motion.div>
   )
+}
+
+// Add cursor blink animation
+const styles = `
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 0.8s infinite;
+}
+`
+
+// Add styles to head
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement("style")
+  styleSheet.textContent = styles
+  document.head.appendChild(styleSheet)
 }
