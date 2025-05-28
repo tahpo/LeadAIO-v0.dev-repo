@@ -14,9 +14,9 @@ export function HeroSection() {
   const [currentWord2, setCurrentWord2] = useState(0)
   const [mounted, setMounted] = useState(false)
   const [dashboardMetrics, setDashboardMetrics] = useState({
-    visitors: 0,
-    conversions: 0,
-    revenue: 0
+    visitors: Math.floor(Math.random() * 5000),
+    conversions: Math.floor(Math.random() * 500),
+    revenue: Math.floor(Math.random() * 25000)
   })
   const animationFrameId = useRef<number | null>(null)
   const dashboardRef = useRef(null)
@@ -24,9 +24,9 @@ export function HeroSection() {
   useEffect(() => {
     const updateMetrics = () => {
       setDashboardMetrics(prev => ({
-        visitors: Math.min(prev.visitors + Math.floor(Math.random() * 50), 10000),
-        conversions: Math.min(prev.conversions + Math.floor(Math.random() * 5), 1000),
-        revenue: Math.min(prev.revenue + Math.floor(Math.random() * 1000), 50000)
+        visitors: Math.min(prev.visitors + Math.floor(Math.random() * 100), 10000),
+        conversions: Math.min(prev.conversions + Math.floor(Math.random() * 10), 1000),
+        revenue: Math.min(prev.revenue + Math.floor(Math.random() * 2000), 50000)
       }))
       animationFrameId.current = requestAnimationFrame(updateMetrics)
     }
@@ -501,67 +501,4 @@ export function HeroSection() {
                       </div>
                       
                       <div className="bg-[#131b2c] border border-[#F72585]/30 rounded p-3 hover:border-[#F72585]/40 transition-colors">
-                        <div className="flex items-center mb-2">
-                          <div className="h-6 w-6 bg-[#F72585]/30 rounded-full flex items-center justify-center mr-2">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#F72585]" fill="none" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                          </div>
-                          <span className="text-xs text-[#F72585] font-medium">Claude</span>
-                        </div>
-                        <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">88</div>
-                          <div className="text-xs text-emerald-400">+5 ↑</div>
-                        </div>
-                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#F72585] rounded-full" style={{width: "88%"}}></div>
-                        </div>
-                      </div>
-
-                      <div className="bg-[#131b2c] border border-[#4CC9F0]/30 rounded p-3 hover:border-[#4CC9F0]/40 transition-colors">
-                        <div className="flex items-center mb-2">
-                          <div className="h-6 w-6 bg-[#4CC9F0]/30 rounded-full flex items-center justify-center mr-2">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#4CC9F0]" fill="none" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                            </svg>
-                          </div>
-                          <span className="text-xs text-[#4CC9F0] font-medium">Bard</span>
-                        </div>
-                        <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">82</div>
-                          <div className="text-xs text-emerald-400">+3 ↑</div>
-                        </div>
-                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#4CC9F0] rounded-full" style={{width: "82%"}}></div>
-                        </div>
-                      </div>
-
-                      <div className="bg-[#131b2c] border border-[#FF9E00]/30 rounded p-3 hover:border-[#FF9E00]/40 transition-colors">
-                        <div className="flex items-center mb-2">
-                          <div className="h-6 w-6 bg-[#FF9E00]/30 rounded-full flex items-center justify-center mr-2">
-                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#FF9E00]" fill="none" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
-                            </svg>
-                          </div>
-                          <span className="text-xs text-[#FF9E00] font-medium">Analytics</span>
-                        </div>
-                        <div className="flex items-end justify-between">
-                          <div className="text-lg font-bold text-white">95</div>
-                          <div className="text-xs text-emerald-400">+8 ↑</div>
-                        </div>
-                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
-                          <div className="h-full bg-[#FF9E00] rounded-full" style={{width: "95%"}}></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
+                        
