@@ -158,14 +158,15 @@ export default function ContactPage() {
             </div>
           </div>
 
-        {/* Brands Section */}
-        <div className="py-20 bg-white overflow-hidden">
-          <div className="flex space-x-12 animate-scroll">
-            {[...brands, ...brands].map((brand, i) => (
-              <div key={i} className="flex-none grayscale opacity-50 hover:opacity-75 transition-opacity">
-                <brand.Logo className="h-8 w-auto" />
-              </div>
-            ))}
+          {/* Brands Section */}
+          <div className="py-20 bg-white overflow-hidden">
+            <div className="flex space-x-12 animate-scroll">
+              {[...brands, ...brands].map((brand, i) => (
+                <div key={i} className="flex-none grayscale opacity-50 hover:opacity-75 transition-opacity">
+                  <brand.Logo className="h-8 w-auto" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </main>
