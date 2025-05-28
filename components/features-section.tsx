@@ -245,26 +245,35 @@ export function FeaturesSection() {
 
               {/* Feature Image */}
               <motion.div style={{ y: imageY }} className="relative mt-12">
-                <div className="relative h-[300px] bg-white rounded-xl p-6 shadow-lg overflow-hidden mt-[72px]">
+                <div className="relative h-[400px] bg-white rounded-xl p-6 shadow-lg overflow-hidden">
                   {/* AIO Feature */}
                   <motion.div
                     className="absolute inset-0 p-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ 
                       opacity: activeFeature === 0 ? 1 : 0,
-                      y: activeFeature === 0 ? 0 : 20 
+                      y: activeFeature === 0 ? 0 : 20,
+                      transition: { duration: 0.4 }
                     }}
-                    transition={{ duration: 0.4 }}
                     style={{ display: activeFeature === 0 ? 'block' : 'none' }}
                   >
                     <div className="space-y-4">
                       <div className="search-element bg-gray-100 rounded-full p-3 flex items-center">
                         <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
                         <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
-                          <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden">
+                          <motion.span 
+                            className="text-sm text-gray-600 whitespace-nowrap overflow-hidden"
+                            initial={{ width: 0 }}
+                            animate={{ width: "100%" }}
+                            transition={{ duration: 1.5, delay: 0.5 }}
+                          >
                             find the best seo company
-                          </span>
-                          <span className="cursor animate-pulse">|</span>
+                          </motion.span>
+                          <motion.span 
+                            className="inline-block w-0.5 h-4 bg-gray-400 ml-1"
+                            animate={{ opacity: [1, 0] }}
+                            transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                          />
                         </div>
                       </div>
                       
@@ -306,9 +315,9 @@ export function FeaturesSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ 
                       opacity: activeFeature === 1 ? 1 : 0,
-                      y: activeFeature === 1 ? 0 : 20 
+                      y: activeFeature === 1 ? 0 : 20,
+                      transition: { duration: 0.4 }
                     }}
-                    transition={{ duration: 0.4 }}
                     style={{ display: activeFeature === 1 ? 'block' : 'none' }}
                   >
                     <div className="space-y-4">
@@ -325,7 +334,12 @@ export function FeaturesSection() {
                               scale: activeFeature === 1 ? 1 : 0,
                               rotateY: activeFeature === 1 ? 0 : 90
                             }}
-                            transition={{ delay: index * 0.1 }}
+                            transition={{ 
+                              delay: index * 0.1,
+                              duration: 0.6,
+                              type: "spring",
+                              stiffness: 200
+                            }}
                           >
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                           </motion.svg>
@@ -342,7 +356,11 @@ export function FeaturesSection() {
                               opacity: activeFeature === 1 ? 1 : 0,
                               x: activeFeature === 1 ? 0 : -20
                             }}
-                            transition={{ delay: 0.5 + (i * 0.2) }}
+                            transition={{ 
+                              delay: 0.8 + (i * 0.2),
+                              duration: 0.4,
+                              type: "spring"
+                            }}
                           >
                             <div className="flex items-center space-x-2">
                               <div className="w-8 h-8 bg-gray-200 rounded-full" />
@@ -363,9 +381,9 @@ export function FeaturesSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ 
                       opacity: activeFeature === 2 ? 1 : 0,
-                      y: activeFeature === 2 ? 0 : 20 
+                      y: activeFeature === 2 ? 0 : 20,
+                      transition: { duration: 0.4 }
                     }}
-                    transition={{ duration: 0.4 }}
                     style={{ display: activeFeature === 2 ? 'block' : 'none' }}
                   >
                     <div className="space-y-4">
@@ -376,7 +394,11 @@ export function FeaturesSection() {
                           opacity: activeFeature === 2 ? 1 : 0,
                           y: activeFeature === 2 ? 0 : -10
                         }}
-                        transition={{ delay: 0.3 }}
+                        transition={{ 
+                          delay: 0.3,
+                          duration: 0.4,
+                          type: "spring"
+                        }}
                       >
                         <div className="text-xs text-gray-400 mb-1">Sponsored</div>
                         <div className="text-blue-600 font-medium">LeadAIO - AI-Powered SEO Platform</div>
@@ -392,7 +414,11 @@ export function FeaturesSection() {
                             opacity: activeFeature === 2 ? 1 : 0,
                             y: activeFeature === 2 ? 0 : -10
                           }}
-                          transition={{ delay: 0.5 + (i * 0.2) }}
+                          transition={{ 
+                            delay: 0.5 + (i * 0.2),
+                            duration: 0.4,
+                            type: "spring"
+                          }}
                         >
                           <div className="h-4 bg-gray-200 rounded w-3/4" />
                           <div className="h-3 bg-gray-200 rounded w-1/2 mt-2" />
