@@ -420,6 +420,26 @@ section {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Typing cursor animation */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Search text typing animation */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.search-text {
+  animation: typing 2s steps(40, end);
+}
+
 /* Speedometer styles */
 .speedometer {
   position: relative;
