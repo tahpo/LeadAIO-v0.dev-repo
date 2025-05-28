@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import Header from '@/components/header';
+import { Header } from '@/components/header';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
