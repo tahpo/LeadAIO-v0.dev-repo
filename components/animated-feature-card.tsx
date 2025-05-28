@@ -138,7 +138,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
             <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
               <div className="relative flex items-center w-full">
-                <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden" style={{ width: 0 }}>
+                <span className="search-text text-sm text-gray-600 whitespace-nowrap overflow-hidden\" style={{ width: 0 }}>
                 find the best seo company
                 </span>
                 <span className="cursor absolute text-gray-600" style={{ left: "100%" }}>|</span>
