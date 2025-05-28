@@ -35,17 +35,26 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       animationRef.current
         .add({
           targets: cardRef.current.querySelectorAll(".search-element"),
-          delay: anime.stagger(600),
+          delay: anime.stagger(300),
           translateY: [-20, 0],
           opacity: [0, 1],
-          duration: 1200,
+          duration: 800,
           easing: "easeOutElastic(1, .5)"
         })
         .add({
           targets: cardRef.current.querySelector(".search-text"),
-          width: ['0%', '100%'],
+          width: [0, function(el) { return el.scrollWidth; }],
           duration: 800,
           delay: 200,
+          easing: "linear"
+        })
+        .add({
+          targets: cardRef.current.querySelector(".cursor"),
+          translateX: [0, function(el) {
+            const textEl = el.previousElementSibling;
+            return textEl ? textEl.scrollWidth : 0;
+          }],
+          duration: 800,
           easing: "linear"
         })
         .add({
@@ -59,17 +68,19 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           targets: cardRef.current.querySelectorAll("*"),
           opacity: [1, 0],
           duration: 800,
-          delay: 1500,
+          delay: 2000,
           complete: () => {
             // Reset elements for next loop
             anime.set([
               cardRef.current.querySelectorAll(".search-element"),
               cardRef.current.querySelector(".search-text"),
+              cardRef.current.querySelector(".cursor"),
               cardRef.current.querySelectorAll(".result")
             ], {
               translateY: 0,
               opacity: 0,
-              width: '0%'
+              width: 0,
+              translateX: 0
             });
           }
         })
@@ -79,12 +90,12 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       const starsAnimation = anime({
         targets: cardRef.current.querySelectorAll(".review-star"),
         scale: [0.5, 1],
-        rotate: [0, 360],
+        rotate: 360,
         delay: anime.stagger(100),
         duration: 800,
         loop: true,
-        direction: 'normal',
-        easing: "easeOutElastic(1, .5)"
+        easing: "easeInOutQuad",
+        endDelay: 1000
       })
 
       const cardsAnimation = anime({
@@ -144,11 +155,11 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           <div className="search-element bg-gray-100 rounded-full p-3 flex items-center">
             <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
-              <div className="relative flex items-center w-full">
-                <span className="search-text text-sm text-gray-600 whitespace-nowrap" style={{ width: '0%' }}>
+              <div className="relative flex items-center">
+                <span className="search-text text-sm text-gray-600 whitespace-nowrap" style={{ width: 0 }}>
                   find the best seo company
                 </span>
-                <span className="cursor absolute text-gray-600 animate-blink">|</span>
+                <span className="cursor absolute text-gray-600 animate-blink" style={{ transform: 'translateX(0)' }}>|</span>
               </div>
             </div>
           </div>
