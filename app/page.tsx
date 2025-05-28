@@ -1,11 +1,15 @@
+import dynamic from 'next/dynamic'
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
-import { FeaturesSection } from "@/components/features-section"
 import { HowItWorks } from "@/components/how-it-works"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { SpeedPerformanceSection } from "@/components/speed-performance-section"
 import { WorkflowSection } from "@/components/workflow-section"
 import { FooterSection } from "@/components/footer-section"
+
+const FeaturesSection = dynamic(() => import('@/components/features-section'), {
+  ssr: false
+})
 
 export default function Home() {
   return (

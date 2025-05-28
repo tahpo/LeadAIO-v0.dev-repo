@@ -34,7 +34,7 @@ const features = [
   },
 ]
 
-export function FeaturesSection() {
+export default function FeaturesSection() {
   const [activeFeature, setActiveFeature] = useState(0)
   const [isLocked, setIsLocked] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
