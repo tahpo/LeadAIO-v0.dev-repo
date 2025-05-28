@@ -34,7 +34,7 @@ const features = [
   },
 ]
 
-export default function FeaturesSection() {
+export function FeaturesSection() {
   const [activeFeature, setActiveFeature] = useState(0)
   const [isLocked, setIsLocked] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -251,7 +251,7 @@ export default function FeaturesSection() {
               <motion.div style={{ y: imageY }} className="relative mt-12">
                 <div className="feature-image-container bg-[#404040]">
                   {features.map((feature, index) => {
-                    const FeatureComponent = feature.component;
+                    const FeatureComponent = feature.component
                     return (
                       <motion.div
                         key={feature.id}
@@ -274,7 +274,8 @@ export default function FeaturesSection() {
                       >
                         <FeatureComponent />
                       </motion.div>
-                  ))}
+                    )
+                  })}
                 </div>
 
                 {/* Feature indicator dots */}
