@@ -145,11 +145,10 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           <div className="search-element bg-gray-100 rounded-full p-3 flex items-center">
             <div className="w-4 h-4 bg-gray-400 rounded-full mr-3" />
             <div className="flex-1 h-6 bg-white rounded-full overflow-hidden flex items-center px-3">
-              <div className="search-input relative flex items-center w-0">
-                <span className="text-sm text-gray-600 whitespace-nowrap">
+              <div className="search-input flex items-center w-0">
+                <span className="text-sm text-gray-600 whitespace-nowrap overflow-hidden">
                   find the best seo company
                 </span>
-                <span className="absolute right-0 text-gray-600 animate-blink">|</span>
               </div>
             </div>
           </div>
@@ -220,34 +219,4 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       )}
     </motion.div>
   )
-}
-
-// Add cursor blink animation
-const styles = `
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-  
-  .animate-blink {
-    animation: blink 0.7s infinite;
-  }
-  
-  .search-text {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden; 
-    position: relative;
-  }
-  
-  .cursor {
-    right: 0;
-  }
-`
-
-// Add styles to head
-if (typeof document !== 'undefined') {
-  const styleSheet = document.createElement("style")
-  styleSheet.textContent = styles
-  document.head.appendChild(styleSheet)
 }
