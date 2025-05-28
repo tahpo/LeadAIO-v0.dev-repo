@@ -27,13 +27,13 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         .add({
           translateY: [-20, 0],
           opacity: [0, 1],
-          duration: 800,
+          duration: 1200,
           easing: "easeOutElastic(1, .5)"
         })
         .add({
           targets: cardRef.current.querySelector(".cursor"),
           opacity: [0, 1],
-          duration: 100,
+          duration: 400,
           loop: true,
           direction: "alternate",
           easing: "linear"
@@ -41,14 +41,14 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         .add({
           targets: cardRef.current.querySelector(".search-text"),
           width: ["0%", "100%"],
-          duration: 1000,
+          duration: 1500,
           delay: 400
         })
         .add({
           targets: cardRef.current.querySelectorAll(".result"),
           translateY: [-20, 0],
           opacity: [0, 1],
-          duration: 600,
+          duration: 800,
           delay: anime.stagger(200)
         })
     }
@@ -58,9 +58,9 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       anime({
         targets: cardRef.current.querySelectorAll(".review-star"),
         scale: [0, 1],
-        opacity: [0, 1],
+        rotateY: [90, 0],
         delay: anime.stagger(100),
-        duration: 600,
+        duration: 800,
         loop: true,
         direction: "alternate",
         easing: "easeOutElastic(1, .5)"
@@ -72,9 +72,10 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       anime({
         targets: cardRef.current.querySelectorAll(".ppc-element"),
         translateY: [-20, 0],
-        opacity: [0, 1],
+        scale: [0.9, 1],
+        opacity: [0.5, 1],
         delay: anime.stagger(200),
-        duration: 800,
+        duration: 1000,
         loop: true,
         easing: "easeOutElastic(1, .5)"
       })
