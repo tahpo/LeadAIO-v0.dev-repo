@@ -11,12 +11,12 @@ interface AnimatedFeatureCardProps {
 export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardRef, { margin: "-100px", once: false })
+
+  // Track animation state
   const animationRef = useRef<anime.AnimeInstance | null>(null)
 
   useEffect(() => {
     if (!cardRef.current || !isInView) return
-
-    let animation: anime.AnimeInstance | null = null
 
     if (type === "aio") {
       // Clear any existing animation
@@ -25,13 +25,13 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       }
 
       // Create new timeline
-      animation = anime.timeline({
+      animationRef.current = anime.timeline({
         loop: true,
         direction: 'normal',
         easing: 'easeInOutQuad'
       })
 
-      animation
+      animationRef.current
         .add({
           targets: cardRef.current.querySelectorAll(".search-element"),
           delay: anime.stagger(200),
@@ -61,9 +61,9 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
           complete: () => {
             // Reset elements for next loop
             anime.set([
-              cardRef.current?.querySelectorAll(".search-element"),
-              cardRef.current?.querySelector(".search-input"),
-              cardRef.current?.querySelectorAll(".result")
+              cardRef.current.querySelectorAll(".search-element"),
+              cardRef.current.querySelector(".search-input"),
+              cardRef.current.querySelectorAll(".result")
             ], {
               translateY: 0,
               opacity: 0,
@@ -71,10 +71,13 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
             });
           }
         })
+        
+      // Start the animation
+      animationRef.current.play()
     }
 
     if (type === "reputation") {
-      animation = anime({
+      const starsAnimation = anime({
         targets: cardRef.current.querySelectorAll(".review-star"),
         scale: [0.5, 1],
         rotate: 360,
@@ -85,7 +88,7 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         endDelay: 1000
       })
 
-      anime({
+      const cardsAnimation = anime({
         targets: cardRef.current.querySelectorAll(".review-card"),
         translateY: [-20, 0],
         opacity: [0, 1],
@@ -95,10 +98,12 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
         direction: 'normal',
         easing: "easeOutElastic(1, .5)"
       })
+
+      animationRef.current = starsAnimation
     }
 
     if (type === "advertising") {
-      animation = anime({
+      animationRef.current = anime({
         targets: cardRef.current.querySelectorAll(".ppc-element"),
         translateY: [-20, 0],
         scale: [0.9, 1],
@@ -119,20 +124,10 @@ export function AnimatedFeatureCard({ type }: AnimatedFeatureCardProps) {
       })
     }
 
-    animationRef.current = animation
-
     // Cleanup function
     return () => {
       if (animationRef.current) {
         animationRef.current.pause()
-      }
-      if (cardRef.current) {
-        anime.remove(cardRef.current.querySelectorAll(".search-element"))
-        anime.remove(cardRef.current.querySelector(".search-input"))
-        anime.remove(cardRef.current.querySelectorAll(".result"))
-        anime.remove(cardRef.current.querySelectorAll(".review-star"))
-        anime.remove(cardRef.current.querySelectorAll(".review-card"))
-        anime.remove(cardRef.current.querySelectorAll(".ppc-element"))
       }
     }
   }, [isInView, type])

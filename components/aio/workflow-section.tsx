@@ -6,17 +6,13 @@ import anime from 'animejs'
 
 export function AIOWorkflow() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const animationRef = useRef<{
-    row1?: anime.AnimeInstance;
-    row2?: anime.AnimeInstance;
-  }>({})
 
   useEffect(() => {
     const duration = 20000 // 20 seconds for one complete cycle
     const distance = 1000 // Fixed distance for consistent animation
 
     // Animate first row (right to left)
-    animationRef.current.row1 = anime({
+    anime({
       targets: '.workflow-row-1 .workflow-inner',
       translateX: [0, -distance],
       duration: duration,
@@ -25,24 +21,13 @@ export function AIOWorkflow() {
     })
 
     // Animate second row (left to right)
-    animationRef.current.row2 = anime({
+    anime({
       targets: '.workflow-row-2 .workflow-inner',
       translateX: [-distance, 0],
       duration: duration,
       loop: true,
       easing: 'linear'
     })
-
-    // Cleanup function
-    return () => {
-      Object.values(animationRef.current).forEach(animation => {
-        if (animation) {
-          animation.pause()
-        }
-      })
-      anime.remove('.workflow-row-1 .workflow-inner')
-      anime.remove('.workflow-row-2 .workflow-inner')
-    }
   }, [])
 
   const workflowItems = [
@@ -63,7 +48,7 @@ export function AIOWorkflow() {
   const row2 = workflowItems.slice(5)
 
   return (
-    <section ref={containerRef} className="py-24 bg-[#111827] relative overflow-hidden">
+    <section ref={containerRef} className="py-24 bg-gray-50 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-4">

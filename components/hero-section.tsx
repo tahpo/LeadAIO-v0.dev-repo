@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from "react"
+"use client"
+
+import { useState, useEffect, useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import anime from 'animejs'
 
+// Define the words arrays that were missing
 const words1 = ["business", "startup", "brand", "company"]
 const words2 = ["growth", "success", "results", "leads"]
 
@@ -20,13 +23,12 @@ export function HeroSection() {
   const dashboardRef = useRef(null)
   const chartRef = useRef<SVGPathElement>(null)
   const chartRef2 = useRef<SVGPathElement>(null)
-  const metricsAnimationRef = useRef<anime.AnimeInstance | null>(null)
 
   useEffect(() => {
     if (!mounted) return
 
     // Animate initial values with anime.js
-    metricsAnimationRef.current = anime({
+    anime({
       targets: dashboardMetrics,
       visitors: [0, 5000],
       conversions: [0, 500],
@@ -64,10 +66,6 @@ export function HeroSection() {
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current)
       }
-      if (metricsAnimationRef.current) {
-        metricsAnimationRef.current.pause()
-      }
-      anime.remove(dashboardMetrics)
       clearTimeout(timer)
     }
   }, [mounted])
