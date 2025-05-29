@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect, useState, useCallback } from "react"
+import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import anime from 'animejs'
 import { Gauge } from "@/components/ui/gauge"
@@ -9,7 +9,22 @@ import { ContainerScroll } from "@/components/ui/container-scroll-animation"
 export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [gaugeValue, setGaugeValue] = useState(60)
-  const isInView = useInView(containerRef, { once: false, margin: "-100px" })
+  const [isInView, setIsInView] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.1, rootMargin: "-100px" }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     if (!isInView) return
