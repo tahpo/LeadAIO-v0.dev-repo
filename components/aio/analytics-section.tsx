@@ -1,22 +1,18 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import anime from 'animejs'
 
 export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    // Enhanced speedometer animation with higher arc
-    anime({
-      targets: '.speedometer-needle',
-      rotate: [-45, 135], // Increased range for more realistic movement
-      duration: 3000,
-      easing: 'easeInOutQuad',
-      direction: 'alternate',
-      loop: true
-    })
+    // Simulate speedometer effect
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % 7)
+    }, 2000)
 
     // Metrics animation
     anime({
@@ -28,10 +24,10 @@ export function AIOAnalytics() {
       delay: anime.stagger(200)
     })
 
-    // Enhanced ranking bars animation with vertical movement
+    // Ranking bars animation with vertical movement
     anime({
       targets: '.ranking-bar',
-      height: (el) => el.getAttribute('data-height'),
+      scaleY: [0, 1],
       duration: 1500,
       delay: anime.stagger(100),
       easing: 'easeOutElastic(1, .5)',
@@ -39,6 +35,8 @@ export function AIOAnalytics() {
       direction: 'alternate',
       endDelay: 1000
     })
+
+    return () => clearInterval(interval)
   }, [])
 
   return (
@@ -58,30 +56,30 @@ export function AIOAnalytics() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Performance Metrics */}
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-garnett mb-6">Site Performance</h3>
+          <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+            <h3 className="text-xl font-garnett mb-8">Site Performance</h3>
             
-            {/* Enhanced Speedometer */}
-            <div className="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center">
-              <div className="absolute inset-0 rounded-full border-[16px] border-gray-100"></div>
-              <div 
-                className="absolute inset-0 rounded-full border-[16px] border-red-500 border-t-transparent border-l-transparent"
-                style={{ transform: 'rotate(-45deg)' }}
+            {/* Speedometer from home page */}
+            <div className="relative h-[200px] w-[200px] mx-auto mb-12">
+              {/* Background circle */}
+              <div className="absolute inset-0 rounded-full border-[20px] border-gray-200"></div>
+              
+              {/* Progress circle */}
+              <div
+                className="absolute inset-0 rounded-full border-[20px] border-transparent"
+                style={{
+                  borderTopColor: "#4361EE",
+                  borderRightColor: "#4361EE",
+                  borderLeftColor: activeIndex >= 4 ? "#4361EE" : "transparent",
+                  transform: `rotate(${45 + activeIndex * 40}deg)`,
+                  transition: "transform 0.5s ease-out"
+                }}
               ></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-full h-full">
-                  <div 
-                    className="speedometer-needle absolute w-1.5 h-24 bg-red-600 rounded-full shadow-lg"
-                    style={{ 
-                      transformOrigin: 'bottom center',
-                      left: 'calc(50% - 0.75px)',
-                      bottom: '50%'
-                    }}
-                  ></div>
-                </div>
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center mt-8">
-                <div className="text-3xl font-bold">92</div>
+              
+              {/* Center and value */}
+              <div className="absolute inset-0 flex items-center justify-center flex-col">
+                <span className="text-4xl font-bold mb-2">{85 + activeIndex * 2}</span>
+                <span className="text-sm text-gray-500">/ 100</span>
               </div>
             </div>
 
@@ -91,7 +89,7 @@ export function AIOAnalytics() {
                 { label: "Page Speed", value: 95 },
                 { label: "Mobile Score", value: 88 },
                 { label: "Core Web Vitals", value: 92 },
-                { label: "SEO Score", value: 94, className: "mt-4" }
+                { label: "SEO Score", value: 94 }
               ].map((metric, i) => (
                 <div key={i} className="bg-gray-50 rounded-lg p-4">
                   <div 
@@ -105,30 +103,29 @@ export function AIOAnalytics() {
           </div>
 
           {/* Ranking Distribution */}
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-garnett mb-6">Ranking Distribution</h3>
+          <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+            <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
             
-            <div className="flex justify-between h-64 mb-8">
+            <div className="flex items-end justify-between h-64 mb-8">
               {[
+                { label: "Top 10", height: "85%", count: 42, color: "bg-purple-500" },
                 { label: "Top 20", height: "65%", count: 36, color: "bg-purple-400" },
-                { label: "Top 30", height: "50%", count: 42, color: "bg-purple-300" },
-                { label: "Top 40", height: "35%", count: 28, color: "bg-purple-200" },
-                { label: "Top 50", height: "20%", count: 18, color: "bg-purple-100" },
-                { label: "Top 50", height: "20%", count: 18, color: "bg-purple-100" }
+                { label: "Top 30", height: "45%", count: 28, color: "bg-purple-300" },
+                { label: "Top 40", height: "35%", count: 22, color: "bg-purple-200" },
+                { label: "Top 50", height: "25%", count: 18, color: "bg-purple-100" }
               ].map(({ label, height, count, color }, i) => (
                 <div key={i} className="flex flex-col items-center w-16">
-                  <div className="text-sm text-gray-600 mb-2">{label}</div>
-                  <div className="relative w-8 h-full bg-gray-100 rounded-lg overflow-hidden">
+                  <div className="w-12 h-full bg-gray-100 rounded-lg overflow-hidden">
                     <div 
-                      className={`ranking-bar absolute bottom-0 inset-x-0 ${color}`}
-                      style={{ height: '0%' }}
-                      data-height={height}
+                      className={`ranking-bar w-full ${color} transform origin-bottom`}
+                      style={{ height }}
                     >
-                      <div className="absolute top-0 inset-x-0 flex items-center justify-center">
+                      <div className="h-full flex items-center justify-center">
                         <div className="text-white text-sm font-medium">{count}</div>
                       </div>
                     </div>
                   </div>
+                  <div className="text-sm text-gray-600 mt-2">{label}</div>
                 </div>
               ))}
             </div>
