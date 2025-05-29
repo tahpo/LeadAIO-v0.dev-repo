@@ -128,15 +128,15 @@ export function AIOAnalytics() {
           {/* Ranking Distribution */}
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
-            <div className="h-[240px] md:h-[280px] lg:h-[300px] w-full mb-8 md:mb-10 lg:mb-12">
+            <div className="h-[200px] sm:h-[220px] md:h-[240px] lg:h-[260px] w-full mb-6 sm:mb-8 md:mb-10">
               <ChartContainer config={chartConfig}>
-                <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
+                <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 30, left: 10 }}>
                   <CartesianGrid vertical={false} stroke="#f1f5f9" opacity={0.5} />
                   <XAxis 
                     dataKey="position"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748b', fontSize: 12, fontFamily: 'Universal Sans' }}
+                    tick={{ fill: '#64748b', fontSize: 11, fontFamily: 'Universal Sans' }}
                     dy={8}
                   />
                   <ChartTooltip 
@@ -153,7 +153,7 @@ export function AIOAnalytics() {
                     dataKey="keywords" 
                     fill="rgba(168, 85, 247, 0.7)"
                     radius={[4, 4, 0, 0]}
-                    maxBarSize={40}
+                    maxBarSize={35}
                     onMouseEnter={(data, index) => setHoveredBar(index)}
                     onMouseLeave={() => setHoveredBar(null)}
                     className="transition-all duration-200"
