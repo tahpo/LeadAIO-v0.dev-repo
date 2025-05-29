@@ -110,7 +110,7 @@ export function AIOAnalytics() {
                 { label: "Top 30", width: "50%", count: 42, color: "bg-purple-300" },
                 { label: "Top 40", width: "35%", count: 28, color: "bg-purple-200" },
                 { label: "Top 50", width: "20%", count: 18, color: "bg-purple-100" }
-              ].map(({ label, height, count, color }, i) => (
+              ].map(({ label, width, count, color }, i) => (
                 <div key={i} className="flex-1">
                   <div className="text-sm text-gray-600 mb-2">{label}</div>
                   <div className="relative h-8 bg-gray-100 rounded-lg overflow-hidden">
