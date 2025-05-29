@@ -128,7 +128,7 @@ export function AIOAnalytics() {
           {/* Ranking Distribution */}
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
-            <div className="h-[300px] w-full mb-12">
+            <div className="h-[240px] md:h-[280px] lg:h-[300px] w-full mb-8 md:mb-10 lg:mb-12">
               <ChartContainer config={chartConfig}>
                 <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
                   <CartesianGrid vertical={false} stroke="#f1f5f9" opacity={0.5} />
@@ -165,7 +165,7 @@ export function AIOAnalytics() {
               </ChartContainer>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 mt-8">
+            <div className="grid grid-cols-2 gap-3">
               <div className="bg-green-50 rounded-lg p-4">
                 <div className="text-green-600 text-sm mb-1">Improved Rankings</div>
                 <div className="text-2xl font-bold text-green-700">+42%</div>
