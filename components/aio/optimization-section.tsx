@@ -11,29 +11,43 @@ export function AIOOptimization() {
     // Content scanning animation
     anime({
       targets: '.scan-line',
-      translateY: ['-100%', '100%'],
-      duration: 2000,
+      translateY: ['0%', '100%'],
+      duration: 3000,
       easing: 'linear',
-      loop: true
+      loop: true,
+      direction: 'alternate'
     })
 
     // Analysis cards animation
     anime({
       targets: '.optimization-result',
-      translateX: [-20, 0],
+      translateY: [-20, 0],
       opacity: [0, 1],
       delay: anime.stagger(200),
       duration: 800,
-      easing: 'easeOutQuad'
+      easing: 'easeOutQuad',
+      loop: true,
+      direction: 'alternate',
+      endDelay: 1000
     })
 
     // Progress bars animation
     anime({
       targets: '.progress-bar',
-      width: (el) => el.getAttribute('data-progress'),
+      scaleX: [0, 1],
       duration: 1500,
       delay: anime.stagger(150),
-      easing: 'easeOutQuart'
+      easing: 'easeOutQuart',
+      complete: () => {
+        anime({
+          targets: '.progress-bar',
+          opacity: [1, 0.8],
+          duration: 1000,
+          loop: true,
+          direction: 'alternate',
+          easing: 'linear'
+        })
+      }
     })
 
   }, [])
@@ -61,13 +75,13 @@ export function AIOOptimization() {
             <div className="relative bg-gray-50 rounded-lg p-6 h-[300px] overflow-hidden">
               {/* Sample Content */}
               <div className="space-y-4">
-                {[...Array(8)].map((_, i) => (
+                {[...Array(10)].map((_, i) => (
                   <div key={i} className="h-4 bg-gray-200 rounded w-full"></div>
                 ))}
               </div>
 
               {/* Scanning Effect */}
-              <div className="scan-line absolute inset-x-0 h-full bg-gradient-to-b from-blue-500/20 via-blue-500/10 to-transparent pointer-events-none"></div>
+              <div className="scan-line absolute inset-x-0 h-1/3 bg-gradient-to-b from-blue-500/20 via-blue-500/10 to-transparent pointer-events-none"></div>
 
               {/* Analysis Results */}
               <div className="absolute top-4 right-4 space-y-2">
@@ -104,9 +118,9 @@ export function AIOOptimization() {
                   </div>
                   <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                     <div 
-                      className="progress-bar h-full bg-green-500 rounded-full"
+                      className="progress-bar h-full bg-green-500 rounded-full transform origin-left"
                       data-progress={item.progress}
-                      style={{ width: 0 }}
+                      style={{ width: item.progress }}
                     ></div>
                   </div>
                 </div>

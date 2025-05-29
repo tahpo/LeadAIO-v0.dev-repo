@@ -11,7 +11,7 @@ export function AIOAnalytics() {
     // Speedometer animation with correct needle positioning
     anime({
       targets: '.speedometer-needle',
-      rotate: [0, 180],
+      rotate: [-90, 90],
       duration: 3000,
       easing: 'easeInOutQuad',
       direction: 'alternate',
@@ -31,7 +31,7 @@ export function AIOAnalytics() {
     // Chart bar animation with proper positioning
     anime({
       targets: '.chart-bar',
-      height: (el) => el.getAttribute('data-height'),
+      scaleY: [0, 1],
       duration: 1500,
       delay: anime.stagger(100),
       easing: 'easeOutElastic(1, .5)',
@@ -63,10 +63,16 @@ export function AIOAnalytics() {
             <div className="relative w-48 h-48 mx-auto mb-8">
               <div className="absolute inset-0 rounded-full border-8 border-gray-200"></div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <div 
-                  className="speedometer-needle absolute w-1 h-24 bg-red-600 origin-bottom"
-                  style={{ transformOrigin: 'center bottom', left: '50%', bottom: '50%' }}
-                ></div>
+                <div className="relative w-full h-full">
+                  <div 
+                    className="speedometer-needle absolute w-1 h-24 bg-red-600"
+                    style={{ 
+                      transformOrigin: 'bottom center',
+                      left: 'calc(50% - 0.5px)',
+                      bottom: '50%'
+                    }}
+                  ></div>
+                </div>
               </div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-3xl font-bold">92</div>
@@ -98,16 +104,17 @@ export function AIOAnalytics() {
             
             <div className="flex items-end h-64 space-x-6">
               {[
-                { label: "Top 10", height: "85%", count: 24 },
-                { label: "Top 20", height: "65%", count: 36 },
-                { label: "Top 30", height: "45%", count: 42 },
-                { label: "Top 40", height: "30%", count: 28 },
-                { label: "Top 50", height: "20%", count: 18 }
+                { label: "Top 10", height: "85%", count: 24, color: "bg-purple-500" },
+                { label: "Top 20", height: "65%", count: 36, color: "bg-purple-400" },
+                { label: "Top 30", height: "45%", count: 42, color: "bg-purple-300" },
+                { label: "Top 40", height: "30%", count: 28, color: "bg-purple-200" },
+                { label: "Top 50", height: "20%", count: 18, color: "bg-purple-100" }
               ].map(({ label, height, count }, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center">
                   <div className="w-full bg-gray-100 rounded-t-lg overflow-hidden">
                     <div 
-                      className="chart-bar w-full bg-purple-500 origin-bottom h-0"
+                      className={`chart-bar w-full ${color} origin-bottom`}
+                      style={{ height }}
                       data-height={height}
                     >
                       <div className="text-white text-sm font-medium text-center mt-2">{count}</div>
