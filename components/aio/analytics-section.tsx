@@ -129,24 +129,23 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
             
-            <div className="h-[160px] w-full relative overflow-hidden">
+            <div className="h-[240px] w-full">
               <ChartContainer config={chartConfig}>
-                <BarChart data={chartData} margin={{ top: 10, right: 30, bottom: 20, left: 30 }}>
+                <BarChart data={chartData} margin={{ top: 20, right: 20, bottom: 30, left: 20 }}>
                   <CartesianGrid vertical={false} stroke="#f1f5f9" opacity={0.5} />
                   <XAxis 
                     dataKey="position"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748b', fontSize: 13, fontFamily: 'Universal Sans' }}
-                    dy={8}
+                    tick={{ fill: '#64748b', fontSize: 12, fontFamily: 'Universal Sans' }}
                   />
                   <ChartTooltip
-                    cursor={{ fill: 'rgba(168, 85, 247, 0.05)' }}
+                    cursor={{ fill: 'rgba(168, 85, 247, 0.1)' }}
                     content={
                       <ChartTooltipContent
-                        className="bg-white/95 backdrop-blur-sm shadow-lg border border-gray-100 z-50"
+                        className="bg-white shadow-lg border border-gray-100"
                         labelFormatter={(value) => `${value}`}
-                        formatter={(value) => [`${value} Keywords in ${value}`, '']}
+                        formatter={(value) => [`${value} Keywords`, '']}
                       />
                     }
                   />
@@ -154,10 +153,10 @@ export function AIOAnalytics() {
                     dataKey="keywords"
                     fill="#a855f7"
                     radius={[4, 4, 0, 0]}
-                    maxBarSize={40}
+                    maxBarSize={50}
                     onMouseEnter={(data, index) => setHoveredBar(index)}
                     onMouseLeave={() => setHoveredBar(null)}
-                    className="transition-all duration-200 z-10"
+                    className="transition-all duration-200"
                     style={{
                       opacity: hoveredBar !== null ? (hoveredBar === hoveredBar ? '1' : '0.7') : '1'
                     }}
@@ -166,7 +165,7 @@ export function AIOAnalytics() {
               </ChartContainer>
             </div>
 
-            <div className="mt-3 grid grid-cols-2 gap-3">
+            <div className="mt-6 grid grid-cols-2 gap-3">
               <div className="bg-green-50 rounded-lg p-4">
                 <div className="text-green-600 text-sm mb-1">Improved Rankings</div>
                 <div className="text-2xl font-bold text-green-700">+42%</div>
