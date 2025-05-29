@@ -12,29 +12,30 @@ export function AIOOptimization() {
     anime({
       targets: '.scan-line',
       translateY: ['0%', '100%'],
-      duration: 3000,
+      duration: 2000,
       easing: 'linear',
       loop: true
     })
 
     // Progress bars with elastic animation
-    anime({
-      targets: '.progress-bar',
-      width: (el) => el.getAttribute('data-progress'),
-      duration: 1500,
-      delay: anime.stagger(200),
-      easing: 'easeOutElastic(1, .5)'
-    })
+    const progressAnimation = anime.timeline({
+      easing: 'easeOutElastic(1, .5)',
+      duration: 1200
+    });
 
-    // Results fade in with stagger
-    anime({
-      targets: '.optimization-result',
-      translateY: [-20, 0],
-      opacity: [0, 1],
-      duration: 800,
-      delay: anime.stagger(300),
-      easing: 'easeOutQuad'
-    })
+    progressAnimation
+      .add({
+        targets: '.progress-bar',
+        width: (el) => el.getAttribute('data-progress'),
+        delay: anime.stagger(150)
+      })
+      .add({
+        targets: '.optimization-result',
+        translateY: [-20, 0],
+        opacity: [0, 1],
+        delay: anime.stagger(100)
+      });
+
   }, [])
 
   return (

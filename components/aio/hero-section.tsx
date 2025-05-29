@@ -54,24 +54,11 @@ export function AIOHero() {
           >
             <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
               <Link href="/signup">
-                Start free trial <ArrowRight className="ml-2 h-5 w-5" />
+                Get started <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/contact">Talk to an expert</Link>
-            </Button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex justify-center mb-8"
-          >
-            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-              <Link href="/contact">
-                Talk to an expert <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
             </Button>
           </motion.div>
         </div>

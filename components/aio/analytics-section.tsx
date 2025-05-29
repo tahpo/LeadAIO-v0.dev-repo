@@ -8,10 +8,10 @@ export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Speedometer animation with continuous rotation
+    // Speedometer animation with proper positioning
     anime({
       targets: '.speedometer-needle',
-      rotate: [0, 180],
+      rotate: [-45, 135],
       duration: 3000,
       easing: 'easeInOutQuad',
       direction: 'alternate',
@@ -28,16 +28,14 @@ export function AIOAnalytics() {
       delay: anime.stagger(200)
     })
 
-    // Improved chart bar animation
+    // Chart bar animation with proper values
     anime({
       targets: '.chart-bar',
       scaleY: [0, 1],
       duration: 1500,
       delay: anime.stagger(100),
       easing: 'easeOutElastic(1, .5)',
-      loop: true,
-      direction: 'alternate',
-      endDelay: 500
+      loop: false
     })
   }, [])
 
@@ -96,17 +94,25 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-6">Ranking Distribution</h3>
             
-            <div className="flex items-end h-64 space-x-4">
-              {[85, 65, 45, 30, 20].map((height, i) => (
+            <div className="flex items-end h-64 space-x-6">
+              {[
+                { label: "Top 10", height: 85, count: 24 },
+                { label: "Top 20", height: 65, count: 36 },
+                { label: "Top 30", height: 45, count: 42 },
+                { label: "Top 40", height: 30, count: 28 },
+                { label: "Top 50", height: 20, count: 18 }
+              ].map(({ label, height, count }, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center">
                   <div className="w-full bg-gray-100 rounded-t-lg overflow-hidden">
                     <div 
                       className="chart-bar w-full bg-purple-500 origin-bottom"
                       style={{ height: `${height}%` }}
-                    ></div>
+                    >
+                      <div className="text-white text-sm font-medium text-center mt-2">{count}</div>
+                    </div>
                   </div>
                   <div className="mt-2 text-sm text-gray-600">
-                    {`Top ${(i + 1) * 10}`}
+                    {label}
                   </div>
                 </div>
               ))}
