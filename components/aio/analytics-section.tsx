@@ -1,16 +1,34 @@
 "use client"
 
-import React from "react"
-import { useRef, useEffect } from "react"
+import * as React from "react"
+import { useRef, useEffect, useMemo } from "react"
 import { motion } from "framer-motion"
 import anime from 'animejs'
 import { Gauge } from "@/components/ui/gauge"
 import { useInView } from "framer-motion"
+import { BarChart, Bar, XAxis, CartesianGrid } from "recharts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+
+const rankingData = [
+  { position: "Top 10", keywords: 42 },
+  { position: "Top 20", keywords: 36 },
+  { position: "Top 30", keywords: 28 },
+  { position: "Top 40", keywords: 22 },
+  { position: "Top 50", keywords: 18 }
+]
+
+const chartConfig = {
+  keywords: {
+    label: "Keywords",
+    color: "#a855f7"
+  }
+} 
 
 export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: false, margin: "-100px" })
   const [gaugeValue, setGaugeValue] = React.useState(0)
+  const [hoveredBar, setHoveredBar] = React.useState<number | null>(null)
 
   useEffect(() => {
     if (!isInView) return
@@ -36,24 +54,14 @@ export function AIOAnalytics() {
       delay: anime.stagger(200)
     }).play()
 
-    // Ranking bars animation with vertical movement
-    anime({
-      targets: '.ranking-bar',
-      height: (el) => el.getAttribute('data-height'),
-      duration: 1500,
-      delay: anime.stagger(100),
-      easing: 'easeOutElastic(1, .5)'
-    }).play()
-
   }, [isInView])
 
-  const rankingData = [
-    { label: "Top 10", height: "85%", count: 42 },
-    { label: "Top 20", height: "65%", count: 36 },
-    { label: "Top 30", height: "45%", count: 28 },
-    { label: "Top 40", height: "35%", count: 22 },
-    { label: "Top 50", height: "25%", count: 18 }
-  ]
+  const chartData = useMemo(() => {
+    return rankingData.map(item => ({
+      position: item.position,
+      keywords: item.keywords
+    }))
+  }, [])
 
   return (
     <section ref={containerRef} className="py-16 bg-white relative overflow-hidden">
@@ -121,27 +129,38 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
             
-            <div className="flex items-end justify-between h-48 mb-8">
-              {rankingData.map(({ label, height, count }, i) => (
-                <div key={i} className="flex flex-col items-center w-16">
-                  <div className="w-12 bg-gray-100 rounded-lg overflow-hidden group cursor-pointer relative h-full">
-                    <div 
-                      className="ranking-bar absolute bottom-0 left-0 right-0 bg-purple-500/90 transition-all duration-500 group-hover:bg-purple-500"
-                      data-height={height}
-                      style={{ height: "0%" }}
-                    >
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-white text-sm font-medium">{count}</div>
-                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur-sm text-white text-xs py-2 px-3 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-lg">
-                          <div className="font-medium">{count} keywords</div>
-                          <div className="text-gray-300 mt-0.5">in top {label}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-sm text-gray-600 mt-3 font-medium">{label}</div>
-                </div>
-              ))}
+            <div className="h-[300px] w-full">
+              <ChartContainer config={chartConfig}>
+                <BarChart data={chartData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                  <CartesianGrid vertical={false} stroke="#f1f5f9" />
+                  <XAxis 
+                    dataKey="position"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#64748b', fontSize: 12 }}
+                  />
+                  <ChartTooltip
+                    cursor={{ fill: 'transparent' }}
+                    content={
+                      <ChartTooltipContent
+                        labelFormatter={(value) => `${value}`}
+                        formatter={(value) => [`${value} keywords`, 'Keywords']}
+                      />
+                    }
+                  />
+                  <Bar
+                    dataKey="keywords"
+                    fill="#a855f7"
+                    radius={[4, 4, 0, 0]}
+                    onMouseEnter={(data, index) => setHoveredBar(index)}
+                    onMouseLeave={() => setHoveredBar(null)}
+                    className="transition-all duration-300"
+                    style={{
+                      filter: hoveredBar !== null ? `brightness(${hoveredBar === hoveredBar ? '110%' : '95%'})` : 'none'
+                    }}
+                  />
+                </BarChart>
+              </ChartContainer>
             </div>
 
             <div className="mt-8 grid grid-cols-2 gap-4">
