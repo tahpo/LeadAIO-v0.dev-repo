@@ -1,5 +1,10 @@
-import { Suspense } from "react"
+'use client'
 
+import { Suspense } from "react"
+import { useState, useRef, useEffect } from "react"
+import Link from "next/link"
+import { Check, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
 import { PricingContent } from "@/components/pricing-content"
