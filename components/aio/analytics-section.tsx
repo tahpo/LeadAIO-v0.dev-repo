@@ -124,21 +124,22 @@ export function AIOAnalytics() {
             <div className="flex items-end justify-between h-48 mb-8">
               {rankingData.map(({ label, height, count }, i) => (
                 <div key={i} className="flex flex-col items-center w-16">
-                  <div className="w-12 bg-gray-100 rounded-lg overflow-hidden group cursor-pointer relative" style={{ height: "100%" }}>
+                  <div className="w-12 bg-gray-100 rounded-lg overflow-hidden group cursor-pointer relative h-full">
                     <div 
-                      className="ranking-bar absolute bottom-0 w-full bg-purple-500 transition-all duration-300 group-hover:brightness-110"
+                      className="ranking-bar absolute bottom-0 left-0 right-0 bg-purple-500/90 transition-all duration-500 group-hover:bg-purple-500"
                       data-height={height}
                       style={{ height: "0%" }}
                     >
-                      <div className="h-full flex items-center justify-center relative">
+                      <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-white text-sm font-medium">{count}</div>
-                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-1.5 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
-                          Last updated: {new Date().toLocaleDateString()}
+                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur-sm text-white text-xs py-2 px-3 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-lg">
+                          <div className="font-medium">{count} keywords</div>
+                          <div className="text-gray-300 mt-0.5">in top {label}</div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="text-sm text-gray-600 mt-2">{label}</div>
+                  <div className="text-sm text-gray-600 mt-3 font-medium">{label}</div>
                 </div>
               ))}
             </div>

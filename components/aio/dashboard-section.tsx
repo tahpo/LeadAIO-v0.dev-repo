@@ -57,7 +57,14 @@ export function AIODashboard() {
   }, [])
 
   return (
-    <section ref={containerRef} className="py-24 bg-[#111827] relative overflow-hidden">
+    <section className="pt-12 pb-24 bg-[#111827] relative overflow-hidden">
+      {/* Top wave */}
+      <div className="absolute -top-1 left-0 right-0 transform rotate-180">
+        <svg className="w-full h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="#ffffff" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+      </div>
+
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm font-medium mb-4">
@@ -167,6 +174,13 @@ export function AIODashboard() {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Bottom wave */}
+      <div className="absolute -bottom-1 left-0 right-0">
+        <svg className="w-full h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="#ffffff" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
       </div>
     </section>
   )
