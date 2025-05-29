@@ -6,53 +6,51 @@ import anime from 'animejs'
 
 export function AIOOptimization() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(containerRef, { once: false, margin: "-100px" })
 
   useEffect(() => {
-    if (!isInView) return
-    
     // Content scanning animation
-    const scanAnimation = anime({
+    anime({
       targets: '.scan-line',
       translateY: ['-100%', '100%'],
       duration: 3000,
       easing: 'linear',
       loop: true,
-      direction: 'alternate',
-      autoplay: false
+      direction: 'alternate'
     })
 
     // Analysis cards animation
-    const cardsAnimation = anime({
+    anime({
       targets: '.optimization-result',
       translateY: [-20, 0],
       opacity: [0, 1],
       delay: anime.stagger(200),
       duration: 800,
-      easing: 'easeOutQuad'
+      easing: 'easeOutQuad',
+      loop: true,
+      direction: 'alternate',
+      endDelay: 1000
     })
 
     // Progress bars animation
-    const progressAnimation = anime({
+    anime({
       targets: '.progress-bar',
       scaleX: [0, 1],
       duration: 1500,
       delay: anime.stagger(150),
-      easing: 'easeOutQuart'
+      easing: 'easeOutQuart',
+      complete: () => {
+        anime({
+          targets: '.progress-bar',
+          opacity: [1, 0.8],
+          duration: 1000,
+          loop: true,
+          direction: 'alternate',
+          easing: 'linear'
+        })
+      }
     })
 
-    if (isInView) {
-      scanAnimation.play()
-      cardsAnimation.play()
-      progressAnimation.play()
-    }
-
-    return () => {
-      scanAnimation.pause()
-      cardsAnimation.pause()
-      progressAnimation.pause()
-    }
-  }, [isInView])
+  }, [])
 
   return (
     <section ref={containerRef} className="py-24 bg-gray-50 relative overflow-hidden">
@@ -74,7 +72,7 @@ export function AIOOptimization() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Content Analysis</h3>
             
-            <div className="relative bg-gray-50 rounded-lg p-6 h-[400px] overflow-hidden">
+            <div className="relative bg-gray-50 rounded-lg p-6 h-[600px] overflow-hidden">
               {/* Sample Content */}
               <div className="space-y-4">
                 {[...Array(10)].map((_, i) => (

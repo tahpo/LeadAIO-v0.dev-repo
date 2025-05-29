@@ -7,11 +7,11 @@ import { AIOOptimization } from "@/components/aio/optimization-section"
 
 export default function AIOPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white pt-20">
       <Header />
-      <div className="relative pt-24">
+      <div className="relative pt-8">
         <AIOHero />
-        <div className="relative z-10">
+        <div className="relative -mt-32 z-10">
           <AIODashboard />
         </div>
       </div>

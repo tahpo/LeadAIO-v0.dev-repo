@@ -3,63 +3,41 @@
 import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import anime from 'animejs'
-import { Gauge } from "@/components/ui/gauge"
-import { ContainerScroll } from "@/components/ui/container-scroll-animation"
 
 export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [gaugeValue, setGaugeValue] = useState(60)
-  const [isInView, setIsInView] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting)
-      },
-      { threshold: 0.1, rootMargin: "-100px" }
-    )
+    // Simulate speedometer effect
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % 7)
+    }, 2000)
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current)
-    }
+    // Metrics animation
+    anime({
+      targets: '.metric-value',
+      innerHTML: (el) => [0, el.getAttribute('data-value')],
+      round: 1,
+      duration: 2000,
+      easing: 'easeOutExpo',
+      delay: anime.stagger(200)
+    })
 
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (!isInView) return
-
-    const animation = anime({
+    // Ranking bars animation with vertical movement
+    anime({
       targets: '.ranking-bar',
       height: (el) => el.getAttribute('data-height'),
       duration: 1500,
       delay: anime.stagger(100),
       easing: 'easeOutElastic(1, .5)',
-      begin: () => {
-        // Start gauge animation
-        anime({
-          targets: { value: gaugeValue },
-          value: [0, 85],
-          duration: 2000,
-          round: 1,
-          easing: 'easeOutExpo',
-          update: (anim) => {
-            setGaugeValue(Math.round(anim.animations[0].currentValue))
-          }
-        })
-      }
-    });
+      loop: true,
+      direction: 'alternate',
+      endDelay: 1000
+    })
 
-    return () => animation.pause()
-  }, [isInView])
-
-  const rankingData = [
-    { label: "Top 10", height: "85%", count: 42 },
-    { label: "Top 20", height: "65%", count: 36 },
-    { label: "Top 30", height: "45%", count: 28 },
-    { label: "Top 40", height: "35%", count: 22 },
-    { label: "Top 50", height: "25%", count: 18 }
-  ]
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
@@ -82,15 +60,26 @@ export function AIOAnalytics() {
             <h3 className="text-xl font-garnett mb-8">Site Performance</h3>
             
             {/* Speedometer */}
-            <div className="relative mx-auto mb-12">
-              <Gauge 
-                value={gaugeValue} 
-                size="xl"
-                showValue={true}
-                valueLabel="Performance Score"
-                variant="gradient"
-                gradientColors={["#4361EE", "#7209B7"]}
-              />
+            <div className="relative h-[200px] w-[200px] mx-auto mb-12">
+              {/* Background circle */}
+              <div className="absolute inset-0 rounded-full border-[20px] border-gray-100"></div>
+              
+              {/* Progress circle */}
+              <div
+                className="absolute inset-0 rounded-full border-[20px] border-transparent transition-transform duration-500 ease-out"
+                style={{
+                  borderTopColor: "#4361EE",
+                  borderRightColor: "#4361EE",
+                  borderLeftColor: activeIndex >= 4 ? "#4361EE" : "transparent",
+                  transform: `rotate(${-45 + activeIndex * 40}deg)`,
+                }}
+              ></div>
+              
+              {/* Center and value */}
+              <div className="absolute inset-0 flex items-center justify-center flex-col">
+                <span className="text-4xl font-bold mb-4">{85 + activeIndex * 2}</span>
+                <span className="text-sm text-gray-500">Performance Score</span>
+              </div>
             </div>
 
             {/* Metrics Grid */}
@@ -117,11 +106,17 @@ export function AIOAnalytics() {
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
             
             <div className="flex items-end justify-between h-64 mb-8">
-              {rankingData.map(({ label, height, count }, i) => (
+              {[
+                { label: "Top 10", height: "85%", count: 42, color: "bg-purple-500" },
+                { label: "Top 20", height: "65%", count: 36, color: "bg-purple-400" },
+                { label: "Top 30", height: "45%", count: 28, color: "bg-purple-300" },
+                { label: "Top 40", height: "35%", count: 22, color: "bg-purple-200" },
+                { label: "Top 50", height: "25%", count: 18, color: "bg-purple-100" }
+              ].map(({ label, height, count, color }, i) => (
                 <div key={i} className="flex flex-col items-center w-16">
                   <div className="w-12 bg-gray-100 rounded-lg overflow-hidden" style={{ height: "100%" }}>
                     <div 
-                      className="ranking-bar w-full bg-purple-500 opacity-0"
+                      className={`ranking-bar w-full ${color} transition-all duration-500`}
                       data-height={height}
                       style={{ height: "0%" }}
                     >
