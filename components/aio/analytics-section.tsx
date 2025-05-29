@@ -1,18 +1,29 @@
 "use client"
 
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import anime from 'animejs'
+import { Gauge } from "@/components/ui/gauge"
+import { useInView } from "framer-motion"
 
 export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const isInView = useInView(containerRef, { once: false, margin: "-100px" })
+  const [gaugeValue, setGaugeValue] = React.useState(0)
 
   useEffect(() => {
-    // Simulate speedometer effect
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % 7)
-    }, 2000)
+    if (!isInView) return
+
+    // Animate gauge value
+    anime({
+      targets: { value: 0 },
+      value: 92,
+      duration: 2000,
+      easing: 'easeOutExpo',
+      update: (anim) => {
+        setGaugeValue(Math.round(anim.progress))
+      }
+    })
 
     // Metrics animation
     anime({
@@ -22,7 +33,7 @@ export function AIOAnalytics() {
       duration: 2000,
       easing: 'easeOutExpo',
       delay: anime.stagger(200)
-    })
+    }).play()
 
     // Ranking bars animation with vertical movement
     anime({
@@ -30,14 +41,18 @@ export function AIOAnalytics() {
       height: (el) => el.getAttribute('data-height'),
       duration: 1500,
       delay: anime.stagger(100),
-      easing: 'easeOutElastic(1, .5)',
-      loop: true,
-      direction: 'alternate',
-      endDelay: 1000
-    })
+      easing: 'easeOutElastic(1, .5)'
+    }).play()
 
-    return () => clearInterval(interval)
-  }, [])
+  }, [isInView])
+
+  const rankingData = [
+    { label: "Top 10", height: "85%", count: 42 },
+    { label: "Top 20", height: "65%", count: 36 },
+    { label: "Top 30", height: "45%", count: 28 },
+    { label: "Top 40", height: "35%", count: 22 },
+    { label: "Top 50", height: "25%", count: 18 }
+  ]
 
   return (
     <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
@@ -59,27 +74,27 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Site Performance</h3>
             
-            {/* Speedometer */}
-            <div className="relative h-[200px] w-[200px] mx-auto mb-12">
-              {/* Background circle */}
-              <div className="absolute inset-0 rounded-full border-[20px] border-gray-100"></div>
-              
-              {/* Progress circle */}
-              <div
-                className="absolute inset-0 rounded-full border-[20px] border-transparent transition-transform duration-500 ease-out"
-                style={{
-                  borderTopColor: "#4361EE",
-                  borderRightColor: "#4361EE",
-                  borderLeftColor: activeIndex >= 4 ? "#4361EE" : "transparent",
-                  transform: `rotate(${-45 + activeIndex * 40}deg)`,
+            {/* Gauge */}
+            <div className="relative mx-auto mb-16 flex flex-col items-center">
+              <Gauge
+                value={gaugeValue}
+                size={200}
+                strokeWidth={12}
+                primary={{
+                  0: "danger",
+                  40: "warning",
+                  60: "info",
+                  80: "success"
                 }}
-              ></div>
-              
-              {/* Center and value */}
-              <div className="absolute inset-0 flex items-center justify-center flex-col">
-                <span className="text-4xl font-bold mb-4">{85 + activeIndex * 2}</span>
-                <span className="text-sm text-gray-500">Performance Score</span>
-              </div>
+                secondary={{
+                  0: "#e5e7eb"
+                }}
+                showValue={true}
+                className={{
+                  textClassName: "font-garnett"
+                }}
+              />
+              <span className="text-sm text-gray-500 mt-4">Performance Score</span>
             </div>
 
             {/* Metrics Grid */}
@@ -105,18 +120,12 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
             
-            <div className="flex items-end justify-between h-64 mb-8">
-              {[
-                { label: "Top 10", height: "85%", count: 42, color: "bg-purple-500" },
-                { label: "Top 20", height: "65%", count: 36, color: "bg-purple-400" },
-                { label: "Top 30", height: "45%", count: 28, color: "bg-purple-300" },
-                { label: "Top 40", height: "35%", count: 22, color: "bg-purple-200" },
-                { label: "Top 50", height: "25%", count: 18, color: "bg-purple-100" }
-              ].map(({ label, height, count, color }, i) => (
+            <div className="flex items-end justify-between h-48 mb-8">
+              {rankingData.map(({ label, height, count }, i) => (
                 <div key={i} className="flex flex-col items-center w-16">
                   <div className="w-12 bg-gray-100 rounded-lg overflow-hidden" style={{ height: "100%" }}>
                     <div 
-                      className={`ranking-bar w-full ${color} transition-all duration-500`}
+                      className={`ranking-bar w-full bg-purple-500 opacity-${90 - i * 10} transition-all duration-500`}
                       data-height={height}
                       style={{ height: "0%" }}
                     >
