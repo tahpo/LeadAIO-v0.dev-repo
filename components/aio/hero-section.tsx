@@ -7,9 +7,9 @@ import Link from "next/link"
 
 export function AIOHero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-24 overflow-hidden">
       {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fdfcfa] to-white"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-cream to-white"></div>
       
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -32,13 +32,13 @@ export function AIOHero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-6"
           >
             <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-4">
               AI-Powered SEO
             </span>
-            <h1 className="text-5xl md:text-6xl font-garnett mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            <h1 className="text-5xl md:text-6xl font-garnett mb-8 leading-[1.1] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
               Transform Your Search Rankings with AI
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto font-universal">
@@ -65,10 +65,9 @@ export function AIOHero() {
       </div>
 
       {/* Wave Divider */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg className="w-full h-24" viewBox="0 0 1440 74" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1440 74V39.6354C1360.52 13.2118 1273.95 0 1180.29 0C1036.21 0 905.679 27.9669 790.698 74H1440Z" fill="white"/>
-          <path d="M790.698 74C630.471 27.9669 445.382 0 246.431 0C160.975 0 81.0039 6.60589 0 19.8177V74H790.698Z" fill="white"/>
+      <div className="absolute -bottom-1 left-0 right-0">
+        <svg className="w-full h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="#111827" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
         </svg>
       </div>
     </section>

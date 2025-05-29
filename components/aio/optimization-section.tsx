@@ -63,7 +63,7 @@ export function AIOOptimization() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Content Analysis</h3>
             
-            <div className="relative bg-gray-50 rounded-lg p-6 h-[360px] overflow-hidden">
+            <div className="relative bg-gray-50 rounded-lg p-6 h-[320px] overflow-hidden">
               {/* Sample Content */}
               <div className="space-y-4">
                 {[...Array(10)].map((_, i) => (
@@ -77,9 +77,9 @@ export function AIOOptimization() {
               {/* Analysis Results */}
               <div className="absolute top-4 right-4 space-y-4">
                 {[
-                  { label: "SEO Score", score: "95%", color: "text-green-600", className: "mt-8 min-w-[140px]" },
-                  { label: "Readability", score: "A+", color: "text-blue-600", className: "min-w-[140px]" },
-                  { label: "Keywords", score: "12", color: "text-purple-600", className: "min-w-[140px]" }
+                  { label: "SEO Score", score: "95%", color: "text-green-600", className: "mt-8 min-w-[160px]" },
+                  { label: "Readability", score: "A+", color: "text-blue-600", className: "min-w-[160px]" },
+                  { label: "Keywords", score: "12", color: "text-purple-600", className: "min-w-[160px]" }
                 ].map((result, i) => (
                   <div key={i} className={`optimization-result opacity-0 bg-white rounded-lg p-3 shadow-sm text-sm flex justify-between items-center ${result.className || ''}`}>
                     <span className="text-gray-600">{result.label}</span>

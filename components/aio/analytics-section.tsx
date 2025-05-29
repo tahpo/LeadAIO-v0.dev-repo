@@ -124,15 +124,15 @@ export function AIOAnalytics() {
             <div className="flex items-end justify-between h-48 mb-8">
               {rankingData.map(({ label, height, count }, i) => (
                 <div key={i} className="flex flex-col items-center w-16">
-                  <div className="w-12 bg-gray-100 rounded-lg overflow-hidden group cursor-pointer" style={{ height: "100%" }}>
+                  <div className="w-12 bg-gray-100 rounded-lg overflow-hidden group cursor-pointer relative" style={{ height: "100%" }}>
                     <div 
-                      className="ranking-bar w-full bg-purple-500 transition-all duration-300 group-hover:brightness-110"
+                      className="ranking-bar absolute bottom-0 w-full bg-purple-500 transition-all duration-300 group-hover:brightness-110"
                       data-height={height}
                       style={{ height: "0%" }}
                     >
                       <div className="h-full flex items-center justify-center relative">
                         <div className="text-white text-sm font-medium">{count}</div>
-                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-1.5 px-3 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
                           Last updated: {new Date().toLocaleDateString()}
                         </div>
                       </div>
