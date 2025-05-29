@@ -128,7 +128,7 @@ export function AIOAnalytics() {
           {/* Ranking Distribution */}
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
-            <div className="h-[180px] w-full mb-4">
+            <div className="h-[300px] w-full mb-12">
               <ChartContainer config={chartConfig}>
                 <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
                   <CartesianGrid vertical={false} stroke="#f1f5f9" opacity={0.5} />
@@ -139,7 +139,7 @@ export function AIOAnalytics() {
                     tick={{ fill: '#64748b', fontSize: 12, fontFamily: 'Universal Sans' }}
                     dy={8}
                   />
-                  <ChartTooltip
+                  <ChartTooltip 
                     cursor={{ fill: 'rgba(168, 85, 247, 0.1)' }}
                     content={
                       <ChartTooltipContent
@@ -150,7 +150,7 @@ export function AIOAnalytics() {
                     }
                   />
                   <Bar
-                    dataKey="keywords"
+                    dataKey="keywords" 
                     fill="#a855f7"
                     radius={[4, 4, 0, 0]}
                     maxBarSize={40}
@@ -165,7 +165,7 @@ export function AIOAnalytics() {
               </ChartContainer>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 mt-8">
               <div className="bg-green-50 rounded-lg p-4">
                 <div className="text-green-600 text-sm mb-1">Improved Rankings</div>
                 <div className="text-2xl font-bold text-green-700">+42%</div>
