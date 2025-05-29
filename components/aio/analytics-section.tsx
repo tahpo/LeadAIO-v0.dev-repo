@@ -8,10 +8,10 @@ export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Speedometer animation
+    // Enhanced speedometer animation with higher arc
     anime({
       targets: '.speedometer-needle',
-      rotate: [0, 180],
+      rotate: [-45, 135], // Increased range for more realistic movement
       duration: 3000,
       easing: 'easeInOutQuad',
       direction: 'alternate',
@@ -28,14 +28,16 @@ export function AIOAnalytics() {
       delay: anime.stagger(200)
     })
 
-    // Ranking bars animation
+    // Enhanced ranking bars animation with vertical movement
     anime({
       targets: '.ranking-bar',
-      width: (el) => el.getAttribute('data-width'),
+      height: (el) => el.getAttribute('data-height'),
       duration: 1500,
       delay: anime.stagger(100),
       easing: 'easeOutElastic(1, .5)',
-      loop: false
+      loop: true,
+      direction: 'alternate',
+      endDelay: 1000
     })
   }, [])
 
@@ -59,23 +61,26 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-6">Site Performance</h3>
             
-            {/* Improved Speedometer */}
+            {/* Enhanced Speedometer */}
             <div className="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center">
-              <div className="absolute inset-0 rounded-full border-[16px] border-gray-200"></div>
-              <div className="absolute inset-0 rounded-full border-[16px] border-t-red-500 border-r-red-500 border-b-transparent border-l-transparent transform -rotate-45"></div>
+              <div className="absolute inset-0 rounded-full border-[16px] border-gray-100"></div>
+              <div 
+                className="absolute inset-0 rounded-full border-[16px] border-red-500 border-t-transparent border-l-transparent"
+                style={{ transform: 'rotate(-45deg)' }}
+              ></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative w-full h-full">
                   <div 
-                    className="speedometer-needle absolute w-1 h-20 bg-red-600 rounded-full"
+                    className="speedometer-needle absolute w-1.5 h-24 bg-red-600 rounded-full shadow-lg"
                     style={{ 
                       transformOrigin: 'bottom center',
-                      left: 'calc(50% - 0.5px)',
+                      left: 'calc(50% - 0.75px)',
                       bottom: '50%'
                     }}
                   ></div>
                 </div>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center mt-4">
+              <div className="absolute inset-0 flex items-center justify-center mt-8">
                 <div className="text-3xl font-bold">92</div>
               </div>
             </div>
@@ -86,7 +91,7 @@ export function AIOAnalytics() {
                 { label: "Page Speed", value: 95 },
                 { label: "Mobile Score", value: 88 },
                 { label: "Core Web Vitals", value: 92 },
-                { label: "SEO Score", value: 94 }
+                { label: "SEO Score", value: 94, className: "mt-4" }
               ].map((metric, i) => (
                 <div key={i} className="bg-gray-50 rounded-lg p-4">
                   <div 
@@ -103,23 +108,23 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-6">Ranking Distribution</h3>
             
-            <div className="flex items-end h-64 space-x-8 mb-8">
+            <div className="flex justify-between h-64 mb-8">
               {[
-                { label: "Top 10", width: "80%", count: 24, color: "bg-purple-500" },
-                { label: "Top 20", width: "65%", count: 36, color: "bg-purple-400" },
-                { label: "Top 30", width: "50%", count: 42, color: "bg-purple-300" },
-                { label: "Top 40", width: "35%", count: 28, color: "bg-purple-200" },
+                { label: "Top 20", height: "65%", count: 36, color: "bg-purple-400" },
+                { label: "Top 30", height: "50%", count: 42, color: "bg-purple-300" },
+                { label: "Top 40", height: "35%", count: 28, color: "bg-purple-200" },
+                { label: "Top 50", height: "20%", count: 18, color: "bg-purple-100" }
                 { label: "Top 50", width: "20%", count: 18, color: "bg-purple-100" }
               ].map(({ label, width, count, color }, i) => (
-                <div key={i} className="flex-1">
+                <div key={i} className="flex flex-col items-center w-16">
                   <div className="text-sm text-gray-600 mb-2">{label}</div>
-                  <div className="relative h-8 bg-gray-100 rounded-lg overflow-hidden">
+                  <div className="relative w-8 h-full bg-gray-100 rounded-lg overflow-hidden">
                     <div 
-                      className={`ranking-bar absolute inset-y-0 left-0 ${color}`}
-                      style={{ width: '0%' }}
-                      data-width={width}
+                      className={`ranking-bar absolute bottom-0 inset-x-0 ${color}`}
+                      style={{ height: '0%' }}
+                      data-height={height}
                     >
-                      <div className="absolute inset-0 flex items-center justify-end pr-2">
+                      <div className="absolute top-0 inset-x-0 flex items-center justify-center">
                         <div className="text-white text-sm font-medium">{count}</div>
                       </div>
                     </div>
