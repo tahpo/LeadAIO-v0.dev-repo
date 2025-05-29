@@ -29,12 +29,13 @@ export function AIOAnalytics() {
   const isInView = useInView(containerRef, { once: false, margin: "-100px" })
   const [gaugeValue, setGaugeValue] = React.useState(0)
   const [hoveredBar, setHoveredBar] = React.useState<number | null>(null)
+  const animationRef = useRef<anime.AnimeInstance | null>(null)
 
   useEffect(() => {
     if (!isInView) return
 
     // Animate gauge value
-    anime({
+    const gaugeAnimation = anime({
       targets: { value: 0 },
       value: 92,
       duration: 2000,
@@ -45,15 +46,25 @@ export function AIOAnalytics() {
     })
 
     // Metrics animation
-    anime({
+    const metricsAnimation = anime({
       targets: '.metric-value',
       innerHTML: (el) => [0, el.getAttribute('data-value')],
       round: 1,
       duration: 2000,
       easing: 'easeOutExpo',
       delay: anime.stagger(200)
-    }).play()
+    })
 
+    animationRef.current = gaugeAnimation
+
+    // Cleanup function
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.pause()
+      }
+      anime.remove('.metric-value')
+      anime.remove({ value: 0 })
+    }
   }, [isInView])
 
   const chartData = useMemo(() => {

@@ -8,22 +8,27 @@ import { useInView } from "framer-motion"
 export function AIOOptimization() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: false, margin: "-100px" })
+  const animationRef = useRef<{
+    scan?: anime.AnimeInstance;
+    results?: anime.AnimeInstance;
+    progress?: anime.AnimeInstance;
+  }>({})
 
   useEffect(() => {
     if (!isInView) return
 
     // Content scanning animation
-    anime({
+    animationRef.current.scan = anime({
       targets: '.scan-line',
       translateY: ['-120%', '120%'],
       duration: 3000,
       easing: 'linear',
       loop: true,
       direction: 'alternate'
-    }).play()
+    })
 
     // Analysis cards animation
-    anime({
+    animationRef.current.results = anime({
       targets: '.optimization-result',
       translateY: [-20, 0],
       opacity: [0, 1],
@@ -33,7 +38,7 @@ export function AIOOptimization() {
     })
 
     // Progress bars animation
-    anime({
+    animationRef.current.progress = anime({
       targets: '.progress-bar',
       scaleX: [0, 1],
       duration: 1500,
@@ -41,6 +46,17 @@ export function AIOOptimization() {
       easing: 'easeOutQuart'
     })
 
+    // Cleanup function
+    return () => {
+      Object.values(animationRef.current).forEach(animation => {
+        if (animation) {
+          animation.pause()
+        }
+      })
+      anime.remove('.scan-line')
+      anime.remove('.optimization-result')
+      anime.remove('.progress-bar')
+    }
   }, [isInView])
 
   return (
