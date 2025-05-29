@@ -70,9 +70,9 @@ export function AIOOptimization() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Content Scanner */}
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-            <h3 className="text-xl font-garnett mb-6">Content Analysis</h3>
+            <h3 className="text-xl font-garnett mb-8">Content Analysis</h3>
             
-            <div className="relative bg-gray-50 rounded-lg p-6 h-[300px] overflow-hidden">
+            <div className="relative bg-gray-50 rounded-lg p-6 h-[400px] overflow-hidden">
               {/* Sample Content */}
               <div className="space-y-4">
                 {[...Array(10)].map((_, i) => (
@@ -81,18 +81,18 @@ export function AIOOptimization() {
               </div>
 
               {/* Scanning Effect */}
-              <div className="scan-line absolute inset-x-0 h-1/3 bg-gradient-to-b from-blue-500/20 via-blue-500/10 to-transparent pointer-events-none"></div>
+              <div className="scan-line absolute inset-x-0 h-full bg-gradient-to-b from-blue-500/20 via-blue-500/10 to-transparent pointer-events-none"></div>
 
               {/* Analysis Results */}
               <div className="absolute top-4 right-4 space-y-2">
                 {[
-                  { label: "Readability", score: "A+" },
-                  { label: "SEO Score", score: "95%" },
-                  { label: "Keywords", score: "12" }
+                  { label: "SEO Score", score: "95%", color: "text-green-600" },
+                  { label: "Readability", score: "A+", color: "text-blue-600" },
+                  { label: "Keywords", score: "12", color: "text-purple-600" }
                 ].map((result, i) => (
                   <div key={i} className="optimization-result opacity-0 bg-white rounded-lg p-2 shadow-sm text-sm flex justify-between items-center">
                     <span className="text-gray-600">{result.label}</span>
-                    <span className="font-medium text-green-600">{result.score}</span>
+                    <span className={`font-medium ${result.color}`}>{result.score}</span>
                   </div>
                 ))}
               </div>

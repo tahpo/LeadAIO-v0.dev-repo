@@ -8,17 +8,17 @@ export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Speedometer animation with correct needle positioning
+    // Speedometer animation
     anime({
       targets: '.speedometer-needle',
-      rotate: [-90, 90],
+      rotate: [0, 180],
       duration: 3000,
       easing: 'easeInOutQuad',
       direction: 'alternate',
       loop: true
     })
 
-    // Animate the metrics
+    // Metrics animation
     anime({
       targets: '.metric-value',
       innerHTML: (el) => [0, el.getAttribute('data-value')],
@@ -28,10 +28,10 @@ export function AIOAnalytics() {
       delay: anime.stagger(200)
     })
 
-    // Chart bar animation with proper positioning
+    // Ranking bars animation
     anime({
-      targets: '.chart-bar',
-      scaleY: [0, 1],
+      targets: '.ranking-bar',
+      width: (el) => el.getAttribute('data-width'),
       duration: 1500,
       delay: anime.stagger(100),
       easing: 'easeOutElastic(1, .5)',
@@ -59,13 +59,14 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-6">Site Performance</h3>
             
-            {/* Speedometer */}
-            <div className="relative w-48 h-48 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-full border-8 border-gray-200"></div>
+            {/* Improved Speedometer */}
+            <div className="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full border-[16px] border-gray-200"></div>
+              <div className="absolute inset-0 rounded-full border-[16px] border-t-red-500 border-r-red-500 border-b-transparent border-l-transparent transform -rotate-45"></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative w-full h-full">
                   <div 
-                    className="speedometer-needle absolute w-1 h-24 bg-red-600"
+                    className="speedometer-needle absolute w-1 h-20 bg-red-600 rounded-full"
                     style={{ 
                       transformOrigin: 'bottom center',
                       left: 'calc(50% - 0.5px)',
@@ -74,7 +75,7 @@ export function AIOAnalytics() {
                   ></div>
                 </div>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center mt-4">
                 <div className="text-3xl font-bold">92</div>
               </div>
             </div>
@@ -102,26 +103,26 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-6">Ranking Distribution</h3>
             
-            <div className="flex items-end h-64 space-x-6">
+            <div className="flex items-end h-64 space-x-8 mb-8">
               {[
-                { label: "Top 10", height: "85%", count: 24, color: "bg-purple-500" },
-                { label: "Top 20", height: "65%", count: 36, color: "bg-purple-400" },
-                { label: "Top 30", height: "45%", count: 42, color: "bg-purple-300" },
-                { label: "Top 40", height: "30%", count: 28, color: "bg-purple-200" },
-                { label: "Top 50", height: "20%", count: 18, color: "bg-purple-100" }
+                { label: "Top 10", width: "80%", count: 24, color: "bg-purple-500" },
+                { label: "Top 20", width: "65%", count: 36, color: "bg-purple-400" },
+                { label: "Top 30", width: "50%", count: 42, color: "bg-purple-300" },
+                { label: "Top 40", width: "35%", count: 28, color: "bg-purple-200" },
+                { label: "Top 50", width: "20%", count: 18, color: "bg-purple-100" }
               ].map(({ label, height, count, color }, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center">
-                  <div className="w-full bg-gray-100 rounded-t-lg overflow-hidden">
+                <div key={i} className="flex-1">
+                  <div className="text-sm text-gray-600 mb-2">{label}</div>
+                  <div className="relative h-8 bg-gray-100 rounded-lg overflow-hidden">
                     <div 
-                      className={`chart-bar w-full ${color} origin-bottom`}
-                      style={{ height }}
-                      data-height={height}
+                      className={`ranking-bar absolute inset-y-0 left-0 ${color}`}
+                      style={{ width: '0%' }}
+                      data-width={width}
                     >
-                      <div className="text-white text-sm font-medium text-center mt-2">{count}</div>
+                      <div className="absolute inset-0 flex items-center justify-end pr-2">
+                        <div className="text-white text-sm font-medium">{count}</div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-2 text-sm text-gray-600">
-                    {label}
                   </div>
                 </div>
               ))}
