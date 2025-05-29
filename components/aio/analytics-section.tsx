@@ -129,21 +129,21 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
             
-            <div className="h-[180px] w-full relative">
+            <div className="h-[160px] w-full relative overflow-hidden">
               <ChartContainer config={chartConfig}>
-                <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+                <BarChart data={chartData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
                   <CartesianGrid vertical={false} stroke="#f1f5f9" opacity={0.5} />
                   <XAxis 
                     dataKey="position"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748b', fontSize: 13, fontFamily: 'Universal Sans' }}
+                    tick={{ fill: '#64748b', fontSize: 12, fontFamily: 'Universal Sans' }}
                   />
                   <ChartTooltip
                     cursor={{ fill: 'rgba(168, 85, 247, 0.05)' }}
                     content={
                       <ChartTooltipContent
-                        className="bg-white/95 backdrop-blur-sm shadow-lg border border-gray-100"
+                        className="bg-white/95 backdrop-blur-sm shadow-lg border border-gray-100 z-50"
                         labelFormatter={(value) => `${value}`}
                         formatter={(value) => [`${value} Keywords in ${value}`, '']}
                       />
@@ -153,6 +153,7 @@ export function AIOAnalytics() {
                     dataKey="keywords"
                     fill="#a855f7"
                     radius={[4, 4, 0, 0]}
+                    maxBarSize={50}
                     onMouseEnter={(data, index) => setHoveredBar(index)}
                     onMouseLeave={() => setHoveredBar(null)}
                     className="transition-all duration-200 z-10"
@@ -164,7 +165,7 @@ export function AIOAnalytics() {
               </ChartContainer>
             </div>
 
-            <div className="mt-4 grid grid-cols-2 gap-3">
+            <div className="mt-3 grid grid-cols-2 gap-3">
               <div className="bg-green-50 rounded-lg p-4">
                 <div className="text-green-600 text-sm mb-1">Improved Rankings</div>
                 <div className="text-2xl font-bold text-green-700">+42%</div>
