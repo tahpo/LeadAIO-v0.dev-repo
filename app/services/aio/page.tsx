@@ -9,7 +9,7 @@ export default function AIOPage() {
   return (
     <main className="min-h-screen bg-cream">
       <Header />
-      <div className="relative">
+      <div className="relative -mb-24">
         <AIOHero />
         <div className="relative z-10">
           <AIODashboard />
@@ -17,7 +17,10 @@ export default function AIOPage() {
       </div>
       <AIOAnalytics />
       <AIOOptimization />
-      <FooterSection />
+      <div className="relative">
+        <div className="absolute inset-0 bg-[#faf9f6]" />
+        <FooterSection />
+      </div>
     </main>
   )
 }

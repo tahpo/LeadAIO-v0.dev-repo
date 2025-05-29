@@ -114,7 +114,7 @@ export function AIOAnalytics() {
                 { label: "Core Web Vitals", value: 92 },
                 { label: "SEO Score", value: 94 }
               ].map((metric, i) => (
-                <div key={i} className="bg-gray-50 rounded-lg p-4 text-center">
+                <div key={i} className="bg-gray-50 rounded-lg p-4 text-center mt-4">
                   <div 
                     className="metric-value text-2xl font-bold mb-1"
                     data-value={metric.value}
