@@ -113,9 +113,9 @@ export function AIOAnalytics() {
                 { label: "Top 20", height: "65%", count: 36, color: "bg-purple-400" },
                 { label: "Top 30", height: "50%", count: 42, color: "bg-purple-300" },
                 { label: "Top 40", height: "35%", count: 28, color: "bg-purple-200" },
+                { label: "Top 50", height: "20%", count: 18, color: "bg-purple-100" },
                 { label: "Top 50", height: "20%", count: 18, color: "bg-purple-100" }
-                { label: "Top 50", width: "20%", count: 18, color: "bg-purple-100" }
-              ].map(({ label, width, count, color }, i) => (
+              ].map(({ label, height, count, color }, i) => (
                 <div key={i} className="flex flex-col items-center w-16">
                   <div className="text-sm text-gray-600 mb-2">{label}</div>
                   <div className="relative w-8 h-full bg-gray-100 rounded-lg overflow-hidden">
