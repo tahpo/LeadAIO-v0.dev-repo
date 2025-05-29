@@ -64,30 +64,30 @@ export function AIOAnalytics() {
   }, [])
 
   return (
-    <section ref={containerRef} className="py-16 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-12 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-purple-50 text-purple-600 rounded-full text-sm font-medium mb-4">
             Smart Analytics
           </span>
-          <h2 className="text-3xl md:text-4xl font-garnett mb-4">
+          <h2 className="text-2xl md:text-3xl font-garnett mb-3">
             AI-Powered Insights
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto font-universal">
+          <p className="text-base text-gray-600 max-w-3xl mx-auto font-universal">
             Get actionable insights and recommendations powered by advanced AI
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Performance Metrics */}
           <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Site Performance</h3>
             
             {/* Gauge */}
-            <div className="relative mx-auto mb-16 flex flex-col items-center">
+            <div className="relative mx-auto mb-8 flex flex-col items-center">
               <Gauge
                 value={gaugeValue}
-                size={200}
+                size={160}
                 strokeWidth={12}
                 primary={{
                   0: "danger",
@@ -107,32 +107,32 @@ export function AIOAnalytics() {
             </div>
 
             {/* Metrics Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               {[
                 { label: "Page Speed", value: 95 },
                 { label: "Mobile Score", value: 88 },
                 { label: "Core Web Vitals", value: 92 },
                 { label: "SEO Score", value: 94 }
               ].map((metric, i) => (
-                <div key={i} className="bg-gray-50 rounded-lg p-4 text-center">
+                <div key={i} className="bg-gray-50 rounded-lg p-3 text-center">
                   <div 
                     className="metric-value text-2xl font-bold mb-1"
                     data-value={metric.value}
                   >0</div>
-                  <div className="text-sm text-gray-600">{metric.label}</div>
+                  <div className="text-xs text-gray-600">{metric.label}</div>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Ranking Distribution */}
-          <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100 overflow-hidden">
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
             
-            <div className="h-[240px] w-full">
+            <div className="h-[180px] w-full relative">
               <ChartContainer config={chartConfig}>
                 <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
-                  <CartesianGrid vertical={false} stroke="#f1f5f9" />
+                  <CartesianGrid vertical={false} stroke="#f1f5f9" opacity={0.5} />
                   <XAxis 
                     dataKey="position"
                     axisLine={false}
@@ -140,10 +140,10 @@ export function AIOAnalytics() {
                     tick={{ fill: '#64748b', fontSize: 13, fontFamily: 'Universal Sans' }}
                   />
                   <ChartTooltip
-                    cursor={{ fill: 'rgba(168, 85, 247, 0.1)' }}
+                    cursor={{ fill: 'rgba(168, 85, 247, 0.05)' }}
                     content={
                       <ChartTooltipContent
-                        className="bg-white shadow-lg border border-gray-100"
+                        className="bg-white/95 backdrop-blur-sm shadow-lg border border-gray-100"
                         labelFormatter={(value) => `${value}`}
                         formatter={(value) => [`${value} Keywords in ${value}`, '']}
                       />
@@ -155,7 +155,7 @@ export function AIOAnalytics() {
                     radius={[4, 4, 0, 0]}
                     onMouseEnter={(data, index) => setHoveredBar(index)}
                     onMouseLeave={() => setHoveredBar(null)}
-                    className="transition-all duration-200"
+                    className="transition-all duration-200 z-10"
                     style={{
                       opacity: hoveredBar !== null ? (hoveredBar === hoveredBar ? '1' : '0.7') : '1'
                     }}
@@ -164,7 +164,7 @@ export function AIOAnalytics() {
               </ChartContainer>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-4">
+            <div className="mt-4 grid grid-cols-2 gap-3">
               <div className="bg-green-50 rounded-lg p-4">
                 <div className="text-green-600 text-sm mb-1">Improved Rankings</div>
                 <div className="text-2xl font-bold text-green-700">+42%</div>
