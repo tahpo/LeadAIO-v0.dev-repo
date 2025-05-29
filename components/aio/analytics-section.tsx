@@ -10,17 +10,17 @@ import { BarChart, Bar, XAxis, CartesianGrid } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 
 const rankingData = [
-  { position: "Top 10", keywords: 42 },
-  { position: "Top 20", keywords: 36 },
-  { position: "Top 30", keywords: 28 },
-  { position: "Top 40", keywords: 22 },
+  { position: "Top 10", keywords: 48 },
+  { position: "Top 20", keywords: 42 },
+  { position: "Top 30", keywords: 35 },
+  { position: "Top 40", keywords: 26 },
   { position: "Top 50", keywords: 18 }
 ]
 
 const chartConfig = {
   keywords: {
     label: "Keywords",
-    color: "#a855f7"
+    color: "rgba(168, 85, 247, 0.7)"
   }
 } 
 
@@ -151,7 +151,7 @@ export function AIOAnalytics() {
                   />
                   <Bar
                     dataKey="keywords" 
-                    fill="#a855f7"
+                    fill="rgba(168, 85, 247, 0.7)"
                     radius={[4, 4, 0, 0]}
                     maxBarSize={40}
                     onMouseEnter={(data, index) => setHoveredBar(index)}
