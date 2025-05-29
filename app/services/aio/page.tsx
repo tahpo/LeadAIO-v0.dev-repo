@@ -7,9 +7,9 @@ import { AIOOptimization } from "@/components/aio/optimization-section"
 
 export default function AIOPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#fdfcfa]">
       <Header />
-      <div className="relative pt-24">
+      <div className="relative pt-20">
         <AIOHero />
         <div className="relative z-10">
           <AIODashboard />

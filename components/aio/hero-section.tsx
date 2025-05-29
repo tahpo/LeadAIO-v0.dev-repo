@@ -7,9 +7,9 @@ import Link from "next/link"
 
 export function AIOHero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-20 overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
       {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-white"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fdfcfa] to-white"></div>
       
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -17,13 +17,13 @@ export function AIOHero() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 0.1, scale: 1 }}
           transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute top-20 left-[20%] w-64 h-64 rounded-full bg-blue-400 blur-3xl"
+          className="absolute top-20 left-[20%] w-64 h-64 rounded-full bg-orange-400 blur-3xl"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 0.1, scale: 1 }}
           transition={{ duration: 2, delay: 0.5, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute bottom-20 right-[20%] w-64 h-64 rounded-full bg-purple-400 blur-3xl"
+          className="absolute bottom-20 right-[20%] w-64 h-64 rounded-full bg-orange-300 blur-3xl"
         />
       </div>
 

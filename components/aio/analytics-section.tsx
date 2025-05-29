@@ -56,7 +56,7 @@ export function AIOAnalytics() {
   ]
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-16 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-purple-50 text-purple-600 rounded-full text-sm font-medium mb-4">
@@ -106,7 +106,7 @@ export function AIOAnalytics() {
                 { label: "Core Web Vitals", value: 92 },
                 { label: "SEO Score", value: 94 }
               ].map((metric, i) => (
-                <div key={i} className="bg-gray-50 rounded-lg p-4">
+                <div key={i} className="bg-gray-50 rounded-lg p-4 text-center">
                   <div 
                     className="metric-value text-2xl font-bold mb-1"
                     data-value={metric.value}
@@ -124,14 +124,17 @@ export function AIOAnalytics() {
             <div className="flex items-end justify-between h-48 mb-8">
               {rankingData.map(({ label, height, count }, i) => (
                 <div key={i} className="flex flex-col items-center w-16">
-                  <div className="w-12 bg-gray-100 rounded-lg overflow-hidden" style={{ height: "100%" }}>
+                  <div className="w-12 bg-gray-100 rounded-lg overflow-hidden group cursor-pointer" style={{ height: "100%" }}>
                     <div 
-                      className={`ranking-bar w-full bg-purple-500 opacity-${90 - i * 10} transition-all duration-500`}
+                      className="ranking-bar w-full bg-purple-500 transition-all duration-300 group-hover:brightness-110"
                       data-height={height}
                       style={{ height: "0%" }}
                     >
-                      <div className="h-full flex items-center justify-center">
+                      <div className="h-full flex items-center justify-center relative">
                         <div className="text-white text-sm font-medium">{count}</div>
+                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                          Last updated: {new Date().toLocaleDateString()}
+                        </div>
                       </div>
                     </div>
                   </div>
