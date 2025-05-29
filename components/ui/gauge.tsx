@@ -39,8 +39,8 @@ export function Gauge({
       >
         <defs>
           {variant === "gradient" && (
-            <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor={gradientColors[0]} />
+            <linearGradient id="gaugeGradient\" x1="0%\" y1="0%\" x2="100%\" y2="0%">
+              <stop offset="0%\" stopColor={gradientColors[0]} />
               <stop offset="100%" stopColor={gradientColors[1]} />
             </linearGradient>
           )}
