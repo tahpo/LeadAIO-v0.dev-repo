@@ -131,13 +131,14 @@ export function AIOAnalytics() {
             
             <div className="h-[160px] w-full relative overflow-hidden">
               <ChartContainer config={chartConfig}>
-                <BarChart data={chartData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
+                <BarChart data={chartData} margin={{ top: 10, right: 30, bottom: 20, left: 30 }}>
                   <CartesianGrid vertical={false} stroke="#f1f5f9" opacity={0.5} />
                   <XAxis 
                     dataKey="position"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748b', fontSize: 12, fontFamily: 'Universal Sans' }}
+                    tick={{ fill: '#64748b', fontSize: 13, fontFamily: 'Universal Sans' }}
+                    dy={8}
                   />
                   <ChartTooltip
                     cursor={{ fill: 'rgba(168, 85, 247, 0.05)' }}
@@ -153,7 +154,7 @@ export function AIOAnalytics() {
                     dataKey="keywords"
                     fill="#a855f7"
                     radius={[4, 4, 0, 0]}
-                    maxBarSize={50}
+                    maxBarSize={40}
                     onMouseEnter={(data, index) => setHoveredBar(index)}
                     onMouseLeave={() => setHoveredBar(null)}
                     className="transition-all duration-200 z-10"
