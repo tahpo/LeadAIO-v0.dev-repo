@@ -126,25 +126,26 @@ export function AIOAnalytics() {
           </div>
 
           {/* Ranking Distribution */}
-          <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+          <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100 overflow-hidden">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
             
-            <div className="h-[300px] w-full">
+            <div className="h-[240px] w-full">
               <ChartContainer config={chartConfig}>
-                <BarChart data={chartData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
                   <CartesianGrid vertical={false} stroke="#f1f5f9" />
                   <XAxis 
                     dataKey="position"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748b', fontSize: 12 }}
+                    tick={{ fill: '#64748b', fontSize: 13, fontFamily: 'Universal Sans' }}
                   />
                   <ChartTooltip
-                    cursor={{ fill: 'transparent' }}
+                    cursor={{ fill: 'rgba(168, 85, 247, 0.1)' }}
                     content={
                       <ChartTooltipContent
+                        className="bg-white shadow-lg border border-gray-100"
                         labelFormatter={(value) => `${value}`}
-                        formatter={(value) => [`${value} keywords`, 'Keywords']}
+                        formatter={(value) => [`${value} Keywords in ${value}`, '']}
                       />
                     }
                   />
@@ -154,16 +155,16 @@ export function AIOAnalytics() {
                     radius={[4, 4, 0, 0]}
                     onMouseEnter={(data, index) => setHoveredBar(index)}
                     onMouseLeave={() => setHoveredBar(null)}
-                    className="transition-all duration-300"
+                    className="transition-all duration-200"
                     style={{
-                      filter: hoveredBar !== null ? `brightness(${hoveredBar === hoveredBar ? '110%' : '95%'})` : 'none'
+                      opacity: hoveredBar !== null ? (hoveredBar === hoveredBar ? '1' : '0.7') : '1'
                     }}
                   />
                 </BarChart>
               </ChartContainer>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-4">
+            <div className="mt-6 grid grid-cols-2 gap-4">
               <div className="bg-green-50 rounded-lg p-4">
                 <div className="text-green-600 text-sm mb-1">Improved Rankings</div>
                 <div className="text-2xl font-bold text-green-700">+42%</div>
