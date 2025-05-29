@@ -14,6 +14,7 @@ export default function PricingPage() {
       <FooterSection />
     </main>
   )
+}
 
 function PricingSection({
   billingPeriod,
