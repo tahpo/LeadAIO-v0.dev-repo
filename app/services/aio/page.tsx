@@ -9,8 +9,12 @@ export default function AIOPage() {
   return (
     <main className="min-h-screen bg-white">
       <Header />
-      <AIOHero />
-      <AIODashboard />
+      <div className="relative">
+        <AIOHero />
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <AIODashboard />
+        </div>
+      </div>
       <AIOAnalytics />
       <AIOOptimization />
       <FooterSection />

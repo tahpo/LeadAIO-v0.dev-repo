@@ -8,13 +8,14 @@ export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Animate the speedometer
+    // Speedometer animation with continuous rotation
     anime({
       targets: '.speedometer-needle',
-      rotate: [0, 160],
-      duration: 2000,
-      easing: 'easeOutElastic(1, .5)',
-      delay: 500
+      rotate: [0, 180],
+      duration: 3000,
+      easing: 'easeInOutQuad',
+      direction: 'alternate',
+      loop: true
     })
 
     // Animate the metrics
@@ -27,24 +28,16 @@ export function AIOAnalytics() {
       delay: anime.stagger(200)
     })
 
-    // Animate the chart bars
+    // Improved chart bar animation
     anime({
       targets: '.chart-bar',
       scaleY: [0, 1],
       duration: 1500,
       delay: anime.stagger(100),
       easing: 'easeOutElastic(1, .5)',
-      complete: () => {
-        // Add a subtle pulse animation after initial load
-        anime({
-          targets: '.chart-bar',
-          scaleY: [1, 0.95, 1],
-          duration: 3000,
-          delay: anime.stagger(100),
-          loop: true,
-          easing: 'easeInOutSine'
-        })
-      }
+      loop: true,
+      direction: 'alternate',
+      endDelay: 500
     })
   }, [])
 

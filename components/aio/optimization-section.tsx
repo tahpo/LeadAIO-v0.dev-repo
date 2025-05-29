@@ -8,46 +8,31 @@ export function AIOOptimization() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Animate the optimization process
-    const timeline = anime.timeline({
-      easing: 'easeInOutQuad'
-    })
-
-    // Scanning animation
-    timeline.add({
+    // Content scanning animation
+    anime({
       targets: '.scan-line',
       translateY: ['0%', '100%'],
-      duration: 2000,
+      duration: 3000,
       easing: 'linear',
-      complete: () => {
-        // Reset scan line position and repeat
-        anime({
-          targets: '.scan-line',
-          translateY: ['0%', '100%'],
-          duration: 2000,
-          delay: 1000,
-          loop: true,
-          easing: 'linear'
-        })
-      }
+      loop: true
     })
 
-    // Progress bars animation
-    .add({
+    // Progress bars with elastic animation
+    anime({
       targets: '.progress-bar',
       width: (el) => el.getAttribute('data-progress'),
-      duration: 800,
+      duration: 1500,
       delay: anime.stagger(200),
       easing: 'easeOutElastic(1, .5)'
     })
 
-    // Results animation
-    .add({
+    // Results fade in with stagger
+    anime({
       targets: '.optimization-result',
       translateY: [-20, 0],
       opacity: [0, 1],
-      duration: 500,
-      delay: anime.stagger(200),
+      duration: 800,
+      delay: anime.stagger(300),
       easing: 'easeOutQuad'
     })
   }, [])

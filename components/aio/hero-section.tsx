@@ -66,7 +66,7 @@ export function AIOHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            className="flex justify-center mb-8"
           >
             <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
               <Link href="/contact">
