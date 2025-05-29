@@ -1,42 +1,19 @@
-"use client"
+import { Suspense } from "react"
 
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
-import { useState, useEffect, useRef } from "react"
-import { Check, HelpCircle, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { PricingContent } from "@/components/pricing-content"
 
 export default function PricingPage() {
-  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("yearly")
-  const [mounted, setMounted] = useState(false)
-  
-  // Prevent hydration mismatch by only rendering after component is mounted
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Don't render anything until client-side
-  if (!mounted) {
-    return null
-  }
-
   return (
     <main className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
       <Header />
-      <PricingSection billingPeriod={billingPeriod} setBillingPeriod={setBillingPeriod} />
-      <ParallaxCompareSection billingPeriod={billingPeriod} />
-      <FaqSection />
+      <Suspense fallback={<div>Loading...</div>}>
+        <PricingContent />
+      </Suspense>
       <FooterSection />
     </main>
   )
-}
 
 function PricingSection({
   billingPeriod,
