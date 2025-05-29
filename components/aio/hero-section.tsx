@@ -65,27 +65,14 @@ export function AIOHero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex justify-center gap-8 text-sm text-gray-500"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           >
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span>14-day free trial</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span>No credit card required</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span>Cancel anytime</span>
-            </div>
+            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Link href="/contact">
+                Talk to an expert <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
           </motion.div>
         </div>
       </div>

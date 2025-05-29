@@ -11,11 +11,10 @@ export function AIOAnalytics() {
     // Animate the speedometer
     anime({
       targets: '.speedometer-needle',
-      rotate: [0, 180],
+      rotate: [0, 160],
       duration: 2000,
       easing: 'easeOutElastic(1, .5)',
-      loop: true,
-      direction: 'alternate'
+      delay: 500
     })
 
     // Animate the metrics
@@ -24,7 +23,8 @@ export function AIOAnalytics() {
       innerHTML: (el) => [0, el.getAttribute('data-value')],
       round: 1,
       duration: 2000,
-      easing: 'easeOutExpo'
+      easing: 'easeOutExpo',
+      delay: anime.stagger(200)
     })
 
     // Animate the chart bars
@@ -33,7 +33,18 @@ export function AIOAnalytics() {
       scaleY: [0, 1],
       duration: 1500,
       delay: anime.stagger(100),
-      easing: 'easeOutElastic(1, .5)'
+      easing: 'easeOutElastic(1, .5)',
+      complete: () => {
+        // Add a subtle pulse animation after initial load
+        anime({
+          targets: '.chart-bar',
+          scaleY: [1, 0.95, 1],
+          duration: 3000,
+          delay: anime.stagger(100),
+          loop: true,
+          easing: 'easeInOutSine'
+        })
+      }
     })
   }, [])
 

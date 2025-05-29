@@ -4,7 +4,6 @@ import { AIOHero } from "@/components/aio/hero-section"
 import { AIODashboard } from "@/components/aio/dashboard-section"
 import { AIOAnalytics } from "@/components/aio/analytics-section"
 import { AIOOptimization } from "@/components/aio/optimization-section"
-import { CTASection } from "@/components/cta-section"
 
 export default function AIOPage() {
   return (
@@ -14,7 +13,6 @@ export default function AIOPage() {
       <AIODashboard />
       <AIOAnalytics />
       <AIOOptimization />
-      <CTASection />
       <FooterSection />
     </main>
   )

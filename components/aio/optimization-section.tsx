@@ -10,8 +10,6 @@ export function AIOOptimization() {
   useEffect(() => {
     // Animate the optimization process
     const timeline = anime.timeline({
-      loop: true,
-      direction: 'alternate',
       easing: 'easeInOutQuad'
     })
 
@@ -19,8 +17,19 @@ export function AIOOptimization() {
     timeline.add({
       targets: '.scan-line',
       translateY: ['0%', '100%'],
-      duration: 1500,
-      easing: 'linear'
+      duration: 2000,
+      easing: 'linear',
+      complete: () => {
+        // Reset scan line position and repeat
+        anime({
+          targets: '.scan-line',
+          translateY: ['0%', '100%'],
+          duration: 2000,
+          delay: 1000,
+          loop: true,
+          easing: 'linear'
+        })
+      }
     })
 
     // Progress bars animation
@@ -28,7 +37,8 @@ export function AIOOptimization() {
       targets: '.progress-bar',
       width: (el) => el.getAttribute('data-progress'),
       duration: 800,
-      delay: anime.stagger(200)
+      delay: anime.stagger(200),
+      easing: 'easeOutElastic(1, .5)'
     })
 
     // Results animation
@@ -37,7 +47,8 @@ export function AIOOptimization() {
       translateY: [-20, 0],
       opacity: [0, 1],
       duration: 500,
-      delay: anime.stagger(200)
+      delay: anime.stagger(200),
+      easing: 'easeOutQuad'
     })
   }, [])
 
