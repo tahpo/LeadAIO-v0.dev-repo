@@ -83,7 +83,8 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Site Performance</h3>
             
-            <div className="relative mx-auto mb-6 flex flex-col items-center">
+            {/* Gauge */}
+            <div className="relative mx-auto mb-8 flex flex-col items-center">
               <Gauge
                 value={gaugeValue}
                 size={160}
@@ -127,7 +128,7 @@ export function AIOAnalytics() {
           {/* Ranking Distribution */}
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Ranking Distribution</h3>
-            <div className="relative w-full h-[180px] mb-6">
+            <div className="relative w-full aspect-[2/1] mb-6">
               <ChartContainer config={chartConfig}>
                 <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 30, left: 10 }}>
                   <CartesianGrid vertical={false} stroke="#f1f5f9" opacity={0.5} />
