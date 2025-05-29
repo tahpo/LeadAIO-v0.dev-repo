@@ -27,7 +27,7 @@ export function AIOAnalytics() {
     // Ranking bars animation with vertical movement
     anime({
       targets: '.ranking-bar',
-      scaleY: [0, 1],
+      height: (el) => el.getAttribute('data-height'),
       duration: 1500,
       delay: anime.stagger(100),
       easing: 'easeOutElastic(1, .5)',
@@ -59,27 +59,26 @@ export function AIOAnalytics() {
           <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-8">Site Performance</h3>
             
-            {/* Speedometer from home page */}
+            {/* Speedometer */}
             <div className="relative h-[200px] w-[200px] mx-auto mb-12">
               {/* Background circle */}
-              <div className="absolute inset-0 rounded-full border-[20px] border-gray-200"></div>
+              <div className="absolute inset-0 rounded-full border-[20px] border-gray-100"></div>
               
               {/* Progress circle */}
               <div
-                className="absolute inset-0 rounded-full border-[20px] border-transparent"
+                className="absolute inset-0 rounded-full border-[20px] border-transparent transition-transform duration-500 ease-out"
                 style={{
                   borderTopColor: "#4361EE",
                   borderRightColor: "#4361EE",
                   borderLeftColor: activeIndex >= 4 ? "#4361EE" : "transparent",
-                  transform: `rotate(${45 + activeIndex * 40}deg)`,
-                  transition: "transform 0.5s ease-out"
+                  transform: `rotate(${-45 + activeIndex * 40}deg)`,
                 }}
               ></div>
               
               {/* Center and value */}
               <div className="absolute inset-0 flex items-center justify-center flex-col">
-                <span className="text-4xl font-bold mb-2">{85 + activeIndex * 2}</span>
-                <span className="text-sm text-gray-500">/ 100</span>
+                <span className="text-4xl font-bold mb-4">{85 + activeIndex * 2}</span>
+                <span className="text-sm text-gray-500">Performance Score</span>
               </div>
             </div>
 
@@ -115,10 +114,11 @@ export function AIOAnalytics() {
                 { label: "Top 50", height: "25%", count: 18, color: "bg-purple-100" }
               ].map(({ label, height, count, color }, i) => (
                 <div key={i} className="flex flex-col items-center w-16">
-                  <div className="w-12 h-full bg-gray-100 rounded-lg overflow-hidden">
+                  <div className="w-12 bg-gray-100 rounded-lg overflow-hidden" style={{ height: "100%" }}>
                     <div 
-                      className={`ranking-bar w-full ${color} transform origin-bottom`}
-                      style={{ height }}
+                      className={`ranking-bar w-full ${color} transition-all duration-500`}
+                      data-height={height}
+                      style={{ height: "0%" }}
                     >
                       <div className="h-full flex items-center justify-center">
                         <div className="text-white text-sm font-medium">{count}</div>

@@ -11,7 +11,7 @@ export function AIOOptimization() {
     // Content scanning animation
     anime({
       targets: '.scan-line',
-      translateY: ['0%', '400%'],
+      translateY: ['-100%', '100%'],
       duration: 3000,
       easing: 'linear',
       loop: true,
@@ -81,12 +81,12 @@ export function AIOOptimization() {
               </div>
 
               {/* Scanning Effect */}
-              <div className="scan-line absolute inset-x-0 h-full bg-gradient-to-b from-blue-500/20 via-blue-500/10 to-transparent pointer-events-none"></div>
+              <div className="scan-line absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-blue-500/20 via-blue-500/10 to-transparent pointer-events-none"></div>
 
               {/* Analysis Results */}
-              <div className="absolute top-4 right-4 space-y-2">
+              <div className="absolute top-4 right-4 space-y-4">
                 {[
-                  { label: "SEO Score", score: "95%", color: "text-green-600", className: "mt-16" },
+                  { label: "SEO Score", score: "95%", color: "text-green-600", className: "mt-8" },
                   { label: "Readability", score: "A+", color: "text-blue-600" },
                   { label: "Keywords", score: "12", color: "text-purple-600" }
                 ].map((result, i) => (
