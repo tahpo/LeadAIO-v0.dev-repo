@@ -11,30 +11,30 @@ export function AIOOptimization() {
     // Content scanning animation
     anime({
       targets: '.scan-line',
-      translateY: ['0%', '100%'],
+      translateY: ['-100%', '100%'],
       duration: 2000,
       easing: 'linear',
       loop: true
     })
 
-    // Progress bars with elastic animation
-    const progressAnimation = anime.timeline({
-      easing: 'easeOutElastic(1, .5)',
-      duration: 1200
-    });
+    // Analysis cards animation
+    anime({
+      targets: '.optimization-result',
+      translateX: [-20, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(200),
+      duration: 800,
+      easing: 'easeOutQuad'
+    })
 
-    progressAnimation
-      .add({
-        targets: '.progress-bar',
-        width: (el) => el.getAttribute('data-progress'),
-        delay: anime.stagger(150)
-      })
-      .add({
-        targets: '.optimization-result',
-        translateY: [-20, 0],
-        opacity: [0, 1],
-        delay: anime.stagger(100)
-      });
+    // Progress bars animation
+    anime({
+      targets: '.progress-bar',
+      width: (el) => el.getAttribute('data-progress'),
+      duration: 1500,
+      delay: anime.stagger(150),
+      easing: 'easeOutQuart'
+    })
 
   }, [])
 
@@ -58,16 +58,16 @@ export function AIOOptimization() {
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <h3 className="text-xl font-garnett mb-6">Content Analysis</h3>
             
-            <div className="relative bg-gray-50 rounded-lg p-4 h-[300px] overflow-hidden">
+            <div className="relative bg-gray-50 rounded-lg p-6 h-[300px] overflow-hidden">
               {/* Sample Content */}
-              <div className="space-y-2">
+              <div className="space-y-4">
                 {[...Array(8)].map((_, i) => (
                   <div key={i} className="h-4 bg-gray-200 rounded w-full"></div>
                 ))}
               </div>
 
               {/* Scanning Effect */}
-              <div className="scan-line absolute inset-x-0 h-24 bg-gradient-to-b from-blue-500/20 via-blue-500/10 to-transparent pointer-events-none"></div>
+              <div className="scan-line absolute inset-x-0 h-full bg-gradient-to-b from-blue-500/20 via-blue-500/10 to-transparent pointer-events-none"></div>
 
               {/* Analysis Results */}
               <div className="absolute top-4 right-4 space-y-2">

@@ -8,10 +8,10 @@ export function AIOAnalytics() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Speedometer animation with proper positioning
+    // Speedometer animation with correct needle positioning
     anime({
       targets: '.speedometer-needle',
-      rotate: [-45, 135],
+      rotate: [0, 180],
       duration: 3000,
       easing: 'easeInOutQuad',
       direction: 'alternate',
@@ -28,10 +28,10 @@ export function AIOAnalytics() {
       delay: anime.stagger(200)
     })
 
-    // Chart bar animation with proper values
+    // Chart bar animation with proper positioning
     anime({
       targets: '.chart-bar',
-      scaleY: [0, 1],
+      height: (el) => el.getAttribute('data-height'),
       duration: 1500,
       delay: anime.stagger(100),
       easing: 'easeOutElastic(1, .5)',
@@ -62,10 +62,12 @@ export function AIOAnalytics() {
             {/* Speedometer */}
             <div className="relative w-48 h-48 mx-auto mb-8">
               <div className="absolute inset-0 rounded-full border-8 border-gray-200"></div>
-              <div 
-                className="speedometer-needle absolute left-1/2 bottom-0 w-1 h-24 bg-purple-600 origin-bottom transform -translate-x-1/2"
-                style={{ transformOrigin: 'bottom center' }}
-              ></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div 
+                  className="speedometer-needle absolute w-1 h-24 bg-red-600 origin-bottom"
+                  style={{ transformOrigin: 'center bottom', left: '50%', bottom: '50%' }}
+                ></div>
+              </div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-3xl font-bold">92</div>
               </div>
@@ -96,17 +98,17 @@ export function AIOAnalytics() {
             
             <div className="flex items-end h-64 space-x-6">
               {[
-                { label: "Top 10", height: 85, count: 24 },
-                { label: "Top 20", height: 65, count: 36 },
-                { label: "Top 30", height: 45, count: 42 },
-                { label: "Top 40", height: 30, count: 28 },
-                { label: "Top 50", height: 20, count: 18 }
+                { label: "Top 10", height: "85%", count: 24 },
+                { label: "Top 20", height: "65%", count: 36 },
+                { label: "Top 30", height: "45%", count: 42 },
+                { label: "Top 40", height: "30%", count: 28 },
+                { label: "Top 50", height: "20%", count: 18 }
               ].map(({ label, height, count }, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center">
                   <div className="w-full bg-gray-100 rounded-t-lg overflow-hidden">
                     <div 
-                      className="chart-bar w-full bg-purple-500 origin-bottom"
-                      style={{ height: `${height}%` }}
+                      className="chart-bar w-full bg-purple-500 origin-bottom h-0"
+                      data-height={height}
                     >
                       <div className="text-white text-sm font-medium text-center mt-2">{count}</div>
                     </div>
