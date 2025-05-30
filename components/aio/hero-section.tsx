@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export function AIOHero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-24 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center pt-28 pb-32 overflow-hidden">
       {/* Gradient Background with Noise */}
       <GradientBackground
         gradientOrigin="bottom-middle"
@@ -54,7 +54,7 @@ export function AIOHero() {
             <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-4">
               AI-Powered SEO
             </span>
-            <h1 className="text-5xl md:text-6xl font-garnett mb-10 leading-[1.2] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            <h1 className="text-5xl md:text-6xl font-garnett mb-12 leading-[1.3] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
               Transform Your Search Rankings with AI
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto font-universal">
