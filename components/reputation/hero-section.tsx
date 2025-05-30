@@ -20,7 +20,7 @@ export function ReputationHero() {
   return (
     <section 
       ref={containerRef} 
-      className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-16 overflow-hidden"
+      className="relative min-h-[80vh] pt-28 pb-24 overflow-hidden"
     >
       {/* Sunset Glow Background with Noise */}
       <GradientBackground
@@ -92,7 +92,7 @@ export function ReputationHero() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-16">
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">

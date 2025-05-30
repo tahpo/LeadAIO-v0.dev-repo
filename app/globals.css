@@ -186,8 +186,8 @@ button,
 
 /* Reduce section padding globally */
 section {
-  padding-top: 60px !important; /* Reduced from 96px (py-24) */
-  padding-bottom: 60px !important;
+  padding-top: 72px !important;
+  padding-bottom: 72px !important;
 }
 
 /* Header styling - Enhanced like index.app with responsive margins */
