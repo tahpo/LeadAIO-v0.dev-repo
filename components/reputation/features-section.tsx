@@ -47,7 +47,7 @@ export function ReputationFeatures() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden mb-12">
+    <section ref={containerRef} className="py-24 bg-white relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-600 rounded-full text-sm font-medium mb-4">
@@ -72,7 +72,7 @@ export function ReputationFeatures() {
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
-                className={`${feature.className} rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50`}
+                className={`${feature.className} rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50 h-full`}
               >
                 <div className="flex items-center gap-3 mb-4">
                   <Icon className="h-6 w-6 text-gray-700" />

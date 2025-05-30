@@ -7,15 +7,11 @@ import { ReputationStats } from "@/components/reputation/stats-section"
 
 export default function ReputationManagementPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white overflow-hidden">
       <Header />
       <ReputationHero />
-      <div className="relative">
-        <ReputationFeatures />
-      </div>
-      <div className="relative">
-        <ReputationMonitor />
-      </div>
+      <ReputationFeatures />
+      <ReputationMonitor />
       <ReputationStats />
       <FooterSection />
     </main>
