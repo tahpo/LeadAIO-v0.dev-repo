@@ -54,10 +54,10 @@ export function AIOHero() {
             <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-4">
               AI-Powered SEO
             </span>
-            <h1 className="text-5xl md:text-6xl font-garnett mb-12 leading-[1.3] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            <h1 className="text-5xl md:text-6xl font-garnett mb-8 leading-[1.2] text-gray-900">
               Transform Your Search Rankings with AI
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-universal">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 font-universal">
               Our advanced AI algorithms analyze your website, optimize your content, and boost your search rankings automatically. Get more traffic, leads, and revenue with LeadAIO.
             </p>
           </motion.div>
@@ -68,12 +68,12 @@ export function AIOHero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           >
-            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+            <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium">
               <Link href="/signup">
                 Get started <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className="font-medium">
               <Link href="/contact">Talk to an expert</Link>
             </Button>
           </motion.div>
