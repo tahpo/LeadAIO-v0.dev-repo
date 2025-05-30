@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award, Bell } from "lucide-react"
+import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award } from "lucide-react"
 
 const features = [
   {
@@ -53,12 +53,6 @@ const features = [
     description: "Get detailed insights into your reputation score.",
     className: "col-span-1 row-span-1 bg-gradient-to-br from-violet-50 to-fuchsia-50 hover:from-violet-100 hover:to-fuchsia-100",
   },
-  {
-    icon: Bell,
-    title: "Alert System",
-    description: "Get instant notifications for critical mentions.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-teal-50 to-emerald-50 hover:from-teal-100 hover:to-emerald-100",
-  },
 ]
 
 export function ReputationFeatures() {
@@ -86,7 +80,7 @@ export function ReputationFeatures() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {features.map((feature, index) => {
+          {features.slice(0, 8).map((feature, index) => {
             const Icon = feature.icon
             return (
               <motion.div
