@@ -2,9 +2,7 @@ import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
 import { ReputationHero } from "@/components/reputation/hero-section"
 import { ReputationFeatures } from "@/components/reputation/features-section"
-import { ReputationMonitor } from "@/components/reputation/monitor-section"
-import { ReputationTestimonials } from "@/components/reputation/testimonials-section"
-import { ReputationProcess } from "@/components/reputation/process-section"
+import { ReputationStats } from "@/components/reputation/stats-section"
 
 export default function ReputationManagementPage() {
   return (
@@ -12,9 +10,7 @@ export default function ReputationManagementPage() {
       <Header />
       <ReputationHero />
       <ReputationFeatures />
-      <ReputationMonitor />
-      <ReputationTestimonials />
-      <ReputationProcess />
+      <ReputationStats />
       <FooterSection />
     </main>
   )
