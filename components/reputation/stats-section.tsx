@@ -66,7 +66,7 @@ export function ReputationStats() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="py-20 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden -mt-12">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gradient-to-r from-green-50 to-emerald-50 text-green-600 rounded-full text-sm font-medium mb-4">

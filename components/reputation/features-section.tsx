@@ -47,7 +47,7 @@ export function ReputationFeatures() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="py-20 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden -mt-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-600 rounded-full text-sm font-medium mb-4">
@@ -61,21 +61,54 @@ export function ReputationFeatures() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {features.map((feature, index) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {[
+            {
+              id: "review-monitoring",
+              icon: Star,
+              title: "Review Monitoring",
+              description: "Track and analyze reviews across all major platforms in real-time.",
+              color: "bg-yellow-100 text-yellow-600",
+              className: "lg:col-span-2"
+            },
+            {
+              id: "sentiment-analysis",
+              icon: BarChart2,
+              title: "Sentiment Analysis",
+              description: "Advanced AI analysis of customer sentiment and trends.",
+              color: "bg-purple-100 text-purple-600",
+              className: "lg:row-span-2"
+            },
+            {
+              id: "brand-protection",
+              icon: Shield,
+              title: "Brand Protection",
+              description: "Proactive alerts and crisis prevention tools.",
+              color: "bg-red-100 text-red-600",
+              className: "lg:col-span-2"
+            },
+            {
+              id: "web-monitoring",
+              icon: Globe,
+              title: "Web Monitoring",
+              description: "Track mentions and coverage across the entire web.",
+              color: "bg-green-100 text-green-600",
+              className: "lg:col-span-2"
+            }
+          ].map((feature, index) => {
             const Icon = feature.icon
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-                className={`${feature.className} rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50`}
+                className={cn(
+                  "bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100",
+                  feature.className
+                )}
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <Icon className="h-6 w-6 text-gray-700" />
+                  <div className={`p-3 rounded-lg ${feature.color}`}>
+                    <Icon className="h-6 w-6" />
+                  </div>
                   <h3 className="text-xl font-garnett">{feature.title}</h3>
                 </div>
                 <p className="text-gray-600 font-universal">{feature.description}</p>
