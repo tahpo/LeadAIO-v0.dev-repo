@@ -84,7 +84,7 @@ export function ReputationHero() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium">
-                <Link href="/signup">Start free trial <span className="ml-1">→</span></Link>
+                <Link href="/signup">Get started <span className="ml-1">→</span></Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="font-medium">
                 <Link href="/contact">Schedule demo</Link>
@@ -92,7 +92,7 @@ export function ReputationHero() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-8 h-full">
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
@@ -100,7 +100,7 @@ export function ReputationHero() {
                   </div>
                   <h3 className="text-lg font-garnett">Proactive Monitoring</h3>
                 </div>
-                <p className="text-gray-600 font-universal text-sm">Real-time alerts and monitoring across all major review platforms and social media</p>
+                <p className="text-gray-600 font-universal text-sm h-[40px]">Real-time alerts and monitoring across all major review platforms and social media</p>
               </div>
               
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
@@ -110,7 +110,7 @@ export function ReputationHero() {
                   </div>
                   <h3 className="text-lg font-garnett">Brand Protection</h3>
                 </div>
-                <p className="text-gray-600 font-universal text-sm">Advanced sentiment analysis and crisis prevention tools to safeguard your reputation</p>
+                <p className="text-gray-600 font-universal text-sm h-[40px]">Advanced sentiment analysis and crisis prevention tools to safeguard your reputation</p>
               </div>
               
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
@@ -120,7 +120,7 @@ export function ReputationHero() {
                   </div>
                   <h3 className="text-lg font-garnett">Review Management</h3>
                 </div>
-                <p className="text-gray-600 font-universal text-sm">Streamlined review response and management system with AI-powered suggestions</p>
+                <p className="text-gray-600 font-universal text-sm h-[40px]">Streamlined review response and management system with AI-powered suggestions</p>
               </div>
             </div>
           </motion.div>
