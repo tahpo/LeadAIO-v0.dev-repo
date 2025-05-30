@@ -100,7 +100,7 @@ export function ReputationHero() {
                   </div>
                   <h3 className="text-lg font-garnett">Proactive Monitoring</h3>
                 </div>
-                <p className="text-gray-600 font-universal text-sm h-[40px]">Real-time alerts and monitoring across all major review platforms and social media</p>
+                <p className="text-gray-600 font-universal text-sm h-[48px] pb-1">Real-time alerts and monitoring across all major review platforms and social media</p>
               </div>
               
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
@@ -110,7 +110,7 @@ export function ReputationHero() {
                   </div>
                   <h3 className="text-lg font-garnett">Quality Protection</h3>
                 </div>
-                <p className="text-gray-600 font-universal text-sm h-[40px]">Advanced sentiment analysis and crisis prevention tools to safeguard your reputation</p>
+                <p className="text-gray-600 font-universal text-sm h-[48px] pb-1">Advanced sentiment analysis and crisis prevention tools to safeguard your reputation</p>
               </div>
               
               <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
@@ -120,7 +120,7 @@ export function ReputationHero() {
                   </div>
                   <h3 className="text-lg font-garnett">Review Management</h3>
                 </div>
-                <p className="text-gray-600 font-universal text-sm h-[40px]">Streamlined review response and management system with AI-powered suggestions</p>
+                <p className="text-gray-600 font-universal text-sm h-[48px] pb-1">Streamlined review response and management system with AI-powered suggestions</p>
               </div>
             </div>
           </motion.div>
