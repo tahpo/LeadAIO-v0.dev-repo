@@ -9,7 +9,7 @@ export function ReputationFeatures() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden -mt-16">
+    <section ref={containerRef} className="py-32 bg-white relative overflow-hidden -mt-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-600 rounded-full text-sm font-medium mb-4">
@@ -31,7 +31,7 @@ export function ReputationFeatures() {
               title: "Review Monitoring",
               description: "Track and analyze reviews across all major platforms in real-time.",
               color: "bg-yellow-100 text-yellow-600",
-              className: "md:col-span-2 md:row-span-2"
+              className: "md:col-span-2 md:row-span-2 min-h-[320px]"
             },
             {
               id: "sentiment-analysis",
@@ -39,7 +39,7 @@ export function ReputationFeatures() {
               title: "Sentiment Analysis",
               description: "Advanced AI analysis of customer sentiment and trends.",
               color: "bg-purple-100 text-purple-600",
-              className: "md:col-span-2"
+              className: "md:col-span-2 min-h-[160px]"
             },
             {
               id: "brand-protection",
@@ -47,7 +47,7 @@ export function ReputationFeatures() {
               title: "Brand Protection",
               description: "Proactive alerts and crisis prevention tools.",
               color: "bg-red-100 text-red-600",
-              className: "md:col-span-1"
+              className: "md:col-span-1 min-h-[160px]"
             },
             {
               id: "web-monitoring",
@@ -55,7 +55,7 @@ export function ReputationFeatures() {
               title: "Web Monitoring",
               description: "Track mentions and coverage across the entire web.",
               color: "bg-green-100 text-green-600",
-              className: "md:col-span-1"
+              className: "md:col-span-1 min-h-[160px]"
             }
           ].map((feature, index) => {
             const Icon = feature.icon

@@ -66,7 +66,7 @@ export function ReputationStats() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-32 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gradient-to-r from-green-50 to-emerald-50 text-green-600 rounded-full text-sm font-medium mb-4">
@@ -85,7 +85,7 @@ export function ReputationStats() {
             const color = item.changeType === "positive" ? "hsl(142.1 76.2% 36.3%)" : "hsl(0 72.2% 50.6%)"
 
             return (
-              <Card key={item.name} className="p-6">
+              <Card key={item.name} className="p-6 min-h-[240px]">
                 <div>
                   <h3 className="text-lg font-garnett text-gray-900 mb-2">{item.name}</h3>
                   <div className="flex items-baseline justify-between">
