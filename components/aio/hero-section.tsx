@@ -2,14 +2,26 @@
 
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
+import { GradientBackground } from "@/components/ui/noisy-gradient-backgrounds"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 export function AIOHero() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-24 overflow-hidden">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-cream to-white"></div>
+      {/* Gradient Background with Noise */}
+      <GradientBackground
+        gradientType="linear-gradient"
+        gradientOrigin="top-middle"
+        colors={[
+          { color: 'rgba(250,249,246,1)', stop: '0%' },
+          { color: 'rgba(255,255,255,1)', stop: '100%' }
+        ]}
+        noiseIntensity={0.8}
+        noisePatternSize={90}
+        noisePatternRefreshInterval={2}
+        noisePatternAlpha={15}
+      />
       
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
