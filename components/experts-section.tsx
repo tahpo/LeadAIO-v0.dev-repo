@@ -15,6 +15,8 @@ export function ExpertsSection() {
   const [showChat, setShowChat] = useState(true)
   const [showFirstMessage, setShowFirstMessage] = useState(false)
   const [showSecondMessage, setShowSecondMessage] = useState(false)
+  const timeoutsRef = useRef<Array<NodeJS.Timeout>>([])
+  const cursorIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const [cursorPositions, setCursorPositions] = useState([
     { x: 100, y: 100, color: "#A8D9FF", name: "Jessica", targetX: 150, targetY: 150, speed: 1.5 },
     { x: 180, y: 150, color: "#FAC666", name: "Michael", targetX: 220, targetY: 100, speed: 2 },
@@ -24,7 +26,7 @@ export function ExpertsSection() {
   // Animation message
   const messageToType = "We've found a high-value keyword cluster that competitors are missing. Search volume is 8.2K/month with low competition."
   
-  // Keywords for analysis table - added more for the expanded view
+  // Keywords for analysis table
   const keywords = [
     { keyword: "ai seo tools", volume: "5,200", difficulty: "32/100", potential: "High" },
     { keyword: "ai keyword research", volume: "3,800", difficulty: "41/100", potential: "High" },
@@ -58,12 +60,22 @@ export function ExpertsSection() {
       observer.observe(sectionRef.current)
     }
 
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      timeoutsRef.current.forEach(timeout => clearTimeout(timeout))
+      if (cursorIntervalRef.current) {
+        clearInterval(cursorIntervalRef.current)
+      }
+    }
   }, [])
 
   // Animation of chat
   useEffect(() => {
     if (!isVisible) return
+    
+    // Clear any existing timeouts
+    timeoutsRef.current.forEach(timeout => clearTimeout(timeout))
+    timeoutsRef.current = []
     
     // Reset animation state
     setTypingIndex(0)
@@ -75,132 +87,121 @@ export function ExpertsSection() {
     
     // Start chat animation loop
     const runChatAnimation = () => {
-      // Show Sarah's message first with time to view it
-      setShowFirstMessage(true)
-      
-      // After 1.5 seconds, show Michael's message and start typing
-      setTimeout(() => {
-        setShowSecondMessage(true)
+      // Show Sarah's message first
+      timeoutsRef.current.push(setTimeout(() => {
+        setShowFirstMessage(true)
         
-        // Start typing animation with a short delay
-        setTimeout(() => {
-          // Typing animation
-          const typingInterval = setInterval(() => {
-            setTypingIndex(prev => {
-              if (prev < messageToType.length) {
-                return prev + 1
-              } else {
-                clearInterval(typingInterval)
-                return prev
-              }
-            })
-          }, 30) // Speed of typing
+        // Show Michael's message and start typing
+        timeoutsRef.current.push(setTimeout(() => {
+          setShowSecondMessage(true)
           
-          // After typing, show reactions one by one
-          setTimeout(() => {
-            // Show first reaction
-            setShowThumbsUp(true)
+          // Start typing animation
+          timeoutsRef.current.push(setTimeout(() => {
+            const typingInterval = setInterval(() => {
+              setTypingIndex(prev => {
+                if (prev < messageToType.length) {
+                  return prev + 1
+                } else {
+                  clearInterval(typingInterval)
+                  return prev
+                }
+              })
+            }, 30)
             
-            // Show second reaction after delay
-            setTimeout(() => {
-              setShowFire(true)
+            timeoutsRef.current.push(setTimeout(() => {
+              clearInterval(typingInterval)
               
-              // Hide chat after showing reactions
-              setTimeout(() => {
-                setShowChat(false)
+              // Show reactions
+              timeoutsRef.current.push(setTimeout(() => {
+                setShowThumbsUp(true)
                 
-                // Reset and restart after showing dashboard
-                setTimeout(() => {
-                  setTypingIndex(0)
-                  setShowThumbsUp(false)
-                  setShowFire(false)
-                  setShowChat(true)
-                  setShowFirstMessage(false)
-                  setShowSecondMessage(false)
+                timeoutsRef.current.push(setTimeout(() => {
+                  setShowFire(true)
                   
-                  // Restart the animation after delay
-                  setTimeout(runChatAnimation, 1000)
-                }, 3000) // Time showing dashboard (3 seconds)
-              }, 2000) // Time showing chat with reactions
-            }, 600) // Delay between reactions
-          }, messageToType.length * 30 + 500) // Wait for typing to complete
-        }, 200)
-      }, 1500) // Increased delay before showing second message
+                  timeoutsRef.current.push(setTimeout(() => {
+                    setShowChat(false)
+                    
+                    timeoutsRef.current.push(setTimeout(() => {
+                      setTypingIndex(0)
+                      setShowThumbsUp(false)
+                      setShowFire(false)
+                      setShowChat(true)
+                      setShowFirstMessage(false)
+                      setShowSecondMessage(false)
+                      
+                      timeoutsRef.current.push(setTimeout(runChatAnimation, 1000))
+                    }, 3000))
+                  }, 2000))
+                }, 600))
+              }, messageToType.length * 30 + 500))
+            }, messageToType.length * 30))
+          }, 200))
+        }, 1500))
+      }, 100))
     }
     
-    // Start the animation
     runChatAnimation()
     
     return () => {
-      // Clear all timeouts
-      const highestId = setTimeout(() => {}, 0)
-      for (let i = 0; i < highestId; i++) {
-        clearTimeout(i)
-      }
+      timeoutsRef.current.forEach(timeout => clearTimeout(timeout))
+      timeoutsRef.current = []
     }
   }, [isVisible])
   
-  // Move cursors around more randomly
+  // Move cursors around
   useEffect(() => {
     if (!isVisible) return
     
-    // Function to generate a new random target position
     const getNewTarget = (currentX, currentY) => {
-      // More dramatic movements - larger range (20-100 pixels)
-      const rangeX = 20 + Math.random() * 80;
-      const rangeY = 20 + Math.random() * 80;
+      const rangeX = 20 + Math.random() * 80
+      const rangeY = 20 + Math.random() * 80
+      const directionX = Math.random() > 0.5 ? 1 : -1
+      const directionY = Math.random() > 0.5 ? 1 : -1
+      const newX = currentX + (directionX * rangeX)
+      const newY = currentY + (directionY * rangeY)
       
-      // Random direction
-      const directionX = Math.random() > 0.5 ? 1 : -1;
-      const directionY = Math.random() > 0.5 ? 1 : -1;
-      
-      // New target coordinates
-      const newX = currentX + (directionX * rangeX);
-      const newY = currentY + (directionY * rangeY);
-      
-      // Ensure targets stay within bounds (50-300 for X, 50-250 for Y)
       return {
         x: Math.min(Math.max(newX, 50), 300),
         y: Math.min(Math.max(newY, 50), 250)
-      };
-    };
+      }
+    }
     
-    // Move cursors toward random targets
-    const cursorInterval = setInterval(() => {
+    cursorIntervalRef.current = setInterval(() => {
       setCursorPositions(prev => 
         prev.map(cursor => {
-          // If cursor is close to target, generate a new target
           const distToTarget = Math.sqrt(
             Math.pow(cursor.targetX - cursor.x, 2) + 
             Math.pow(cursor.targetY - cursor.y, 2)
-          );
+          )
           
           if (distToTarget < 5) {
-            const newTarget = getNewTarget(cursor.x, cursor.y);
+            const newTarget = getNewTarget(cursor.x, cursor.y)
             return {
               ...cursor,
               targetX: newTarget.x,
               targetY: newTarget.y,
-              // Randomize speed slightly each time
               speed: 0.8 + Math.random() * 2
-            };
+            }
           }
           
-          // Move toward current target
-          const dx = (cursor.targetX - cursor.x) / 20 * cursor.speed;
-          const dy = (cursor.targetY - cursor.y) / 20 * cursor.speed;
+          const dx = (cursor.targetX - cursor.x) / 20 * cursor.speed
+          const dy = (cursor.targetY - cursor.y) / 20 * cursor.speed
           
           return {
             ...cursor,
             x: cursor.x + dx,
             y: cursor.y + dy
-          };
+          }
         })
-      );
-    }, 50); // Update frequency
+      )
+    }, 50)
     
-    return () => clearInterval(cursorInterval);
-  }, [isVisible]);
+    return () => {
+      if (cursorIntervalRef.current) {
+        clearInterval(cursorIntervalRef.current)
+      }
+    }
+  }, [isVisible])
 
   return (
     <div ref={sectionRef} className="bg-[#1a1a1a] rounded-2xl p-8 shadow-xl">
@@ -213,7 +214,7 @@ export function ExpertsSection() {
         Our team constantly analyzes, monitors, and optimizes your rankings to keep you ahead of competitors and future-proof your SEO strategy.
       </p>
 
-      {/* Dashboard Container - Reduced height */}
+      {/* Dashboard Container */}
       <div className="relative bg-[#222] rounded-2xl p-5 overflow-hidden h-[370px]">
         {/* Table Area */}
         <div ref={tableRef} className="h-full w-full">
@@ -222,7 +223,7 @@ export function ExpertsSection() {
             <div className="text-sm text-gray-400">Last updated: just now</div>
           </div>
 
-          {/* Keywords table - adjusted to fill height */}
+          {/* Keywords table */}
           <div className="w-full overflow-hidden border border-gray-700 rounded-lg" style={{ height: "calc(100% - 50px)" }}>
             <div className="grid grid-cols-4 gap-1 px-4 py-2 bg-[#333] text-gray-300 text-sm">
               <div>Keyword</div>
@@ -287,7 +288,7 @@ export function ExpertsSection() {
             <div className="text-xs text-gray-400">Active now</div>
           </div>
 
-          {/* Chat Messages Container - Reduced padding */}
+          {/* Chat Messages Container */}
           <div className="p-3 h-[calc(100%-40px)] overflow-hidden relative">
             {/* Messages Stack */}
             <div className="h-full flex flex-col justify-end">

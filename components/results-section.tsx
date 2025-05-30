@@ -10,6 +10,7 @@ export function ResultsSection() {
   const [isVisible, setIsVisible] = useState(false)
   const [totalSegments, setTotalSegments] = useState(8)
   const animationFrameRef = useRef<number | null>(null)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
   
   // Total number of segments in the speedometer
   const TOTAL_SEGMENTS = 12;
@@ -35,6 +36,9 @@ export function ResultsSection() {
       observer.disconnect()
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
+      }
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
       }
     }
   }, [])
@@ -76,15 +80,16 @@ export function ResultsSection() {
       
       // Flicker rapidly - between 70-120ms
       const flickerRate = 70 + Math.random() * 50;
-      setTimeout(updateSpeedometer, flickerRate);
+      timerRef.current = setTimeout(updateSpeedometer, flickerRate);
     };
     
     // Start the speedometer animation
     updateSpeedometer();
     
     return () => {
-      // Cleanup any remaining timers
-      clearTimeout(updateSpeedometer as unknown as number);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
     };
   }, [isVisible]);
 
