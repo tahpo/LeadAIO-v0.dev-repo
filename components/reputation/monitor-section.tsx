@@ -1,94 +1,144 @@
 "use client"
 
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Star, MessageSquare, TrendingUp } from "lucide-react"
-import { Card } from "@/components/ui/card"
+import anime from 'animejs'
+import { Star, ThumbsUp, MessageSquare } from "lucide-react"
 
 export function ReputationMonitor() {
-  const [reviews] = useState([
-    { rating: 5, text: "Amazing service! They really helped improve our online presence.", author: "Sarah M." },
-    { rating: 5, text: "The AI-powered responses are incredibly natural. Great tool!", author: "Michael R." },
-    { rating: 4, text: "Very effective for managing our brand reputation across platforms.", author: "David K." },
-  ])
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const timeline = anime.timeline({
+      easing: 'easeOutExpo',
+      loop: true
+    });
+
+    timeline
+      .add({
+        targets: '.review-card',
+        translateY: [-20, 0],
+        opacity: [0, 1],
+        delay: anime.stagger(200),
+        duration: 800
+      })
+      .add({
+        targets: '.sentiment-bar',
+        width: (el) => el.getAttribute('data-width'),
+        duration: 1000,
+        delay: anime.stagger(100)
+      })
+      .add({
+        targets: '.review-card, .sentiment-bar',
+        opacity: 0,
+        duration: 500,
+        delay: 3000,
+        complete: function(anim) {
+          // Reset elements
+          document.querySelectorAll('.review-card').forEach(el => {
+            (el as HTMLElement).style.transform = 'translateY(-20px)';
+            (el as HTMLElement).style.opacity = '0';
+          });
+          document.querySelectorAll('.sentiment-bar').forEach(el => {
+            (el as HTMLElement).style.width = '0';
+          });
+        }
+      });
+  }, []);
 
   return (
-    <section className="relative py-24 bg-[#111827] overflow-hidden">
-      {/* Top Wave */}
-      <div className="absolute -top-1 left-0 right-0 h-16">
-        <svg className="absolute bottom-0 w-full h-16" preserveAspectRatio="none" viewBox="0 0 1440 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1440 54V0C1440 0 1082.5 54 720 54C357.5 54 0 0 0 0V54H1440Z" fill="white"/>
-        </svg>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
+    <section ref={containerRef} className="py-24 bg-indigo-50 relative overflow-hidden">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className="inline-block px-3 py-1 bg-indigo-500/10 text-indigo-300 rounded-full text-sm font-medium mb-4">
-            Real-time Monitoring
+          <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm font-medium mb-4">
+            Monitor
           </span>
-          <h2 className="text-3xl md:text-4xl font-garnett mb-4 text-white">
-            Monitor Your Online Reputation
+          <h2 className="text-3xl md:text-4xl font-garnett mb-4">
+            Real-time Reputation Monitoring
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-universal">
-            Track and respond to reviews across all major platforms in real-time
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-universal">
+            Track and analyze your online reputation across all major platforms
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {reviews.map((review, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card className="p-6 bg-white/5 backdrop-blur border-gray-800">
-                <div className="flex items-center gap-1 mb-4">
-                  {Array.from({ length: review.rating }).map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
-                  ))}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Live Monitor */}
+          <div className="bg-white rounded-xl p-6 shadow-xl">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-garnett">Live Review Feed</h3>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm text-gray-500">Live</span>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {[
+                { platform: "Google", rating: 5, text: "Excellent service! Very professional team." },
+                { platform: "Yelp", rating: 4, text: "Great experience overall, would recommend." },
+                { platform: "Facebook", rating: 5, text: "Top notch customer service!" }
+              ].map((review, i) => (
+                <div key={i} className="review-card opacity-0 bg-gray-50 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">{review.platform}</span>
+                    <div className="flex items-center">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-600">{review.text}</p>
                 </div>
-                <p className="text-gray-300 mb-4 font-universal">{review.text}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-400 font-universal">{review.author}</span>
-                  <span className="text-sm text-indigo-400 font-universal">2 hours ago</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Sentiment Analysis */}
+          <div className="bg-white rounded-xl p-6 shadow-xl">
+            <h3 className="text-lg font-garnett mb-6">Sentiment Analysis</h3>
+            
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <ThumbsUp className="w-5 h-5 text-green-500" />
+                    <span className="text-sm font-medium">Positive</span>
+                  </div>
+                  <span className="text-sm text-gray-500">85%</span>
                 </div>
-              </Card>
-            </motion.div>
-          ))}
+                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="sentiment-bar h-full bg-green-500 rounded-full" data-width="85%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <MessageSquare className="w-5 h-5 text-blue-500" />
+                    <span className="text-sm font-medium">Neutral</span>
+                  </div>
+                  <span className="text-sm text-gray-500">10%</span>
+                </div>
+                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="sentiment-bar h-full bg-blue-500 rounded-full" data-width="10%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <ThumbsUp className="w-5 h-5 text-red-500 rotate-180" />
+                    <span className="text-sm font-medium">Negative</span>
+                  </div>
+                  <span className="text-sm text-gray-500">5%</span>
+                </div>
+                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="sentiment-bar h-full bg-red-500 rounded-full" data-width="5%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
-          <Card className="p-6 bg-white/5 backdrop-blur border-gray-800">
-            <div className="flex items-center gap-3 mb-4">
-              <MessageSquare className="h-5 w-5 text-indigo-400" />
-              <h3 className="text-lg font-garnett text-white">Response Rate</h3>
-            </div>
-            <div className="text-3xl font-garnett text-white mb-2">98.5%</div>
-            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-              <div className="h-full bg-indigo-500 rounded-full" style={{ width: "98.5%" }}></div>
-            </div>
-          </Card>
-
-          <Card className="p-6 bg-white/5 backdrop-blur border-gray-800">
-            <div className="flex items-center gap-3 mb-4">
-              <TrendingUp className="h-5 w-5 text-green-400" />
-              <h3 className="text-lg font-garnett text-white">Sentiment Score</h3>
-            </div>
-            <div className="text-3xl font-garnett text-white mb-2">92/100</div>
-            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-              <div className="h-full bg-green-500 rounded-full" style={{ width: "92%" }}></div>
-            </div>
-          </Card>
-        </div>
-      </div>
-
-      {/* Bottom Wave */}
-      <div className="absolute -bottom-1 left-0 right-0 h-16">
-        <svg className="absolute bottom-0 w-full h-16" preserveAspectRatio="none" viewBox="0 0 1440 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0C0 0 357.5 54 720 54C1082.5 54 1440 0 1440 0V54H0V0Z" fill="white"/>
-        </svg>
       </div>
     </section>
   )
