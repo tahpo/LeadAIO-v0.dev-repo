@@ -9,7 +9,7 @@ const features = [
     icon: Star,
     title: "Review Monitoring",
     description: "Track and analyze reviews across all major platforms in real-time.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100",
+    className: "col-span-2 row-span-1 bg-gradient-to-br from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100",
   },
   {
     icon: MessageSquare,
@@ -21,7 +21,7 @@ const features = [
     icon: BarChart2,
     title: "Sentiment Analysis",
     description: "Advanced AI analysis of customer sentiment and trends.",
-    className: "col-span-1 row-span-2 bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100",
+    className: "col-span-2 row-span-1 bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100",
   },
   {
     icon: Globe,
@@ -33,7 +33,7 @@ const features = [
     icon: Shield,
     title: "Brand Protection",
     description: "Proactive alerts and crisis management tools.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-red-50 to-rose-50 hover:from-red-100 hover:to-rose-100",
+    className: "col-span-2 row-span-1 bg-gradient-to-br from-red-50 to-rose-50 hover:from-red-100 hover:to-rose-100",
   },
   {
     icon: Users,
@@ -45,19 +45,7 @@ const features = [
     icon: TrendingUp,
     title: "Growth Analytics",
     description: "Track your reputation growth and ROI over time.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-cyan-50 to-sky-50 hover:from-cyan-100 hover:to-sky-100",
-  },
-  {
-    icon: Award,
-    title: "Reputation Score",
-    description: "Get detailed insights into your reputation score.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-violet-50 to-fuchsia-50 hover:from-violet-100 hover:to-fuchsia-100",
-  },
-  {
-    icon: Bell,
-    title: "Alert System",
-    description: "Get instant notifications for critical mentions.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-teal-50 to-emerald-50 hover:from-teal-100 hover:to-emerald-100",
+    className: "col-span-2 row-span-1 bg-gradient-to-br from-cyan-50 to-sky-50 hover:from-cyan-100 hover:to-sky-100",
   },
 ]
 
@@ -85,7 +73,7 @@ export function ReputationFeatures() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (

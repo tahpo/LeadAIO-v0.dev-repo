@@ -1,40 +1,41 @@
 'use client'
 
-import { useRef } from "react"
-import { motion } from "framer-motion"
-import { AreaChart, Area, ResponsiveContainer } from "recharts"
+import { useRef, useEffect } from "react"
+import { motion, useInView } from "framer-motion"
+import { AreaChart, Area, ResponsiveContainer, LineChart, Line } from "recharts"
 import { Card } from "@/components/ui/card"
+import anime from 'animejs'
 
 const data = [
   {
     date: "Jan 2024",
-    "Review Score": 4.2,
-    "Response Rate": 92,
-    "Brand Sentiment": 85,
+    "Review Score": 3.8,
+    "Response Rate": 82,
+    "Brand Sentiment": 75,
   },
   {
     date: "Feb 2024",
-    "Review Score": 4.4,
-    "Response Rate": 94,
-    "Brand Sentiment": 87,
+    "Review Score": 4.0,
+    "Response Rate": 86,
+    "Brand Sentiment": 79,
   },
   {
     date: "Mar 2024",
-    "Review Score": 4.6,
-    "Response Rate": 96,
-    "Brand Sentiment": 89,
+    "Review Score": 4.3,
+    "Response Rate": 90,
+    "Brand Sentiment": 83,
   },
   {
     date: "Apr 2024",
-    "Review Score": 4.7,
-    "Response Rate": 97,
-    "Brand Sentiment": 91,
+    "Review Score": 4.5,
+    "Response Rate": 94,
+    "Brand Sentiment": 88,
   },
   {
     date: "May 2024",
     "Review Score": 4.8,
     "Response Rate": 98,
-    "Brand Sentiment": 93,
+    "Brand Sentiment": 93, 
   },
 ]
 
@@ -64,6 +65,30 @@ const summary = [
 
 export function ReputationStats() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" })
+  
+  useEffect(() => {
+    if (isInView) {
+      // Animate the metrics
+      anime({
+        targets: '.stat-value',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        delay: anime.stagger(200),
+        duration: 1200,
+        easing: 'easeOutElastic(1, .5)'
+      })
+      
+      // Animate the chart lines
+      anime({
+        targets: '.chart-line',
+        strokeDashoffset: [anime.setDashoffset, 0],
+        easing: 'easeOutQuad',
+        duration: 1500,
+        delay: anime.stagger(300)
+      })
+    }
+  }, [isInView])
 
   return (
     <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
@@ -83,13 +108,14 @@ export function ReputationStats() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
           {summary.map((item) => {
             const color = item.changeType === "positive" ? "hsl(142.1 76.2% 36.3%)" : "hsl(0 72.2% 50.6%)"
+            const gradientId = `gradient-${item.name.toLowerCase().replace(/\s+/g, '-')}`
 
             return (
-              <Card key={item.name} className="p-6">
+              <Card key={item.name} className="p-6 hover:shadow-lg transition-all duration-300">
                 <div>
                   <h3 className="text-lg font-garnett text-gray-900 mb-2">{item.name}</h3>
                   <div className="flex items-baseline justify-between">
-                    <p className="text-3xl font-garnett">{item.value}</p>
+                    <p className="text-3xl font-garnett stat-value">{item.value}</p>
                     <div className="flex items-center space-x-1 text-sm">
                       <span className="font-medium text-gray-900">{item.change}</span>
                       <span className="text-green-600">({item.percentageChange})</span>
@@ -97,17 +123,32 @@ export function ReputationStats() {
                   </div>
                 </div>
 
-                <div className="mt-4 h-16">
+                <div className="mt-4 h-24">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={data}>
+                    <LineChart data={data}>
+                      <defs>
+                        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor={color} stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor={color} stopOpacity={0.2}/>
+                        </linearGradient>
+                      </defs>
+                      <Line 
+                        type="monotone" 
+                        dataKey={item.name} 
+                        stroke={color} 
+                        strokeWidth={3}
+                        dot={{ r: 4, fill: color, strokeWidth: 0 }}
+                        activeDot={{ r: 6, fill: color, strokeWidth: 0 }}
+                        className="chart-line"
+                      />
                       <Area
                         type="monotone"
                         dataKey={item.name}
-                        stroke={color}
-                        fill={color}
-                        fillOpacity={0.2}
+                        stroke="none"
+                        fill={`url(#${gradientId})`}
+                        fillOpacity={0.3}
                       />
-                    </AreaChart>
+                    </LineChart>
                   </ResponsiveContainer>
                 </div>
               </Card>
