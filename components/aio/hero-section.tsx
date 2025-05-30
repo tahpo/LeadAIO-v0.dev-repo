@@ -11,16 +11,20 @@ export function AIOHero() {
     <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-24 overflow-hidden">
       {/* Gradient Background with Noise */}
       <GradientBackground
-        gradientType="linear-gradient"
-        gradientOrigin="top-middle"
+        gradientOrigin="bottom-middle"
         colors={[
-          { color: 'rgba(250,249,246,1)', stop: '0%' },
-          { color: 'rgba(255,255,255,1)', stop: '100%' }
+          { color: 'rgba(245,87,2,0.15)', stop: '10.5%' },
+          { color: 'rgba(245,120,2,0.15)', stop: '16%' },
+          { color: 'rgba(245,140,2,0.15)', stop: '17.5%' },
+          { color: 'rgba(245,170,100,0.15)', stop: '25%' },
+          { color: 'rgba(238,174,202,0.15)', stop: '40%' },
+          { color: 'rgba(202,179,214,0.15)', stop: '65%' },
+          { color: 'rgba(148,201,233,0.15)', stop: '100%' }
         ]}
-        noiseIntensity={0.8}
+        noiseIntensity={1.0}
         noisePatternSize={90}
         noisePatternRefreshInterval={2}
-        noisePatternAlpha={15}
+        noisePatternAlpha={20}
       />
       
       {/* Animated Background Elements */}
