@@ -47,7 +47,7 @@ export function ReputationFeatures() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="py-20 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden mb-12">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-600 rounded-full text-sm font-medium mb-4">
