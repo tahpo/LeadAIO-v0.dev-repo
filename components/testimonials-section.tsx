@@ -73,8 +73,8 @@ export function TestimonialsSection() {
   })
 
   // MUCH FASTER SPEED - increased from 1500px to 2500px
-  const leftColumnY = useTransform(scrollYProgress, [0, 1], [0, -2500]) // Goes UP faster
-  const rightColumnY = useTransform(scrollYProgress, [0, 1], [-2000, 500]) // Starts higher, more content above
+  const leftColumnY = useTransform(scrollYProgress, [0, 1], [0, -2500])
+  const rightColumnY = useTransform(scrollYProgress, [0, 1], [0, 2500])
 
   // Split testimonials into two columns
   const leftColumn = testimonials.filter((_, i) => i % 2 === 0)
@@ -151,15 +151,21 @@ export function TestimonialsSection() {
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <Avatar className="h-10 w-10 mr-3 border-2 border-gray-100">
-                            <AvatarImage src={testimonial.avatar || "/placeholder.svg"} alt={testimonial.name} />
-                            <AvatarFallback className="bg-gray-100 text-gray-800 font-universal text-xs">
-                              {testimonial.name
-                                .split(" ")
-                                .map((n) => n[0])
-                                .join("")}
-                            </AvatarFallback>
-                          </Avatar>
+                          <div className="h-10 w-10 mr-3 rounded-full bg-gray-100 flex items-center justify-center">
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              className="h-6 w-6 text-gray-500"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                              />
+                            </svg>
+                          </div>
                           <div>
                             <p className="font-garnett text-gray-900 text-sm">{testimonial.name}</p>
                             <p className="text-xs text-gray-500 font-universal">
@@ -195,15 +201,21 @@ export function TestimonialsSection() {
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <Avatar className="h-10 w-10 mr-3 border-2 border-gray-100">
-                            <AvatarImage src={testimonial.avatar || "/placeholder.svg"} alt={testimonial.name} />
-                            <AvatarFallback className="bg-gray-100 text-gray-800 font-universal text-xs">
-                              {testimonial.name
-                                .split(" ")
-                                .map((n) => n[0])
-                                .join("")}
-                            </AvatarFallback>
-                          </Avatar>
+                          <div className="h-10 w-10 mr-3 rounded-full bg-gray-100 flex items-center justify-center">
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              className="h-6 w-6 text-gray-500"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                              />
+                            </svg>
+                          </div>
                           <div>
                             <p className="font-garnett text-gray-900 text-sm">{testimonial.name}</p>
                             <p className="text-xs text-gray-500 font-universal">
