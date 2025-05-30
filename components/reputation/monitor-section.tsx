@@ -47,7 +47,22 @@ export function ReputationMonitor() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-24 bg-indigo-50 relative overflow-hidden">
+    <section className="py-24 bg-[#111827] relative overflow-hidden mt-24">
+      {/* Top wave */}
+      <div className="absolute -top-24 left-0 right-0 h-24">
+        <svg
+          className="absolute bottom-0 w-full h-24"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="#111827"
+            d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          />
+        </svg>
+      </div>
+
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm font-medium mb-4">
@@ -139,6 +154,21 @@ export function ReputationMonitor() {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Bottom wave */}
+      <div className="absolute -bottom-24 left-0 right-0 h-24">
+        <svg
+          className="absolute top-0 w-full h-24"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="#111827"
+            d="M0,32L48,48C96,64,192,96,288,122.7C384,149,480,171,576,154.7C672,139,768,85,864,69.3C960,53,1056,75,1152,69.3C1248,64,1344,32,1392,16L1440,0L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+          />
+        </svg>
       </div>
     </section>
   )
