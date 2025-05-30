@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion } from "framer-motion"
-import * as RechartsPrimitive from "recharts"
+import { AreaChart, Area, ResponsiveContainer } from "recharts"
 import { Card } from "@/components/ui/card"
 
 const data = [
@@ -98,17 +98,17 @@ export function ReputationStats() {
                 </div>
 
                 <div className="mt-4 h-16">
-                  <RechartsPrimitive.ResponsiveContainer>
-                    <RechartsPrimitive.AreaChart data={data}>
-                      <RechartsPrimitive.Area
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={data}>
+                      <Area
                         type="monotone"
                         dataKey={item.name}
                         stroke={color}
                         fill={color}
                         fillOpacity={0.2}
                       />
-                    </RechartsPrimitive.AreaChart>
-                  </RechartsPrimitive.ResponsiveContainer>
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               </Card>
             )
