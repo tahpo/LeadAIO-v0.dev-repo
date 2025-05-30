@@ -2,53 +2,14 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award } from "lucide-react"
+import { Star, BarChart2, Globe, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
-
-const features = [
-  {
-    icon: Star, 
-    title: "Review Monitoring", 
-    description: "Track and analyze reviews across all major platforms in real-time.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100",
-  },
-  {
-    icon: MessageSquare,
-    title: "Smart Response",
-    description: "AI-powered response suggestions for reviews and mentions.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100",
-  },
-  {
-    icon: BarChart2,
-    title: "Sentiment Analysis",
-    description: "Advanced AI analysis of customer sentiment and trends.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100",
-  },
-  {
-    icon: Globe,
-    title: "Web Monitoring",
-    description: "Track mentions and coverage across the entire web.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100",
-  },
-  {
-    icon: Shield,
-    title: "Brand Protection",
-    description: "Proactive alerts and crisis management tools.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-red-50 to-rose-50 hover:from-red-100 hover:to-rose-100",
-  },
-  {
-    icon: Users,
-    title: "Customer Insights",
-    description: "Deep analytics into customer feedback and preferences.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100",
-  },
-]
 
 export function ReputationFeatures() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden -mt-24">
+    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden -mt-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-600 rounded-full text-sm font-medium mb-4">
@@ -62,7 +23,7 @@ export function ReputationFeatures() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {[
             {
               id: "review-monitoring",
@@ -70,7 +31,7 @@ export function ReputationFeatures() {
               title: "Review Monitoring",
               description: "Track and analyze reviews across all major platforms in real-time.",
               color: "bg-yellow-100 text-yellow-600",
-              className: "lg:col-span-2"
+              className: "md:col-span-2 md:row-span-2"
             },
             {
               id: "sentiment-analysis",
@@ -78,7 +39,7 @@ export function ReputationFeatures() {
               title: "Sentiment Analysis",
               description: "Advanced AI analysis of customer sentiment and trends.",
               color: "bg-purple-100 text-purple-600",
-              className: "lg:row-span-2"
+              className: "md:col-span-2"
             },
             {
               id: "brand-protection",
@@ -86,7 +47,7 @@ export function ReputationFeatures() {
               title: "Brand Protection",
               description: "Proactive alerts and crisis prevention tools.",
               color: "bg-red-100 text-red-600",
-              className: "lg:col-span-2"
+              className: "md:col-span-1"
             },
             {
               id: "web-monitoring",
@@ -94,7 +55,7 @@ export function ReputationFeatures() {
               title: "Web Monitoring",
               description: "Track mentions and coverage across the entire web.",
               color: "bg-green-100 text-green-600",
-              className: "lg:col-span-2"
+              className: "md:col-span-1"
             }
           ].map((feature, index) => {
             const Icon = feature.icon
