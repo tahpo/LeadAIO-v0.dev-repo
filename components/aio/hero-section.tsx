@@ -77,6 +77,38 @@ export function AIOHero() {
               <Link href="/contact">Talk to an expert</Link>
             </Button>
           </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-8 h-full">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  <Star className="w-5 h-5 text-yellow-600" />
+                </div>
+                <h3 className="text-lg font-garnett">Proactive Monitoring</h3>
+              </div>
+              <p className="text-gray-600 font-universal text-sm h-[40px]">Real-time alerts and monitoring across all major platforms</p>
+            </div>
+            
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-indigo-600" />
+                </div>
+                <h3 className="text-lg font-garnett">Brand Protection</h3>
+              </div>
+              <p className="text-gray-600 font-universal text-sm h-[40px]">Advanced AI tools to protect and enhance your brand</p>
+            </div>
+            
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <Award className="w-5 h-5 text-purple-600" />
+                </div>
+                <h3 className="text-lg font-garnett">Review Management</h3>
+              </div>
+              <p className="text-gray-600 font-universal text-sm h-[40px]">Smart review management with AI-powered insights</p>
+            </div>
+          </div>
         </div>
       </div>
 
