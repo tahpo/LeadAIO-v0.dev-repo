@@ -10,10 +10,10 @@ export default function ReputationManagementPage() {
     <main className="min-h-screen bg-white">
       <Header />
       <ReputationHero />
-      <div className="mt-[-40px]">
+      <div>
         <ReputationFeatures />
       </div>
-      <div className="mt-12">
+      <div className="mt-0">
         <ReputationMonitor />
       </div>
       <ReputationStats />
