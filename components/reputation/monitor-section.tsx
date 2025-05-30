@@ -47,7 +47,7 @@ export function ReputationMonitor() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-24 bg-indigo-50 relative overflow-hidden">
+    <section ref={containerRef} className="py-20 bg-indigo-50 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm font-medium mb-4">
@@ -61,7 +61,7 @@ export function ReputationMonitor() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Live Monitor */}
           <div className="bg-white rounded-xl p-6 shadow-xl">
             <div className="flex items-center justify-between mb-6">
@@ -94,7 +94,7 @@ export function ReputationMonitor() {
           </div>
 
           {/* Sentiment Analysis */}
-          <div className="bg-white rounded-xl p-6 shadow-xl">
+          <div className="bg-white rounded-xl p-6 shadow-xl mt-0">
             <h3 className="text-lg font-garnett mb-6">Sentiment Analysis</h3>
             
             <div className="space-y-6">

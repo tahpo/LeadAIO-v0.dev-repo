@@ -66,7 +66,7 @@ export function ReputationStats() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-20 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gradient-to-r from-green-50 to-emerald-50 text-green-600 rounded-full text-sm font-medium mb-4">
@@ -91,21 +91,22 @@ export function ReputationStats() {
                   <div className="flex items-baseline justify-between">
                     <p className="text-3xl font-garnett">{item.value}</p>
                     <div className="flex items-center space-x-1 text-sm">
-                      <span className="font-medium text-gray-900">{item.change}</span>
-                      <span className="text-green-600">({item.percentageChange})</span>
+                      <span className="font-medium text-green-600">{item.change}</span>
+                      <span className="text-green-600 font-medium">({item.percentageChange})</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 h-16">
+                <div className="mt-6 h-20">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={data}>
+                    <AreaChart data={data} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
                       <Area
                         type="monotone"
                         dataKey={item.name}
                         stroke={color}
                         fill={color}
-                        fillOpacity={0.2}
+                        fillOpacity={0.3}
+                        strokeWidth={2}
                       />
                     </AreaChart>
                   </ResponsiveContainer>

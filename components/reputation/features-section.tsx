@@ -6,66 +6,48 @@ import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award
 
 const features = [
   {
-    icon: Star,
-    title: "Review Monitoring",
+    icon: Star, 
+    title: "Review Monitoring", 
     description: "Track and analyze reviews across all major platforms in real-time.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100",
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100",
   },
   {
     icon: MessageSquare,
     title: "Smart Response",
     description: "AI-powered response suggestions for reviews and mentions.",
-    className: "col-span-2 row-span-1 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100",
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100",
   },
   {
     icon: BarChart2,
     title: "Sentiment Analysis",
     description: "Advanced AI analysis of customer sentiment and trends.",
-    className: "col-span-1 row-span-2 bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100",
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100",
   },
   {
     icon: Globe,
     title: "Web Monitoring",
     description: "Track mentions and coverage across the entire web.",
-    className: "col-span-2 row-span-1 bg-gradient-to-br from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100",
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100",
   },
   {
     icon: Shield,
     title: "Brand Protection",
     description: "Proactive alerts and crisis management tools.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-red-50 to-rose-50 hover:from-red-100 hover:to-rose-100",
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-red-50 to-rose-50 hover:from-red-100 hover:to-rose-100",
   },
   {
     icon: Users,
     title: "Customer Insights",
     description: "Deep analytics into customer feedback and preferences.",
-    className: "col-span-2 row-span-1 bg-gradient-to-br from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100",
-  },
-  {
-    icon: TrendingUp,
-    title: "Growth Analytics",
-    description: "Track your reputation growth and ROI over time.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-cyan-50 to-sky-50 hover:from-cyan-100 hover:to-sky-100",
-  },
-  {
-    icon: Award,
-    title: "Reputation Score",
-    description: "Get detailed insights into your reputation score.",
-    className: "col-span-1 row-span-1 bg-gradient-to-br from-violet-50 to-fuchsia-50 hover:from-violet-100 hover:to-fuchsia-100",
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100",
   },
 ]
 
 export function ReputationFeatures() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100])
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-20 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-600 rounded-full text-sm font-medium mb-4">
@@ -79,8 +61,8 @@ export function ReputationFeatures() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {features.slice(0, 8).map((feature, index) => {
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {features.map((feature, index) => {
             const Icon = feature.icon
             return (
               <motion.div
