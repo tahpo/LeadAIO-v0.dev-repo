@@ -158,38 +158,6 @@ export function ReputationFeatures() {
             <p className="text-gray-800 font-universal text-sm">Deep analytics into customer feedback and preferences.</p>
           </motion.div>
         </div>
-
-        {/* Competitive Analysis - Medium Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.2 }}
-          className="bg-teal-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <TrendingUp className="h-5 w-5 text-teal-600" />
-            <h3 className="text-lg font-garnett">Competitive Analysis</h3>
-          </div>
-          <p className="text-gray-800 font-universal text-sm">Monitor and benchmark against competitor reputation metrics.</p>
-        </motion.div>
-
-        {/* Performance Metrics - Medium Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.2 }}
-          className="bg-cyan-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <Award className="h-5 w-5 text-cyan-600" />
-            <h3 className="text-lg font-garnett">Performance Metrics</h3>
-          </div>
-          <p className="text-gray-800 font-universal text-sm">Track and measure reputation KPIs and improvements.</p>
-        </motion.div>
       </div>
     </section>
   )
