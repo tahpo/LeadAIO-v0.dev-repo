@@ -61,27 +61,102 @@ export function ReputationFeatures() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {features.map((feature, index) => {
-            const Icon = feature.icon
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-                className={`${feature.className} rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50 h-full`}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <Icon className="h-6 w-6 text-gray-700" />
-                  <h3 className="text-xl font-garnett">{feature.title}</h3>
-                </div>
-                <p className="text-gray-600 font-universal">{feature.description}</p>
-              </motion.div>
-            )
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {/* Review Monitoring - Large Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-yellow-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Star className="h-5 w-5 text-yellow-600" />
+              <h3 className="text-lg font-garnett">Review Monitoring</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Track and analyze reviews across all major platforms in real-time.</p>
+          </motion.div>
+
+          {/* Smart Response - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-blue-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <MessageSquare className="h-5 w-5 text-blue-600" />
+              <h3 className="text-lg font-garnett">Smart Response</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">AI-powered response suggestions for reviews and mentions.</p>
+          </motion.div>
+
+          {/* Sentiment Analysis - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-purple-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <BarChart2 className="h-5 w-5 text-purple-600" />
+              <h3 className="text-lg font-garnett">Sentiment Analysis</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Advanced AI analysis of customer sentiment and trends.</p>
+          </motion.div>
+
+          {/* Web Monitoring - Wide Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-green-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50 md:col-span-2 lg:col-span-2"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Globe className="h-5 w-5 text-green-600" />
+              <h3 className="text-lg font-garnett">Web Monitoring</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Track mentions and coverage across the entire web.</p>
+          </motion.div>
+
+          {/* Brand Protection - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-red-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Shield className="h-5 w-5 text-red-600" />
+              <h3 className="text-lg font-garnett">Brand Protection</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Proactive alerts and crisis management tools.</p>
+          </motion.div>
+
+          {/* Customer Insights - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-orange-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Users className="h-5 w-5 text-orange-600" />
+              <h3 className="text-lg font-garnett">Customer Insights</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Deep analytics into customer feedback and preferences.</p>
+          </motion.div>
         </div>
       </div>
     </section>
