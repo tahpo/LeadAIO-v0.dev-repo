@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { ContainerScroll } from "./container-scroll"
+import { Button } from "@/components/ui/button"
 
 // Define the words arrays that were missing
 const words1 = ["business", "startup", "brand", "company"]
