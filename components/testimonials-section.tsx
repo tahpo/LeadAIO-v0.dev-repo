@@ -2,8 +2,8 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card" 
+import { User } from "lucide-react"
 import { Star } from "lucide-react"
 
 const testimonials = [
@@ -13,7 +13,6 @@ const testimonials = [
     company: "TechFlow",
     content:
       "LeadAIO increased our organic traffic by 215% in just 3 months. The AI recommendations are incredibly accurate.",
-    avatar: "/professional-woman-headshot.png",
     rating: 5,
     metric: "+215% traffic",
   },
@@ -22,7 +21,6 @@ const testimonials = [
     role: "SEO Specialist",
     company: "GrowthLabs",
     content: "Finally, an SEO tool that actually works. We're now ranking #1 for our most important keywords.",
-    avatar: "/professional-man-headshot.png",
     rating: 5,
     metric: "#1 rankings",
   },
@@ -73,8 +71,7 @@ export function TestimonialsSection() {
   })
 
   // MUCH FASTER SPEED - increased from 1500px to 2500px
-  const leftColumnY = useTransform(scrollYProgress, [0, 1], [0, -2500]) // Goes UP faster
-  const rightColumnY = useTransform(scrollYProgress, [0, 1], [-2000, 500]) // Starts higher, more content above
+  const columnY = useTransform(scrollYProgress, [0, 1], [0, -2500]) // Same speed for both columns
 
   // Split testimonials into two columns
   const leftColumn = testimonials.filter((_, i) => i % 2 === 0)
@@ -135,7 +132,7 @@ export function TestimonialsSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto relative h-full">
             {/* Left Column - moves UP (negative direction) */}
             <div className="relative overflow-hidden h-full">
-              <motion.div style={{ y: leftColumnY }} className="space-y-6">
+              <motion.div style={{ y: columnY }} className="space-y-6">
                 {massiveLeftColumn.map((testimonial, index) => (
                   <Card key={`left-${index}`} className="bg-white shadow-sm hover-lift border border-gray-100">
                     <CardContent className="p-5 relative">
@@ -151,15 +148,9 @@ export function TestimonialsSection() {
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <Avatar className="h-10 w-10 mr-3 border-2 border-gray-100">
-                            <AvatarImage src={testimonial.avatar || "/placeholder.svg"} alt={testimonial.name} />
-                            <AvatarFallback className="bg-gray-100 text-gray-800 font-universal text-xs">
-                              {testimonial.name
-                                .split(" ")
-                                .map((n) => n[0])
-                                .join("")}
-                            </AvatarFallback>
-                          </Avatar>
+                          <div className="h-10 w-10 mr-3 rounded-full bg-gray-100 flex items-center justify-center">
+                            <User className="h-5 w-5 text-gray-600" />
+                          </div>
                           <div>
                             <p className="font-garnett text-gray-900 text-sm">{testimonial.name}</p>
                             <p className="text-xs text-gray-500 font-universal">
@@ -179,7 +170,7 @@ export function TestimonialsSection() {
 
             {/* Right Column - moves DOWN (positive direction) */}
             <div className="relative overflow-hidden h-full">
-              <motion.div style={{ y: rightColumnY }} className="space-y-6">
+              <motion.div style={{ y: columnY }} className="space-y-6">
                 {massiveRightColumn.map((testimonial, index) => (
                   <Card key={`right-${index}`} className="bg-white shadow-sm hover-lift border border-gray-100">
                     <CardContent className="p-5 relative">
@@ -195,15 +186,9 @@ export function TestimonialsSection() {
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <Avatar className="h-10 w-10 mr-3 border-2 border-gray-100">
-                            <AvatarImage src={testimonial.avatar || "/placeholder.svg"} alt={testimonial.name} />
-                            <AvatarFallback className="bg-gray-100 text-gray-800 font-universal text-xs">
-                              {testimonial.name
-                                .split(" ")
-                                .map((n) => n[0])
-                                .join("")}
-                            </AvatarFallback>
-                          </Avatar>
+                          <div className="h-10 w-10 mr-3 rounded-full bg-gray-100 flex items-center justify-center">
+                            <User className="h-5 w-5 text-gray-600" />
+                          </div>
                           <div>
                             <p className="font-garnett text-gray-900 text-sm">{testimonial.name}</p>
                             <p className="text-xs text-gray-500 font-universal">
