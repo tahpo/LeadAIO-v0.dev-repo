@@ -2,18 +2,64 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Zap, Target, Globe, FileText, BarChart2, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
+
+interface MenuItem {
+  href: string;
+  label: string;
+  description?: string;
+  icon?: JSX.Element;
+}
 
 interface DropdownProps {
   label: string;
-  items: {
-    href: string;
-    label: string;
-  }[];
+  items: MenuItem[];
 }
 
-function NavDropdown({ label, items }: DropdownProps) {
+const servicesItems = [
+  {
+    href: "/services/aio",
+    label: "AI Optimization (AIO)",
+    description: "Leverage AI to optimize your search rankings automatically",
+    icon: <Zap className="h-5 w-5 text-blue-500" />
+  },
+  {
+    href: "/services/reputation-management",
+    label: "Reputation Management",
+    description: "Build and maintain your online reputation effectively",
+    icon: <Target className="h-5 w-5 text-purple-500" />
+  },
+  {
+    href: "/services/paid-advertising",
+    label: "Paid Advertising",
+    description: "Strategic PPC campaigns that maximize ROI",
+    icon: <Globe className="h-5 w-5 text-green-500" />
+  }
+];
+
+const pricingItems = [
+  {
+    href: "/pricing/aio",
+    label: "AIO Pricing",
+    description: "AI-powered SEO optimization pricing plans",
+    icon: <Search className="h-5 w-5 text-orange-500" />
+  },
+  {
+    href: "/pricing/reputation-management",
+    label: "Reputation Management",
+    description: "Pricing for reputation building services",
+    icon: <BarChart2 className="h-5 w-5 text-indigo-500" />
+  },
+  {
+    href: "/pricing/paid-advertising",
+    label: "Paid Advertising",
+    description: "PPC and advertising campaign pricing",
+    icon: <FileText className="h-5 w-5 text-pink-500" />
+  }
+];
+
+function NavDropdown({ label, items }: DropdownProps) { 
   return (
     <div className="relative group">
       <button className="text-sm text-gray-700 hover:text-gray-900 transition-colors font-universal whitespace-nowrap flex items-center gap-1">
@@ -22,15 +68,27 @@ function NavDropdown({ label, items }: DropdownProps) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      <div className="absolute top-full left-0 pt-1 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-150">
-        <div className="bg-white rounded-lg shadow-xl border border-gray-100/50 py-1.5 min-w-[220px] backdrop-blur-sm">
+      <div className="absolute top-full left-0 pt-1 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-150 z-50">
+        <div className="bg-white rounded-lg shadow-xl border border-gray-100/50 py-2 min-w-[320px] backdrop-blur-sm">
           {items.map((item, index) => (
             <Link
-              key={index}
+              key={index} 
               href={item.href}
-              className="block px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50/80 hover:text-gray-900 transition-colors font-universal mx-1 rounded-md"
+              className="flex items-start gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50/80 hover:text-gray-900 transition-colors font-universal mx-1 rounded-md group"
             >
-              {item.label}
+              {item.icon && (
+                <div className="mt-0.5 transition-transform group-hover:scale-110">
+                  {item.icon}
+                </div>
+              )}
+              <div>
+                <div className="font-medium text-gray-900">{item.label}</div>
+                {item.description && (
+                  <div className="text-xs text-gray-500 mt-0.5 font-universal">
+                    {item.description}
+                  </div>
+                )}
+              </div>
             </Link>
           ))}
         </div>
@@ -67,11 +125,7 @@ export function Header() {
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">
           <NavDropdown 
             label="Services"
-            items={[
-              { href: "/services/aio", label: "Artificial Intelligence Optimization (AIO)" },
-              { href: "/services/reputation-management", label: "Reputation Management" },
-              { href: "/services/paid-advertising", label: "Paid Advertising" },
-            ]}
+            items={servicesItems}
           />
           <Link
             href="#how-it-works"
@@ -81,11 +135,7 @@ export function Header() {
           </Link>
           <NavDropdown
             label="Pricing"
-            items={[
-              { href: "/pricing/aio", label: "AIO Pricing" },
-              { href: "/pricing/reputation-management", label: "Reputation Management Pricing" },
-              { href: "/pricing/paid-advertising", label: "Paid Advertising Pricing" },
-            ]}
+            items={pricingItems}
           />
           <Link
             href="/contact"
