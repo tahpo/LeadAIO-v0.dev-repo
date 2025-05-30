@@ -1,72 +1,50 @@
 "use client"
 
 import { useRef, useEffect } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 import anime from 'animejs'
 import { Star, ThumbsUp, MessageSquare } from "lucide-react"
 
 export function ReputationMonitor() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
   useEffect(() => {
-    if (!isInView) return
-    
-    // Animation for review cards
-    anime({
-      targets: '.review-card',
-      translateY: [-20, 0],
-      opacity: [0, 1],
-      delay: anime.stagger(200),
-      duration: 800,
+    const timeline = anime.timeline({
       easing: 'easeOutExpo',
-      loop: true,
-      direction: 'alternate',
-      loopComplete: function(anim) {
-        // Reset elements for next loop
-        document.querySelectorAll('.review-card').forEach(el => {
-          (el as HTMLElement).style.transform = 'translateY(-20px)';
-          (el as HTMLElement).style.opacity = '0';
-        });
-      },
-      loopBegin: function(anim) {
-        // Prepare for next animation
-        document.querySelectorAll('.review-card').forEach(el => {
-          (el as HTMLElement).style.transform = 'translateY(-20px)';
-          (el as HTMLElement).style.opacity = '0';
-        });
-      }
+      loop: true
     });
-    
-    // Animate stars
-    anime({
-      targets: '.review-star',
-      scale: [0.5, 1],
-      rotate: 360,
-      delay: anime.stagger(100),
-      duration: 800,
-      loop: true,
-      direction: 'alternate',
-      easing: 'easeInOutQuad',
-      endDelay: 1000
-    });
-    
-    // Animation for sentiment bars
-    anime({
-      targets: '.sentiment-bar',
-      width: (el) => el.getAttribute('data-width'),
-      duration: 1000,
-      delay: anime.stagger(100),
-      easing: 'easeOutExpo',
-      loop: true,
-      direction: 'alternate',
-      loopBegin: function(anim) {
-        document.querySelectorAll('.sentiment-bar').forEach(el => {
-          (el as HTMLElement).style.width = '0';
-        });
-      }
-    });
-  }, [isInView]);
+
+    timeline
+      .add({
+        targets: '.review-card',
+        translateY: [-20, 0],
+        opacity: [0, 1],
+        delay: anime.stagger(200),
+        duration: 800
+      })
+      .add({
+        targets: '.sentiment-bar',
+        width: (el) => el.getAttribute('data-width'),
+        duration: 1000,
+        delay: anime.stagger(100)
+      })
+      .add({
+        targets: '.review-card, .sentiment-bar',
+        opacity: 0,
+        duration: 500,
+        delay: 3000,
+        complete: function(anim) {
+          // Reset elements
+          document.querySelectorAll('.review-card').forEach(el => {
+            (el as HTMLElement).style.transform = 'translateY(-20px)';
+            (el as HTMLElement).style.opacity = '0';
+          });
+          document.querySelectorAll('.sentiment-bar').forEach(el => {
+            (el as HTMLElement).style.width = '0';
+          });
+        }
+      });
+  }, []);
 
   return (
     <section ref={containerRef} className="py-24 bg-indigo-50 relative overflow-hidden">
@@ -87,14 +65,14 @@ export function ReputationMonitor() {
           {/* Live Monitor */}
           <div className="bg-white rounded-xl p-6 shadow-xl">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-garnett">Review Monitoring</h3>
+              <h3 className="text-lg font-garnett">Live Review Feed</h3>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="text-sm text-gray-500">Live</span>
               </div>
             </div>
 
-            <div className="space-y-4 min-h-[250px]">
+            <div className="space-y-4">
               {[
                 { platform: "Google", rating: 5, text: "Excellent service! Very professional team." },
                 { platform: "Yelp", rating: 4, text: "Great experience overall, would recommend." },
@@ -105,7 +83,7 @@ export function ReputationMonitor() {
                     <span className="text-sm font-medium">{review.platform}</span>
                     <div className="flex items-center">
                       {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current review-star" />
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                       ))}
                     </div>
                   </div>
@@ -116,7 +94,7 @@ export function ReputationMonitor() {
           </div>
 
           {/* Sentiment Analysis */}
-          <div className="bg-white rounded-xl p-6 shadow-xl min-h-[250px]">
+          <div className="bg-white rounded-xl p-6 shadow-xl">
             <h3 className="text-lg font-garnett mb-6">Sentiment Analysis</h3>
             
             <div className="space-y-6">
