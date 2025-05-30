@@ -94,7 +94,7 @@ export function AIOHero() {
                 <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
                   <Shield className="w-5 h-5 text-indigo-600" />
                 </div>
-                <h3 className="text-lg font-garnett">Brand Protection</h3>
+                <h3 className="text-lg font-garnett">Quality Protection</h3>
               </div>
               <p className="text-gray-600 font-universal text-sm h-[40px]">Advanced AI tools to protect and enhance your brand</p>
             </div>
