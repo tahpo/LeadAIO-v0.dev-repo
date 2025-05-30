@@ -8,6 +8,7 @@ import anime from 'animejs'
 // Define the words arrays that were missing
 const words1 = ["business", "startup", "brand", "company"]
 const words2 = ["growth", "success", "results", "leads"]
+import { ContainerScroll } from "@/components/ui/container-scroll"
 
 export function HeroSection() {
   const [currentWord1, setCurrentWord1] = useState(0)
@@ -200,19 +201,8 @@ export function HeroSection() {
           </div>
 
           {/* Dashboard Preview - Slightly reduced size but maintaining proportions */}
-          <div className="relative w-full max-w-5xl mx-auto mt-6">
-            <motion.div
-              ref={dashboardRef}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative rounded-xl overflow-hidden shadow-2xl mx-auto"
-              style={{ 
-                width: "95%", 
-                transform: "scale(0.90)",
-                transformOrigin: "center top"
-              }}
-            >
+          <ContainerScroll titleComponent={null}>
+            <div className="relative w-full h-full">
               {/* Dashboard UI */}
               <div className="bg-gradient-to-br from-[#0F1724] to-[#1a202c] rounded-xl p-5 relative">
                 {/* Header */}
@@ -608,8 +598,8 @@ export function HeroSection() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </ContainerScroll>
         </div>
       </div>
     </section>
