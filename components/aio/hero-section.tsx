@@ -54,7 +54,7 @@ export function AIOHero() {
             <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-4">
               AI-Powered SEO
             </span>
-            <h1 className="text-5xl md:text-6xl font-garnett mb-8 leading-[1.1] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            <h1 className="text-5xl md:text-6xl font-garnett mb-10 leading-[1.2] bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
               Transform Your Search Rankings with AI
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto font-universal">
