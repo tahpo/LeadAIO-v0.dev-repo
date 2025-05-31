@@ -6,62 +6,42 @@ import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award
 
 const features = [
   {
-    icon: Star,
-    title: "Review Monitoring",
+    icon: Star, 
+    title: "Review Monitoring", 
     description: "Track and analyze reviews across all major platforms in real-time.",
-    bgColor: "bg-yellow-50/50",
-    iconColor: "text-yellow-600",
-    iconBg: "bg-yellow-100"
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100",
   },
   {
     icon: MessageSquare,
     title: "Smart Response",
     description: "AI-powered response suggestions for reviews and mentions.",
-    bgColor: "bg-blue-50/50",
-    iconColor: "text-blue-600",
-    iconBg: "bg-blue-100"
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100",
   },
   {
     icon: BarChart2,
     title: "Sentiment Analysis",
     description: "Advanced AI analysis of customer sentiment and trends.",
-    bgColor: "bg-purple-50/50",
-    iconColor: "text-purple-600",
-    iconBg: "bg-purple-100"
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100",
   },
   {
     icon: Globe,
     title: "Web Monitoring",
     description: "Track mentions and coverage across the entire web.",
-    bgColor: "bg-green-50/50",
-    iconColor: "text-green-600",
-    iconBg: "bg-green-100"
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100",
   },
   {
     icon: Shield,
     title: "Brand Protection",
     description: "Proactive alerts and crisis management tools.",
-    bgColor: "bg-red-50/50",
-    iconColor: "text-red-600",
-    iconBg: "bg-red-100"
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-red-50 to-rose-50 hover:from-red-100 hover:to-rose-100",
   },
   {
     icon: Users,
     title: "Customer Insights",
     description: "Deep analytics into customer feedback and preferences.",
-    bgColor: "bg-orange-50/50",
-    iconColor: "text-orange-600",
-    iconBg: "bg-orange-100"
+    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100",
   },
-  {
-    icon: TrendingUp,
-    title: "Performance Analytics",
-    description: "Track reputation metrics and growth over time.",
-    bgColor: "bg-indigo-50/50", 
-    iconColor: "text-indigo-600",
-    iconBg: "bg-indigo-100"
-  }
-];
+]
 
 export function ReputationFeatures() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -82,24 +62,101 @@ export function ReputationFeatures() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`${feature.bgColor} rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 ${index === 3 ? 'md:col-span-2 lg:col-span-1' : ''}`}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <div className={`p-2 ${feature.iconBg} rounded-lg`}>
-                  <feature.icon className={`h-5 w-5 ${feature.iconColor}`} />
-                </div>
-                <h3 className="text-lg font-garnett">{feature.title}</h3>
-              </div>
-              <p className="text-gray-600 font-universal text-sm pb-2">{feature.description}</p>
-            </motion.div>
-          ))}
+          {/* Review Monitoring - Large Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-yellow-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Star className="h-5 w-5 text-yellow-600" />
+              <h3 className="text-lg font-garnett">Review Monitoring</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Track and analyze reviews across all major platforms in real-time.</p>
+          </motion.div>
+
+          {/* Smart Response - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-blue-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <MessageSquare className="h-5 w-5 text-blue-600" />
+              <h3 className="text-lg font-garnett">Smart Response</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">AI-powered response suggestions for reviews and mentions.</p>
+          </motion.div>
+
+          {/* Sentiment Analysis - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-purple-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <BarChart2 className="h-5 w-5 text-purple-600" />
+              <h3 className="text-lg font-garnett">Sentiment Analysis</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Advanced AI analysis of customer sentiment and trends.</p>
+          </motion.div>
+
+          {/* Web Monitoring - Wide Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-green-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50 md:col-span-2 lg:col-span-2"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Globe className="h-5 w-5 text-green-600" />
+              <h3 className="text-lg font-garnett">Web Monitoring</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Track mentions and coverage across the entire web.</p>
+          </motion.div>
+
+          {/* Brand Protection - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-red-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Shield className="h-5 w-5 text-red-600" />
+              <h3 className="text-lg font-garnett">Brand Protection</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Proactive alerts and crisis management tools.</p>
+          </motion.div>
+
+          {/* Customer Insights - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-orange-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Users className="h-5 w-5 text-orange-600" />
+              <h3 className="text-lg font-garnett">Customer Insights</h3>
+            </div>
+            <p className="text-gray-800 font-universal text-sm">Deep analytics into customer feedback and preferences.</p>
+          </motion.div>
         </div>
       </div>
     </section>
