@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export function PPCHero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-16 overflow-hidden">
       {/* Gradient Background with Noise */}
       <GradientBackground
         gradientOrigin="bottom-middle"
@@ -38,8 +38,8 @@ export function PPCHero() {
               Transform Your{" "}
               <span className="relative">
                 Ad Performance
-                <svg className="absolute -bottom-3 left-0 w-full" viewBox="0 0 400 25" fill="none">
-                  <path d="M 0 20 Q 100 0 200 20 Q 300 40 400 20" stroke="url(#gradient)" strokeWidth="5" strokeLinecap="round"/>
+                <svg className="absolute -bottom-3 left-0 w-full" viewBox="0 0 400 40" fill="none" preserveAspectRatio="none">
+                  <path d="M 0 20 Q 100 5 200 20 Q 300 35 400 20" stroke="url(#gradient)" strokeWidth="5" strokeLinecap="round"/>
                   <defs>
                     <linearGradient id="gradient" x1="0" y1="0" x2="100%" y2="0">
                       <stop offset="0%" stopColor="#4F46E5" />
