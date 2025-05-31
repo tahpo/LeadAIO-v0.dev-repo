@@ -9,8 +9,7 @@ export function PPCResults() {
 
   useEffect(() => {
     const timeline = anime.timeline({
-      easing: 'easeOutExpo',
-      loop: true
+      easing: 'easeOutExpo'
     })
 
     timeline
@@ -25,7 +24,7 @@ export function PPCResults() {
         targets: '.ad-metrics',
         scale: [0.9, 1],
         opacity: [0, 1],
-        delay: anime.stagger(100),
+        delay: anime.stagger(200),
         duration: 600
       })
   }, [])

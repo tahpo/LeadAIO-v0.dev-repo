@@ -13,8 +13,7 @@ export function PPCFeatures() {
 
   useEffect(() => {
     const timeline = anime.timeline({
-      easing: 'easeOutExpo',
-      loop: true
+      easing: 'easeOutExpo'
     })
 
     timeline
@@ -28,7 +27,7 @@ export function PPCFeatures() {
       .add({
         targets: '.progress-bar',
         width: (el) => el.getAttribute('data-progress'),
-        duration: 1500,
+        duration: 2000,
         delay: anime.stagger(100)
       })
   }, [])
