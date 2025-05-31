@@ -2,45 +2,51 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award } from "lucide-react"
+import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp } from "lucide-react"
 
 const features = [
   {
     icon: Star, 
     title: "Review Monitoring", 
     description: "Track and analyze reviews across all major platforms in real-time.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100",
+    className: "col-span-1 bg-yellow-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
   },
   {
     icon: MessageSquare,
     title: "Smart Response",
     description: "AI-powered response suggestions for reviews and mentions.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100",
+    className: "col-span-1 bg-blue-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
   },
   {
     icon: BarChart2,
     title: "Sentiment Analysis",
     description: "Advanced AI analysis of customer sentiment and trends.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100",
+    className: "col-span-1 bg-purple-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
   },
   {
     icon: Globe,
     title: "Web Monitoring",
     description: "Track mentions and coverage across the entire web.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100",
+    className: "col-span-1 md:col-span-2 bg-green-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
   },
   {
     icon: Shield,
     title: "Brand Protection",
     description: "Proactive alerts and crisis management tools.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-red-50 to-rose-50 hover:from-red-100 hover:to-rose-100",
+    className: "col-span-1 bg-red-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
   },
   {
     icon: Users,
     title: "Customer Insights",
     description: "Deep analytics into customer feedback and preferences.",
-    className: "col-span-1 md:col-span-2 bg-gradient-to-br from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100",
+    className: "col-span-1 md:col-span-2 bg-orange-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
   },
+  {
+    icon: TrendingUp,
+    title: "Performance Analytics",
+    description: "Detailed reports and insights into your reputation growth.",
+    className: "col-span-1 bg-teal-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+  }
 ]
 
 export function ReputationFeatures() {
