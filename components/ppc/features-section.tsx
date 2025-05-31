@@ -14,8 +14,7 @@ export function PPCFeatures() {
   useEffect(() => {
     const timeline = anime.timeline({
       easing: 'easeOutExpo',
-      loop: false,
-      autoplay: false
+      loop: true
     })
 
     timeline
@@ -32,25 +31,6 @@ export function PPCFeatures() {
         duration: 1500,
         delay: anime.stagger(100)
       })
-
-    // Create intersection observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            timeline.play()
-            observer.disconnect() // Only play once
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current)
-    }
-
-    return () => observer.disconnect()
   }, [])
 
   return (
