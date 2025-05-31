@@ -11,25 +11,34 @@ export function PPCResults() {
   useEffect(() => {
     if (!isInView) return
     
-    const timeline = anime.timeline({
+    // Animate sponsored card first
+    anime({
+      targets: '.sponsored-card',
+      translateY: [-20, 0],
+      opacity: [0, 1],
+      duration: 800,
       easing: 'easeOutExpo'
-    })
-
-    timeline
-      .add({
-        targets: '.search-result',
-        translateY: [-20, 0],
-        opacity: [0, 1],
-        delay: anime.stagger(200),
-        duration: 800
-      })
-      .add({
-        targets: '.ad-metrics',
-        scale: [0.9, 1],
-        opacity: [0, 1],
-        delay: anime.stagger(200),
-        duration: 600
-      })
+    });
+    
+    // Then animate organic results
+    anime({
+      targets: '.organic-result',
+      translateY: [-20, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(200, {start: 400}),
+      duration: 800,
+      easing: 'easeOutExpo'
+    });
+    
+    // Finally animate metrics
+    anime({
+      targets: '.ad-metrics',
+      scale: [0.9, 1],
+      opacity: [0, 1],
+      delay: anime.stagger(200, {start: 800}),
+      duration: 600,
+      easing: 'easeOutExpo'
+    });
   }, [isInView])
 
   return (
@@ -51,14 +60,14 @@ export function PPCResults() {
           {/* Search Results Preview */}
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <div className="space-y-4">
-              <div className="search-result bg-indigo-50 rounded-lg p-4 opacity-0">
+              <div className="sponsored-card bg-indigo-50 rounded-lg p-4 opacity-0">
                 <div className="text-xs text-gray-500 mb-1">Sponsored</div>
                 <div className="text-blue-600 font-medium text-lg mb-1">Transform Your PPC Results with AI</div>
                 <div className="text-gray-600">Maximize ROI and minimize wasted ad spend with our AI-powered PPC management platform.</div>
               </div>
               
               {[...Array(2)].map((_, i) => (
-                <div key={i} className="search-result bg-gray-50 rounded-lg p-4 opacity-0">
+                <div key={i} className="organic-result bg-gray-50 rounded-lg p-4 opacity-0">
                   <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
                   <div className="h-3 bg-gray-200 rounded w-1/2" />
                 </div>
