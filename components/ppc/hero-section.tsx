@@ -38,7 +38,7 @@ export function PPCHero() {
               Transform Your{" "}
               <span className="relative">
                 Ad Performance
-                <svg className="absolute -bottom-3 left-0 w-full" viewBox="0 0 400 40" fill="none" preserveAspectRatio="none">
+                <svg className="absolute -bottom-6 left-0 w-full" viewBox="0 0 400 40" fill="none" preserveAspectRatio="none">
                   <path d="M 0 20 Q 100 5 200 20 Q 300 35 400 20" stroke="url(#gradient)" strokeWidth="5" strokeLinecap="round"/>
                   <defs>
                     <linearGradient id="gradient" x1="0" y1="0" x2="100%" y2="0">
@@ -50,7 +50,7 @@ export function PPCHero() {
               </span>
             </h1>
             
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 font-universal">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mt-4 mb-8 font-universal">
               Our AI optimizes your PPC campaigns in real-time, maximizing ROI and delivering qualified leads while minimizing wasted ad spend.
             </p>
 
