@@ -42,7 +42,7 @@ export function PPCResults() {
   }, [isInView])
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative">
+    <section ref={containerRef} className="py-24 bg-gray-50 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm font-medium mb-4">
