@@ -9,8 +9,8 @@ export default function PaidAdvertisingPage() {
     <main className="min-h-screen bg-white overflow-hidden">
       <Header />
       <PPCHero />
-      <PPCFeatures />
       <PPCResults />
+      <PPCFeatures />
       <FooterSection />
     </main>
   )
