@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award } from "lucide-react"
+import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award, Target, AlertTriangle } from "lucide-react"
 
 const features = [
   {
