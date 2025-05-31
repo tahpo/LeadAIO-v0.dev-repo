@@ -1,13 +1,16 @@
 "use client"
 
 import { useRef, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import anime from 'animejs'
 
 export function PPCResults() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
   useEffect(() => {
+    if (!isInView) return
+    
     const timeline = anime.timeline({
       easing: 'easeOutExpo'
     })
@@ -27,7 +30,7 @@ export function PPCResults() {
         delay: anime.stagger(200),
         duration: 600
       })
-  }, [])
+  }, [isInView])
 
   return (
     <section ref={containerRef} className="py-24 bg-white relative">
