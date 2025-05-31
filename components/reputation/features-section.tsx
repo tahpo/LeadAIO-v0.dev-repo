@@ -8,6 +8,7 @@ const features = [
     description: "Track and analyze reviews across all major platforms in real-time.",
     href: "#",
     cta: "Learn more",
+    background: "bg-yellow-50/50",
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-2",
   },
   {
@@ -16,6 +17,7 @@ const features = [
     description: "AI-powered response suggestions for reviews and mentions.",
     href: "#",
     cta: "Learn more",
+    background: "bg-blue-50/50",
     className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
   },
   {
@@ -24,6 +26,7 @@ const features = [
     description: "Advanced AI analysis of customer sentiment and trends.",
     href: "#",
     cta: "Learn more",
+    background: "bg-purple-50/50",
     className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
   },
   {
@@ -32,6 +35,7 @@ const features = [
     description: "Track mentions and coverage across the entire web.",
     href: "#",
     cta: "Learn more",
+    background: "bg-green-50/50",
     className: "lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-3",
   },
   {
@@ -40,6 +44,7 @@ const features = [
     description: "Proactive alerts and crisis management tools.",
     href: "#",
     cta: "Learn more",
+    background: "bg-red-50/50",
     className: "lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3",
   },
   {
@@ -48,6 +53,7 @@ const features = [
     description: "Deep analytics into customer feedback and preferences.",
     href: "#",
     cta: "Learn more",
+    background: "bg-orange-50/50",
     className: "lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-4",
   },
   {
@@ -56,6 +62,7 @@ const features = [
     description: "Track and improve your reputation metrics over time.",
     href: "#",
     cta: "Learn more",
+    background: "bg-teal-50/50",
     className: "lg:col-start-3 lg:col-end-4 lg:row-start-3 lg:row-end-4",
   },
 ]
