@@ -89,7 +89,7 @@ export function ReputationFeatures() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 ${index === 3 ? 'md:col-span-2 lg:col-span-2' : ''}`}
+              className={`${feature.bgColor} rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 ${index === 3 ? 'md:col-span-2 lg:col-span-1' : ''}`}
             >
               <div className="flex items-center gap-2 mb-4">
                 <div className={`p-2 ${feature.iconBg} rounded-lg`}>
@@ -97,7 +97,7 @@ export function ReputationFeatures() {
                 </div>
                 <h3 className="text-lg font-garnett">{feature.title}</h3>
               </div>
-              <p className="text-gray-600 font-universal text-sm">{feature.description}</p>
+              <p className="text-gray-600 font-universal text-sm pb-2">{feature.description}</p>
             </motion.div>
           ))}
         </div>
