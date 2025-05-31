@@ -10,7 +10,8 @@ export function PPCResults() {
   useEffect(() => {
     const timeline = anime.timeline({
       easing: 'easeOutExpo',
-      loop: true
+      loop: false,
+      autoplay: false
     })
 
     timeline
@@ -28,6 +29,25 @@ export function PPCResults() {
         delay: anime.stagger(100),
         duration: 600
       })
+
+    // Create intersection observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            timeline.play()
+            observer.disconnect() // Only play once
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => observer.disconnect()
   }, [])
 
   return (
