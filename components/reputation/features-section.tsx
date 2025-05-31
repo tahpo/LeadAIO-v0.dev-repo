@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award, Target, AlertTriangle } from "lucide-react"
+import { Star, MessageSquare, BarChart2, Globe, Shield, Users, TrendingUp, Award } from "lucide-react"
 
 const features = [
   {
@@ -62,77 +62,101 @@ export function ReputationFeatures() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {/* Review Monitoring */}
-          <div className="bg-yellow-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50">
+          {/* Review Monitoring - Large Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-yellow-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
             <div className="flex items-center gap-2 mb-4">
               <Star className="h-5 w-5 text-yellow-600" />
-              <h3 className="font-garnett text-lg">Review Monitoring</h3>
+              <h3 className="text-lg font-garnett">Review Monitoring</h3>
             </div>
             <p className="text-gray-800 font-universal text-sm">Track and analyze reviews across all major platforms in real-time.</p>
-          </div>
+          </motion.div>
 
-          {/* Smart Response */}
-          <div className="bg-blue-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50">
+          {/* Smart Response - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-blue-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
             <div className="flex items-center gap-2 mb-4">
               <MessageSquare className="h-5 w-5 text-blue-600" />
-              <h3 className="font-garnett text-lg">Smart Response</h3>
+              <h3 className="text-lg font-garnett">Smart Response</h3>
             </div>
             <p className="text-gray-800 font-universal text-sm">AI-powered response suggestions for reviews and mentions.</p>
-          </div>
+          </motion.div>
 
-          {/* Sentiment Analysis */}
-          <div className="bg-purple-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50">
+          {/* Sentiment Analysis - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-purple-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
             <div className="flex items-center gap-2 mb-4">
               <BarChart2 className="h-5 w-5 text-purple-600" />
-              <h3 className="font-garnett text-lg">Sentiment Analysis</h3>
+              <h3 className="text-lg font-garnett">Sentiment Analysis</h3>
             </div>
             <p className="text-gray-800 font-universal text-sm">Advanced AI analysis of customer sentiment and trends.</p>
-          </div>
+          </motion.div>
 
-          {/* Web Monitoring */}
-          <div className="bg-green-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50">
+          {/* Web Monitoring - Wide Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-green-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50 md:col-span-2 lg:col-span-2"
+          >
             <div className="flex items-center gap-2 mb-4">
               <Globe className="h-5 w-5 text-green-600" />
-              <h3 className="font-garnett text-lg">Web Monitoring</h3>
+              <h3 className="text-lg font-garnett">Web Monitoring</h3>
             </div>
             <p className="text-gray-800 font-universal text-sm">Track mentions and coverage across the entire web.</p>
-          </div>
+          </motion.div>
 
-          {/* Brand Protection */}
-          <div className="bg-red-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50">
+          {/* Brand Protection - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-red-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
             <div className="flex items-center gap-2 mb-4">
               <Shield className="h-5 w-5 text-red-600" />
-              <h3 className="font-garnett text-lg">Brand Protection</h3>
+              <h3 className="text-lg font-garnett">Brand Protection</h3>
             </div>
             <p className="text-gray-800 font-universal text-sm">Proactive alerts and crisis management tools.</p>
-          </div>
+          </motion.div>
 
-          {/* Customer Insights */}
-          <div className="bg-orange-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50">
+          {/* Customer Insights - Medium Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+            className="bg-orange-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50"
+          >
             <div className="flex items-center gap-2 mb-4">
               <Users className="h-5 w-5 text-orange-600" />
-              <h3 className="font-garnett text-lg">Customer Insights</h3>
+              <h3 className="text-lg font-garnett">Customer Insights</h3>
             </div>
             <p className="text-gray-800 font-universal text-sm">Deep analytics into customer feedback and preferences.</p>
-          </div>
-
-          {/* Competitor Analysis */}
-          <div className="bg-indigo-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50">
-            <div className="flex items-center gap-2 mb-4">
-              <Target className="h-5 w-5 text-indigo-600" />
-              <h3 className="font-garnett text-lg">Competitor Analysis</h3>
-            </div>
-            <p className="text-gray-800 font-universal text-sm">Monitor and analyze competitor reputation strategies.</p>
-          </div>
-
-          {/* Crisis Management */}
-          <div className="bg-pink-50/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50">
-            <div className="flex items-center gap-2 mb-4">
-              <AlertTriangle className="h-5 w-5 text-pink-600" />
-              <h3 className="font-garnett text-lg">Crisis Management</h3>
-            </div>
-            <p className="text-gray-800 font-universal text-sm">Rapid response protocols for reputation threats.</p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
