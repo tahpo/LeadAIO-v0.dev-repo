@@ -43,6 +43,11 @@ export function PricingSection({
                    plans.length === 2 ? "md:grid-cols-2" :
                    plans.length === 4 ? "md:grid-cols-4" : "md:grid-cols-3";
 
+  // Calculate max width based on number of plans
+  const maxWidth = plans.length === 1 ? "max-w-xl" :
+                   plans.length === 2 ? "max-w-3xl" :
+                   plans.length === 4 ? "max-w-7xl" : "max-w-6xl";
+
   return (
     <section className="py-32 mt-16">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,7 +94,7 @@ export function PricingSection({
           )}
         </div>
 
-        <div className={`grid grid-cols-1 ${gridCols} gap-8 max-w-7xl mx-auto`}>
+        <div className={`grid grid-cols-1 ${gridCols} gap-8 ${maxWidth} mx-auto`}>
           {plans.map((plan, index) => (
             <div 
               key={index}
@@ -128,7 +133,7 @@ export function PricingSection({
                   </Link>
                 )}
               </div>
-              <div className="bg-gray-50 px-8 py-6">
+              <div className="px-8 py-6">
                 <p className="font-medium mb-4 font-universal text-sm">Features:</p>
                 <ul className="space-y-3 font-universal">
                   {plan.features.map((feature, i) => (
