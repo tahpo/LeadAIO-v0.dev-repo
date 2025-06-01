@@ -32,6 +32,17 @@ export function PricingSection({
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("monthly")
   const showBillingToggle = plans.length > 1
 
+  // Format price with commas and $ sign
+  const formatPrice = (price: string | number) => {
+    if (typeof price === "string") return price;
+    return `$${price.toLocaleString()}`;
+  }
+
+  // Determine grid columns based on number of plans
+  const gridCols = plans.length === 1 ? "md:grid-cols-1" :
+                   plans.length === 2 ? "md:grid-cols-2" :
+                   plans.length === 4 ? "md:grid-cols-4" : "md:grid-cols-3";
+
   return (
     <section className="py-32 mt-16">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,7 +89,7 @@ export function PricingSection({
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className={`grid grid-cols-1 ${gridCols} gap-8 max-w-7xl mx-auto`}>
           {plans.map((plan, index) => (
             <div 
               key={index}
@@ -96,7 +107,7 @@ export function PricingSection({
               <div className="p-8">
                 <h3 className="text-lg font-garnett text-gray-800 mb-3">{plan.name}</h3>
                 <div className="mb-5">
-                  <span className="text-4xl font-garnett">{plan.price}</span>
+                  <span className="text-4xl font-garnett">{formatPrice(plan.price)}</span>
                   {typeof plan.price === "number" && <span className="text-gray-600 ml-2">per month</span>}
                   {plan.commitment && (
                     <div className="text-sm text-orange-600 mt-1 font-universal">{plan.commitment}</div>

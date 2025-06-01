@@ -1,6 +1,7 @@
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
 import { PricingSection } from "@/components/pricing/pricing-section"
+import { FeaturesSection } from "@/components/pricing/features-section"
 import { FAQSection } from "@/components/pricing/faq-section"
 
 const paidAdvertisingPlans = [
@@ -29,6 +30,27 @@ const paidAdvertisingPlans = [
     cta: {
       text: "Get Started",
       href: "/signup"
+    }
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    description: "Custom PPC management solution for enterprise organizations.",
+    features: [
+      "Unlimited Ad Budget",
+      "Custom AI Strategy Development",
+      "Multi-Account Management",
+      "Enterprise-Grade Analytics",
+      "Custom Integration Development",
+      "Dedicated Strategy Team",
+      "24/7 Priority Support",
+      "Executive Strategy Sessions",
+      "Custom Reporting Solutions",
+      "Advanced Automation Rules"
+    ],
+    cta: {
+      text: "Contact Sales",
+      href: "/contact"
     }
   }
 ]
@@ -65,6 +87,7 @@ export default function PaidAdvertisingPricingPage() {
         description="Transform your paid advertising with AI-powered campaign management."
         plans={paidAdvertisingPlans}
       />
+      <FeaturesSection type="ppc" />
       <FAQSection faqs={paidAdvertisingFaqs} />
       <FooterSection />
     </div>

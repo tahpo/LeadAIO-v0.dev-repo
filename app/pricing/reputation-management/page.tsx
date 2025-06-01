@@ -1,6 +1,7 @@
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
 import { PricingSection } from "@/components/pricing/pricing-section"
+import { FeaturesSection } from "@/components/pricing/features-section"
 import { FAQSection } from "@/components/pricing/faq-section"
 
 const reputationPlans = [
@@ -114,6 +115,7 @@ export default function ReputationManagementPricingPage() {
         description="Build and maintain your online reputation with authentic, high-quality reviews."
         plans={reputationPlans}
       />
+      <FeaturesSection type="reputation" />
       <FAQSection faqs={reputationFaqs} />
       <FooterSection />
     </div>

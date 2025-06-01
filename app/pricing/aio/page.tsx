@@ -1,6 +1,7 @@
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
 import { PricingSection } from "@/components/pricing/pricing-section"
+import { FeaturesSection } from "@/components/pricing/features-section"
 import { FAQSection } from "@/components/pricing/faq-section"
 
 const aioPlans = [
@@ -131,6 +132,7 @@ export default function AIOPricingPage() {
         description="Choose the perfect plan to transform your search rankings with AI."
         plans={aioPlans}
       />
+      <FeaturesSection type="aio" />
       <FAQSection faqs={aioFaqs} />
       <FooterSection />
     </div>
