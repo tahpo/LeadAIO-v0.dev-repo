@@ -35,7 +35,10 @@ export function PricingSection({
   const formatPrice = (price: string | number) => {
     if (typeof price === "string") return price;
     // Apply 20% discount for yearly billing
-    const discountedPrice = billingPeriod === "yearly" ? price * 0.8 : price;
+    if (billingPeriod === "yearly") {
+      const discountedPrice = Math.floor(price * 0.8);
+      return `$${discountedPrice.toLocaleString()}`;
+    }
     return `$${price.toLocaleString()}`;
   }
 
@@ -114,9 +117,7 @@ export function PricingSection({
                 <h3 className="text-lg font-garnett text-gray-800 mb-3">{plan.name}</h3>
                 <div className="mb-5">
                   <span className="text-4xl font-garnett">
-                    {typeof plan.price === "number" 
-                      ? formatPrice(billingPeriod === "yearly" ? plan.price * 0.8 : plan.price)
-                      : formatPrice(plan.price)}
+                    {formatPrice(plan.price)}
                   </span>
                   {typeof plan.price === "number" && <span className="text-gray-600 ml-2">per month</span>}
                   {billingPeriod === "yearly" && typeof plan.price === "number" && (
