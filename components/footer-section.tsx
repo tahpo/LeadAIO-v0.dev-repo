@@ -5,23 +5,23 @@ import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
 
 export function FooterSection() {
   return (
-    <section className="relative" style={{ marginBottom: 0, paddingBottom: 0 }}>
+    <section className="relative">
       {/* Fixed footer wave - made more visible */}
       <div className="relative h-24 w-full overflow-hidden">
         <svg
           className="absolute bottom-0 w-full h-24"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 96 1440 320"
+          viewBox="0 0 1440 320"
           preserveAspectRatio="none"
         >
           <path
             fill="#000000"
-            d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            d="M0,192L48,192C96,192,192,192,288,186.7C384,181,480,171,576,165.3C672,160,768,160,864,165.3C960,171,1056,181,1152,186.7C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           />
         </svg>
       </div>
 
-      <div className="relative z-10 bg-black pt-12 text-white -mt-1" style={{ marginBottom: 0, paddingBottom: 0 }}>
+      <div className="relative z-10 bg-black pt-12 text-white">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-garnett mb-6">Analyze. Visualize. Collaborate.</h2>
@@ -124,7 +124,7 @@ export function FooterSection() {
               </Link>
             </div>
           </div>
-          <div className="pb-10"></div>
+          <div className="pb-8"></div>
         </div>
       </div>
     </section>
