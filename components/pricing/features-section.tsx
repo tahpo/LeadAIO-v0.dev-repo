@@ -260,11 +260,6 @@ export function FeaturesSection({ type }: FeaturesSectionProps) {
                     <div className="flex items-center">
                       <div className="text-sm font-universal font-medium">{feature.name}</div>
                     </div>
-                    <div 
-                      className="text-center text-sm font-universal"
-                      onMouseEnter={() => setHoveredFeature(`${categoryIndex}-${featureIndex}-0`)}
-                      onMouseLeave={() => setHoveredFeature(null)}
-                    >
                     {type === 'ppc' ? (
                       <>
                         <div className="text-center text-sm font-universal">{feature.starter}</div>
@@ -278,7 +273,6 @@ export function FeaturesSection({ type }: FeaturesSectionProps) {
                         <div className="text-center text-sm font-universal">{feature.enterprisePlus}</div>
                       </>
                     )}
-                    </div>
                   </div>
                 ))}
               </div>
