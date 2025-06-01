@@ -10,6 +10,8 @@ export function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
+    service: "",
     company: "",
     message: ""
   })
@@ -54,6 +56,20 @@ export function ContactForm() {
             />
           </div>
         </div>
+        
+        <div>
+          <label htmlFor="phone" className="block text-sm font-universal text-gray-700 mb-2">
+            Phone Number
+          </label>
+          <Input
+            id="phone"
+            type="tel"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            className="w-full"
+            placeholder="+1 (234) 567-890"
+          />
+        </div>
 
         <div>
           <label htmlFor="company" className="block text-sm font-universal text-gray-700 mb-2">
@@ -68,6 +84,22 @@ export function ContactForm() {
           />
         </div>
 
+        <div>
+          <label htmlFor="service" className="block text-sm font-universal text-gray-700 mb-2">
+            Service Interested In
+          </label>
+          <select
+            id="service"
+            value={formData.service}
+            onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+            className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+          >
+            <option value="">Select a service</option>
+            <option value="aio">AI-Powered SEO (AIO)</option>
+            <option value="reputation">Reputation Management</option>
+            <option value="ppc">Paid Advertising</option>
+          </select>
+        </div>
         <div>
           <label htmlFor="message" className="block text-sm font-universal text-gray-700 mb-2">
             Message

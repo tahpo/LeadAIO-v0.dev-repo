@@ -32,9 +32,10 @@ export function PricingSection({
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("monthly")
   const showBillingToggle = plans.length > 1
 
-  // Format price with commas and $ sign
   const formatPrice = (price: string | number) => {
     if (typeof price === "string") return price;
+    // Apply 20% discount for yearly billing
+    const discountedPrice = billingPeriod === "yearly" ? price * 0.8 : price;
     return `$${price.toLocaleString()}`;
   }
 
@@ -112,15 +113,22 @@ export function PricingSection({
               <div className="p-8">
                 <h3 className="text-lg font-garnett text-gray-800 mb-3">{plan.name}</h3>
                 <div className="mb-5">
-                  <span className="text-4xl font-garnett">{formatPrice(plan.price)}</span>
+                  <span className="text-4xl font-garnett">
+                    {typeof plan.price === "number" 
+                      ? formatPrice(billingPeriod === "yearly" ? plan.price * 0.8 : plan.price)
+                      : formatPrice(plan.price)}
+                  </span>
                   {typeof plan.price === "number" && <span className="text-gray-600 ml-2">per month</span>}
+                  {billingPeriod === "yearly" && typeof plan.price === "number" && (
+                    <div className="text-sm text-gray-600 mt-1 font-universal">billed annually</div>
+                  )}
                   {plan.commitment && (
                     <div className="text-sm text-orange-600 mt-1 font-universal">{plan.commitment}</div>
                   )}
                 </div>
                 <p className="text-gray-600 mb-6 font-universal">{plan.description}</p>
                 {plan.cta && (
-                  <Link href={plan.cta.href} className="w-full">
+                  <Link href="/contact" className="w-full">
                     <Button 
                       className={`w-full ${
                         plan.highlight 
