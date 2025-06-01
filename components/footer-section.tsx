@@ -7,7 +7,7 @@ export function FooterSection() {
   return (
     <section className="relative pt-15 bg-white" style={{ marginBottom: 0, paddingBottom: 0 }}>
       {/* Fixed footer wave - made more visible */}
-      <div className="relative h-24 w-full overflow-hidden">
+      <div className="relative h-24 w-full overflow-hidden bg-transparent">
         <svg
           className="absolute bottom-0 w-full h-24"
           xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,6 @@ export function FooterSection() {
         </svg>
       </div>
 
-      <div className="relative z-10 bg-black pt-12 text-white" style={{ marginBottom: 0, paddingBottom: 0 }}>
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-garnett mb-6">Analyze. Visualize. Collaborate.</h2>
