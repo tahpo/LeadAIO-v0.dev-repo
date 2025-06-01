@@ -2,6 +2,8 @@
 
 import { useRef, useEffect, useState } from "react"
 import { Check, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 interface Feature {
   name: string
