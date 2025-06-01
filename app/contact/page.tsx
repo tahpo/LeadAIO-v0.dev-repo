@@ -7,7 +7,7 @@ import { BrandsScroll } from "@/components/brands-scroll"
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white/50">
       <GradientBackground
         gradientType="radial-gradient"
         gradientSize="125% 125%"
@@ -47,11 +47,13 @@ export default function ContactPage() {
           </div>
 
           {/* Brands Section */}
-          <BrandsScroll />
+          <div className="relative z-10 bg-white/80 backdrop-blur-sm py-12 -mx-4 px-4">
+            <BrandsScroll />
+          </div>
         </div>
       </main>
 
-      <div className="relative z-10">
+      <div className="relative z-10 mt-auto">
         <FooterSection />
       </div>
     </div>
