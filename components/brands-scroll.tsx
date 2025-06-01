@@ -13,7 +13,7 @@ const brands = [
 
 export function BrandsScroll() {
   return (
-    <div className="py-12 overflow-hidden">
+    <div className="py-6 overflow-hidden">
       <div className="flex space-x-12 animate-scroll">
         {[...brands, ...brands].map((brand, i) => (
           <div key={i} className="flex-none grayscale opacity-50 hover:opacity-75 transition-opacity">

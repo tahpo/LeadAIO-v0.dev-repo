@@ -46,7 +46,7 @@ export default function ContactPage() {
             <ContactForm />
           </div>
 
-          <div className="relative z-10 py-12 -mx-4 px-4">
+          <div className="relative z-10 py-6 -mx-4 px-4">
             <BrandsScroll />
           </div>
         </div>
