@@ -9,25 +9,19 @@ export function FooterSection() {
       {/* Fixed footer wave - made more visible */}
       <div className="relative h-24 w-full overflow-hidden">
         <svg
-          className="absolute bottom-0 w-full h-24"
+          className="absolute bottom-0 w-full h-24" 
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
           preserveAspectRatio="none"
         >
           <path
-            fill="url(#wave-gradient)"
+            fill="#000000"
             d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          ></path>
-          <defs>
-            <linearGradient id="wave-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(0,0,0,0)" />
-              <stop offset="50%" stopColor="#000000" />
-            </linearGradient>
-          </defs>
+          />
         </svg>
       </div>
 
-      <div className="relative z-10 bg-black pt-12 text-white" style={{ marginBottom: 0, paddingBottom: 0 }}>
+      <div className="relative z-10 bg-black pt-12 text-white" style={{ marginBottom: 0, paddingBottom: 0, marginTop: "-1px" }}>
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-garnett mb-6">Analyze. Visualize. Collaborate.</h2>
