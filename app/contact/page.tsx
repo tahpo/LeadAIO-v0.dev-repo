@@ -7,7 +7,7 @@ import { BrandsScroll } from "@/components/brands-scroll"
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <div className="min-h-screen flex flex-col">
       <GradientBackground
         gradientType="radial-gradient"
         gradientSize="125% 125%"
@@ -29,7 +29,7 @@ export default function ContactPage() {
       <Header />
       
       {/* Main content */}
-      <main className="flex-grow pt-28">
+      <main className="flex-grow pt-28 relative z-10">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
             {/* Left Column - Title */}
@@ -51,7 +51,9 @@ export default function ContactPage() {
         </div>
       </main>
 
-      <FooterSection />
+      <div className="relative z-10">
+        <FooterSection />
+      </div>
     </div>
   )
 }

@@ -220,7 +220,7 @@ function GradientBackground({
 
   return (
     <div 
-      className={`absolute inset-0 w-full h-full ${className}`}
+      className={`fixed inset-0 w-full h-full ${className}`}
       style={gradientStyle}
     >
       {enableNoise && (
