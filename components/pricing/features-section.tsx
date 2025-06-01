@@ -27,9 +27,75 @@ const aioFeatures: FeatureCategory[] = [
       { name: "Keyword difficulty analysis", starter: <Check className="h-5 w-5 text-green-500 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
       { name: "Keyword grouping", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
       { name: "Competitor keyword analysis", starter: "Basic", pro: "Advanced", enterprise: "Enterprise", enterprisePlus: "Custom" },
-      { name: "Local keyword tracking", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> }
+      { name: "Local keyword tracking", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "Keyword intent analysis", starter: "Basic", pro: "Advanced", enterprise: "Custom", enterprisePlus: "Enterprise" },
+      { name: "Search volume tracking", starter: <Check className="h-5 w-5 text-green-500 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> }
     ]
   },
+  {
+    category: "Content Optimization",
+    items: [
+      { name: "Blog articles per week", starter: "1", pro: "2", enterprise: "4", enterprisePlus: "Unlimited" },
+      { name: "AI content suggestions", starter: "Basic", pro: "Advanced", enterprise: "Custom", enterprisePlus: "Enterprise" },
+      { name: "Content performance tracking", starter: <Check className="h-5 w-5 text-green-500 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "SEO content templates", starter: "5", pro: "15", enterprise: "30", enterprisePlus: "Unlimited" },
+      { name: "Content gap analysis", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "Topic cluster optimization", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> }
+    ]
+  },
+  {
+    category: "Technical SEO",
+    items: [
+      { name: "Site audit frequency", starter: "Monthly", pro: "Weekly", enterprise: "Daily", enterprisePlus: "Real-time" },
+      { name: "Pages crawled", starter: "1,000", pro: "10,000", enterprise: "100,000", enterprisePlus: "Unlimited" },
+      { name: "Core Web Vitals monitoring", starter: <Check className="h-5 w-5 text-green-500 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "Schema markup optimization", starter: "Basic", pro: "Advanced", enterprise: "Custom", enterprisePlus: "Enterprise" },
+      { name: "Mobile optimization", starter: <Check className="h-5 w-5 text-green-500 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "JavaScript rendering", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> }
+    ]
+  },
+  {
+    category: "Link Building",
+    items: [
+      { name: "Monthly backlinks", starter: "10", pro: "25", enterprise: "50", enterprisePlus: "Custom" },
+      { name: "Link quality analysis", starter: "Basic", pro: "Advanced", enterprise: "Enterprise", enterprisePlus: "Custom" },
+      { name: "Competitor backlink analysis", starter: <Check className="h-5 w-5 text-green-500 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "Toxic link monitoring", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "Link building outreach", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: "Basic", enterprise: "Advanced", enterprisePlus: "Custom" },
+      { name: "Guest posting opportunities", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> }
+    ]
+  },
+  {
+    category: "Reporting & Analytics",
+    items: [
+      { name: "Custom dashboards", starter: "1", pro: "3", enterprise: "10", enterprisePlus: "Unlimited" },
+      { name: "Report frequency", starter: "Monthly", pro: "Weekly", enterprise: "Daily", enterprisePlus: "Custom" },
+      { name: "White-label reports", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "API access", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <X className="h-5 w-5 text-gray-400 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "ROI tracking", starter: "Basic", pro: "Advanced", enterprise: "Custom", enterprisePlus: "Enterprise" },
+      { name: "Competitor tracking", starter: "2", pro: "5", enterprise: "10", enterprisePlus: "Unlimited" }
+    ]
+  },
+  {
+    category: "AI Features",
+    items: [
+      { name: "Custom AI agents", starter: "1", pro: "3", enterprise: "5", enterprisePlus: "Unlimited" },
+      { name: "AI model training", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: "Basic", enterprise: "Advanced", enterprisePlus: "Custom" },
+      { name: "Predictive analytics", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> },
+      { name: "AI strategy adaptation", starter: "Basic", pro: "Advanced", enterprise: "Custom", enterprisePlus: "Enterprise" },
+      { name: "Market trend analysis", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> }
+    ]
+  },
+  {
+    category: "Support & Training",
+    items: [
+      { name: "Support channels", starter: "Email", pro: "Email & Chat", enterprise: "Priority", enterprisePlus: "24/7 VIP" },
+      { name: "Response time", starter: "48h", pro: "24h", enterprise: "4h", enterprisePlus: "1h" },
+      { name: "Training sessions", starter: "1", pro: "3", enterprise: "Unlimited", enterprisePlus: "Custom" },
+      { name: "Strategy reviews", starter: "Quarterly", pro: "Monthly", enterprise: "Weekly", enterprisePlus: "On-demand" },
+      { name: "Dedicated manager", starter: <X className="h-5 w-5 text-gray-400 mx-auto" />, pro: <X className="h-5 w-5 text-gray-400 mx-auto" />, enterprise: <Check className="h-5 w-5 text-green-500 mx-auto" />, enterprisePlus: <Check className="h-5 w-5 text-green-500 mx-auto" /> }
+    ]
+  }
 ]
 
 const reputationFeatures: FeatureCategory[] = [
