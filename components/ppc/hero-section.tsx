@@ -1,15 +1,10 @@
 "use client"
 
-import dynamic from 'next/dynamic'
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
+import { GradientBackground } from "@/components/ui/noisy-gradient-backgrounds"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-
-const GradientBackground = dynamic(
-  () => import("@/components/ui/noisy-gradient-backgrounds").then(mod => mod.GradientBackground),
-  { ssr: false }
-)
 
 export function PPCHero() {
   return (

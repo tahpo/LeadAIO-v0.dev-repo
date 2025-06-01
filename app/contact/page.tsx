@@ -1,40 +1,16 @@
-import dynamic from 'next/dynamic'
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
 import { ContactForm } from "@/components/contact-form"
 import { ContactCards } from "@/components/contact-cards"
 import { BrandsScroll } from "@/components/brands-scroll"
 
-const GradientBackground = dynamic(
-  () => import("@/components/ui/noisy-gradient-backgrounds").then(mod => mod.GradientBackground),
-  { ssr: false }
-)
-
 export default function ContactPage() {
   return (
-    <div className="min-h-screen flex flex-col relative">
-      <GradientBackground
-        gradientType="radial-gradient"
-        gradientSize="125% 125%"
-        gradientOrigin="bottom-middle"
-        colors={[
-          { color: 'rgba(245,87,2,0.15)', stop: '10.5%' },
-          { color: 'rgba(245,120,2,0.15)', stop: '16%' },
-          { color: 'rgba(245,140,2,0.15)', stop: '17.5%' },
-          { color: 'rgba(245,170,100,0.15)', stop: '25%' },
-          { color: 'rgba(238,174,202,0.15)', stop: '40%' },
-          { color: 'rgba(202,179,214,0.15)', stop: '65%' },
-          { color: 'rgba(148,201,233,0.15)', stop: '100%' }
-        ]}
-        noiseIntensity={1.0}
-        noisePatternSize={90}
-        noisePatternRefreshInterval={2}
-        noisePatternAlpha={20}
-      />
+    <div className="min-h-screen bg-white flex flex-col">
       <Header />
       
       {/* Main content */}
-      <main className="flex-grow pt-28 relative">
+      <main className="flex-grow pt-28">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
             {/* Left Column - Title */}
@@ -56,9 +32,7 @@ export default function ContactPage() {
         </div>
       </main>
 
-      <div className="relative">
-        <FooterSection />
-      </div>
+      <FooterSection />
     </div>
   )
 }

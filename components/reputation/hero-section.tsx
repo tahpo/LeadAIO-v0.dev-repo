@@ -1,16 +1,11 @@
 "use client"
 
-import dynamic from 'next/dynamic'
 import { useRef, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Star, TrendingUp, Shield, Award } from "lucide-react"
+import { GradientBackground } from "@/components/ui/noisy-gradient-backgrounds"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-
-const GradientBackground = dynamic(
-  () => import("@/components/ui/noisy-gradient-backgrounds").then(mod => mod.GradientBackground),
-  { ssr: false }
-)
 
 export function ReputationHero() {
   const containerRef = useRef<HTMLDivElement>(null)
