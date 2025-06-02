@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic"
 import { Header } from "@/components/header"
 import { AIOHero } from "@/components/aio/hero-section"
 import { AIODashboard } from "@/components/aio/dashboard-section"

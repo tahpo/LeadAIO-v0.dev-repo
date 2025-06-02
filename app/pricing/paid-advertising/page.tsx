@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic"
 import { Header } from "@/components/header"
 import { PricingSection } from "@/components/pricing/pricing-section"
 import { FeaturesSection } from "@/components/pricing/features-section"

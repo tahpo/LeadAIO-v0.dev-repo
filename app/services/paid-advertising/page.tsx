@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic"
 import { Header } from "@/components/header"
 import { PPCHero } from "@/components/ppc/hero-section"
 import { PPCFeatures } from "@/components/ppc/features-section"
