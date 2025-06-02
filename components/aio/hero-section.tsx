@@ -23,7 +23,7 @@ export function AIOHero() {
         ]}
         noiseIntensity={1.0}
         noisePatternSize={90}
-        noisePatternRefreshInterval={2}
+        noisePatternRefreshInterval={20}
         noisePatternAlpha={20}
       />
       

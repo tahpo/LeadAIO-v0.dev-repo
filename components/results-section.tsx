@@ -9,7 +9,6 @@ export function ResultsSection() {
   const [speedValue, setSpeedValue] = useState(60)
   const [isVisible, setIsVisible] = useState(false)
   const [totalSegments, setTotalSegments] = useState(8)
-  const animationFrameRef = useRef<number | null>(null)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   
   // Total number of segments in the speedometer
@@ -47,49 +46,38 @@ export function ResultsSection() {
   useEffect(() => {
     if (!isVisible || !speedometerRef.current) return
     
-    // Function to update the speedometer display
-    const updateSpeedometer = () => {
-      // Randomly determine how many segments should be lit (8-12)
-      const segmentCount = Math.floor(Math.random() * 5) + 8; // 8-12 range
-      setTotalSegments(segmentCount);
-      
-      // Get all segment elements
-      const segments = speedometerRef.current?.querySelectorAll('.segment');
-      
-      if (segments) {
-        // Reset all segments
-        segments.forEach((segment, i) => {
-          // Gray segments
-          if (i < GRAY_SEGMENTS) {
-            (segment as HTMLElement).style.opacity = '0.7';
-            (segment as HTMLElement).style.fill = '#4A4A4A';
-          } 
-          // Red segments
-          else {
-            // If this segment should be lit based on the random count
-            if (i < segmentCount) {
-              (segment as HTMLElement).style.opacity = '0.9';
-              (segment as HTMLElement).style.fill = '#FF3E3E';
-            } else {
-              (segment as HTMLElement).style.opacity = '0.15';
-              (segment as HTMLElement).style.fill = '#8B3E3E';
-            }
-          }
-        });
-      }
-      
-      // Flicker rapidly - between 70-120ms
-      const flickerRate = 70 + Math.random() * 50;
-      timerRef.current = setTimeout(updateSpeedometer, flickerRate);
-    };
-    
-    // Start the speedometer animation
-    updateSpeedometer();
+    // Use anime.js for efficient segment animation
+    const segments = speedometerRef.current?.querySelectorAll('.segment');
+    if (!segments) return;
+
+    const timeline = anime.timeline({
+      loop: true,
+      direction: 'alternate',
+      easing: 'easeInOutQuad'
+    });
+
+    // Animate gray segments with subtle opacity changes
+    timeline.add({
+      targets: Array.from(segments).slice(0, GRAY_SEGMENTS),
+      opacity: [0.6, 0.8],
+      fill: '#4A4A4A',
+      duration: 1000
+    });
+
+    // Animate red segments with flickering effect
+    timeline.add({
+      targets: Array.from(segments).slice(GRAY_SEGMENTS),
+      opacity: [0.15, 0.9],
+      fill: ['#8B3E3E', '#FF3E3E'],
+      delay: anime.stagger(100),
+      duration: 800
+    }, '-=800');
     
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
+      timeline.pause();
     };
   }, [isVisible]);
 
@@ -97,34 +85,20 @@ export function ResultsSection() {
   useEffect(() => {
     if (!isVisible) return
 
-    // Phase 1: Moderate increase to 150 in 4 seconds
-    anime({
-      targets: {value: 60},
-      value: 150,
-      duration: 4000,
+    // Single animation with optimized timing
+    const animation = anime({
+      targets: { value: speedValue },
+      value: [60, 400],
+      duration: 60000, // 1 minute total duration
       easing: 'easeInOutQuad',
-      round: 1,
       update: (anim) => {
-        setSpeedValue(Math.round(anim.animations[0].currentValue));
+        setSpeedValue(Math.round(anim.progress * 3.4 + 60));
       },
-      complete: () => {
-        // Phase 2: Slower increase from 150 to 400
-        // 4 seconds per unit × 250 units = 1,000,000 milliseconds
-        anime({
-          targets: {value: 150},
-          value: 400,
-          duration: 1000000, // ~16.7 minutes (4 seconds per unit)
-          easing: 'linear', // Linear to make it consistently slow
-          round: 1,
-          update: (anim) => {
-            setSpeedValue(Math.round(anim.animations[0].currentValue));
-          }
-        });
-      }
+      loop: true
     });
     
     return () => {
-      anime.remove('[data-speed-counter]');
+      animation.pause();
     };
   }, [isVisible]);
 
