@@ -1,9 +1,9 @@
 .contact-form {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+  background: white;
   border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
   transition: all 0.2s ease;
 }
 
@@ -50,10 +50,13 @@
   width: 100%;
   background: black;
   color: white;
-  height: 60px;
+  height: 48px;
   border-radius: 12px;
   font-weight: 500;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact-submit:hover {
