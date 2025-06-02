@@ -23,13 +23,13 @@ function ContactForm() {
   }
 
   return (
-    <div className={styles.contactForm}>
+    <form onSubmit={handleSubmit} className={styles.contactForm}>
       <h2 className="text-2xl md:text-3xl font-garnett mb-2">Send us a message</h2>
       <p className="text-gray-600 mb-8 font-universal">
         Fill out the form below and we'll get back to you within 24 hours.
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="name" className="block text-sm font-universal text-gray-700 mb-2">
@@ -114,14 +114,14 @@ function ContactForm() {
           />
         </div>
 
-        <Button 
-          type="submit" 
-          className="w-full bg-black hover:bg-gray-800 text-white h-[60px] rounded-xl flex items-center justify-center gap-2 font-universal contact-submit"
+        <button 
+          type="submit"
+          className={styles.contactSubmit}
         >
           Send Message <ArrowRight className="h-5 w-5" />
-        </Button>
-      </form>
-    </div>
+        </button>
+      </div>
+    </form>
   )
 }
 

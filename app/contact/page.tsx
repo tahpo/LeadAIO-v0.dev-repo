@@ -45,7 +45,7 @@ export default function ContactPage() {
             </div>
 
             {/* Right Column - Contact Form */}
-            <div className={styles.contactFormWrapper}>
+            <div>
               <ContactForm />
             </div>
           </div>
