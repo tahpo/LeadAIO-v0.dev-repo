@@ -47,30 +47,27 @@ export function ResultsSection() {
   useEffect(() => {
     if (!isVisible || !speedometerRef.current) return
 
-    // Function to update the speedometer display with faster animations
     const updateSpeedometer = () => {
       const segments = speedometerRef.current?.querySelectorAll('.segment');
       if (!segments) return;
 
-      // Randomly determine active segments (8-12 range)
       const segmentCount = Math.floor(Math.random() * 5) + 8;
       setTotalSegments(segmentCount);
 
-      // Super fast animation for segments
-      anime({
-        targets: Array.from(segments),
-        opacity: (el, i) => {
-          if (i < GRAY_SEGMENTS) return [0.6, 0.7];
-          return i < segmentCount ? [0.15, 0.9] : [0.9, 0.15];
-        },
-        fill: (el, i) => {
-          if (i < GRAY_SEGMENTS) return '#4A4A4A';
-          return i < segmentCount ? ['#8B3E3E', '#FF3E3E'] : ['#FF3E3E', '#8B3E3E'];
-        },
-        duration: 200,
-        easing: 'easeInOutQuad',
-        loop: true
+      // Instantly update segments without animation
+      segments.forEach((segment, i) => {
+        const el = segment as HTMLElement;
+        if (i < GRAY_SEGMENTS) {
+          el.style.opacity = '0.7';
+          el.style.fill = '#4A4A4A';
+        } else {
+          el.style.opacity = i < segmentCount ? '0.9' : '0.15';
+          el.style.fill = i < segmentCount ? '#FF3E3E' : '#8B3E3E';
+        }
       });
+
+      // Ultra-fast refresh rate for segment updates
+      timerRef.current = setTimeout(updateSpeedometer, 50);
     };
 
     // Start the animation
