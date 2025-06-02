@@ -129,4 +129,5 @@ export function FooterSection() {
       </div>
     </section>
   )
+  )
 }
