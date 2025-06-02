@@ -3,6 +3,7 @@ import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
 import { ContactForm } from "@/components/contact-form"
 import { ContactCards } from "@/components/contact-cards"
+import styles from './contact.module.css'
 import { BrandsScroll } from "@/components/brands-scroll"
 
 export default function ContactPage() {
@@ -43,7 +44,9 @@ export default function ContactPage() {
             </div>
 
             {/* Right Column - Contact Form */}
-            <ContactForm />
+            <div className={styles.contactFormWrapper}>
+              <ContactForm />
+            </div>
           </div>
 
           <div className="relative z-10 py-6 -mx-4 px-4">

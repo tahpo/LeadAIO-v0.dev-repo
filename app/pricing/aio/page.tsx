@@ -3,6 +3,7 @@ import { FooterSection } from "@/components/footer-section"
 import { PricingSection } from "@/components/pricing/pricing-section"
 import { FeaturesSection } from "@/components/pricing/features-section"
 import { FAQSection } from "@/components/pricing/faq-section"
+import styles from '../pricing.module.css'
 
 const aioPlans = [
   {
@@ -125,7 +126,7 @@ const aioFaqs = [
 
 export default function AIOPricingPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className={`min-h-screen bg-white ${styles.pricingPage}`}>
       <Header />
       <PricingSection 
         title="AI-Powered SEO Pricing"

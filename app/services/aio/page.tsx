@@ -4,6 +4,7 @@ import { AIOHero } from "@/components/aio/hero-section"
 import { AIODashboard } from "@/components/aio/dashboard-section"
 import { AIOAnalytics } from "@/components/aio/analytics-section"
 import { AIOOptimization } from "@/components/aio/optimization-section"
+import styles from './aio.module.css'
 
 export default function AIOPage() {
   return (
@@ -11,7 +12,7 @@ export default function AIOPage() {
       <Header />
       <div className="relative -mb-24">
         <AIOHero />
-        <div className="relative z-10">
+        <div className={`relative z-10 ${styles.dashboardContainer}`}>
           <AIODashboard />
         </div>
       </div>
