@@ -136,14 +136,14 @@ export function HowItWorks() {
               </p>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="stat-card">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
                   <div className="stat-value font-garnett">+<span data-counter="keywords">0</span>%</div>
                   <div className="stat-label font-universal">Keyword improvement</div>
                   <div className="stat-trend stat-trend-up font-universal">
                     <ArrowUp className="h-4 w-4 mr-1" /> Last 30 days
                   </div>
                 </div>
-                <div className="stat-card">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
                   <div className="stat-value font-garnett"><span data-counter="rankings">0</span></div>
                   <div className="stat-label font-universal">Top 3 rankings</div>
                   <div className="stat-trend stat-trend-up font-universal">
@@ -164,14 +164,14 @@ export function HowItWorks() {
               </p>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="stat-card">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
                   <div className="stat-value font-garnett"><span data-counter="traffic">0</span>%</div>
                   <div className="stat-label font-universal">Organic traffic growth</div>
                   <div className="stat-trend stat-trend-up font-universal">
                     Year over year
                   </div>
                 </div>
-                <div className="stat-card">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
                   <div className="stat-value font-garnett"><span data-counter="conversion">0</span></div>
                   <div className="stat-label font-universal">Conversion rate</div>
                   <div className="stat-trend stat-trend-up font-universal">
