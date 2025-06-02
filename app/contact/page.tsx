@@ -1,4 +1,3 @@
-import { GradientBackground } from "@/components/ui/noisy-gradient-backgrounds"
 import dynamic from "next/dynamic"
 import { FooterSection } from "@/components/footer-section"
 import { ContactForm } from "@/components/contact-form"
