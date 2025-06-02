@@ -2,90 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Fonts */
-
-/* Universal Sans */
-@font-face {
-  font-family: "Universal Sans";
-  src: url("/fonts/universal-sans-500.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Universal Sans";
-  src: url("/fonts/universal-sans-600.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Universal Sans";
-  src: url("/fonts/universal-sans-850.ttf") format("truetype");
-  font-weight: 850;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Universal Sans Display";
-  src: url("/fonts/universal-sans-display-500.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Garnett fonts - all weights */
-@font-face {
-  font-family: "Garnett";
-  src: url("/fonts/garnett-light.woff") format("woff"), url("/fonts/garnett-light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Garnett";
-  src: url("/fonts/garnett-regular.woff") format("woff"), url("/fonts/garnett-regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Garnett";
-  src: url("/fonts/garnett-medium.woff") format("woff"), url("/fonts/garnett-medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Garnett";
-  src: url("/fonts/garnett-semibold.woff") format("woff"), url("/fonts/garnett-semibold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Garnett";
-  src: url("/fonts/garnett-bold.woff") format("woff"), url("/fonts/garnett-bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Garnett";
-  src: url("/fonts/garnett-black.woff") format("woff"), url("/fonts/garnett-black.ttf") format("truetype");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Reset and base styles */
 * {
   -webkit-font-smoothing: antialiased;
@@ -101,7 +17,7 @@ html {
 }
 
 body {
-  font-family: "Universal Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-universal), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 500;
   background-color: #ffffff;
   color: #111827;
@@ -118,7 +34,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Garnett", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: var(--font-garnett), system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 500 !important; /* Medium weight */
 }
 
@@ -130,7 +46,7 @@ li,
 a,
 td,
 th {
-  font-family: "Universal Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-universal), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 500;
 }
 
@@ -138,17 +54,17 @@ th {
 button,
 .button,
 .btn {
-  font-family: "Garnett", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: var(--font-garnett), system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 500 !important; /* Medium weight */
 }
 
 /* Utility classes for font families */
 .font-garnett {
-  font-family: "Garnett", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: var(--font-garnett), system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .font-universal {
-  font-family: "Universal Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: var(--font-universal), system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 /* Background color from index.app */

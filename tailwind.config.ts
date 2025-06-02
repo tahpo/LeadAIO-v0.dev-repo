@@ -21,11 +21,11 @@ const config = {
     extend: {
       fontFamily: {
         garnett: [
-          'Garnett Trial',
+          'var(--font-garnett)',
           'sans-serif'
         ],
         universal: [
-          'Universal Sans',
+          'var(--font-universal)',
           'sans-serif'
         ]
       },
