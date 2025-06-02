@@ -286,14 +286,14 @@ export function HowItWorks() {
               </p>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="stat-card">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
                   <div className="stat-value font-garnett"><span data-counter="backlinks">0</span></div>
                   <div className="stat-label font-universal">Quality backlinks</div>
                   <div className="stat-trend stat-trend-up font-universal">
                     <Search className="h-4 w-4 mr-1" /> 87 new this month
                   </div>
                 </div>
-                <div className="stat-card">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
                   <div className="stat-value font-garnett"><span data-counter="authority">0</span></div>
                   <div className="stat-label font-universal">Domain authority</div>
                   <div className="stat-trend stat-trend-up font-universal">
