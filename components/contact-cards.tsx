@@ -6,7 +6,7 @@ import styles from '@/app/contact/contact.module.css'
 function ContactCards() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-auto pt-[180px]">
-      <div className={`${styles.contactCard} bg-gradient-to-br from-blue-50 to-indigo-50`}>
+      <div className={styles.contactCard}>
         <div className={`${styles.contactIconWrapper} bg-blue-50`}>
           <Mail className="h-4 w-4 text-blue-600" />
         </div>
@@ -17,19 +17,19 @@ function ContactCards() {
         </a>
       </div>
 
-      <div className={`${styles.contactCard} bg-gradient-to-br from-green-50 to-emerald-50`}>
-        <div className={`${styles.contactIconWrapper} bg-green-50`}>
+      <div className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+        <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center mb-3">
           <MessageSquare className="h-4 w-4 text-green-600" />
         </div>
         <h3 className="text-base font-garnett mb-1">Live Chat</h3>
         <p className="text-gray-600 text-xs mb-2 font-universal">Chat with our team</p>
-        <button className="text-green-600 hover:text-green-700 text-sm font-universal transition-colors">
+        <button className="text-green-600 hover:text-green-700 text-sm font-universal">
           Start a conversation
         </button>
       </div>
 
-      <div className={`${styles.contactCard} bg-gradient-to-br from-purple-50 to-pink-50`}>
-        <div className={`${styles.contactIconWrapper} bg-purple-50`}>
+      <div className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+        <div className="w-8 h-8 bg-purple-50 rounded-lg flex items-center justify-center mb-3">
           <Phone className="h-4 w-4 text-purple-600" />
         </div>
         <h3 className="text-base font-garnett mb-1">Phone</h3>
