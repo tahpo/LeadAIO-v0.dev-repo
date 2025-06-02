@@ -19,6 +19,7 @@ html {
 body {
   font-family: var(--font-universal), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 500;
+  position: relative;
   background-color: #ffffff;
   color: #111827;
   height: 100%;
