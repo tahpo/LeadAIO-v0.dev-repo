@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import type { Metadata } from "next"
 import { Garnett, UniversalSans } from "@/lib/fonts"
+import { LoadingSpinner } from "@/components/ui/loading-spinner"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className="h-full m-0 p-0" suppressHydrationWarning>
-        <Suspense fallback={null}>
+        <Suspense fallback={<LoadingSpinner />}>
           {children}
         </Suspense>
       </body>
