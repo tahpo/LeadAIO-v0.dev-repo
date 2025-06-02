@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { ArrowRight } from "lucide-react"
+import styles from '@/app/contact/contact.module.css'
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-[#fdfcfa] rounded-2xl p-8 md:p-12 shadow-sm">
+    <div className={styles.contactForm}>
       <h2 className="text-2xl md:text-3xl font-garnett mb-2">Send us a message</h2>
       <p className="text-gray-600 mb-8 font-universal">
         Fill out the form below and we'll get back to you within 24 hours.
@@ -38,7 +39,7 @@ export function ContactForm() {
               id="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full"
+              className={styles.contactInput}
               placeholder="John Doe"
             />
           </div>
