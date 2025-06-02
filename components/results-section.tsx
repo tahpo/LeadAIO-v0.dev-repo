@@ -46,47 +46,48 @@ export function ResultsSection() {
   // Redline flickering animation using Anime.js
   useEffect(() => {
     if (!isVisible || !speedometerRef.current) return
-    
-    // Use anime.js for efficient segment animation
-    const segments = speedometerRef.current?.querySelectorAll('.segment');
-    if (!segments) return;
 
-    const timeline = anime.timeline({
-      loop: true,
-      direction: 'alternate',
-      easing: 'easeInOutQuad'
-    });
+    // Function to update the speedometer display with faster animations
+    const updateSpeedometer = () => {
+      const segments = speedometerRef.current?.querySelectorAll('.segment');
+      if (!segments) return;
 
-    // Animate gray segments with subtle opacity changes
-    timeline.add({
-      targets: Array.from(segments).slice(0, GRAY_SEGMENTS),
-      opacity: [0.6, 0.8],
-      fill: '#4A4A4A',
-      duration: 1000
-    });
+      // Randomly determine active segments (8-12 range)
+      const segmentCount = Math.floor(Math.random() * 5) + 8;
+      setTotalSegments(segmentCount);
 
-    // Animate red segments with flickering effect
-    timeline.add({
-      targets: Array.from(segments).slice(GRAY_SEGMENTS),
-      opacity: [0.15, 0.9],
-      fill: ['#8B3E3E', '#FF3E3E'],
-      delay: anime.stagger(100),
-      duration: 800
-    }, '-=800');
+      // Super fast animation for segments
+      anime({
+        targets: Array.from(segments),
+        opacity: (el, i) => {
+          if (i < GRAY_SEGMENTS) return [0.6, 0.7];
+          return i < segmentCount ? [0.15, 0.9] : [0.9, 0.15];
+        },
+        fill: (el, i) => {
+          if (i < GRAY_SEGMENTS) return '#4A4A4A';
+          return i < segmentCount ? ['#8B3E3E', '#FF3E3E'] : ['#FF3E3E', '#8B3E3E'];
+        },
+        duration: 200,
+        easing: 'easeInOutQuad',
+        loop: true
+      });
+    };
+
+    // Start the animation
+    updateSpeedometer();
     
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
-      timeline.pause();
     };
   }, [isVisible]);
 
   // Counter animation with faster second phase (4 seconds per unit)
   useEffect(() => {
     if (!isVisible) return
-
-    // Single animation with optimized timing
+    
+    // Keep the same counter animation speed
     const animation = anime({
       targets: { value: speedValue },
       value: [60, 400],
