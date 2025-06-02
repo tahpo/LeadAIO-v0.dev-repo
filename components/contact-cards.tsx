@@ -5,7 +5,7 @@ import styles from '@/app/contact/contact.module.css'
 
 function ContactCards() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-auto pt-[180px]">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
       <div className={styles.contactCard}>
         <div className={`${styles.contactIconWrapper} bg-blue-50`}>
           <Mail className="h-4 w-4 text-blue-600" />
