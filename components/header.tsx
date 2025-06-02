@@ -122,10 +122,15 @@ export function Header() {
           <Image 
             src="/leadaiologo.png"
             alt="LeadAIO"
-            width={160}
-            height={40}
-            className="h-10 w-auto"
+            width={240}
+            height={60}
+            className="h-10 w-auto object-contain"
+            quality={100}
             priority
+            style={{
+              maxWidth: "none",
+              objectFit: "contain"
+            }}
           />
         </Link>
 
