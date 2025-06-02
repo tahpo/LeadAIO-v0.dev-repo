@@ -1,13 +1,9 @@
-import dynamic from "next/dynamic"
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
 import { PricingSection } from "@/components/pricing/pricing-section"
+import { FeaturesSection } from "@/components/pricing/features-section"
 import { FAQSection } from "@/components/pricing/faq-section"
 
-const FeaturesSection = dynamic(
-  () => import("@/components/pricing/features-section").then(mod => ({ default: mod.FeaturesSection })),
-  { ssr: false }
-)
 const paidAdvertisingPlans = [
   {
     name: "AI-Powered PPC Management",

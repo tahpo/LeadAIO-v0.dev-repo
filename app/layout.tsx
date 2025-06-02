@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { LoadingBar } from "@/components/ui/loading"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -34,10 +33,7 @@ export default function RootLayout({
         <link rel="preload" href="/fonts/garnett-regular.woff" as="font" type="font/woff" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/garnett-semibold.woff" as="font" type="font/woff" crossOrigin="anonymous" />
       </head>
-      <body className="h-full m-0 p-0" suppressHydrationWarning>
-        <LoadingBar />
-        {children}
-      </body>
+      <body className="h-full m-0 p-0" suppressHydrationWarning>{children}</body>
     </html>
   )
 }
