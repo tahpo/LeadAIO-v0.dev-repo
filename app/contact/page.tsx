@@ -1,10 +1,11 @@
+import dynamic from "next/dynamic"
 import { GradientBackground } from "@/components/ui/noisy-gradient-backgrounds"
 import { Header } from "@/components/header"
 import { FooterSection } from "@/components/footer-section"
-import { ContactForm } from "@/components/contact-form"
-import { ContactCards } from "@/components/contact-cards"
+const ContactForm = dynamic(() => import("@/components/contact-form").then(mod => ({ default: mod.ContactForm })), { ssr: true })
+const ContactCards = dynamic(() => import("@/components/contact-cards").then(mod => ({ default: mod.ContactCards })), { ssr: true })
 import styles from './contact.module.css'
-import { BrandsScroll } from "@/components/brands-scroll"
+const BrandsScroll = dynamic(() => import("@/components/brands-scroll").then(mod => ({ default: mod.BrandsScroll })), { ssr: true })
 
 export default function ContactPage() {
   return (

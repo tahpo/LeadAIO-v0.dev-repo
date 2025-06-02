@@ -1,8 +1,8 @@
-import { Suspense } from "react"
+import { Suspense, lazy } from "react"
 import type { Metadata } from "next"
 import { Garnett, UniversalSans } from "@/lib/fonts"
-import { PageWrapper } from "@/components/page-wrapper"
-import { LoadingSpinner } from "@/components/ui/loading-spinner"
+const PageWrapper = lazy(() => import("@/components/page-wrapper"))
+const LoadingSpinner = lazy(() => import("@/components/ui/loading-spinner").then(mod => ({ default: mod.LoadingSpinner })))
 import "./globals.css"
 
 export const metadata: Metadata = {

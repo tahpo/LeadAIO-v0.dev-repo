@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { ArrowRight } from "lucide-react"
 import styles from '@/app/contact/contact.module.css'
 
-export function ContactForm() {
+function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -124,3 +124,6 @@ export function ContactForm() {
     </div>
   )
 }
+
+export { ContactForm }
+export default ContactForm

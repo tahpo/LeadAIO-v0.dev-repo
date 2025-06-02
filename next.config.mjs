@@ -20,6 +20,12 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    swcMinify: true,
+    modularizeImports: {
+      'lucide-react': {
+        transform: 'lucide-react/dist/esm/icons/{{member}}',
+      },
+    },
   },
   // Configure headers for caching
   async headers() {

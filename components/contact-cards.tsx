@@ -3,7 +3,7 @@
 import { Mail, MessageSquare, Phone } from "lucide-react"
 import styles from '@/app/contact/contact.module.css'
 
-export function ContactCards() {
+function ContactCards() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-auto pt-[180px]">
       <div className={styles.contactCard}>
@@ -41,3 +41,6 @@ export function ContactCards() {
     </div>
   )
 }
+
+export { ContactCards }
+export default ContactCards
