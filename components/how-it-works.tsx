@@ -136,18 +136,18 @@ export function HowItWorks() {
               </p>
 
               <div className="grid grid-cols-2 gap-6">
-                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
                   <div className="text-3xl font-garnett mb-2">+<span data-counter="keywords">0</span>%</div>
-                  <div className="text-gray-600 text-sm font-universal">Keyword improvement</div>
-                  <div className="flex items-center text-green-600 text-sm mt-2 font-universal">
-                    <ArrowUp className="h-4 w-4 mr-1.5" /> Last 30 days
+                  <div className="text-gray-600 text-sm font-universal mb-1">Keyword improvement</div>
+                  <div className="text-gray-500 text-xs font-universal">
+                    <ArrowUp className="inline-block h-3 w-3 mr-1" /> Last 30 days
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
                   <div className="text-3xl font-garnett mb-2"><span data-counter="rankings">0</span></div>
-                  <div className="text-gray-600 text-sm font-universal">Top 3 rankings</div>
-                  <div className="flex items-center text-green-600 text-sm mt-2 font-universal">
-                    <TrendingUp className="h-4 w-4 mr-1.5" /> +5 this month
+                  <div className="text-gray-600 text-sm font-universal mb-1">Top 3 rankings</div>
+                  <div className="text-gray-500 text-xs font-universal">
+                    <TrendingUp className="inline-block h-3 w-3 mr-1" /> +5 this month
                   </div>
                 </div>
               </div>
@@ -163,18 +163,18 @@ export function HowItWorks() {
                 to your site.
               </p>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="stat-card">
-                  <div className="stat-value font-garnett"><span data-counter="traffic">0</span>%</div>
-                  <div className="stat-label font-universal">Organic traffic growth</div>
-                  <div className="stat-trend stat-trend-up font-universal">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="text-3xl font-garnett mb-2"><span data-counter="traffic">0</span>%</div>
+                  <div className="text-gray-600 text-sm font-universal mb-1">Organic traffic growth</div>
+                  <div className="text-gray-500 text-xs font-universal">
                     Year over year
                   </div>
                 </div>
-                <div className="stat-card">
-                  <div className="stat-value font-garnett"><span data-counter="conversion">0</span></div>
-                  <div className="stat-label font-universal">Conversion rate</div>
-                  <div className="stat-trend stat-trend-up font-universal">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="text-3xl font-garnett mb-2"><span data-counter="conversion">0</span></div>
+                  <div className="text-gray-600 text-sm font-universal mb-1">Conversion rate</div>
+                  <div className="text-gray-500 text-xs font-universal">
                     +1.3% increase
                   </div>
                 </div>
@@ -285,19 +285,19 @@ export function HowItWorks() {
                 building strategies.
               </p>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="stat-card">
-                  <div className="stat-value font-garnett"><span data-counter="backlinks">0</span></div>
-                  <div className="stat-label font-universal">Quality backlinks</div>
-                  <div className="stat-trend stat-trend-up font-universal">
-                    <Search className="h-4 w-4 mr-1" /> 87 new this month
+              <div className="grid grid-cols-2 gap-6">
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="text-3xl font-garnett mb-2"><span data-counter="backlinks">0</span></div>
+                  <div className="text-gray-600 text-sm font-universal mb-1">Quality backlinks</div>
+                  <div className="text-gray-500 text-xs font-universal">
+                    <Search className="inline-block h-3 w-3 mr-1" /> 87 new this month
                   </div>
                 </div>
-                <div className="stat-card">
-                  <div className="stat-value font-garnett"><span data-counter="authority">0</span></div>
-                  <div className="stat-label font-universal">Domain authority</div>
-                  <div className="stat-trend stat-trend-up font-universal">
-                    <Target className="h-4 w-4 mr-1" /> +12 points
+                <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="text-3xl font-garnett mb-2"><span data-counter="authority">0</span></div>
+                  <div className="text-gray-600 text-sm font-universal mb-1">Domain authority</div>
+                  <div className="text-gray-500 text-xs font-universal">
+                    <Target className="inline-block h-3 w-3 mr-1" /> +12 points
                   </div>
                 </div>
               </div>
