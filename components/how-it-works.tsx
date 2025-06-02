@@ -136,14 +136,14 @@ export function HowItWorks() {
               </p>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="stat-card bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4">
+                <div className="stat-card bg-gradient-to-br from-green-50 to-emerald-50 p-6">
                   <div className="text-2xl font-garnett text-green-600 mb-1">+<span data-counter="keywords">0</span>%</div>
                   <div className="text-gray-800 text-sm font-universal mb-1">Keyword improvement</div>
                   <div className="text-green-600 text-xs font-universal flex items-center">
                     <ArrowUp className="h-4 w-4 mr-1" /> Last 30 days
                   </div>
                 </div>
-                <div className="stat-card bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4">
+                <div className="stat-card bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
                   <div className="text-2xl font-garnett text-blue-600 mb-1"><span data-counter="rankings">0</span></div>
                   <div className="text-gray-800 text-sm font-universal mb-1">Top 3 rankings</div>
                   <div className="text-blue-600 text-xs font-universal flex items-center">
@@ -164,14 +164,14 @@ export function HowItWorks() {
               </p>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="stat-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4">
+                <div className="stat-card bg-gradient-to-br from-purple-50 to-pink-50 p-6">
                   <div className="text-2xl font-garnett text-purple-600 mb-1"><span data-counter="traffic">0</span>%</div>
                   <div className="text-gray-800 text-sm font-universal mb-1">Organic traffic growth</div>
                   <div className="text-purple-600 text-xs font-universal flex items-center">
                     Year over year
                   </div>
                 </div>
-                <div className="stat-card bg-gradient-to-br from-orange-50 to-amber-50 rounded-lg p-4">
+                <div className="stat-card bg-gradient-to-br from-orange-50 to-amber-50 p-6">
                   <div className="text-2xl font-garnett text-orange-600 mb-1"><span data-counter="conversion">0</span></div>
                   <div className="text-gray-800 text-sm font-universal mb-1">Conversion rate</div>
                   <div className="text-orange-600 text-xs font-universal flex items-center">
@@ -286,14 +286,14 @@ export function HowItWorks() {
               </p>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="stat-card bg-gradient-to-br from-indigo-50 to-blue-50 rounded-lg p-4">
+                <div className="stat-card bg-gradient-to-br from-indigo-50 to-blue-50 p-6">
                   <div className="text-2xl font-garnett text-indigo-600 mb-1"><span data-counter="backlinks">0</span></div>
                   <div className="text-gray-800 text-sm font-universal mb-1">Quality backlinks</div>
                   <div className="text-indigo-600 text-xs font-universal flex items-center">
                     <Search className="h-4 w-4 mr-1" /> 87 new this month
                   </div>
                 </div>
-                <div className="stat-card bg-gradient-to-br from-pink-50 to-rose-50 rounded-lg p-4">
+                <div className="stat-card bg-gradient-to-br from-pink-50 to-rose-50 p-6">
                   <div className="text-2xl font-garnett text-pink-600 mb-1"><span data-counter="authority">0</span></div>
                   <div className="text-gray-800 text-sm font-universal mb-1">Domain authority</div>
                   <div className="text-pink-600 text-xs font-universal flex items-center">
