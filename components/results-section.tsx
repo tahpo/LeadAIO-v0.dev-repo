@@ -6,6 +6,7 @@ import anime from 'animejs'
 export function ResultsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const speedometerRef = useRef<HTMLDivElement>(null)
+  const animationFrameRef = useRef<number | null>(null)
   const [speedValue, setSpeedValue] = useState(60)
   const [isVisible, setIsVisible] = useState(false)
   const [totalSegments, setTotalSegments] = useState(8)
