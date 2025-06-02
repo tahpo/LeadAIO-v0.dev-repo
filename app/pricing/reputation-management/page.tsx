@@ -1,8 +1,8 @@
 import { Header } from "@/components/header"
-import { FooterSection } from "@/components/footer-section"
 import { PricingSection } from "@/components/pricing/pricing-section"
 import { FeaturesSection } from "@/components/pricing/features-section"
 import { FAQSection } from "@/components/pricing/faq-section"
+const FooterSection = dynamic(() => import("@/components/footer-section").then(mod => ({ default: mod.FooterSection })), { ssr: true })
 
 const reputationPlans = [
   {
