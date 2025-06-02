@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import type { Metadata } from "next"
 import { Garnett, UniversalSans } from "@/lib/fonts"
+import { PageWrapper } from "@/components/page-wrapper"
 import { LoadingSpinner } from "@/components/ui/loading-spinner"
 import "./globals.css"
 
@@ -36,7 +37,9 @@ export default function RootLayout({
       </head>
       <body className="h-full m-0 p-0" suppressHydrationWarning>
         <Suspense fallback={<LoadingSpinner />}>
-          {children}
+          <PageWrapper>
+            {children}
+          </PageWrapper>
         </Suspense>
       </body>
     </html>
