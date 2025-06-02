@@ -6,28 +6,29 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Enable image optimization
+  swcMinify: true,
+  modularizeImports: {
+    'lucide-react': {
+      transform: 'lucide-react/dist/esm/icons/{{member}}',
+    },
+  },
   images: {
-    domains: ['images.pexels.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+      }
+    ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   devIndicators: false,
-  // Enable HTTP response compression
   compress: true,
-  // Enable static page generation optimization
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-    swcMinify: true,
-    modularizeImports: {
-      'lucide-react': {
-        transform: 'lucide-react/dist/esm/icons/{{member}}',
-      },
-    },
   },
-  // Configure headers for caching
   async headers() {
     return [
       {
