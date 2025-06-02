@@ -150,7 +150,7 @@ export function Header() {
           <a href="/login" className="index-button index-button-secondary text-sm px-3 lg:px-4">
             Log in
           </a>
-          <a href="/signup" className="index-button index-button-primary text-sm px-3 lg:px-4">
+          <a href="/contact" className="index-button index-button-primary text-sm px-3 lg:px-4">
             Start for free
           </a>
         </div>

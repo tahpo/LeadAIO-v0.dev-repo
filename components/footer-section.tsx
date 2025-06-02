@@ -31,7 +31,7 @@ export function FooterSection() {
             <a
               href="/signup" 
               className="index-button index-button-primary bg-white text-black hover:bg-gray-100 hover:text-black cta-button flex items-center justify-center gap-2 mx-auto inline-flex"
-            >
+            <a href="/contact" className="index-button index-button-primary bg-white text-black hover:bg-gray-100 hover:text-black cta-button flex items-center justify-center gap-2 mx-auto inline-flex">
               Get started - for free <span className="ml-2">→</span>
             </a>
           </div>

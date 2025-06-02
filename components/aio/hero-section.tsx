@@ -68,10 +68,10 @@ export function AIOHero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           >
-            <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium">
               <Link href="/signup">
                 Get started <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+            <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium">
+              <Link href="/contact">Get started <ArrowRight className="ml-2 h-5 w-5" /></Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="font-medium">
               <Link href="/contact">Talk to an expert</Link>
