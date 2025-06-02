@@ -41,5 +41,3 @@ export function ContactCards() {
     </div>
   )
 }
-
-export { ContactCards }
