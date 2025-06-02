@@ -6,8 +6,8 @@ import styles from '@/app/contact/contact.module.css'
 function ContactCards() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-auto pt-[180px]">
-      <div className={styles.contactCard}>
-        <div className={`${styles.contactIconWrapper} bg-blue-50`}>
+      <div className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+        <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
           <Mail className="h-4 w-4 text-blue-600" />
         </div>
         <h3 className="text-base font-garnett mb-1">Email Us</h3>
