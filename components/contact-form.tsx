@@ -23,7 +23,7 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.contactForm}>
+    <form onSubmit={handleSubmit}>
       <h2 className="text-2xl md:text-3xl font-garnett mb-2">Send us a message</h2>
       <p className="text-gray-600 mb-8 font-universal">
         Fill out the form below and we'll get back to you within 24 hours.
@@ -39,7 +39,7 @@ function ContactForm() {
               id="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className={styles.contactInput}
+              className="w-full"
               placeholder="John Doe"
             />
           </div>
@@ -116,7 +116,7 @@ function ContactForm() {
 
         <button 
           type="submit"
-          className={styles.contactSubmit}
+          className="w-full bg-black hover:bg-gray-800 text-white h-12 rounded-xl flex items-center justify-center gap-2 font-universal transition-all duration-200 hover:-translate-y-0.5"
         >
           Send Message <ArrowRight className="h-5 w-5" />
         </button>

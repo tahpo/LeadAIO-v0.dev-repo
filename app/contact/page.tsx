@@ -45,7 +45,7 @@ export default function ContactPage() {
             </div>
 
             {/* Right Column - Contact Form */}
-            <div>
+            <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
               <ContactForm />
             </div>
           </div>
