@@ -69,10 +69,13 @@ export function AIOHero() {
             className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           >
             <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium">
-              <Link href="/contact">Get started <ArrowRight className="ml-2 h-5 w-5" /></Link>
+              <Link href="/signup">
+                Get started <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="font-medium">
               <Link href="/contact">Talk to an expert</Link>
+            </Button>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-8 h-full">
@@ -116,9 +119,5 @@ export function AIOHero() {
         </svg>
       </div>
     </section>
-  )
-}
-  )
-}
   )
 }

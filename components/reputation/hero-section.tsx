@@ -84,7 +84,7 @@ export function ReputationHero() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium">
-                <Link href="/contact">Get started <span className="ml-1">→</span></Link>
+                <Link href="/signup">Get started <span className="ml-1">→</span></Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="font-medium">
                 <Link href="/contact">Schedule demo</Link>
