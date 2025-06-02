@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X, Zap, Target, Globe, FileText, BarChart2, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -118,7 +119,14 @@ export function Header() {
         )}
       >
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl text-gray-900 font-garnett">LeadAIO</span>
+          <Image 
+            src="/leadaiologo.png"
+            alt="LeadAIO"
+            width={160}
+            height={40}
+            className="h-10 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}
