@@ -241,7 +241,7 @@ export function Header() {
               <a href="/login" className="index-button index-button-secondary w-full text-center">
                 Log in
               </a>
-              <a href="/signup" className="index-button index-button-primary w-full text-center">
+              <a href="/contact" className="index-button index-button-primary w-full text-center">
                 Start for free
               </a>
             </div>

@@ -28,12 +28,12 @@ export function FooterSection() {
             <p className="text-lg text-gray-300 mb-8 font-universal">
               The AI-powered SEO platform for businesses that want to dominate search results.
             </p>
-            <a
-              href="/signup" 
+            <Link
+              href="/contact" 
               className="index-button index-button-primary bg-white text-black hover:bg-gray-100 hover:text-black cta-button flex items-center justify-center gap-2 mx-auto inline-flex"
             >
               Get started - for free <span className="ml-2">→</span>
-            </a>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-12 border-t border-gray-800">
