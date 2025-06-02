@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
 
 export function FooterSection() {
   return (
@@ -39,69 +38,50 @@ export function FooterSection() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-12 border-t border-gray-800">
             <div className="col-span-1 md:col-span-2">
               <Link href="/" className="text-2xl font-garnett mb-4 block">
-                LeadAIO
+                <img src="/leadaiologo.png" alt="LeadAIO" className="h-10 w-auto object-contain" />
               </Link>
               <p className="text-gray-400 mb-6 max-w-md font-universal">
                 AI-powered SEO platform that helps businesses dominate search results and generate quality leads.
               </p>
-              <div className="flex space-x-4">
-                <button className="text-gray-400 hover:text-white hover:bg-gray-800 p-2 rounded-full">
-                  <Facebook className="h-5 w-5" />
-                </button>
-                <button className="text-gray-400 hover:text-white hover:bg-gray-800 p-2 rounded-full">
-                  <Twitter className="h-5 w-5" />
-                </button>
-                <button className="text-gray-400 hover:text-white hover:bg-gray-800 p-2 rounded-full">
-                  <Linkedin className="h-5 w-5" />
-                </button>
-                <button className="text-gray-400 hover:text-white hover:bg-gray-800 p-2 rounded-full">
-                  <Instagram className="h-5 w-5" />
-                </button>
-              </div>
             </div>
 
             <div>
               <h3 className="text-lg font-garnett mb-4">Product</h3>
               <ul className="space-y-2 font-universal">
                 <li>
-                  <Link href="#features" className="text-gray-400 hover:text-white transition-colors">
-                    Features
+                  <Link href="/services/aio" className="text-gray-400 hover:text-white transition-colors">
+                    AI Optimization (AIO)
                   </Link>
                 </li>
                 <li>
-                  <Link href="#pricing" className="text-gray-400 hover:text-white transition-colors">
-                    Pricing
+                  <Link href="/services/reputation-management" className="text-gray-400 hover:text-white transition-colors">
+                    Reputation Management
                   </Link>
                 </li>
                 <li>
-                  <Link href="/integrations" className="text-gray-400 hover:text-white transition-colors">
-                    Integrations
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/api" className="text-gray-400 hover:text-white transition-colors">
-                    API
+                  <Link href="/services/paid-advertising" className="text-gray-400 hover:text-white transition-colors">
+                    Paid Advertising
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-lg font-garnett mb-4">Company</h3>
+              <h3 className="text-lg font-garnett mb-4">Pricing</h3>
               <ul className="space-y-2 font-universal">
                 <li>
-                  <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
-                    About
+                  <Link href="/pricing/aio" className="text-gray-400 hover:text-white transition-colors">
+                    AIO Pricing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
-                    Blog
+                  <Link href="/pricing/reputation-management" className="text-gray-400 hover:text-white transition-colors">
+                    Reputation Management
                   </Link>
                 </li>
                 <li>
-                  <Link href="/careers" className="text-gray-400 hover:text-white transition-colors">
-                    Careers
+                  <Link href="/pricing/paid-advertising" className="text-gray-400 hover:text-white transition-colors">
+                    Paid Advertising
                   </Link>
                 </li>
                 <li>
