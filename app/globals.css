@@ -382,6 +382,16 @@ body {
   }
 }
 
+/* Cursor styles */
+button,
+a,
+[role="button"],
+select,
+input[type="submit"],
+.clickable {
+  cursor: pointer;
+}
+
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
