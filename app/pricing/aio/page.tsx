@@ -131,7 +131,6 @@ export default function AIOPricingPage() {
     <div className={`min-h-screen bg-white ${styles.pricingPage}`}>
       <Header />
       <PricingSection 
-        className="pt-8"
         title="AI-Powered SEO Pricing"
         description="Choose the perfect plan to transform your search rankings with AI."
         plans={aioPlans}

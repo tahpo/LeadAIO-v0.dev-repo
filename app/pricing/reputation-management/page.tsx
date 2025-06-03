@@ -112,7 +112,6 @@ export default function ReputationManagementPricingPage() {
     <div className="min-h-screen bg-white">
       <Header />
       <PricingSection 
-        className="pt-8"
         title="Reputation Management Pricing"
         description="Build and maintain your online reputation with authentic, high-quality reviews."
         plans={reputationPlans}

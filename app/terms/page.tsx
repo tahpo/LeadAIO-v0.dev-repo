@@ -6,7 +6,7 @@ export default function TermsPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow container max-w-4xl mx-auto px-4 pt-8 pb-16">
+      <main className="flex-grow container max-w-4xl mx-auto px-4 pb-16">
         <h1 className="text-4xl font-garnett mb-8">Terms of Service</h1>
         
         <div className="prose max-w-none">

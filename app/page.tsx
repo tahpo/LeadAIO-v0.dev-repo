@@ -12,7 +12,7 @@ const WorkflowSection = dynamic(() => import("@/components/workflow-section").th
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white pt-16" style={{ margin: 0, padding: 0 }}>
+    <main className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
       <Header />
       <HeroSection />
       <Suspense fallback={null}>
