@@ -73,8 +73,8 @@ export function TestimonialsSection() {
   })
 
   // MUCH FASTER SPEED - increased from 1500px to 2500px
-  const leftColumnY = useTransform(scrollYProgress, [0, 1], [0, -2500]) // Goes UP faster
-  const rightColumnY = useTransform(scrollYProgress, [0, 1], [-2000, 500]) // Starts higher, more content above
+  const leftColumnY = useTransform(scrollYProgress, [0, 1], [0, -3500]) // Goes UP faster
+  const rightColumnY = useTransform(scrollYProgress, [0, 1], [-3000, 1500]) // Starts higher, more content above
 
   // Split testimonials into two columns
   const leftColumn = testimonials.filter((_, i) => i % 2 === 0)
@@ -152,7 +152,6 @@ export function TestimonialsSection() {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
                           <Avatar className="h-10 w-10 mr-3 border-2 border-gray-100">
-                            <AvatarImage src={testimonial.avatar || "/placeholder.svg"} alt={testimonial.name} />
                             <AvatarFallback className="bg-gray-100 text-gray-800 font-universal text-xs">
                               {testimonial.name
                                 .split(" ")
