@@ -114,7 +114,7 @@ export function HeroSection() {
   const longestWord2 = words2.reduce((a, b) => (a.length > b.length ? a : b), "")
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-16 overflow-hidden">
+    <section className="relative min-h-screen pt-28 pb-20 overflow-hidden bg-white">
       <div className="section-container relative z-10">
         <div className="section-panel bg-[#fdfcfa]">
           <div className="max-w-4xl mx-auto text-center">
@@ -528,4 +528,90 @@ export function HeroSection() {
                           <div className="text-lg font-bold text-white">92</div>
                           <div className="text-xs text-emerald-400">+4 ↑</div>
                         </div>
-                        <div className="mt-2 h-1.5 w-full bg-
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#4361EE] rounded-full" style={{width: "92%"}}></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-[#131b2c] border border-[#F72585]/30 rounded p-3 hover:border-[#F72585]/40 transition-colors">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 bg-[#F72585]/30 rounded-full flex items-center justify-center mr-2">
+                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#F72585]" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                          </div>
+                          <span className="text-xs text-[#F72585] font-medium">Bing</span>
+                        </div>
+                        <div className="flex items-end justify-between">
+                          <div className="text-lg font-bold text-white">88</div>
+                          <div className="text-xs text-emerald-400">+6 ↑</div>
+                        </div>
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#F72585] rounded-full" style={{width: "88%"}}></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-[#131b2c] border border-[#7209B7]/30 rounded p-3 hover:border-[#7209B7]/40 transition-colors">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 bg-[#7209B7]/30 rounded-full flex items-center justify-center mr-2">
+                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#7209B7]" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                          </div>
+                          <span className="text-xs text-[#7209B7] font-medium">Yahoo</span>
+                        </div>
+                        <div className="flex items-end justify-between">
+                          <div className="text-lg font-bold text-white">85</div>
+                          <div className="text-xs text-emerald-400">+3 ↑</div>
+                        </div>
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#7209B7] rounded-full" style={{width: "85%"}}></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-[#131b2c] border border-[#FF9E00]/30 rounded p-3 hover:border-[#FF9E00]/40 transition-colors">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 bg-[#FF9E00]/30 rounded-full flex items-center justify-center mr-2">
+                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#FF9E00]" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                            </svg>
+                          </div>
+                          <span className="text-xs text-[#FF9E00] font-medium">DuckDuckGo</span>
+                        </div>
+                        <div className="flex items-end justify-between">
+                          <div className="text-lg font-bold text-white">79</div>
+                          <div className="text-xs text-emerald-400">+5 ↑</div>
+                        </div>
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#FF9E00] rounded-full" style={{width: "79%"}}></div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-[#131b2c] border border-[#4CC9F0]/30 rounded p-3 hover:border-[#4CC9F0]/40 transition-colors">
+                        <div className="flex items-center mb-2">
+                          <div className="h-6 w-6 bg-[#4CC9F0]/30 rounded-full flex items-center justify-center mr-2">
+                            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#4CC9F0]" fill="none" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                            </svg>
+                          </div>
+                          <span className="text-xs text-[#4CC9F0] font-medium">Yandex</span>
+                        </div>
+                        <div className="flex items-end justify-between">
+                          <div className="text-lg font-bold text-white">76</div>
+                          <div className="text-xs text-emerald-400">+2 ↑</div>
+                        </div>
+                        <div className="mt-2 h-1.5 w-full bg-[#1E293B] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#4CC9F0] rounded-full" style={{width: "76%"}}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
