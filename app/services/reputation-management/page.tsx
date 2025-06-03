@@ -10,9 +10,7 @@ export default function ReputationManagementPage() {
   return (
     <main className="min-h-screen bg-white overflow-hidden">
       <Header />
-      <div className="pt-16">
-        <ReputationHero />
-      </div>
+      <ReputationHero />
       <ReputationFeatures />
       <ReputationMonitor />
       <ReputationStats />

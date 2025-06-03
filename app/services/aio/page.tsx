@@ -9,12 +9,10 @@ const FooterSection = dynamic(() => import("@/components/footer-section").then(m
 
 export default function AIOPage() {
   return (
-    <main className="min-h-screen bg-cream" style={{ margin: 0, padding: 0 }}>
+    <main className="min-h-screen bg-cream">
       <Header />
       <div className="relative -mb-24">
-        <div className="pt-16">
-          <AIOHero />
-        </div>
+        <AIOHero />
         <div className={`relative z-10 ${styles.dashboardContainer}`}>
           <AIODashboard />
         </div>
