@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
+import emailjs from '@emailjs/browser'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -17,13 +18,44 @@ function ContactForm() {
     message: ""
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(formData)
+    
+    if (!formRef.current) return
+    
+    setIsSubmitting(true)
+    
+    try {
+      const result = await emailjs.sendForm(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        formRef.current,
+        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+      )
+      
+      console.log('Email sent successfully:', result.text)
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        company: "",
+        message: ""
+      })
+      alert('Message sent successfully!')
+    } catch (error) {
+      console.error('Failed to send email:', error)
+      alert('Failed to send message. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form ref={formRef} onSubmit={handleSubmit}>
       <h2 className="text-2xl md:text-3xl font-garnett mb-2">Send us a message</h2>
       <p className="text-gray-600 mb-8 font-universal">
         Fill out the form below and we'll get back to you within 24 hours.
@@ -37,6 +69,7 @@ function ContactForm() {
             </label>
             <Input
               id="name"
+              name="user_name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full"
@@ -50,6 +83,7 @@ function ContactForm() {
             <Input
               id="email"
               type="email"
+              name="user_email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full"
@@ -65,6 +99,7 @@ function ContactForm() {
           <Input
             id="phone"
             type="tel"
+            name="user_phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             className="w-full"
@@ -78,6 +113,7 @@ function ContactForm() {
           </label>
           <Input
             id="company"
+            name="user_company"
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
             className="w-full"
@@ -91,6 +127,7 @@ function ContactForm() {
           </label>
           <select
             id="service"
+            name="user_service"
             value={formData.service}
             onChange={(e) => setFormData({ ...formData, service: e.target.value })}
             className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
@@ -107,6 +144,7 @@ function ContactForm() {
           </label>
           <Textarea
             id="message"
+            name="message"
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             className="w-full min-h-[120px]"
@@ -117,8 +155,9 @@ function ContactForm() {
         <button 
           type="submit"
           className="w-full bg-black hover:bg-gray-800 text-white h-12 rounded-xl flex items-center justify-center gap-2 font-universal transition-all duration-200 hover:-translate-y-0.5"
+          disabled={isSubmitting}
         >
-          Send Message <ArrowRight className="h-5 w-5" />
+          {isSubmitting ? 'Sending...' : 'Send Message'} <ArrowRight className="h-5 w-5" />
         </button>
       </div>
     </form>
