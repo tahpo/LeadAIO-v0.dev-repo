@@ -8,7 +8,7 @@ export function SpeedPerformanceSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="relative bg-white">
+    <section ref={containerRef} className="relative bg-white -mb-12">
       <div className="relative bg-[#2d2d2d] py-24">
         {/* Top wave */}
         <div className="absolute -top-24 left-0 right-0 h-24">
