@@ -1,4 +1,4 @@
-"use client"
+// Remove client directive since this component uses SSR
 
 import { useState, useRef, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
@@ -31,7 +31,7 @@ const features = [
   },
 ]
 
-export function FeaturesSection() {
+export default function FeaturesSection() {
   const [activeFeature, setActiveFeature] = useState(0)
   const [isLocked, setIsLocked] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)

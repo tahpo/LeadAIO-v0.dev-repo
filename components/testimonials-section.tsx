@@ -1,4 +1,4 @@
-"use client"
+// Remove client directive since this component uses SSR
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
@@ -64,7 +64,7 @@ const testimonials = [
   },
 ]
 
-export function TestimonialsSection() {
+export default function TestimonialsSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   const { scrollYProgress } = useScroll({
