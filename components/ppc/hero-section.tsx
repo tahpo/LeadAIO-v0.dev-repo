@@ -1,9 +1,8 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-const GradientBackground = dynamic(() => import("@/components/ui/noisy-gradient-backgrounds").then(mod => ({ default: mod.GradientBackground })), { ssr: false })
+import { GradientBackground } from "@/components/ui/noisy-gradient-backgrounds"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 

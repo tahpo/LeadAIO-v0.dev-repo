@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic"
+import { GradientBackground } from "@/components/ui/noisy-gradient-backgrounds"
 import { Header } from "@/components/header"
-const GradientBackground = dynamic(() => import("@/components/ui/noisy-gradient-backgrounds").then(mod => ({ default: mod.GradientBackground })), { ssr: false })
 const FooterSection = dynamic(() => import("@/components/footer-section").then(mod => ({ default: mod.FooterSection })), { ssr: true })
 const ContactForm = dynamic(() => import("@/components/contact-form").then(mod => ({ default: mod.ContactForm })), { ssr: true })
 const ContactCards = dynamic(() => import("@/components/contact-cards").then(mod => ({ default: mod.ContactCards })), { ssr: true })
