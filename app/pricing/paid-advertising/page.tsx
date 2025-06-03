@@ -84,7 +84,7 @@ export default function PaidAdvertisingPricingPage() {
     <div className="min-h-screen bg-white">
       <Header />
       <PricingSection 
-        className="pt-28"
+        className="pt-16"
         title="PPC Management Pricing"
         description="Transform your paid advertising with AI-powered campaign management."
         plans={paidAdvertisingPlans}
