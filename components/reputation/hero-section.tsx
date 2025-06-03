@@ -20,7 +20,7 @@ export function ReputationHero() {
   return (
     <section 
       ref={containerRef} 
-      className="relative min-h-[85vh] flex items-center justify-center pt-16 pb-16 overflow-hidden"
+      className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-16 overflow-hidden"
     >
       {/* Sunset Glow Background with Noise */}
       <GradientBackground

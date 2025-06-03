@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export function AIOHero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 pb-16 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center pt-28 pb-32 overflow-hidden">
       {/* Gradient Background with Noise */}
       <GradientBackground
         gradientOrigin="bottom-middle"
