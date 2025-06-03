@@ -53,7 +53,7 @@ export function PricingSection({
                    plans.length === 4 ? "max-w-7xl" : "max-w-6xl";
 
   return (
-    <section className="py-32 mt-16">
+    <section className="py-16">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-garnett font-medium mb-6">{title}</h1>

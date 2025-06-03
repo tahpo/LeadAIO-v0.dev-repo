@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export function PPCHero() {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center pt-28 pb-16 overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center justify-center pt-16 pb-16 overflow-hidden">
       {/* Gradient Background with Noise */}
       <GradientBackground
         gradientOrigin="bottom-middle"
