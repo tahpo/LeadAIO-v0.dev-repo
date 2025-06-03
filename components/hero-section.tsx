@@ -529,3 +529,5 @@ export function HeroSection() {
                           <div className="text-xs text-emerald-400">+4 ↑</div>
                         </div>
                         <div className="mt-2 h-1.5 w-full bg-[#1
+  )
+}
