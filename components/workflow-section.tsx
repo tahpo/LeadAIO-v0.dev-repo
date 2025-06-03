@@ -49,7 +49,7 @@ export function WorkflowSection() {
   const row2 = workflowItems.slice(5);
 
   return (
-    <section ref={containerRef} className="py-6 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-12 bg-white relative overflow-hidden">
       <div className="section-container relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 bg-gray-100 rounded-full text-sm font-universal text-gray-800 mb-4">

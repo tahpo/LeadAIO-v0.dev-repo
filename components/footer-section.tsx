@@ -20,7 +20,7 @@ export function FooterSection() {
         </svg>
       </div>
 
-      <div className="relative z-10 bg-black pt-6 text-white">
+      <div className="relative z-10 bg-black pt-12 text-white">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-garnett mb-6">Analyze. Visualize. Collaborate.</h2>
@@ -38,7 +38,7 @@ export function FooterSection() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-12 border-t border-gray-800">
             <div className="col-span-1 md:col-span-2">
               <Link href="/" className="text-2xl font-garnett mb-4 block">
-                <Image src="/footerlogo.png" alt="LeadAIO" width={160} height={40} className="h-10 w-auto object-contain" priority />
+                <img src="/footerlogo.png" alt="LeadAIO" className="h-10 w-auto object-contain" />
               </Link>
               <p className="text-gray-400 mb-6 max-w-md font-universal">
                 AI-powered SEO platform that helps businesses dominate search results and generate quality leads.
