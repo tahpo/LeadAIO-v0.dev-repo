@@ -1,11 +1,11 @@
-// Remove client directive since this component uses SSR
+"use client"
 
 import { useRef, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowUp, TrendingUp, Search, Target, Link as LinkIcon } from "lucide-react"
 import anime from 'animejs'
 
-export default function HowItWorks() {
+export function HowItWorks() {
   const containerRef = useRef<HTMLDivElement>(null)
   const rankingRef = useRef<HTMLDivElement>(null)
   const trafficRef = useRef<HTMLDivElement>(null)

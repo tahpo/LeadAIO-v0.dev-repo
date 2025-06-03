@@ -21,14 +21,12 @@ const nextConfig = {
   compress: true,
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react']
-  },
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.(woff|woff2|eot|ttf|otf)$/i,
-      type: 'asset/resource',
-    })
-    return config
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    modularizeImports: {
+      'lucide-react': {
+        transform: 'lucide-react/dist/esm/icons/{{member}}',
+      },
+    },
   },
   async headers() {
     return [

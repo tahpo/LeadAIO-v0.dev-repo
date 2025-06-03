@@ -3,16 +3,16 @@ import dynamic from "next/dynamic"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 
-const FooterSection = dynamic(() => import("@/components/footer-section"), { ssr: false })
-const FeaturesSection = dynamic(() => import("@/components/features-section"), { ssr: false })
-const HowItWorks = dynamic(() => import("@/components/how-it-works"), { ssr: false })
-const TestimonialsSection = dynamic(() => import("@/components/testimonials-section"), { ssr: false })
-const SpeedPerformanceSection = dynamic(() => import("@/components/speed-performance-section"), { ssr: false })
-const WorkflowSection = dynamic(() => import("@/components/workflow-section"), { ssr: false })
+const FooterSection = dynamic(() => import("@/components/footer-section").then(mod => ({ default: mod.FooterSection })), { ssr: true })
+const FeaturesSection = dynamic(() => import("@/components/features-section").then(mod => ({ default: mod.FeaturesSection })), { ssr: true })
+const HowItWorks = dynamic(() => import("@/components/how-it-works").then(mod => ({ default: mod.HowItWorks })), { ssr: true })
+const TestimonialsSection = dynamic(() => import("@/components/testimonials-section").then(mod => ({ default: mod.TestimonialsSection })), { ssr: true })
+const SpeedPerformanceSection = dynamic(() => import("@/components/speed-performance-section").then(mod => ({ default: mod.SpeedPerformanceSection })), { ssr: true })
+const WorkflowSection = dynamic(() => import("@/components/workflow-section").then(mod => ({ default: mod.WorkflowSection })), { ssr: true })
 
-export default async function Home() {
+export default function Home() {
   return (
-    <main className="min-h-screen bg-white relative" style={{ margin: 0, padding: 0 }}>
+    <main className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
       <Header />
       <HeroSection />
       <Suspense fallback={null}>
