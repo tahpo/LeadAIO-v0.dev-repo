@@ -38,7 +38,7 @@ export function FooterSection() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-12 border-t border-gray-800">
             <div className="col-span-1 md:col-span-2">
               <Link href="/" className="text-2xl font-garnett mb-4 block">
-                <img src="/leadaiologo.png" alt="LeadAIO" className="h-10 w-auto object-contain" />
+                <img src="/footerlogo.png" alt="LeadAIO" className="h-10 w-auto object-contain" />
               </Link>
               <p className="text-gray-400 mb-6 max-w-md font-universal">
                 AI-powered SEO platform that helps businesses dominate search results and generate quality leads.
