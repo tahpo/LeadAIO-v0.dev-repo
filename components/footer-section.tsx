@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export function FooterSection() {
   return (
-    <section className="relative">
+    <section className="relative -mt-12">
       {/* Fixed footer wave - made more visible */}
       <div className="relative h-24 w-full overflow-hidden">
         <svg
