@@ -21,7 +21,7 @@ const nextConfig = {
   compress: true,
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    optimizePackageImports: ['lucide-react'],
   },
   async headers() {
     return [

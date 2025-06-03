@@ -10,9 +10,9 @@ const TestimonialsSection = dynamic(() => import("@/components/testimonials-sect
 const SpeedPerformanceSection = dynamic(() => import("@/components/speed-performance-section").then(mod => ({ default: mod.SpeedPerformanceSection })), { ssr: true })
 const WorkflowSection = dynamic(() => import("@/components/workflow-section").then(mod => ({ default: mod.WorkflowSection })), { ssr: true })
 
-export default function Home() {
+export default async function Home() {
   return (
-    <main className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
+    <main className="min-h-screen bg-white relative" style={{ margin: 0, padding: 0 }}>
       <Header />
       <HeroSection />
       <Suspense fallback={null}>
