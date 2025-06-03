@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react"
 import emailjs from "@emailjs/browser"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -45,10 +46,16 @@ function ContactForm() {
         company: "",
         message: ""
       })
-      alert('Message sent successfully!')
+      toast.success('Message sent successfully!', {
+        description: "We'll get back to you within 24 hours.",
+        duration: 5000
+      })
     } catch (error) {
       console.error('Failed to send email:', error) 
-      alert('Failed to send message. Please try again.')
+      toast.error('Failed to send message', {
+        description: "Please try again later.",
+        duration: 5000
+      })
     } finally {
       setIsSubmitting(false)
     }

@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react"
 import type { Metadata } from "next"
 import { Garnett, UniversalSans } from "@/lib/fonts"
+import { Toaster } from "sonner"
 const PageWrapper = lazy(() => import("@/components/page-wrapper").then(mod => ({ default: mod.PageWrapper })))
 const LoadingSpinner = lazy(() => import("@/components/ui/loading-spinner").then(mod => ({ default: mod.LoadingSpinner })))
 import "./globals.css"
@@ -37,6 +38,7 @@ export default function RootLayout({
       </head>
       <body className="h-full m-0 p-0" suppressHydrationWarning>
         <Suspense fallback={<LoadingSpinner />}>
+          <Toaster position="top-right" />
           <PageWrapper>
             {children}
           </PageWrapper>
