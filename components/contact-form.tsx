@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
-import emailjs from '@emailjs/browser'
+import emailjs from "@emailjs/browser"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -30,10 +30,10 @@ function ContactForm() {
     
     try {
       const result = await emailjs.sendForm(
-        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         formRef.current,
-        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       
       console.log('Email sent successfully:', result.text)
@@ -47,7 +47,7 @@ function ContactForm() {
       })
       alert('Message sent successfully!')
     } catch (error) {
-      console.error('Failed to send email:', error)
+      console.error('Failed to send email:', error) 
       alert('Failed to send message. Please try again.')
     } finally {
       setIsSubmitting(false)
