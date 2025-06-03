@@ -31,7 +31,7 @@ export default function ContactPage() {
       />
       <Header />
       
-      <main className="flex-grow pt-16 relative z-10">
+      <main className="flex-grow pt-8 relative z-10">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
             {/* Left Column - Title */}
